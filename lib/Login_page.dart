@@ -1,6 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:fiservonboardingexp/firebase_options.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 
-void main() {
+// void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   runApp(LoginApp());
 }
 
@@ -14,16 +20,39 @@ class LoginApp extends StatelessWidget {
 }
 
 class LoginPage extends StatelessWidget {
-  TextEditingController usernameController = TextEditingController();
-  TextEditingController passwordController = TextEditingController();
+  final TextEditingController usernameController = TextEditingController();
+  final TextEditingController passwordController = TextEditingController();
 
-  void _handleLogin(BuildContext context) {
+  Future _handleLogin(BuildContext context) async {
     // get the information
     String username = usernameController.text;
     String password = passwordController.text;
+
+    try {
+      //detect the user account.
+      UserCredential userCredential =
+          await FirebaseAuth.instance.signInWithEmailAndPassword(
+        email: username,
+        password: password,
+      );
+
+      // If the authentication is successful, the user is logged in.
+      // You can access the user information using userCredential.user property.
+      // print('User logged in: ${userCredential.user?.email}');
+    } catch (e) {
+      // If there's an error, show an error message.
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Invalid username or password.'),
+        ),
+      );
+      print('Error during login:');
+    }
+    //
     if (username.isEmpty || password.isEmpty) {
       ScaffoldMessenger.of(context).showSnackBar(
-        SnackBar(content: Text('Please enter both username and password.')),
+        const SnackBar(
+            content: Text('Please enter both username and password.')),
       );
     } else {
       print('Username: $username, Password: $password');
