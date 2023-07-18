@@ -35,10 +35,10 @@ class LoginPage extends StatelessWidget {
         email: username,
         password: password,
       );
-
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Login Successfully.')),
+      );
       // If the authentication is successful, the user is logged in.
-      // You can access the user information using userCredential.user property.
-      // print('User logged in: ${userCredential.user?.email}');
     } catch (e) {
       // If there's an error, show an error message.
       ScaffoldMessenger.of(context).showSnackBar(
