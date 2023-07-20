@@ -1,4 +1,5 @@
-import 'package:fiservonboardingexp/main.dart';
+import 'package:fiservonboardingexp/screens/home_screen.dart';
+import 'package:fiservonboardingexp/screens/profile_page.dart';
 import 'package:flutter/material.dart';
 
 class AppRouter {
@@ -7,7 +8,9 @@ class AppRouter {
 
     switch (settings.name) {
       case '/':
-        return HomeScreen.route();
+        return HomePage.route();
+      case ProfilePage.routeName:
+        return ProfilePage.route();
       default:
         return _errorRoute();
     }

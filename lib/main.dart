@@ -1,4 +1,6 @@
 import 'package:fiservonboardingexp/config/app_router.dart';
+import 'package:fiservonboardingexp/screens/home_screen.dart';
+import 'package:fiservonboardingexp/screens/profile_page.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,27 +18,7 @@ class MyApp extends StatelessWidget {
         primarySwatch: Colors.blue,
       ),
       onGenerateRoute: AppRouter.onGenerateRoute,
-      initialRoute: HomeScreen.routeName,
-    );
-  }
-}
-
-class HomeScreen extends StatelessWidget {
-  static const String routeName = '/';
-  const HomeScreen({super.key});
-
-  static Route route() {
-    return MaterialPageRoute(
-      settings: const RouteSettings(name: routeName),
-      builder: (_) => const HomeScreen(),
-    );
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(),
-      bottomNavigationBar: const BottomAppBar(),
+      initialRoute: ProfilePage.routeName,
     );
   }
 }
