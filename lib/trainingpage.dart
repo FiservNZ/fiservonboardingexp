@@ -1,5 +1,6 @@
-import 'package:fiservonboardingexp/constants.dart';
+import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:fiservonboardingexp/util/my_box.dart';
+import 'package:fiservonboardingexp/weekonepage.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 //import 'package:google_fonts/google_fonts.dart';
@@ -37,7 +38,7 @@ class _TrainingPage extends State<TrainingPage> {
               style: GoogleFonts.bebasNeue(fontSize: 30, color: fiservColor)),
           const SizedBox(height: 10),
           AspectRatio(
-            aspectRatio: 0.837,
+            aspectRatio: 0.65,
             child: ConstrainedBox(
               constraints: const BoxConstraints(),
               //width: double.infinity,
@@ -47,7 +48,20 @@ class _TrainingPage extends State<TrainingPage> {
                     crossAxisCount: 2, childAspectRatio: 1 / 1.5),
                 itemBuilder: (context, index) {
                   String title = titles[index];
-                  return MyBox(title: title, context: context);
+                  return GestureDetector(
+                    onTap: () {
+                      // Navigate to the new page when the box is tapped.
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const WeekOnePage()),
+                      );
+                    },
+                    child: MyBox(
+                      title: title,
+                      context: context,
+                    ),
+                  );
                 },
               ),
             ),

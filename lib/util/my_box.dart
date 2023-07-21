@@ -1,4 +1,5 @@
-import 'package:fiservonboardingexp/constants.dart';
+import 'package:fiservonboardingexp/util/constants.dart';
+import 'package:fiservonboardingexp/weekonepage.dart';
 import 'package:flutter/material.dart';
 
 class MyBox extends StatefulWidget {
@@ -44,17 +45,51 @@ class _MyBoxState extends State<MyBox> {
     showDialog(
       context: widget.context,
       builder: (BuildContext context) {
-        return AlertDialog(
-          title: Text(widget.title),
-          content: const Text('Popup Content'),
-          actions: [
-            TextButton(
-              child: const Text('Close'),
-              onPressed: () {
-                Navigator.of(context).pop();
-              },
-            ),
-          ],
+        return Theme(
+          data: Theme.of(context).copyWith(
+            // Customize the background color of the AlertDialog here
+            dialogBackgroundColor: Colors.white,
+            // Customize the shape of the AlertDialog here (optional)
+          ),
+          child: AlertDialog(
+            shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16.0)),
+            title: Text(widget.title),
+            content: const Text('Popup Content'),
+            actions: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  // On press of the button, the pop up window should close
+                  TextButton(
+                    child: const Text('Close'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                  // On press of the button, should be taken to weekonepage.dart
+                  TextButton.icon(
+                    style: TextButton.styleFrom(
+                      backgroundColor: Colors.white,
+                    ),
+                    icon: Image.asset(
+                      'assets/Icons/start-button.png',
+                      width: 70,
+                      height: 70,
+                    ),
+                    label: const SizedBox.shrink(),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: ((context) => const WeekOnePage())));
+                    },
+                  ),
+                ],
+              ),
+            ],
+          ),
         );
       },
     );
