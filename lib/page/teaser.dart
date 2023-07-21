@@ -6,6 +6,7 @@ import 'package:flutter/material.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../main.dart';
+import 'NavAppOverlay.dart';
 
 class TeaserScreen extends StatefulWidget {
   const TeaserScreen({Key? key}) : super(key: key);
