@@ -12,4 +12,5 @@ class Colleagues {
     required this.email,
     required this.hobbies,
   });
+
 }
