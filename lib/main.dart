@@ -10,7 +10,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Test Commit',
+      debugShowCheckedModeBanner: false,
+      title: 'Fiserv Onboarding',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
