@@ -1,17 +1,16 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'package:fiservonboardingexp/firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
-// void main() {
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  runApp(LoginApp());
-}
+// class Global {
+//   static UserCredential? userCredential;
+// }
 
 class LoginApp extends StatelessWidget {
+  const LoginApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -24,7 +23,7 @@ class LoginPage extends StatelessWidget {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  Future _handleLogin(BuildContext context) async {
+  Future handleLogin(BuildContext context) async {
     // get the information
     String username = usernameController.text;
     String password = passwordController.text;
@@ -36,9 +35,14 @@ class LoginPage extends StatelessWidget {
         email: username,
         password: password,
       );
+
+      // //save userCredential in global varible
+      // Global.userCredential = userCredential;
+
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Login Successfully.')),
       );
+      checkUserPosition();
 
       print('Username: $username, Password: $password');
       // If the authentication is successful, the user is logged in.
@@ -55,10 +59,49 @@ class LoginPage extends StatelessWidget {
             content: Text('Invalid username or password.'),
           ),
         );
-        print('Error during login:');
+        print('Error during login');
       }
     }
     //
+  }
+
+  // Check user position
+  void checkUserPosition() async {
+    User? user = FirebaseAuth.instance.currentUser;
+    if (user != null) {
+      String uid = user.uid;
+
+      try {
+        DocumentSnapshot<Map<String, dynamic>> snapshot =
+            await FirebaseFirestore.instance.collection('User').doc(uid).get();
+        if (snapshot.exists) {
+          String position = snapshot.data()!['position'];
+          bool isFirstLogin = snapshot.data()!['firstlog'];
+          // Determin logic based on position
+          if (position == 'developer') {
+            print('User is a developer.');
+            // Update the 'firstlog' field if it's the first login
+            if (isFirstLogin) {
+              print("go to the teaser page");
+              await FirebaseFirestore.instance
+                  .collection('User')
+                  .doc(uid)
+                  .update({'firstlog': false});
+            }
+          } else if (position == 'manager') {
+            print('User is a manager.');
+          } else {
+            print('User position unknown.');
+          }
+        } else {
+          print('User data not found in Firestore.');
+        }
+      } catch (e) {
+        print('Error retrieving user data: $e');
+      }
+    } else {
+      print('User not logged in.');
+    }
   }
 
   @override
@@ -89,7 +132,7 @@ class LoginPage extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 // Navigate the user to the Home page
-                _handleLogin(context);
+                handleLogin(context);
               },
               child: Text('Login'),
             ),
