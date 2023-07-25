@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:fiservonboardingexp/firebase_options.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 // void main() {
 Future<void> main() async {
@@ -38,25 +39,26 @@ class LoginPage extends StatelessWidget {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Login Successfully.')),
       );
+
+      print('Username: $username, Password: $password');
       // If the authentication is successful, the user is logged in.
     } catch (e) {
       // If there's an error, show an error message.
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Invalid username or password.'),
-        ),
-      );
-      print('Error during login:');
+      if (username.isEmpty || password.isEmpty) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+              content: Text('Please enter both username and password.')),
+        );
+      } else {
+        ScaffoldMessenger.of(context).showSnackBar(
+          const SnackBar(
+            content: Text('Invalid username or password.'),
+          ),
+        );
+        print('Error during login:');
+      }
     }
     //
-    if (username.isEmpty || password.isEmpty) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-            content: Text('Please enter both username and password.')),
-      );
-    } else {
-      print('Username: $username, Password: $password');
-    }
   }
 
   @override
