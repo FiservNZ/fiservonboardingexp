@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "615866826238",
+    "project_id": "onboardingdatabase",
+    "storage_bucket": "onboardingdatabase.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:615866826238:android:1006b86933644acd3dd4af",
+        "android_client_info": {
+          "package_name": "com.saintsmc.fiservonboardingexp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "615866826238-v7gs89jpi133crp1p9fjsmhbquhp03bd.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBuxaRGhKxGfx5V_vbfk2yvXWFyhnZWFWc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "615866826238-v7gs89jpi133crp1p9fjsmhbquhp03bd.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "615866826238-jtpr79nb63u8gpdobl3t3gbhcqr8qpsq.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.saintsmc.fiservonboardingexp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
