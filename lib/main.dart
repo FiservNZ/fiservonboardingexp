@@ -1,17 +1,16 @@
+import 'package:fiservonboardingexp/config/app_router.dart';
 import 'package:flutter/material.dart';
-import 'package:fiservonboardingexp/home_page.dart';
 
-void main() {
-  runApp(MyApp());
-}
+import 'package:firebase_core/firebase_core.dart';
+import 'package:fiservonboardingexp/firebase_options.dart';
 
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return const MaterialApp(
-      title: 'Fiserv Onboarding App',
-      home: HomePage(),
-      debugShowCheckedModeBanner: false,
-    );
-  }
+
+// Import class from another file
+import 'login_page.dart';
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  runApp(const LoginApp());
+
 }

@@ -38,8 +38,8 @@ dependencies:
   url_launcher: ^6.1.12
   firebase_core: ^2.14.0
   firebase_auth: ^4.3.0
-  #cloud_firestore: ^4.4.5
-  #firebase_analytics: ^10.1.6
+  cloud_firestore: ^4.4.5
+  firebase_analytics: ^10.1.6
 
 dev_dependencies:
   flutter_test:
@@ -70,6 +70,9 @@ flutter:
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware
+  assets:
+    - assets/icon/
+
 
   # For details regarding adding assets from package dependencies, see
   # https://flutter.dev/assets-and-images/#from-packages
