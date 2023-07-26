@@ -1,5 +1,5 @@
+import 'package:fiservonboardingexp/screens/profile_page.dart';
 import 'package:flutter/material.dart';
-import 'package:fiservonboardingexp/profile_page.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({super.key});
