@@ -38,7 +38,7 @@ class _TrainingPage extends State<TrainingPage> {
               style: GoogleFonts.bebasNeue(fontSize: 30, color: fiservColor)),
           const SizedBox(height: 10),
           AspectRatio(
-            aspectRatio: 0.65,
+            aspectRatio: 0.59,
             child: ConstrainedBox(
               constraints: const BoxConstraints(),
               //width: double.infinity,

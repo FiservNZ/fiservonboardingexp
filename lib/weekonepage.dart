@@ -62,7 +62,7 @@ class _WeekOnePage extends State<WeekOnePage> {
         ),
         const SizedBox(height: 10),
         AspectRatio(
-          aspectRatio: 0.73,
+          aspectRatio: 0.59,
           child: ConstrainedBox(
             constraints: const BoxConstraints(),
             //width: double.infinity,
