@@ -51,12 +51,15 @@ class LoginPage extends StatelessWidget {
       if (username.isEmpty || password.isEmpty) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
-              content: Text('Please enter both username and password.')),
+            content: Text('Please enter both username and password.'),
+            duration: Duration(seconds: 1),
+          ),
         );
       } else {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
             content: Text('Invalid username or password.'),
+            duration: Duration(seconds: 1),
           ),
         );
         print('Error during login');
@@ -108,37 +111,69 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Login Page'),
+        title: const Text(
+          'Login Page',
+          style: TextStyle(color: Colors.black),
+        ),
+        backgroundColor: fiservColor,
+        centerTitle: true,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            TextFormField(
-              controller: usernameController,
-              decoration: const InputDecoration(
-                  labelText: 'Username', border: OutlineInputBorder()),
+            const Padding(
+              padding: EdgeInsets.only(top: 40.0),
+              child: Text(
+                'Welcome to Firserv',
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
             ),
-            SizedBox(height: 16),
-            TextFormField(
-              controller: passwordController,
-              obscureText: true,
-              decoration: const InputDecoration(
-                  labelText: 'Password', border: OutlineInputBorder()),
-            ),
-            SizedBox(height: 24),
-            ElevatedButton(
-              onPressed: () {
-                // Navigate the user to the Home page
-                handleLogin(context);
-              },
-              child: Text('Login'),
+            Expanded(
+              // Wrap the Column with Expanded
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  TextFormField(
+                    controller: usernameController,
+                    decoration: const InputDecoration(
+                      labelText: 'Username',
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                  const SizedBox(height: 16),
+                  TextFormField(
+                    controller: passwordController,
+                    obscureText: true,
+                    decoration: const InputDecoration(
+                      labelText: 'Password',
+                      border: OutlineInputBorder(),
+                    ),
+                  ),
+                  const SizedBox(height: 24),
+                  ElevatedButton(
+                    onPressed: () {
+                      // Navigate the user to the Home page
+                      handleLogin(context);
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.black,
+                    ),
+                    child: const Text('Login'),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
       ),
     );
   }
+
+  static const fiservColor = Color(0xFFFF6600);
 }
