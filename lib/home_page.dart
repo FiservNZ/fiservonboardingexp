@@ -10,7 +10,7 @@ class HomePage extends StatelessWidget {
       appBar: AppBar(
           backgroundColor: Color(0xFFFF6600),
           leading: IconButton(
-            icon: const Image(image: AssetImage('images/profile.png')),
+            icon: const Image(image: AssetImage('assets/images/profile.png')),
             onPressed: () {
               Navigator.of(context).push(
                 MaterialPageRoute(builder: (context) => ProfilePage()),
@@ -27,7 +27,7 @@ class HomePage extends StatelessWidget {
             ),
           ]),
       body: const Center(
-        child: Image(image: AssetImage('images/Fiserv_logo.png')),
+        child: Image(image: AssetImage('assets/images/Fiserv_logo.png')),
       ),
     );
   }
