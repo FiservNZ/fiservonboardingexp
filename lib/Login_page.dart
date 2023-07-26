@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -14,6 +12,7 @@ class LoginApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       home: LoginPage(),
     );
   }
@@ -111,10 +110,6 @@ class LoginPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'Login Page',
-          style: TextStyle(color: Colors.black),
-        ),
         backgroundColor: fiservColor,
         centerTitle: true,
       ),
@@ -123,14 +118,24 @@ class LoginPage extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Padding(
-              padding: EdgeInsets.only(top: 40.0),
-              child: Text(
-                'Welcome to Firserv',
-                style: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
+            Padding(
+              padding: const EdgeInsets.only(top: 40.0),
+              child: Column(
+                children: [
+                  Image.asset(
+                    'assets/icon/Fiserv_logo.png', // Replace with your image asset path
+                  ),
+                  SizedBox(
+                      height:
+                          16), // Add some vertical spacing between the image and text
+                  const Text(
+                    'Welcome to Firserv',
+                    style: TextStyle(
+                      fontSize: 24,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
               ),
             ),
             Expanded(
