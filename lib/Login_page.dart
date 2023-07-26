@@ -119,19 +119,19 @@ class LoginPage extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
             Padding(
-              padding: const EdgeInsets.only(top: 40.0),
+              padding: const EdgeInsets.only(top: 10.0),
               child: Column(
                 children: [
                   Image.asset(
-                    'assets/icon/Fiserv_logo.png', // Replace with your image asset path
+                    'assets/icon/Fiserv_logo.png',
+                    width: 400,
+                    height: 100,
                   ),
-                  SizedBox(
-                      height:
-                          16), // Add some vertical spacing between the image and text
+                  const SizedBox(height: 30),
                   const Text(
                     'Welcome to Firserv',
                     style: TextStyle(
-                      fontSize: 24,
+                      fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
