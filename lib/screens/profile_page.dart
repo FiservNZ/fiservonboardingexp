@@ -151,21 +151,27 @@ class _ProfilePageState extends State<ProfilePage> {
 
                 //Interesting fact field
                 CustomTextBox(
-                  text: userData['Interesting Facts'],
+                  text: userData['Interesting Facts'].toString().isEmpty
+                      ? interestingFacts
+                      : userData['Interesting Facts'],
                   fieldName: 'Interesting Facts',
                   onPressed: () => editField('Interesting Facts'),
                 ),
 
                 //Hobbies
                 CustomTextBox(
-                  text: userData['Hobbies'],
+                  text: userData['Hobbies'].toString().isEmpty
+                      ? hobbies
+                      : userData['Hobbies'],
                   fieldName: 'Hobbies',
                   onPressed: () => editField('Hobbies'),
                 ),
 
                 //Future self
                 CustomTextBox(
-                  text: userData['Future Self'],
+                  text: userData['Future Self'].toString().isEmpty
+                      ? futureSelf
+                      : userData['Future Self'],
                   fieldName: 'Future Self',
                   onPressed: () => editField('Future Self'),
                 ),
