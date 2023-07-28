@@ -1,3 +1,4 @@
+import 'package:fiservonboardingexp/screens/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -41,7 +42,7 @@ class LoginPage extends StatelessWidget {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Login Successfully.')),
       );
-      checkUserPosition();
+      checkUserPosition(context);
 
       print('Username: $username, Password: $password');
       // If the authentication is successful, the user is logged in.
@@ -68,7 +69,7 @@ class LoginPage extends StatelessWidget {
   }
 
   // Check user position
-  void checkUserPosition() async {
+  void checkUserPosition(context) async {
     User? user = FirebaseAuth.instance.currentUser;
     if (user != null) {
       String uid = user.uid;
@@ -83,6 +84,8 @@ class LoginPage extends StatelessWidget {
           if (position == 'developer') {
             print('User is a developer.');
             // Update the 'firstlog' field if it's the first login
+            Navigator.push(context,
+                MaterialPageRoute(builder: ((context) => const HomePage())));
             if (isFirstLogin) {
               print("go to the teaser page");
               await FirebaseFirestore.instance
@@ -123,7 +126,7 @@ class LoginPage extends StatelessWidget {
               child: Column(
                 children: [
                   Image.asset(
-                    'assets/icon/Fiserv_logo.png',
+                    'assets/images/Fiserv_logo.png',
                     width: 400,
                     height: 100,
                   ),
