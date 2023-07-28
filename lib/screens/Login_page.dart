@@ -83,15 +83,15 @@ class LoginPage extends StatelessWidget {
           // Determin logic based on position
           if (position == 'developer') {
             print('User is a developer.');
-            // Update the 'firstlog' field if it's the first login
-            Navigator.push(context,
-                MaterialPageRoute(builder: ((context) => const HomePage())));
             if (isFirstLogin) {
-              print("go to the teaser page");
+              print("go to the teaser page"); //replace by navi to teaser page
               await FirebaseFirestore.instance
                   .collection('User')
                   .doc(uid)
                   .update({'firstlog': false});
+            } else {
+              Navigator.push(context,
+                  MaterialPageRoute(builder: ((context) => const HomePage())));
             }
           } else if (position == 'manager') {
             print('User is a manager.');
