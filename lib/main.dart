@@ -29,7 +29,7 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: initScreen == 0 || initScreen == null ? 'teaser' : 'home',
       routes: {
-        'home': (context) => MyHomePage(),
+        'home': (context) => LoginPage(),
         'teaser': (context) => TeaserScreen(),
       },
     );
