@@ -81,7 +81,7 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
       builder: (BuildContext context) {
         return AlertDialog(
           title: const Text('Colleague Details'),
-          content: SingleChildScrollView( // Wrap with SingleChildScrollView
+          content: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
