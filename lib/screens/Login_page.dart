@@ -1,4 +1,5 @@
 import 'package:fiservonboardingexp/screens/home_page.dart';
+import 'package:fiservonboardingexp/screens/navAppOverlay.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -85,7 +86,7 @@ class LoginPage extends StatelessWidget {
             print('User is a developer.');
             // Update the 'firstlog' field if it's the first login
             Navigator.push(context,
-                MaterialPageRoute(builder: ((context) => const HomePage())));
+                MaterialPageRoute(builder: ((context) => const MyHomePage())));
             if (isFirstLogin) {
               print("go to the teaser page");
               await FirebaseFirestore.instance
