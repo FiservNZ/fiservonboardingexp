@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
-final myAppBar = AppBar(
-  backgroundColor: const Color.fromARGB(255, 15, 15, 15),
-);
+import '../screens/appBarOverlay.dart';
+
+const myAppBar = AppBarOverlay();
 
 const myDrawer = Drawer(
   backgroundColor: Colors.grey,
@@ -44,9 +44,10 @@ final navBar = Container(
             icon: Icons.home,
             text: 'Home',
           ),
-          GButton(icon: Icons.favorite_border, text: 'Favs'),
-          GButton(icon: Icons.search, text: 'Search'),
           GButton(icon: Icons.library_books, text: 'Modules'),
+          GButton(icon: Icons.bookmark, text: 'Achievements'),
+          GButton(icon: Icons.check_circle_outline, text: 'Checklist'),
+          GButton(icon: Icons.person_search_outlined, text: 'Collegues'),
         ]),
   ),
 );
