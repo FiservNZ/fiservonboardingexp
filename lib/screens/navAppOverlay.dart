@@ -1,4 +1,7 @@
+import 'package:fiservonboardingexp/training_page.dart';
+import 'package:fiservonboardingexp/week_one_page.dart';
 import 'package:flutter/material.dart';
+import '../security_tasks_page.dart';
 import 'achievements_page.dart';
 import 'home_page.dart';
 import 'modules_page.dart';
@@ -21,7 +24,7 @@ class _NavAppOverlay extends State<MyHomePage> {
 
   final List<Widget> pages = [
     const HomePage(),
-    const ModulesPage(),
+    SecurityTasks(),
     const UrgentTasksPage(),
     const AchievementsPage(),
     const ColleaguesPage(),

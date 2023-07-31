@@ -1,6 +1,6 @@
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:fiservonboardingexp/util/my_box.dart';
-import 'package:fiservonboardingexp/weekonepage.dart';
+import 'package:fiservonboardingexp/week_one_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 //import 'package:google_fonts/google_fonts.dart';
@@ -27,10 +27,10 @@ class _TrainingPage extends State<TrainingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: myAppBar,
+      //appBar: myAppBar,
       backgroundColor: myBackgroundColor,
       drawer: myDrawer,
-      bottomNavigationBar: navBar,
+      //bottomNavigationBar: navBar,
       body: Column(
         children: [
           const SizedBox(height: 15),
@@ -38,7 +38,7 @@ class _TrainingPage extends State<TrainingPage> {
               style: GoogleFonts.bebasNeue(fontSize: 30, color: fiservColor)),
           const SizedBox(height: 10),
           AspectRatio(
-            aspectRatio: 0.59,
+            aspectRatio: 0.573,
             child: ConstrainedBox(
               constraints: const BoxConstraints(),
               //width: double.infinity,
