@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class AchievementsPage extends StatelessWidget {
+  const AchievementsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -11,9 +11,11 @@ class HomePage extends StatelessWidget {
         child: Align(
           alignment: Alignment.topLeft,
           child: Text(
-            'Home Page',
+            'Achievements Page',
             style: TextStyle(
-                fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ),
