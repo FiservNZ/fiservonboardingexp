@@ -49,6 +49,7 @@ dependencies:
   shared_preferences: ^2.0.0
   after_layout: ^1.0.0+1
   smooth_page_indicator: ^1.1.0
+  provider:
 
 dev_dependencies:
   flutter_test:
@@ -76,6 +77,10 @@ flutter:
   assets:
       - assets/images/Fiserv_logo.png
       - assets/images/profile.png
+      # My Training page
+      - assets/icon/back.png
+      - assets/icon/start-button.png
+      - assets/icon/book.png
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
