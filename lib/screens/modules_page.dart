@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+class ModulesPage extends StatelessWidget {
+  const ModulesPage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -11,9 +11,11 @@ class HomePage extends StatelessWidget {
         child: Align(
           alignment: Alignment.topLeft,
           child: Text(
-            'Home Page',
+            'Modules Page',
             style: TextStyle(
-                fontSize: 20, fontWeight: FontWeight.bold, color: Colors.black),
+              fontSize: 20,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
       ),
