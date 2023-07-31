@@ -40,9 +40,11 @@ class LoginPage extends StatelessWidget {
       // //save userCredential in global varible
       // Global.userCredential = userCredential;
 
+      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Login Successfully.')),
       );
+      // ignore: use_build_context_synchronously
       checkUserPosition(context);
 
       print('Username: $username, Password: $password');
