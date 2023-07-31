@@ -8,11 +8,15 @@ class TaskSetUp extends ChangeNotifier {
     Task(
         name: "Your first week with us",
         type: "Read Time: 15 mins",
+        content:
+            "This task will go through what you should look to achieve in your first week with us",
         iconPath: "assets/icon/book.png"),
 
     Task(
         name: "Setting up your device",
         type: "Read Time: 30 mins",
+        content:
+            "This task will have step by step process on how to set up your work device",
         iconPath: "assets/icon/book.png"),
   ];
 
