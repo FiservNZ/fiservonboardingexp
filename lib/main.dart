@@ -1,9 +1,9 @@
 import 'package:fiservonboardingexp/config/app_router.dart';
 import 'package:fiservonboardingexp/screens/Login_page.dart';
 import 'package:fiservonboardingexp/screens/home_page.dart';
-import 'package:fiservonboardingexp/security_tasks_page.dart';
-import 'package:fiservonboardingexp/task_setup.dart';
-import 'package:fiservonboardingexp/week_one_page.dart';
+import 'package:fiservonboardingexp/screens/task_categories/compliance_page.dart';
+import 'package:fiservonboardingexp/screens/task_categories/week_one_page.dart';
+import 'package:fiservonboardingexp/screens/training_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:fiservonboardingexp/firebase_options.dart';
@@ -26,20 +26,17 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => TaskSetUp(),
-      builder: (context, child) => MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Flutter Skeleton',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        initialRoute: initScreen == 0 || initScreen == null ? 'teaser' : 'home',
-        routes: {
-          'home': (context) => const HomePage(),
-          'teaser': (context) => const TeaserScreen(),
-        },
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      title: 'Flutter Skeleton',
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
       ),
+      initialRoute: initScreen == 0 || initScreen == null ? 'teaser' : 'home',
+      routes: {
+        'home': (context) => const TrainingPage(),
+        'teaser': (context) => const TeaserScreen(),
+      },
     );
   }
 }
