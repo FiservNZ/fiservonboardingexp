@@ -2,7 +2,6 @@ import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import 'task.dart';
 import 'task_setup.dart';
 import 'task_tile.dart';
 
@@ -15,18 +14,6 @@ class WeekOnePage extends StatefulWidget {
 }
 
 class _WeekOnePage extends State<WeekOnePage> {
-  bool showTitle = false;
-  List<String> titles = [
-    'Title 1',
-    'Title 2',
-    'Title 3',
-    'Title 4',
-    'Title 5',
-    'Title 6'
-  ];
-
-  final List _tasks = ['task 1', 'task 2', 'task 3', 'task 4'];
-
   @override
   Widget build(BuildContext context) {
     return Consumer<TaskSetUp>(
@@ -46,20 +33,8 @@ class _WeekOnePage extends State<WeekOnePage> {
                 ),
                 const SizedBox(height: 10),
                 //list of tasks
-                Expanded(
-                  child: Material(
-                    child: ListView.builder(
-                        itemCount: value.tasklist.length,
-                        itemBuilder: (context, index) {
-                          // get task info
-                          Task task = value.tasklist[index];
-                          //String title = _tasks[index];
-                          return TaskTile(
-                            task: task,
-                            context: context,
-                          );
-                        }),
-                  ),
+                const Expanded(
+                  child: TaskTile(),
                 )
               ],
             ),

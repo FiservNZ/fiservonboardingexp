@@ -1,9 +1,22 @@
-import 'package:fiservonboardingexp/task.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 
 class TaskSetUp extends ChangeNotifier {
+  var collection = FirebaseFirestore.instance.collection("Task");
+  late List<Map<String, dynamic>> tasklist;
+
+  fetchTasksFromFirestore() async {
+    List<Map<String, dynamic>> tempList = [];
+    var data = await collection.get();
+
+    data.docs.forEach((element) {
+      tempList.add(element.data());
+    });
+  }
+
   //list of tasks
-  final List<Task> _tasklist = [
+  /*final List<Task> _tasklist = [
     //Task on setting up computer
     Task(
         name: "Your first week with us",
@@ -18,21 +31,44 @@ class TaskSetUp extends ChangeNotifier {
         content:
             "This task will have step by step process on how to set up your work device",
         iconPath: "assets/icon/book.png"),
-  ];
+  ];*/
+
+  /*Future<List<Task>> fetchTasksFromFirestore() async {
+    try {
+      DocumentSnapshot<Map<String, dynamic>> snapshot = await FirebaseFirestore
+          .instance
+          .collection('Task')
+          .doc('gdrqBo6lTy1bDyoMVUkx')
+          .get();
+
+      String fname = snapshot.data()!['name'];
+      String ftype = snapshot.data()!['type'];
+      String fcontent = snapshot.data()!['content'];
+      print('value added successfully: $fname');
+      Task task = Task(
+        name: fname,
+        type: ftype,
+        content: fcontent,
+        iconPath: 'assets/icon/book.png',
+      );
+      print('constructor added successfully');
+      print('constructor added successfully: $fname');
+      print('constructor added successfully: $ftype');
+      print('constructor added successfully: $fcontent');
+      tasklist.add(task);
+
+      notifyListeners();
+
+      print('Task added successfully: $task');
+      print('Updated tasklist: $tasklist');
+
+      return tasklist;
+    } catch (e) {
+      print('Error fetching tasks: $e');
+      return []; // Return an empty list on error, but you should handle errors more gracefully.
+    }
+  }
 
   //get tasks available
-  List<Task> get tasklist => _tasklist;
-
-  //remove below when can
-  final List<Task> _userCart = [];
-
-  void addToPage(Task task) {
-    _userCart.add(task);
-    notifyListeners();
-  }
-
-  void removeFromPage(Task task) {
-    _userCart.remove(task);
-    notifyListeners();
-  }
+  List<Task> get getTaskList => tasklist;*/
 }
