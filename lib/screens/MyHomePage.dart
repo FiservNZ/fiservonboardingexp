@@ -1,5 +1,5 @@
+import 'package:fiservonboardingexp/screens/training_page.dart';
 import 'package:flutter/material.dart';
-import '../security_tasks_page.dart';
 import 'NavAppOverlay.dart';
 import 'achievements_page.dart';
 import 'colleagues_page.dart';
@@ -19,7 +19,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   final List<Widget> pages = [
     const HomePage(),
-    SecurityTasks(),
+    TrainingPage(),
     const UrgentTasksPage(),
     const AchievementsPage(),
     const ColleaguesPage(),

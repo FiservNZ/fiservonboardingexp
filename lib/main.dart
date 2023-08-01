@@ -26,7 +26,6 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Skeleton',
@@ -35,7 +34,7 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: initScreen == 0 || initScreen == null ? 'teaser' : 'home',
       routes: {
-        'home': (context) => const MyHomePage(),
+        'home': (context) => LoginPage(),
         'teaser': (context) => const TeaserScreen(),
       },
     );
