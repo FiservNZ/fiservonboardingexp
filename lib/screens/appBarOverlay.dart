@@ -7,8 +7,8 @@ import 'logout_page.dart';
 import 'settings_page.dart';
 import 'package:flutter/material.dart';
 
-class AppbarOverlay extends StatelessWidget implements PreferredSizeWidget {
-  const AppbarOverlay({super.key});
+class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
+  const AppBarOverlay({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -20,7 +20,7 @@ class AppbarOverlay extends StatelessWidget implements PreferredSizeWidget {
           icon: const Image(image: AssetImage('images/profile.png')),
           onPressed: () {
             Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => ProfilePage()),
+              MaterialPageRoute(builder: (context) => const ProfilePage()),
             );
           },
         ),
@@ -60,7 +60,7 @@ class AppbarOverlay extends StatelessWidget implements PreferredSizeWidget {
                             onTap: () {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
-                                    builder: (context) => TeaserScreen()),
+                                    builder: (context) => const TeaserScreen()),
                               );
                             },
                           ),
@@ -78,7 +78,8 @@ class AppbarOverlay extends StatelessWidget implements PreferredSizeWidget {
                             onTap: () {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
-                                    builder: (context) => ColleaguesPage()),
+                                    builder: (context) =>
+                                        const ColleaguesPage()),
                               );
                             },
                           ),
@@ -96,7 +97,7 @@ class AppbarOverlay extends StatelessWidget implements PreferredSizeWidget {
                             onTap: () {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
-                                    builder: (context) => HelpPage()),
+                                    builder: (context) => const HelpPage()),
                               );
                             },
                           ),

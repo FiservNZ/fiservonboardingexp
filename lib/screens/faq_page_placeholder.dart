@@ -5,7 +5,7 @@ class FaqPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
-      appBar: AppbarOverlay(),
+      appBar: AppBarOverlay(),
       body: Padding(
         padding: EdgeInsets.only(top: 16, left: 16),
         child: Align(

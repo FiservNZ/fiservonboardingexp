@@ -10,7 +10,7 @@ class HomePage extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         //appbar
-        appBar: const AppbarOverlay(),
+        appBar: const AppBarOverlay(),
 
         //Home Page
         body: Scrollbar(
