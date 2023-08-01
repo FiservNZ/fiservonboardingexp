@@ -11,6 +11,7 @@ import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fiservonboardingexp/screens/teaser.dart';
 import 'package:fiservonboardingexp/screens/navAppOverlay.dart';
+import 'screens/MyHomePage.dart';
 
 int? initScreen;
 
@@ -36,7 +37,8 @@ class MyApp extends StatelessWidget {
         ),
         initialRoute: initScreen == 0 || initScreen == null ? 'teaser' : 'home',
         routes: {
-          'home': (context) => const HomePage(),
+
+          'home': (context) => const MyHomePage(),
           'teaser': (context) => const TeaserScreen(),
         },
       ),
