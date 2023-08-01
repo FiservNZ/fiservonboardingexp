@@ -1,17 +1,16 @@
-import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../util/task_tile.dart';
+import '../../util/constants.dart';
 
-class WeekOnePage extends StatefulWidget {
-  const WeekOnePage({Key? key}) : super(key: key);
+class TechnicalTasks extends StatefulWidget {
+  const TechnicalTasks({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
-  _WeekOnePage createState() => _WeekOnePage();
+  State<TechnicalTasks> createState() => _TechnicalTasksPage();
 }
 
-class _WeekOnePage extends State<WeekOnePage> {
+class _TechnicalTasksPage extends State<TechnicalTasks> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -27,7 +26,7 @@ class _WeekOnePage extends State<WeekOnePage> {
                 const SizedBox(height: 20),
                 //heading
                 Text(
-                  "Week One Tasks",
+                  "Technical Training Tasks",
                   style:
                       GoogleFonts.bebasNeue(fontSize: 30, color: fiservColor),
                 ),
@@ -42,5 +41,6 @@ class _WeekOnePage extends State<WeekOnePage> {
         ),
       ),
     );
+    ;
   }
 }

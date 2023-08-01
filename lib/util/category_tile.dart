@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 import '../screens/task_categories/compliance_page.dart';
+import '../screens/task_categories/health_and_safety_page.dart';
+import '../screens/task_categories/technical_training_page.dart';
 import '../screens/task_categories/week_one_page.dart';
 import 'constants.dart';
 
@@ -27,12 +29,22 @@ class _CategoryTileState extends State<CategoryTile> {
         if (widget.categoryName == "Orientation") {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => WeekOnePage()),
+            MaterialPageRoute(builder: (context) => const WeekOnePage()),
           );
         } else if (widget.categoryName == "Compliance") {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => SecurityTasks()),
+            MaterialPageRoute(builder: (context) => const SecurityTasks()),
+          );
+        } else if (widget.categoryName == "Health & Safety") {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const HnSTasks()),
+          );
+        } else if (widget.categoryName == "Technical training") {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const TechnicalTasks()),
           );
         }
       },
