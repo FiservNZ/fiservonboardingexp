@@ -35,7 +35,7 @@ class _NavAppOverlay extends State<MyHomePage> {
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(kToolbarHeight),
-        child: const AppBarOverlay(),
+        child: const AppbarOverlay(),
       ),
       body: pages[currentIndex],
       bottomNavigationBar: BottomNavigationBar(

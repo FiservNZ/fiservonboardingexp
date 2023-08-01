@@ -3,7 +3,7 @@ import 'package:google_nav_bar/google_nav_bar.dart';
 
 import '../screens/appBarOverlay.dart';
 
-const myAppBar = AppBarOverlay();
+const myAppBar = AppbarOverlay();
 
 const myDrawer = Drawer(
   backgroundColor: Colors.grey,
