@@ -1,5 +1,6 @@
 import 'package:fiservonboardingexp/config/app_router.dart';
 import 'package:fiservonboardingexp/screens/Login_page.dart';
+import 'package:fiservonboardingexp/screens/home_page.dart';
 import 'package:fiservonboardingexp/security_tasks_page.dart';
 import 'package:fiservonboardingexp/task_setup.dart';
 import 'package:fiservonboardingexp/week_one_page.dart';
@@ -36,6 +37,7 @@ class MyApp extends StatelessWidget {
         ),
         initialRoute: initScreen == 0 || initScreen == null ? 'teaser' : 'home',
         routes: {
+
           'home': (context) => const MyHomePage(),
           'teaser': (context) => const TeaserScreen(),
         },

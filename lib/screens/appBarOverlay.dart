@@ -1,34 +1,171 @@
-import 'package:fiservonboardingexp/screens/profile_page.dart';
+import 'profile_page.dart';
+import 'colleagues_page.dart';
+import 'faq_page_placeholder.dart';
+import 'help_page.dart';
+import 'teaser.dart';
+import 'logout_page.dart';
+import 'settings_page.dart';
 import 'package:flutter/material.dart';
 
-class AppBarOverlay extends StatelessWidget {
+class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
   const AppBarOverlay({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-          backgroundColor: Color(0xFFFF6600),
-          leading: IconButton(
-            icon: const Image(image: AssetImage('assets/images/profile.png')),
+    return AppBar(
+        backgroundColor: Colors.black,
+
+        // Profile picture icon
+        leading: IconButton(
+          icon: const Image(image: AssetImage('assets/images/profile.png')),
+          onPressed: () {
+            Navigator.of(context).push(
+              MaterialPageRoute(builder: (context) => const ProfilePage()),
+            );
+          },
+        ),
+
+        // Rank Title
+        title: const Center(
+          child:
+              Text('[Rank Title]', style: TextStyle(color: Color(0xFFFF6600))),
+        ),
+
+        // Menu sheet
+        actions: <Widget>[
+          IconButton(
+            icon: const Icon(Icons.menu, color: Color(0xFFFF6600)),
             onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => ProfilePage()),
+              showModalBottomSheet(
+                context: context,
+                builder: (BuildContext context) {
+                  return Container(
+                    height: 350,
+                    color: Colors.black,
+                    child: Center(
+                      child: Column(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          //Intro teaser
+                          ListTile(
+                            leading: const Icon(
+                              Icons.list,
+                              color: Color(0xFFFF6600),
+                            ),
+                            title: const Text(
+                              'Intro Teaser',
+                              style: TextStyle(color: Color(0xFFFF6600)),
+                            ),
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                    builder: (context) => const TeaserScreen()),
+                              );
+                            },
+                          ),
+
+                          // Contacts
+                          ListTile(
+                            leading: const Icon(
+                              Icons.contact_page_outlined,
+                              color: Color(0xFFFF6600),
+                            ),
+                            title: const Text(
+                              'Contacts',
+                              style: TextStyle(color: Color(0xFFFF6600)),
+                            ),
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                    builder: (context) =>
+                                        const ColleaguesPage()),
+                              );
+                            },
+                          ),
+
+                          // Help pop up
+                          ListTile(
+                            leading: const Icon(
+                              Icons.question_mark,
+                              color: Color(0xFFFF6600),
+                            ),
+                            title: const Text(
+                              'Help',
+                              style: TextStyle(color: Color(0xFFFF6600)),
+                            ),
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                    builder: (context) => const HelpPage()),
+                              );
+                            },
+                          ),
+
+                          // FAQ
+                          ListTile(
+                            leading: const Icon(
+                              Icons.question_answer,
+                              color: Color(0xFFFF6600),
+                            ),
+                            title: const Text(
+                              'FAQ',
+                              style: TextStyle(color: Color(0xFFFF6600)),
+                            ),
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                    builder: (context) => FaqPage()),
+                              );
+                            },
+                          ),
+
+                          // Settings
+                          ListTile(
+                            leading: const Icon(
+                              Icons.settings,
+                              color: Color(0xFFFF6600),
+                            ),
+                            title: const Text(
+                              'Settings',
+                              style: TextStyle(color: Color(0xFFFF6600)),
+                            ),
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                    builder: (context) => SettingsPage()),
+                              );
+                            },
+                          ),
+
+                          // Logout
+                          ListTile(
+                            leading: const Icon(
+                              Icons.logout,
+                              color: Color(0xFFFF6600),
+                            ),
+                            title: const Text(
+                              'Logout',
+                              style: TextStyle(color: Color(0xFFFF6600)),
+                            ),
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                    builder: (context) => LogoutPage()),
+                              );
+                            },
+                          ),
+                        ],
+                      ),
+                    ),
+                  );
+                },
               );
             },
           ),
-          title: const Center(
-            child: Text("[Rank Title]"),
-          ),
-          actions: <Widget>[
-            IconButton(
-              onPressed: () {},
-              icon: Icon(Icons.menu),
-            ),
-          ]),
-      body: const Center(
-        child: Image(image: AssetImage('assets/images/Fiserv_logo.png')),
-      ),
-    );
+        ]);
   }
+
+  @override
+  Size get preferredSize => const Size.fromHeight(kToolbarHeight);
 }
