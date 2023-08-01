@@ -7,10 +7,10 @@ import 'package:fiservonboardingexp/screens/training_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:fiservonboardingexp/firebase_options.dart';
-import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fiservonboardingexp/screens/teaser.dart';
 import 'package:fiservonboardingexp/screens/navAppOverlay.dart';
+import 'screens/MyHomePage.dart';
 
 int? initScreen;
 
@@ -26,6 +26,7 @@ Future<void> main() async {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Flutter Skeleton',
@@ -34,7 +35,7 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: initScreen == 0 || initScreen == null ? 'teaser' : 'home',
       routes: {
-        'home': (context) => const TrainingPage(),
+        'home': (context) => const MyHomePage(),
         'teaser': (context) => const TeaserScreen(),
       },
     );

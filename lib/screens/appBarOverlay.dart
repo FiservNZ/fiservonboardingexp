@@ -17,7 +17,7 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
 
         // Profile picture icon
         leading: IconButton(
-          icon: const Image(image: AssetImage('images/profile.png')),
+          icon: const Image(image: AssetImage('assets/images/profile.png')),
           onPressed: () {
             Navigator.of(context).push(
               MaterialPageRoute(builder: (context) => const ProfilePage()),
