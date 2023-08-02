@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../util/constants.dart';
 import 'colleagues.dart';
 import 'package:flutter/gestures.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -38,6 +39,7 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: myAppBar,
       body: Padding(
         padding: EdgeInsets.all(16),
         child: Column(

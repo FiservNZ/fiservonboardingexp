@@ -10,7 +10,7 @@ import 'package:fiservonboardingexp/firebase_options.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fiservonboardingexp/screens/teaser.dart';
 import 'package:fiservonboardingexp/screens/navAppOverlay.dart';
-// import 'screens/MainScreen.dart';
+import 'screens/MainScreen.dart';
 
 int? initScreen;
 
@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: initScreen == 0 || initScreen == null ? 'teaser' : 'home',
       routes: {
-        'home': (context) => LoginPage(),
+        'home': (context) => MainScreen(),
         'teaser': (context) => const TeaserScreen(),
       },
     );

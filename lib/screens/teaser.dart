@@ -1,5 +1,4 @@
-import 'MainScreen.dart';
-import 'MyHomePage.dart';
+import 'package:fiservonboardingexp/screens/MainScreen.dart';
 import 'home_page.dart';
 import 'teaser_page_1.dart';
 import 'teaser_page_2.dart';

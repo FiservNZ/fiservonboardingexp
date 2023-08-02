@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'home_page.dart';
+import 'training_page.dart';
+import 'urgent_tasks_page.dart';
+import 'achievements_page.dart';
+import 'colleagues_page.dart';
 
 class NavAppOverlay extends StatefulWidget {
   @override
@@ -10,8 +15,9 @@ class _NavAppOverlayState extends State<NavAppOverlay> {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      child: BottomNavigationBar(
+    return Scaffold(
+      body: _getPage(),
+      bottomNavigationBar: BottomNavigationBar(
         currentIndex: _currentIndex,
         onTap: _onTabTapped,
         items: const [
@@ -51,6 +57,24 @@ class _NavAppOverlayState extends State<NavAppOverlay> {
     setState(() {
       _currentIndex = index;
     });
+  }
+
+  Widget _getPage() {
+    switch (_currentIndex) {
+      case 0:
+        return HomePage();
+        break;
+      case 1:
+        return TrainingPage();
+      case 2:
+        return UrgentTasksPage();
+      case 3:
+        return AchievementsPage();
+      case 4:
+        return ColleaguesPage();
+      default:
+        return Container();
+    }
   }
 }
 

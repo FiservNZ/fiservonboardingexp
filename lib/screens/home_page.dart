@@ -9,8 +9,8 @@ class HomePage extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        //appbar
-        //appBar: const AppBarOverlay(),
+        // //appbar
+        appBar: const AppBarOverlay(),
 
         //Home Page
         body: Scrollbar(
