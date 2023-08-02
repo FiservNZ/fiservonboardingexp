@@ -2,10 +2,7 @@ import 'package:flutter/material.dart';
 import 'achievements_page.dart';
 import 'home_page.dart';
 import 'modules_page.dart';
-import 'package:flutter/material.dart';
-import 'home_page.dart';
 import 'colleagues_page.dart';
-import 'profile_page.dart';
 import 'urgent_tasks_page.dart';
 import 'appBarOverlay.dart';
 
