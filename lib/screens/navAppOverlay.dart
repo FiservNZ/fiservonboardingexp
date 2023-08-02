@@ -1,77 +1,49 @@
-import 'package:fiservonboardingexp/training_page.dart';
-import 'package:fiservonboardingexp/week_one_page.dart';
 import 'package:flutter/material.dart';
-import '../security_tasks_page.dart';
-import 'achievements_page.dart';
-import 'home_page.dart';
-import 'modules_page.dart';
-import 'package:flutter/material.dart';
-import 'home_page.dart';
-import 'colleagues_page.dart';
-import 'profile_page.dart';
-import 'urgent_tasks_page.dart';
-import 'appBarOverlay.dart';
 
-class MyHomePage extends StatefulWidget {
-  const MyHomePage({super.key});
+class NavAppOverlay extends StatelessWidget {
+  final int currentIndex;
+  final Function(int) onTabTapped;
 
-  @override
-  _NavAppOverlay createState() => _NavAppOverlay();
-}
-
-class _NavAppOverlay extends State<MyHomePage> {
-  int currentIndex = 0;
-
-  final List<Widget> pages = [
-    const HomePage(),
-    SecurityTasks(),
-    const UrgentTasksPage(),
-    const AchievementsPage(),
-    const ColleaguesPage(),
-  ];
+  const NavAppOverlay({
+    required this.currentIndex,
+    required this.onTabTapped,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(kToolbarHeight),
-        child: const AppBarOverlay(),
-      ),
-      body: pages[currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
+    return Container(
+      child: BottomNavigationBar(
         currentIndex: currentIndex,
-        onTap: (index) {
-          setState(() {
-            currentIndex = index;
-          });
-        },
+        onTap: onTabTapped,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            backgroundColor: FiservColor,
             label: 'Home',
+            backgroundColor: Colors.black,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.my_library_books),
-            backgroundColor: FiservColor,
             label: 'Modules',
+            backgroundColor: Colors.black,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.bookmarks_outlined),
-            backgroundColor: FiservColor,
             label: 'Urgent Tasks',
+            backgroundColor: Colors.black,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.task_alt),
-            backgroundColor: FiservColor,
             label: 'Achievements',
+            backgroundColor: Colors.black,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person_search_outlined),
-            backgroundColor: FiservColor,
             label: 'Colleagues',
+            backgroundColor: Colors.black,
           ),
         ],
+        selectedItemColor: FiservColor,
+        unselectedItemColor: FiservColor,
       ),
     );
   }
