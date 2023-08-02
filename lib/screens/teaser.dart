@@ -1,4 +1,3 @@
-import 'MyHomePage.dart';
 import 'home_page.dart';
 import 'teaser_page_1.dart';
 import 'teaser_page_2.dart';
