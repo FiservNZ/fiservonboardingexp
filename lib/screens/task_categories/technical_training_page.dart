@@ -17,6 +17,7 @@ class _TechnicalTasksPage extends State<TechnicalTasks> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: myAppBar,
+        bottomNavigationBar: navBar,
         body: Container(
           color: Colors.white,
           child: Padding(

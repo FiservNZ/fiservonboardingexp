@@ -17,6 +17,7 @@ class _HnSPage extends State<HnSTasks> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: myAppBar,
+        bottomNavigationBar: navBar,
         body: Container(
           color: Colors.white,
           child: Padding(
