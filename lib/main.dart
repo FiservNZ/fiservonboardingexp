@@ -10,7 +10,7 @@ import 'package:fiservonboardingexp/firebase_options.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fiservonboardingexp/screens/teaser.dart';
 import 'package:fiservonboardingexp/screens/navAppOverlay.dart';
-import 'screens/MainScreen.dart';
+// import 'screens/MainScreen.dart';
 
 int? initScreen;
 
