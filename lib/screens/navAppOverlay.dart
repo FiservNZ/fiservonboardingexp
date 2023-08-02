@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 
-class NavAppOverlay extends StatelessWidget {
-  final int currentIndex;
-  final Function(int) onTabTapped;
+class NavAppOverlay extends StatefulWidget {
+  @override
+  _NavAppOverlayState createState() => _NavAppOverlayState();
+}
 
-  const NavAppOverlay({
-    required this.currentIndex,
-    required this.onTabTapped,
-  });
+class _NavAppOverlayState extends State<NavAppOverlay> {
+  int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Container(
       child: BottomNavigationBar(
-        currentIndex: currentIndex,
-        onTap: onTabTapped,
+        currentIndex: _currentIndex,
+        onTap: _onTabTapped,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -46,6 +45,12 @@ class NavAppOverlay extends StatelessWidget {
         unselectedItemColor: FiservColor,
       ),
     );
+  }
+
+  void _onTabTapped(int index) {
+    setState(() {
+      _currentIndex = index;
+    });
   }
 }
 

@@ -1,4 +1,4 @@
-import 'MyHomePage.dart';
+import 'MainScreen.dart';
 import 'home_page.dart';
 import 'teaser_page_1.dart';
 import 'teaser_page_2.dart';
@@ -61,7 +61,7 @@ class _TeaserScreenState extends State<TeaserScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => MyHomePage(),
+                            builder: (_) => MainScreen(),
                           ),
                         );
                       },
