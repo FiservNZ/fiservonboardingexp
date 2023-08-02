@@ -35,7 +35,7 @@ class MyApp extends StatelessWidget {
         ),
         initialRoute: initScreen == 0 || initScreen == null ? 'teaser' : 'home',
         routes: {
-          'home': (context) => const WeekOnePage(),
+          'home': (context) => LoginPage(),
           'teaser': (context) => const TeaserScreen(),
         },
       ),
