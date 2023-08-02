@@ -3,6 +3,7 @@ import 'package:fiservonboardingexp/screens/navAppOverlay.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'MyHomePage.dart';
 
 // class Global {
 //   static UserCredential? userCredential;
@@ -40,11 +41,9 @@ class LoginPage extends StatelessWidget {
       // //save userCredential in global varible
       // Global.userCredential = userCredential;
 
-      // ignore: use_build_context_synchronously
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(content: Text('Login Successfully.')),
       );
-      // ignore: use_build_context_synchronously
       checkUserPosition(context);
 
       print('Username: $username, Password: $password');
@@ -86,15 +85,15 @@ class LoginPage extends StatelessWidget {
           // Determin logic based on position
           if (position == 'developer') {
             print('User is a developer.');
+            // Update the 'firstlog' field if it's the first login
+            Navigator.push(context,
+                MaterialPageRoute(builder: ((context) => const MyHomePage())));
             if (isFirstLogin) {
-              print("go to the teaser page"); //replace by navi to teaser page
+              print("go to the teaser page");
               await FirebaseFirestore.instance
                   .collection('User')
                   .doc(uid)
                   .update({'firstlog': false});
-            } else {
-              Navigator.push(context,
-                  MaterialPageRoute(builder: ((context) => const HomePage())));
             }
           } else if (position == 'manager') {
             print('User is a manager.');
