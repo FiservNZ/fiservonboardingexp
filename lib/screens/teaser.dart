@@ -1,4 +1,4 @@
-import 'package:fiservonboardingexp/screens/MainScreen.dart';
+import 'package:fiservonboardingexp/screens/main_screen.dart';
 import 'home_page.dart';
 import 'teaser_page_1.dart';
 import 'teaser_page_2.dart';
@@ -6,7 +6,6 @@ import 'teaser_page_3.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../main.dart';
-import 'navAppOverlay.dart';
 import 'package:after_layout/after_layout.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
@@ -44,16 +43,13 @@ class _TeaserScreenState extends State<TeaserScreen> {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             children: [
-              //skip
               GestureDetector(
                 child: const Text('Skip'),
                 onTap: () {
                   _controller.jumpToPage(2);
                 },
               ),
-
               SmoothPageIndicator(controller: _controller, count: 3),
-
               onLastPage
                   ? GestureDetector(
                       child: const Text('Done'),

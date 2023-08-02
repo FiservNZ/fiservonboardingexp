@@ -1,5 +1,5 @@
 import 'package:fiservonboardingexp/config/app_router.dart';
-import 'package:fiservonboardingexp/screens/Login_page.dart';
+import 'package:fiservonboardingexp/screens/login_page.dart';
 import 'package:fiservonboardingexp/screens/home_page.dart';
 import 'package:fiservonboardingexp/screens/task_categories/compliance_page.dart';
 import 'package:fiservonboardingexp/screens/task_categories/week_one_page.dart';
@@ -9,8 +9,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:fiservonboardingexp/firebase_options.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fiservonboardingexp/screens/teaser.dart';
-import 'package:fiservonboardingexp/screens/navAppOverlay.dart';
-import 'screens/MainScreen.dart';
+import 'package:fiservonboardingexp/screens/nav_bar.dart';
+import 'screens/main_screen.dart';
 
 int? initScreen;
 

@@ -1,4 +1,4 @@
-import 'package:fiservonboardingexp/screens/navAppOverlay.dart';
+import 'package:fiservonboardingexp/screens/nav_bar.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -19,7 +19,7 @@ class _WeekOnePage extends State<WeekOnePage> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: myAppBar,
-        bottomNavigationBar: navBar,
+        bottomNavigationBar: customNavBar(),
         body: Container(
           color: Colors.white,
           child: Padding(

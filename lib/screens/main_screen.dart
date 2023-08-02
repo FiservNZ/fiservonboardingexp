@@ -1,11 +1,11 @@
 import 'package:fiservonboardingexp/screens/task_categories/compliance_page.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
-import 'navAppOverlay.dart';
+import 'package:fiservonboardingexp/screens/nav_bar.dart';
 import 'achievements_page.dart';
 import 'colleagues_page.dart';
 import 'home_page.dart';
-import 'appBarOverlay.dart';
+import 'app_bar.dart';
 import 'urgent_tasks_page.dart';
 
 class MainScreen extends StatefulWidget {
@@ -29,12 +29,8 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: const PreferredSize(
-        preferredSize: Size.fromHeight(kToolbarHeight),
-        child: AppBarOverlay(),
-      ),
       body: pages[currentIndex],
-      bottomNavigationBar: NavAppOverlay(),
+      bottomNavigationBar: const customNavBar(),
       extendBody: true,
     );
   }
