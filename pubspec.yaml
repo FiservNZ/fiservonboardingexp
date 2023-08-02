@@ -78,9 +78,26 @@ flutter:
       - assets/images/Fiserv_logo.png
       - assets/images/profile.png
       # My Training page
-      - assets/icon/back.png
-      - assets/icon/start-button.png
+      - assets/animations/iso_marketing_ agency_interior.json
+      - assets/animations/digital_workspace.json
+      - assets/animations/health_checkup.json
+      - assets/animations/security_system.json
+      - assets/animations/people.json
+
+      - assets/icon/compliance.png
+      - assets/icon/compliant.png
+      - assets/icon/guidelines.png
+      - assets/icon/health.png
+      - assets/icon/technical.png
+      - assets/icon/welcome.png
+      - assets/icon/worldwide.png
+      - assets/icon/vest.png
       - assets/icon/book.png
+      #Task Tile Page
+      - assets/animations/reading_book.json
+      - assets/icon/start-button.png
+      
+
 
 
   # An image asset can refer to one or more resolution-specific "variants", see
