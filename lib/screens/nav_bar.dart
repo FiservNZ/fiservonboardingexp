@@ -14,6 +14,8 @@ class customNavBar extends StatelessWidget {
   Widget build(BuildContext context) {
     return BottomNavigationBar(
       currentIndex: 0,
+      showUnselectedLabels: true,
+      type: BottomNavigationBarType.fixed,
       onTap: (int newIndex) {
         switch (newIndex) {
           case 0:
@@ -47,7 +49,7 @@ class customNavBar extends StatelessWidget {
         ),
         BottomNavigationBarItem(
           icon: Icon(Icons.bookmarks_outlined),
-          label: 'Urgent Tasks',
+          label: 'Tasks',
           backgroundColor: Colors.black,
         ),
         BottomNavigationBarItem(
@@ -63,6 +65,9 @@ class customNavBar extends StatelessWidget {
       ],
       selectedItemColor: FiservColor,
       unselectedItemColor: FiservColor,
+      backgroundColor: Colors.black,
+      selectedFontSize: 12.0,
+      unselectedFontSize: 12.0,
     );
   }
 
