@@ -1,16 +1,9 @@
 import 'package:fiservonboardingexp/screens/Login_page.dart';
-import 'package:fiservonboardingexp/screens/home_page.dart';
-import 'package:fiservonboardingexp/screens/task_categories/compliance_page.dart';
-import 'package:fiservonboardingexp/screens/task_categories/week_one_page.dart';
-import 'package:fiservonboardingexp/screens/training_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:fiservonboardingexp/firebase_options.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fiservonboardingexp/screens/teaser.dart';
-import 'package:fiservonboardingexp/screens/navAppOverlay.dart';
-import 'screens/MyHomePage.dart';
-
 
 int? initScreen;
 
@@ -20,10 +13,12 @@ Future<void> main() async {
   SharedPreferences preferences = await SharedPreferences.getInstance();
   initScreen = await preferences.getInt('initScreen');
   await preferences.setInt('initScreen', 1);
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
