@@ -25,10 +25,10 @@ class _TrainingPage extends State<TrainingPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      //appBar: myAppBar,
+      appBar: myAppBar,
       backgroundColor: myBackgroundColor,
       //drawer: myDrawer,
-      //bottomNavigationBar: navBar,
+      // bottomNavigationBar: navBar,
       body: Column(
         children: [
           const SizedBox(height: 15),

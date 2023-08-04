@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../util/task_tile.dart';
 import '../../util/constants.dart';
+import '../../widgets/nav_bar.dart';
 
 class HnSTasks extends StatefulWidget {
   const HnSTasks({Key? key}) : super(key: key);
@@ -17,6 +18,7 @@ class _HnSPage extends State<HnSTasks> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: myAppBar,
+        bottomNavigationBar: const CustomNavBar(),
         body: Container(
           color: Colors.white,
           child: Padding(

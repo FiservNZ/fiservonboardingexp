@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 
+import '../util/constants.dart';
+import '../widgets/nav_bar.dart';
+
 class AchievementsPage extends StatelessWidget {
   const AchievementsPage({super.key});
 
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
+      appBar: myAppBar,
+      bottomNavigationBar: CustomNavBar(),
       body: Padding(
         padding: EdgeInsets.only(top: 16, left: 16),
         child: Align(
