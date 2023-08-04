@@ -13,59 +13,50 @@ class MyHomePage extends StatefulWidget {
   _NavAppOverlay createState() => _NavAppOverlay();
 }
 
-class _NavAppOverlay extends State<MyHomePage> {
-  int currentIndex = 0;
+class NavAppOverlay extends StatelessWidget {
+  final int currentIndex;
+  final Function(int) onTabTapped;
 
-  final List<Widget> pages = [
-    const HomePage(),
-    const ModulesPage(),
-    const UrgentTasksPage(),
-    const AchievementsPage(),
-    const ColleaguesPage(),
-  ];
+  const NavAppOverlay({
+    required this.currentIndex,
+    required this.onTabTapped,
+  });
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(kToolbarHeight),
-        child: const AppBarOverlay(),
-      ),
-      body: pages[currentIndex],
-      bottomNavigationBar: BottomNavigationBar(
+    return Container(
+      child: BottomNavigationBar(
         currentIndex: currentIndex,
-        onTap: (index) {
-          setState(() {
-            currentIndex = index;
-          });
-        },
+        onTap: onTabTapped,
         items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-            backgroundColor: FiservColor,
             label: 'Home',
+            backgroundColor: Colors.black,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.my_library_books),
-            backgroundColor: FiservColor,
             label: 'Modules',
+            backgroundColor: Colors.black,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.bookmarks_outlined),
-            backgroundColor: FiservColor,
             label: 'Urgent Tasks',
+            backgroundColor: Colors.black,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.task_alt),
-            backgroundColor: FiservColor,
             label: 'Achievements',
+            backgroundColor: Colors.black,
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.person_search_outlined),
-            backgroundColor: FiservColor,
             label: 'Colleagues',
+            backgroundColor: Colors.black,
           ),
         ],
+        selectedItemColor: FiservColor,
+        unselectedItemColor: FiservColor,
       ),
     );
   }
