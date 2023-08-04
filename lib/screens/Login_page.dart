@@ -8,18 +8,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 //   static UserCredential? userCredential;
 // }
 
-class LoginApp extends StatelessWidget {
-  const LoginApp({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      home: LoginPage(),
-    );
-  }
-}
-
 class LoginPage extends StatelessWidget {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
@@ -43,8 +31,12 @@ class LoginPage extends StatelessWidget {
       // Global.userCredential = userCredential;
 
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Login Successfully.')),
+        const SnackBar(
+          content: Text('Login Successfully.'),
+          duration: Duration(seconds: 1),
+        ),
       );
+
       checkUserPosition(context);
 
       print('Username: $username, Password: $password');
@@ -99,6 +91,11 @@ class LoginPage extends StatelessWidget {
                   .collection('User')
                   .doc(uid)
                   .update({'firstlog': false});
+            } else {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: ((context) => const MainScreen())));
             }
           } else if (position == 'manager') {
             debugPrint('User is a manager.');
