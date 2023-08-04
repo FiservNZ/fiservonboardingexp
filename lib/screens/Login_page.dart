@@ -1,5 +1,6 @@
 import 'package:fiservonboardingexp/screens/main_screen.dart';
 import 'package:fiservonboardingexp/screens/home_page.dart';
+import 'package:fiservonboardingexp/screens/teaser.dart';
 import 'package:fiservonboardingexp/widgets/nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -13,7 +14,7 @@ class LoginPage extends StatelessWidget {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
-  LoginPage({super.key});
+  LoginPage({Key? key}) : super(key: key);
 
   Future handleLogin(BuildContext context) async {
     // get the information
@@ -32,8 +33,12 @@ class LoginPage extends StatelessWidget {
       // Global.userCredential = userCredential;
 
       ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Login Successfully.')),
+        const SnackBar(
+          content: Text('Login Successfully.'),
+          duration: Duration(seconds: 1),
+        ),
       );
+
       checkUserPosition(context);
 
       print('Username: $username, Password: $password');
@@ -74,16 +79,21 @@ class LoginPage extends StatelessWidget {
           bool isFirstLogin = snapshot.data()!['firstlog'];
           // Determin logic based on position
           if (position == 'developer') {
-            print('User is a developer.');
             // Update the 'firstlog' field if it's the first login
-            Navigator.push(context,
-                MaterialPageRoute(builder: ((context) => const MainScreen())));
             if (isFirstLogin) {
-              print("go to the teaser page");
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: ((context) => const TeaserScreen())));
               await FirebaseFirestore.instance
                   .collection('User')
                   .doc(uid)
                   .update({'firstlog': false});
+            } else {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: ((context) => const MainScreen())));
             }
           } else if (position == 'manager') {
             print('User is a manager.');

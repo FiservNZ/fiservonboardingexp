@@ -1,4 +1,4 @@
-import 'package:fiservonboardingexp/screens/Login_page.dart';
+import 'package:fiservonboardingexp/screens/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:fiservonboardingexp/firebase_options.dart';
@@ -28,8 +28,8 @@ class MyApp extends StatelessWidget {
       ),
       initialRoute: initScreen == 0 || initScreen == null ? 'teaser' : 'home',
       routes: {
-        'home': (context) => const LoginApp(),
-        'teaser': (context) => const TeaserScreen(),
+        'home': (context) => LoginPage(),
+        'teaser': (context) => LoginPage(),
       },
     );
   }
