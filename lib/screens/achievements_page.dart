@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
-
 import '../util/constants.dart';
-import 'nav_bar.dart';
+import 'package:fiservonboardingexp/widgets/nav_bar.dart';
 
 class AchievementsPage extends StatelessWidget {
   const AchievementsPage({super.key});

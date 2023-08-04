@@ -1,4 +1,4 @@
-import 'package:fiservonboardingexp/screens/nav_bar.dart';
+import 'package:fiservonboardingexp/widgets/nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 import '../screens/app_bar.dart';

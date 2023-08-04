@@ -1,7 +1,7 @@
 import 'package:fiservonboardingexp/screens/task_categories/compliance_page.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:fiservonboardingexp/screens/nav_bar.dart';
+import 'package:fiservonboardingexp/widgets/nav_bar.dart';
 import 'achievements_page.dart';
 import 'colleagues_page.dart';
 import 'home_page.dart';

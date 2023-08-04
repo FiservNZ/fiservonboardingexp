@@ -4,7 +4,7 @@ import 'colleagues.dart';
 import 'package:flutter/gestures.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'nav_bar.dart';
+import 'package:fiservonboardingexp/widgets/nav_bar.dart';
 
 class ColleaguesPage extends StatefulWidget {
   const ColleaguesPage({Key? key}) : super(key: key);

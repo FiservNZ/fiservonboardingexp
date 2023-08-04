@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../util/task_tile.dart';
 import '../../util/constants.dart';
-import '../nav_bar.dart';
+import 'package:fiservonboardingexp/widgets/nav_bar.dart';
 
 class TechnicalTasks extends StatefulWidget {
   const TechnicalTasks({super.key});

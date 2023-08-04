@@ -1,6 +1,6 @@
 import 'package:fiservonboardingexp/screens/main_screen.dart';
 import 'package:fiservonboardingexp/screens/home_page.dart';
-import 'package:fiservonboardingexp/screens/nav_bar.dart';
+import 'package:fiservonboardingexp/widgets/nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
