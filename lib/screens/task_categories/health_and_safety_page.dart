@@ -43,6 +43,5 @@ class _HnSPage extends State<HnSTasks> {
         ),
       ),
     );
-    ;
   }
 }
