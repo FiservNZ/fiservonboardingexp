@@ -1,4 +1,17 @@
 import 'package:flutter/material.dart';
+import 'achievements_page.dart';
+import 'home_page.dart';
+import 'modules_page.dart';
+import 'colleagues_page.dart';
+import 'urgent_tasks_page.dart';
+import 'appBarOverlay.dart';
+
+class MyHomePage extends StatefulWidget {
+  const MyHomePage({super.key});
+
+  @override
+  _NavAppOverlay createState() => _NavAppOverlay();
+}
 
 class NavAppOverlay extends StatelessWidget {
   final int currentIndex;

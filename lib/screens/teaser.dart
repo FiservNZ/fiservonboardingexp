@@ -4,10 +4,7 @@ import 'teaser_page_1.dart';
 import 'teaser_page_2.dart';
 import 'teaser_page_3.dart';
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import '../main.dart';
 import 'navAppOverlay.dart';
-import 'package:after_layout/after_layout.dart';
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class TeaserScreen extends StatefulWidget {
