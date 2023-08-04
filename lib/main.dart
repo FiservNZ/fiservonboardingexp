@@ -4,7 +4,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:fiservonboardingexp/firebase_options.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:fiservonboardingexp/screens/teaser.dart';
-import 'screens/main_screen.dart';
 
 int? initScreen;
 
@@ -14,10 +13,12 @@ Future<void> main() async {
   SharedPreferences preferences = await SharedPreferences.getInstance();
   initScreen = await preferences.getInt('initScreen');
   await preferences.setInt('initScreen', 1);
-  runApp(MyApp());
+  runApp(const MyApp());
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
