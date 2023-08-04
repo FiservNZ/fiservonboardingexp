@@ -4,7 +4,7 @@ import 'colleagues.dart';
 import 'package:flutter/gestures.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-import 'nav_bar.dart';
+import '../widgets/nav_bar.dart';
 
 class ColleaguesPage extends StatefulWidget {
   const ColleaguesPage({Key? key}) : super(key: key);
@@ -42,7 +42,7 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: myAppBar,
-      bottomNavigationBar: const customNavBar(),
+      bottomNavigationBar: const CustomNavBar(),
       body: Padding(
         padding: EdgeInsets.all(16),
         child: Column(
