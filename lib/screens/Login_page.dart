@@ -1,6 +1,5 @@
 import 'package:fiservonboardingexp/screens/main_screen.dart';
-import 'package:fiservonboardingexp/screens/home_page.dart';
-import 'package:fiservonboardingexp/widgets/nav_bar.dart';
+import 'package:fiservonboardingexp/screens/teaser.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -24,6 +23,8 @@ class LoginApp extends StatelessWidget {
 class LoginPage extends StatelessWidget {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+
+  LoginPage({super.key});
 
   Future handleLogin(BuildContext context) async {
     // get the information
@@ -84,30 +85,34 @@ class LoginPage extends StatelessWidget {
           bool isFirstLogin = snapshot.data()!['firstlog'];
           // Determin logic based on position
           if (position == 'developer') {
-            print('User is a developer.');
+            debugPrint('User is a developer.');
             // Update the 'firstlog' field if it's the first login
             Navigator.push(context,
-                MaterialPageRoute(builder: ((context) => const MainScreen())));
+                MaterialPageRoute(builder: (context) => const MainScreen()));
             if (isFirstLogin) {
-              print("go to the teaser page");
+              debugPrint("go to the teaser page");
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => const TeaserScreen()));
               await FirebaseFirestore.instance
                   .collection('User')
                   .doc(uid)
                   .update({'firstlog': false});
             }
           } else if (position == 'manager') {
-            print('User is a manager.');
+            debugPrint('User is a manager.');
           } else {
-            print('User position unknown.');
+            debugPrint('User position unknown.');
           }
         } else {
-          print('User data not found in Firestore.');
+          debugPrint('User data not found in Firestore.');
         }
       } catch (e) {
-        print('Error retrieving user data: $e');
+        debugPrint('Error retrieving user data: $e');
       }
     } else {
-      print('User not logged in.');
+      debugPrint('User not logged in.');
     }
   }
 

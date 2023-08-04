@@ -200,7 +200,7 @@ class _ProfilePageState extends State<ProfilePage> {
                           ),
                           onPressed: () async {
                             final pdfFile = await PdfApi.generateCenteredText(
-                                'Sample Text');
+                                'Sample Text - Test');
 
                             PdfApi.openFile(pdfFile);
                             debugPrint('Submit button pressed...');
