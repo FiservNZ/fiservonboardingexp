@@ -1,4 +1,6 @@
-import 'appBarOverlay.dart';
+import 'package:fiservonboardingexp/screens/nav_bar.dart';
+
+import 'app_bar.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
@@ -9,9 +11,9 @@ class HomePage extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        //appbar
-        //appBar: const AppBarOverlay(),
-
+        // //appbar
+        appBar: const AppBarOverlay(),
+        bottomNavigationBar: customNavBar(),
         //Home Page
         body: Scrollbar(
             thumbVisibility: true,

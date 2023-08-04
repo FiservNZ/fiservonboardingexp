@@ -1,7 +1,7 @@
+import 'package:fiservonboardingexp/screens/nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
-
-import '../screens/appBarOverlay.dart';
+import '../screens/app_bar.dart';
 
 const myAppBar = AppBarOverlay();
 
@@ -28,29 +28,7 @@ const myDrawer = Drawer(
   ]),
 );
 
-final navBar = Container(
-  color: Colors.black,
-  child: const Padding(
-    padding: EdgeInsets.symmetric(horizontal: 13.0, vertical: 15),
-    child: GNav(
-        backgroundColor: Colors.black,
-        color: Colors.white,
-        activeColor: Colors.white,
-        tabBackgroundColor: fiservColor,
-        padding: EdgeInsets.all(10),
-        gap: 8,
-        tabs: [
-          GButton(
-            icon: Icons.home,
-            text: 'Home',
-          ),
-          GButton(icon: Icons.library_books, text: 'Modules'),
-          GButton(icon: Icons.bookmark, text: 'Achievements'),
-          GButton(icon: Icons.check_circle_outline, text: 'Checklist'),
-          GButton(icon: Icons.person_search_outlined, text: 'Collegues'),
-        ]),
-  ),
-);
+final navBar = customNavBar;
 
 const myBackgroundColor = Color.fromARGB(255, 39, 39, 39);
 const fiservColor = Color.fromARGB(255, 255, 102, 0);
