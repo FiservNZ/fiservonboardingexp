@@ -43,6 +43,5 @@ class _TechnicalTasksPage extends State<TechnicalTasks> {
         ),
       ),
     );
-    ;
   }
 }

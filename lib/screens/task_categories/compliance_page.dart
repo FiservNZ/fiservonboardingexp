@@ -43,6 +43,5 @@ class _SecurityTaskPage extends State<SecurityTasks> {
         ),
       ),
     );
-    ;
   }
 }
