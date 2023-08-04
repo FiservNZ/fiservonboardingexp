@@ -1,7 +1,7 @@
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
 
-import 'nav_bar.dart';
+import '../widgets/nav_bar.dart';
 
 class UrgentTasksPage extends StatelessWidget {
   const UrgentTasksPage({super.key});
@@ -10,7 +10,7 @@ class UrgentTasksPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       appBar: myAppBar,
-      bottomNavigationBar: const customNavBar(),
+      bottomNavigationBar: CustomNavBar(),
       body: Padding(
         padding: EdgeInsets.only(top: 16, left: 16),
         child: Align(

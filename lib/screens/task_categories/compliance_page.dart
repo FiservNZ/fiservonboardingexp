@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../util/task_tile.dart';
 import '../../util/constants.dart';
-import 'package:fiservonboardingexp/screens/nav_bar.dart';
+import 'package:fiservonboardingexp/widgets/nav_bar.dart';
 
 class SecurityTasks extends StatefulWidget {
   const SecurityTasks({super.key});
@@ -18,7 +18,7 @@ class _SecurityTaskPage extends State<SecurityTasks> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: myAppBar,
-        bottomNavigationBar: customNavBar(),
+        bottomNavigationBar: const CustomNavBar(),
         body: Container(
           color: Colors.white,
           child: Padding(
