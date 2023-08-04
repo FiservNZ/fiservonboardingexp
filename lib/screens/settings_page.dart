@@ -1,11 +1,13 @@
+import 'package:fiservonboardingexp/widgets/nav_bar.dart';
 import 'package:flutter/material.dart';
-import 'appBarOverlay.dart';
+import 'app_bar.dart';
 
 class SettingsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
       appBar: AppBarOverlay(),
+      bottomNavigationBar: CustomNavBar(),
       body: Padding(
         padding: EdgeInsets.only(top: 16, left: 16),
         child: Align(
