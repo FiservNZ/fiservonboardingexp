@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import '../widgets/nav_bar.dart';
 
 class ModulesPage extends StatelessWidget {
   const ModulesPage({super.key});
@@ -6,6 +7,7 @@ class ModulesPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Scaffold(
+      bottomNavigationBar: CustomNavBar(),
       body: Padding(
         padding: EdgeInsets.only(top: 16, left: 16),
         child: Align(

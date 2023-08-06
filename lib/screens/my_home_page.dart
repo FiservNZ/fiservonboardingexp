@@ -1,10 +1,10 @@
 import 'package:fiservonboardingexp/screens/training_page.dart';
 import 'package:flutter/material.dart';
-import 'NavAppOverlay.dart';
+import 'Nav_App_Overlay.dart';
 import 'achievements_page.dart';
 import 'colleagues_page.dart';
 import 'home_page.dart';
-import 'appBarOverlay.dart';
+import 'app_bar_overlay.dart';
 import 'urgent_tasks_page.dart';
 
 class MyHomePage extends StatefulWidget {
@@ -19,7 +19,7 @@ class _MyHomePageState extends State<MyHomePage> {
 
   final List<Widget> pages = [
     const HomePage(),
-    TrainingPage(),
+    const TrainingPage(),
     const UrgentTasksPage(),
     const AchievementsPage(),
     const ColleaguesPage(),

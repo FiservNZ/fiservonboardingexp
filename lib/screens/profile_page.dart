@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fiservonboardingexp/api/pdf_api.dart';
 import 'package:fiservonboardingexp/widgets/custom_text_box.dart';
 import 'package:flutter/material.dart';
 
@@ -197,7 +198,11 @@ class _ProfilePageState extends State<ProfilePage> {
                               const Color(0xFFFF6600),
                             ),
                           ),
-                          onPressed: () {
+                          onPressed: () async {
+                            final pdfFile = await PdfApi.generateCenteredText(
+                                'Sample Text - Test');
+
+                            PdfApi.openFile(pdfFile);
                             debugPrint('Submit button pressed...');
                             //After Send Introduction has been sent once, it will turn into a Logout button.
                             setState(() {

@@ -1,8 +1,7 @@
+import 'package:fiservonboardingexp/widgets/nav_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:google_nav_bar/google_nav_bar.dart';
+import '../screens/app_bar_overlay.dart';
 
-import '../screens/NavAppOverlay.dart';
-import '../screens/appBarOverlay.dart';
 
 const myAppBar = AppBarOverlay();
 
@@ -29,10 +28,6 @@ const myDrawer = Drawer(
   ]),
 );
 
-final navBar = NavAppOverlay(
-  currentIndex: 0,
-  onTabTapped: (int index) {},
-);
-
+final navBar = CustomNavBar();
 const myBackgroundColor = Color.fromARGB(255, 39, 39, 39);
 const fiservColor = Color.fromARGB(255, 255, 102, 0);
