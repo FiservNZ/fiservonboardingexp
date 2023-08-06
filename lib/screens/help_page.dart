@@ -18,7 +18,7 @@ class HelpPage extends StatelessWidget {
       const Text('\n\n An instructional guide to help navigate the app'),
       Expanded(
         child: Align(
-          alignment: Alignment.bottomCenter,
+          alignment: Alignment.center,
           child: ElevatedButton(
             onPressed: () {
               Navigator.pop(context);
