@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:lottie/lottie.dart';
 import '../screens/task_categories/compliance_page.dart';
 import '../screens/task_categories/health_and_safety_page.dart';
 import '../screens/task_categories/technical_training_page.dart';
 import '../screens/task_categories/week_one_page.dart';
-import 'constants.dart';
 
 class CategoryTile extends StatefulWidget {
   final String categoryName;

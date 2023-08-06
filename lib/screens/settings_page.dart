@@ -7,7 +7,7 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       appBar: AppBarOverlay(),
-      bottomNavigationBar: customNavBar(),
+      bottomNavigationBar: CustomNavBar(),
       body: Padding(
         padding: EdgeInsets.only(top: 16, left: 16),
         child: Align(

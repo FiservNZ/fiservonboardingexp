@@ -18,7 +18,7 @@ class _SecurityTaskPage extends State<SecurityTasks> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: myAppBar,
-        bottomNavigationBar: customNavBar(),
+        bottomNavigationBar: const CustomNavBar(),
         body: Container(
           color: Colors.white,
           child: Padding(
@@ -43,6 +43,5 @@ class _SecurityTaskPage extends State<SecurityTasks> {
         ),
       ),
     );
-    ;
   }
 }

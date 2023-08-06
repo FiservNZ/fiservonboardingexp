@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../../util/task_tile.dart';
 import '../../util/constants.dart';
-import 'package:fiservonboardingexp/widgets/nav_bar.dart';
+import '../../widgets/nav_bar.dart';
 
 class TechnicalTasks extends StatefulWidget {
   const TechnicalTasks({super.key});
@@ -18,7 +18,7 @@ class _TechnicalTasksPage extends State<TechnicalTasks> {
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         appBar: myAppBar,
-        bottomNavigationBar: const customNavBar(),
+        bottomNavigationBar: const CustomNavBar(),
         body: Container(
           color: Colors.white,
           child: Padding(
@@ -43,6 +43,5 @@ class _TechnicalTasksPage extends State<TechnicalTasks> {
         ),
       ),
     );
-    ;
   }
 }

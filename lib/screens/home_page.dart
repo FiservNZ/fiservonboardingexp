@@ -12,7 +12,7 @@ class HomePage extends StatelessWidget {
       home: Scaffold(
         // //appbar
         appBar: const AppBarOverlay(),
-        bottomNavigationBar: customNavBar(),
+        bottomNavigationBar: const CustomNavBar(),
         //Home Page
         body: Scrollbar(
             thumbVisibility: true,

@@ -5,8 +5,8 @@ import 'package:fiservonboardingexp/screens/training_page.dart';
 import 'package:fiservonboardingexp/screens/urgent_tasks_page.dart';
 import 'package:flutter/material.dart';
 
-class customNavBar extends StatelessWidget {
-  const customNavBar({
+class CustomNavBar extends StatelessWidget {
+  const CustomNavBar({
     super.key,
   });
 

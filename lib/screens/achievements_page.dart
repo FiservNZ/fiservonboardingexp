@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import '../util/constants.dart';
-import 'package:fiservonboardingexp/widgets/nav_bar.dart';
+import '../widgets/nav_bar.dart';
 
 class AchievementsPage extends StatelessWidget {
   const AchievementsPage({super.key});
@@ -9,7 +9,7 @@ class AchievementsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Scaffold(
       appBar: myAppBar,
-      bottomNavigationBar: customNavBar(),
+      bottomNavigationBar: CustomNavBar(),
       body: Padding(
         padding: EdgeInsets.only(top: 16, left: 16),
         child: Align(
