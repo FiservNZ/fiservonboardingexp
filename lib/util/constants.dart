@@ -1,6 +1,6 @@
 import 'package:fiservonboardingexp/widgets/nav_bar.dart';
 import 'package:flutter/material.dart';
-import '../screens/app_bar.dart';
+import '../screens/app_bar_overlay.dart';
 
 const myAppBar = AppBarOverlay();
 
