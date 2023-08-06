@@ -18,7 +18,7 @@ class _MainScreenState extends State<MainScreen> {
 
   final List<Widget> pages = [
     const HomePage(),
-    SecurityTasks(),
+    const SecurityTasks(),
     const UrgentTasksPage(),
     const AchievementsPage(),
     const ColleaguesPage(),
