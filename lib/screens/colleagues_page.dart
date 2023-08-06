@@ -3,7 +3,6 @@ import '../util/constants.dart';
 import 'colleagues.dart';
 import 'package:flutter/gestures.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import '../widgets/nav_bar.dart';
 
 class ColleaguesPage extends StatefulWidget {
