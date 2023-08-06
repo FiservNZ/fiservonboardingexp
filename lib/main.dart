@@ -1,3 +1,4 @@
+import 'package:fiservonboardingexp/screens/checklist.dart';
 import 'package:fiservonboardingexp/screens/login_page.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -27,7 +28,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: LoginPage(),
+      home: MainScreen(),
     );
   }
 }
