@@ -1,6 +1,7 @@
 import 'package:fiservonboardingexp/widgets/nav_bar.dart';
 import 'package:flutter/material.dart';
-import '../screens/app_bar.dart';
+import '../screens/app_bar_overlay.dart';
+
 
 const myAppBar = AppBarOverlay();
 
@@ -28,6 +29,5 @@ const myDrawer = Drawer(
 );
 
 final navBar = CustomNavBar();
-
 const myBackgroundColor = Color.fromARGB(255, 39, 39, 39);
 const fiservColor = Color.fromARGB(255, 255, 102, 0);
