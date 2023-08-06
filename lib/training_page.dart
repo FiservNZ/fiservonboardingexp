@@ -1,7 +1,10 @@
-import 'package:fiservonboardingexp/util/category_tile.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
+import 'package:fiservonboardingexp/util/my_box.dart';
+import 'package:fiservonboardingexp/week_one_page.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+//import 'package:google_fonts/google_fonts.dart';
+//import 'package:google_fonts/google_fonts.dart';
 
 class TrainingPage extends StatefulWidget {
   const TrainingPage({Key? key}) : super(key: key);
@@ -11,24 +14,23 @@ class TrainingPage extends StatefulWidget {
 }
 
 class _TrainingPage extends State<TrainingPage> {
-  List moduleCategories = [
-    // [categoryName, categoryImage]
-    // Orientation (First Week), Compliance, Customs and Culture, Technical training, Health &Safety
-    ["Orientation", 'assets/icon/welcome.png'],
-    ["Customs & Culture", 'assets/icon/worldwide.png'],
-    ["Compliance", 'assets/icon/compliance.png'],
-    ["Health & Safety", 'assets/icon/guidelines.png'],
-    ["Technical training", 'assets/icon/technical.png'],
+  bool showTitle = false;
+  List<String> titles = [
+    'Title 1',
+    'Title 2',
+    'Title 3',
+    'Title 4',
+    'Title 5',
+    'Title 6'
   ];
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       resizeToAvoidBottomInset: false,
-      appBar: myAppBar,
+      //appBar: myAppBar,
       backgroundColor: myBackgroundColor,
-      //drawer: myDrawer,
-      // bottomNavigationBar: navBar,
+      drawer: myDrawer,
+      //bottomNavigationBar: navBar,
       body: Column(
         children: [
           const SizedBox(height: 15),
@@ -41,14 +43,24 @@ class _TrainingPage extends State<TrainingPage> {
               constraints: const BoxConstraints(),
               //width: double.infinity,
               child: GridView.builder(
-                itemCount: moduleCategories.length,
-                padding: const EdgeInsets.all(12.0),
+                itemCount: 6,
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2, childAspectRatio: 1 / 1.5),
                 itemBuilder: (context, index) {
-                  return CategoryTile(
-                    categoryName: moduleCategories[index][0],
-                    iconName: moduleCategories[index][1],
+                  String title = titles[index];
+                  return GestureDetector(
+                    onTap: () {
+                      // Navigate to the new page when the box is tapped.
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const WeekOnePage()),
+                      );
+                    },
+                    child: MyBox(
+                      title: title,
+                      context: context,
+                    ),
                   );
                 },
               ),
