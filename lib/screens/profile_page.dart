@@ -227,9 +227,9 @@ class _ProfilePageState extends State<ProfilePage> {
                             debugPrint('Logout button pressed...');
                             //For testing purposes, we will revert back to Send Introduction button.
                             //Once fully implemented, it will be a Logout button permanently.
-                            setState(() {
-                              sendButtonPressed = false;
-                            });
+                            // setState(() {
+                            //   sendButtonPressed = false;
+                            // });
                           },
                           child: const Text('Logout'),
                         ),
