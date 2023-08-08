@@ -1,3 +1,4 @@
+import 'package:fiservonboardingexp/screens/main_screen.dart';
 import 'package:flutter/material.dart';
 
 class HelpPage extends StatelessWidget {
@@ -21,7 +22,12 @@ class HelpPage extends StatelessWidget {
           alignment: Alignment.center,
           child: ElevatedButton(
             onPressed: () {
-              Navigator.pop(context);
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => const MainScreen(),
+                ),
+              );
             },
             style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
             child: const Text(
