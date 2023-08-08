@@ -22,14 +22,14 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
       hobbies: 'Helping',
     ),
     Colleagues(
-      name: 'Emily Smith',
+      name: 'Emily Smith - Manager',
       position: 'Manager',
       phoneNumber: '1234567890',
       email: 'emilysmith@gmail.com',
       hobbies: 'Fishing',
     ),
     Colleagues(
-      name: 'Jane Kim',
+      name: 'Jane Kim - Developer',
       position: 'Developer',
       phoneNumber: '9876543210',
       email: 'janekim@gmail.com',
@@ -61,8 +61,10 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
                 itemBuilder: (context, index) {
                   return ListTile(
                     leading: const CircleAvatar(
-                      // Add the profile icon here
-                      backgroundImage: AssetImage('assets/userIcon.png'),
+                      child: Icon(
+                        Icons.person,
+                        color: Colors.white,
+                      ),
                       backgroundColor: Color(0xFFFF6600),
                     ),
                     title: Text(colleagues[index].name),
