@@ -1,3 +1,4 @@
+import 'package:fiservonboardingexp/screens/help_page.dart';
 import 'package:fiservonboardingexp/screens/main_screen.dart';
 import 'teaser_page_1.dart';
 import 'teaser_page_2.dart';
@@ -53,7 +54,7 @@ class _TeaserScreenState extends State<TeaserScreen> {
                         Navigator.push(
                           context,
                           MaterialPageRoute(
-                            builder: (_) => MainScreen(),
+                            builder: (_) => const HelpPage(),
                           ),
                         );
                       },
