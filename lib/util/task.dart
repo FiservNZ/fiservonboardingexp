@@ -1,14 +1,13 @@
 class Task {
-  //Task Name
+  final String id;
   final String name;
   final String type;
-  final String content;
-  final String iconPath;
+  final String popUpContent;
 
   Task({
+    required this.id,
     required this.name,
     required this.type,
-    required this.content,
-    required this.iconPath,
+    required this.popUpContent,
   });
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-
 import '../widgets/nav_bar.dart';
 
 class ModulesPage extends StatelessWidget {
