@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fiservonboardingexp/screens/task_categories/task_page.dart';
+import 'package:fiservonboardingexp/util/task.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
-import '../screens/task_categories/week_one_page.dart';
 
 class TaskTile extends StatefulWidget {
   const TaskTile({
@@ -48,8 +49,8 @@ class _MyTaskTileState extends State<TaskTile> {
                             subtitle: Text(documentData['type']),
                             leading: Lottie.asset(
                                 'assets/animations/reading_book.json'),
-                            onTap: () =>
-                                _showPopup(context, taskName, popUpContent)),
+                            onTap: () => _showPopup(context, taskName,
+                                popUpContent, data[index].id)),
                       ),
                     );
                   },
@@ -70,7 +71,9 @@ class _MyTaskTileState extends State<TaskTile> {
   }
 }
 
-void _showPopup(BuildContext context, String taskName, String popUpContent) {
+void _showPopup(BuildContext context, String taskName, String popUpContent,
+    String documentId) {
+  var collection = FirebaseFirestore.instance.collection("Task");
   showDialog(
     context: context,
     builder: (BuildContext context) {
@@ -96,23 +99,35 @@ void _showPopup(BuildContext context, String taskName, String popUpContent) {
                 ),
                 // On press of the button, should be taken to weekonepage.dart
                 TextButton.icon(
-                  style: TextButton.styleFrom(
-                    backgroundColor: Colors.white,
-                  ),
-                  icon: Image.asset(
-                    'assets/icon/start-button.png',
-                    width: 60,
-                    height: 60,
-                  ),
-                  label: const SizedBox.shrink(),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: ((context) => const WeekOnePage())));
-                  },
-                ),
+                    style: TextButton.styleFrom(
+                      backgroundColor: Colors.white,
+                    ),
+                    icon: Image.asset(
+                      'assets/icon/start-button.png',
+                      width: 60,
+                      height: 60,
+                    ),
+                    label: const SizedBox.shrink(),
+                    onPressed: () async {
+                      Navigator.of(context).pop();
+                      DocumentSnapshot<Map<String, dynamic>> snapshot =
+                          await collection.doc(documentId).get();
+                      if (snapshot.exists) {
+                        Task task = Task(
+                          id: documentId,
+                          name: taskName,
+                          type: snapshot.data()!['type'],
+                          popUpContent: popUpContent,
+                        );
+                        // ignore: use_build_context_synchronously
+                        Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: ((context) => TaskPage(
+                                      task: task,
+                                    ))));
+                      }
+                    }),
               ],
             ),
           ],
