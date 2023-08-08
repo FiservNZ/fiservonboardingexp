@@ -28,7 +28,7 @@ class _TrainingPage extends State<TrainingPage> {
       appBar: myAppBar,
       backgroundColor: myBackgroundColor,
       //drawer: myDrawer,
-      // bottomNavigationBar: navBar,
+      bottomNavigationBar: navBar,
       body: Column(
         children: [
           const SizedBox(height: 15),
