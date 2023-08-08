@@ -186,7 +186,7 @@ class _ProfilePageState extends State<ProfilePage> {
           or will become a logout button instead
           I will still allow users to edit their "about me".*/
                 //To be implemented later.
-                sendButtonPressed == false
+                userData['introduced'] == false
                     ? Padding(
                         padding: const EdgeInsets.only(
                           left: 120.0,
@@ -199,41 +199,69 @@ class _ProfilePageState extends State<ProfilePage> {
                             ),
                           ),
                           onPressed: () async {
-                            final pdfFile = await PdfApi.generateCenteredText(
-                                'Sample Text - Test');
+                            if (userData['Interesting Facts']
+                                    .toString()
+                                    .isEmpty ||
+                                userData['Hobbies'].toString().isEmpty ||
+                                userData['Future Self'].toString().isEmpty) {
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                const SnackBar(
+                                  content: Text(
+                                    'Please fill the required information.',
+                                    style: TextStyle(color: Colors.red),
+                                  ),
+                                  duration: Duration(seconds: 2),
+                                ),
+                              );
+                            } else {
+                              PdfApi pdfApi = PdfApi();
+                              final pdfFile = await pdfApi.generate();
 
-                            PdfApi.openFile(pdfFile);
-                            debugPrint('Submit button pressed...');
-                            //After Send Introduction has been sent once, it will turn into a Logout button.
-                            setState(() {
-                              sendButtonPressed = true;
-                            });
+                              PdfApi.openFile(pdfFile);
+                              debugPrint('Submit button pressed...');
+                              //After Send Introduction has been sent once, it will turn into a Logout button.
+                              setState(() async {
+                                await userCollection
+                                    .doc(currentUser.uid)
+                                    .update({'introduced': true});
+                              });
+                            }
                           },
                           child: const Text('Send Introduction'),
                         ),
                       )
-                    : Padding(
-                        padding: const EdgeInsets.only(
-                          left: 120.0,
-                          right: 120.0,
-                        ),
-                        child: ElevatedButton(
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                              Colors.grey.shade600,
-                            ),
-                          ),
-                          onPressed: () {
-                            debugPrint('Logout button pressed...');
-                            //For testing purposes, we will revert back to Send Introduction button.
-                            //Once fully implemented, it will be a Logout button permanently.
-                            // setState(() {
-                            //   sendButtonPressed = false;
-                            // });
-                          },
-                          child: const Text('Logout'),
-                        ),
-                      ),
+                    //The button will disappear once the introduction has been generated.
+                    : const SizedBox(height: 5),
+                // The code below will turn the functionality of the code above into a logout button
+                // if the user has already generated an introduction.
+                // : Padding(
+                //     padding: const EdgeInsets.only(
+                //       left: 120.0,
+                //       right: 120.0,
+                //     ),
+                //     child: ElevatedButton(
+                //       style: ButtonStyle(
+                //         backgroundColor: MaterialStateProperty.all<Color>(
+                //           Colors.grey.shade600,
+                //         ),
+                //       ),
+                //       onPressed: () {
+                //         debugPrint('Logout button pressed...');
+                //         FirebaseAuth.instance.signOut();
+                //         Navigator.pop(context);
+                //         Navigator.push(
+                //             context,
+                //             MaterialPageRoute(
+                //                 builder: (context) => LoginPage()));
+                //         //For testing purposes, we will revert back to Send Introduction button.
+                //         //Once fully implemented, it will be a Logout button permanently.
+                //         setState(() {
+                //           sendButtonPressed = false;
+                //         });
+                //       },
+                //       child: const Text('Logout'),
+                //     ),
+                //   ),
               ],
             );
           } else if (snapshot.hasError) {
