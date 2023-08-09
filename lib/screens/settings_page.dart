@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'app_bar_overlay.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fiservonboardingexp/screens/login_page.dart';
 
 class SettingsPage extends StatelessWidget {
   @override
@@ -19,9 +21,18 @@ class SettingsPage extends StatelessWidget {
             width: double.infinity,
             height: 150,
           ),
-          const Align(
+          Align(
             alignment: Alignment.center,
-            child: Text('\n\n Music'),
+            child: ListTile(
+              leading: const Icon(Icons.logout),
+              title: const Text('Logout'),
+              onTap: () async {
+                await FirebaseAuth.instance.signOut();
+                Navigator.of(context).pushAndRemoveUntil(
+                    MaterialPageRoute(builder: (context) => LoginPage()),
+                    (route) => false);
+              },
+            ),
           ),
           Expanded(
             child: Align(
