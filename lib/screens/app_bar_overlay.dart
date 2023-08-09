@@ -1,13 +1,9 @@
-import 'package:fiservonboardingexp/screens/login_page.dart';
-import 'package:fiservonboardingexp/screens/main_screen.dart';
 import 'profile_page.dart';
 import 'faq_page_placeholder.dart';
 import 'help_page.dart';
 import 'teaser.dart';
-import 'logout_page.dart';
 import 'settings_page.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
   const AppBarOverlay({super.key});
@@ -42,7 +38,7 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                 context: context,
                 builder: (BuildContext context) {
                   return Container(
-                    height: 400,
+                    height: 300,
                     color: Colors.black,
                     child: Center(
                       child: Column(
@@ -118,25 +114,6 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                                 MaterialPageRoute(
                                     builder: (context) => SettingsPage()),
                               );
-                            },
-                          ),
-
-                          // Logout
-                          ListTile(
-                            leading: const Icon(
-                              Icons.logout,
-                              color: Color(0xFFFF6600),
-                            ),
-                            title: const Text(
-                              'Logout',
-                              style: TextStyle(color: Color(0xFFFF6600)),
-                            ),
-                            onTap: () async {
-                              await FirebaseAuth.instance.signOut();
-                              Navigator.of(context).pushAndRemoveUntil(
-                                  MaterialPageRoute(
-                                      builder: (context) => LoginPage()),
-                                  (route) => false);
                             },
                           ),
                         ],
