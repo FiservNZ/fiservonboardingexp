@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../widgets/nav_bar.dart';
 
+import '../widgets/nav_bar.dart';
+
 class ModulesPage extends StatelessWidget {
   const ModulesPage({super.key});
 
