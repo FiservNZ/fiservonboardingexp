@@ -56,7 +56,7 @@ class _CategoryTileState extends State<CategoryTile> {
         padding: const EdgeInsets.all(8.0),
         child: Container(
           decoration: BoxDecoration(
-            color: const Color.fromARGB(132, 255, 255, 255),
+            color: const Color.fromARGB(132, 90, 89, 89),
             borderRadius: BorderRadius.circular(12.0),
             /*boxShadow: [
               BoxShadow(
