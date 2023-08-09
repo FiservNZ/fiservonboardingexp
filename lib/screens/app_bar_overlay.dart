@@ -12,6 +12,7 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
         backgroundColor: Colors.black,
+        scrolledUnderElevation: 0, //Removes the app bar shadow
 
         // Profile picture icon
         leading: IconButton(
@@ -38,7 +39,7 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                 context: context,
                 builder: (BuildContext context) {
                   return Container(
-                    height: 300,
+                    height: 320,
                     color: Colors.black,
                     child: Center(
                       child: Column(
@@ -115,6 +116,11 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                                     builder: (context) => SettingsPage()),
                               );
                             },
+                          ),
+
+                          const SizedBox(
+                            width: double.infinity,
+                            height: 30,
                           ),
                         ],
                       ),

@@ -13,7 +13,7 @@ class FaqPage extends StatelessWidget {
         child: Align(
           alignment: Alignment.topLeft,
           child: Text(
-            'Faq Page',
+            'FAQ Page',
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,
