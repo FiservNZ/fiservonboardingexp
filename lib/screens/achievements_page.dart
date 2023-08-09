@@ -26,11 +26,6 @@ class AchievementsPage extends StatelessWidget {
               ),
             ),
           ),
-          // Comment out Expanded, used just for testing purposes cause Modules Page is scuffed.
-          Expanded(
-            child: CheckList(),
-          ),
-          // Comment out until here.
         ],
       ),
     );
