@@ -169,25 +169,13 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
   }
 
   void _launchEmail(String email) async {
-    String encodeQueryParameters(Map<String, String> params) {
-      return params.entries
-          .map((e) =>
-              '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
-          .join('&');
-    }
-
-    final emailUri = Uri(
-      scheme: 'mailto',
-      path: email,
-      query: encodeQueryParameters(<String, String>{
-        'subject': 'Regarding Colleague Information',
-      }),
-    );
-
-    if (await canLaunchUrl(emailUri)) {
-      await launchUrl(emailUri);
+    String subject = Uri.encodeComponent("Query");
+    print(subject); //output: Hello%20Flutter
+    Uri mail = Uri.parse("mailto:$email?subject=$subject");
+    if (await launchUrl(mail)) {
+      //email app opened
     } else {
-      throw Exception('Could not launch $emailUri');
+      //email app is not opened
     }
   }
 }
