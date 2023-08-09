@@ -1,17 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../util/task_tile.dart';
+
 import '../../util/constants.dart';
-import 'package:fiservonboardingexp/widgets/nav_bar.dart';
+import '../../util/task.dart';
+import '../../widgets/nav_bar.dart';
 
-class SecurityTasks extends StatefulWidget {
-  const SecurityTasks({super.key});
+class TaskPage extends StatelessWidget {
+  final Task task;
 
-  @override
-  State<SecurityTasks> createState() => _SecurityTaskPage();
-}
+  const TaskPage({super.key, required this.task});
 
-class _SecurityTaskPage extends State<SecurityTasks> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -26,17 +24,13 @@ class _SecurityTaskPage extends State<SecurityTasks> {
             child: Column(
               children: [
                 const SizedBox(height: 20),
-                //heading
+                //title of page pulled from the name field in firestore
                 Text(
-                  "Security Tasks",
+                  task.name,
                   style:
                       GoogleFonts.bebasNeue(fontSize: 30, color: fiservColor),
                 ),
                 const SizedBox(height: 10),
-                //list of tasks
-                const Expanded(
-                  child: TaskTile(),
-                )
               ],
             ),
           ),

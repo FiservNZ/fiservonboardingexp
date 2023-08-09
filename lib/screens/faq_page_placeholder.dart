@@ -1,6 +1,6 @@
 import 'package:fiservonboardingexp/widgets/nav_bar.dart';
 import 'package:flutter/material.dart';
-import 'app_bar.dart';
+import 'app_bar_overlay.dart';
 
 class FaqPage extends StatelessWidget {
   @override

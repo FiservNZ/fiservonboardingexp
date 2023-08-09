@@ -3,6 +3,7 @@ import '../util/constants.dart';
 import 'colleagues.dart';
 import 'package:flutter/gestures.dart';
 import 'package:url_launcher/url_launcher.dart';
+import '../widgets/nav_bar.dart';
 
 import '../widgets/nav_bar.dart';
 
@@ -62,11 +63,16 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
                 itemBuilder: (context, index) {
                   return ListTile(
                     leading: const CircleAvatar(
-                      // Add the profile icon here
-                      backgroundImage: AssetImage('assets/userIcon.png'),
+                      child: Icon(
+                        Icons.person,
+                        color: Colors.white,
+                      ),
                       backgroundColor: Color(0xFFFF6600),
                     ),
                     title: Text(colleagues[index].name),
+                    subtitle: colleagues[index].name == 'IT Support'
+                        ? null
+                        : Text(colleagues[index].position),
                     onTap: () {
                       _showColleagueDetails(colleagues[index]);
                     },
@@ -163,13 +169,18 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
   }
 
   void _launchEmail(String email) async {
-    final Uri emailUri = Uri(scheme: 'mailto', path: email);
-    final String emailUrl = emailUri.toString();
+    final Uri emailUri = Uri(
+      scheme: 'mailto',
+      path: email,
+      queryParameters: {'subject': 'Regarding Colleague Information'},
+    );
 
-    if (await canLaunch(emailUrl)) {
-      await launch(emailUrl);
+    final gmailUrl = 'googlegmail:///co?to=${emailUri.toString()}';
+
+    if (await canLaunch(gmailUrl)) {
+      await launch(gmailUrl);
     } else {
-      throw 'Could not launch $emailUrl';
+      throw 'Could not launch Gmail...';
     }
   }
 }

@@ -1,11 +1,9 @@
 import 'package:fiservonboardingexp/screens/task_categories/compliance_page.dart';
-import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:fiservonboardingexp/widgets/nav_bar.dart';
 import 'achievements_page.dart';
 import 'colleagues_page.dart';
 import 'home_page.dart';
-import 'app_bar.dart';
 import 'urgent_tasks_page.dart';
 
 class MainScreen extends StatefulWidget {
@@ -20,7 +18,7 @@ class _MainScreenState extends State<MainScreen> {
 
   final List<Widget> pages = [
     const HomePage(),
-    SecurityTasks(),
+    const SecurityTasks(),
     const UrgentTasksPage(),
     const AchievementsPage(),
     const ColleaguesPage(),
