@@ -1,5 +1,6 @@
 import 'package:fiservonboardingexp/screens/help_page.dart';
 import 'package:fiservonboardingexp/screens/main_screen.dart';
+import 'package:flutter/services.dart';
 import 'teaser_page_1.dart';
 import 'teaser_page_2.dart';
 import 'teaser_page_3.dart';
@@ -51,12 +52,7 @@ class _TeaserScreenState extends State<TeaserScreen> {
                   ? GestureDetector(
                       child: const Text('Done'),
                       onTap: () {
-                        Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (_) => const HelpPage(),
-                          ),
-                        );
+                        Navigator.pop(context);
                       },
                     )
                   : GestureDetector(
