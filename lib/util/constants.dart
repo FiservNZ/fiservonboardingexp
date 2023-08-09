@@ -28,5 +28,5 @@ const myDrawer = Drawer(
 );
 
 const navBar = CustomNavBar();
-const myBackgroundColor = Color.fromARGB(255, 39, 39, 39);
+const myBackgroundColor = Colors.white;
 const fiservColor = Color.fromARGB(255, 255, 102, 0);
