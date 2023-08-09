@@ -12,6 +12,7 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     return AppBar(
         backgroundColor: Colors.black,
+        scrolledUnderElevation: 0, //Removes the app bar shadow
 
         // Profile picture icon
         leading: IconButton(
