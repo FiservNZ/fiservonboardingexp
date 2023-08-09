@@ -167,18 +167,25 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
   }
 
   void _launchEmail(String email) async {
-    final Uri emailUri = Uri(
+    String encodeQueryParameters(Map<String, String> params) {
+      return params.entries
+          .map((e) =>
+              '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
+          .join('&');
+    }
+
+    final emailUri = Uri(
       scheme: 'mailto',
       path: email,
-      queryParameters: {'subject': 'Regarding Colleague Information'},
+      query: encodeQueryParameters(<String, String>{
+        'subject': 'Regarding Colleague Information',
+      }),
     );
 
-    final gmailUrl = 'googlegmail:///co?to=${emailUri.toString()}';
-
-    if (await canLaunch(gmailUrl)) {
-      await launch(gmailUrl);
+    if (await canLaunch(emailUri.toString())) {
+      await launchUrl(emailUri.toString() as Uri);
     } else {
-      throw 'Could not launch Gmail...';
+      throw Exception('Could not launch $emailUri');
     }
   }
 }
