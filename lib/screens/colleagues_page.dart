@@ -182,8 +182,8 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
       }),
     );
 
-    if (await canLaunch(emailUri.toString())) {
-      await launchUrl(emailUri.toString() as Uri);
+    if (await canLaunchUrl(emailUri)) {
+      await launchUrl(emailUri);
     } else {
       throw Exception('Could not launch $emailUri');
     }
