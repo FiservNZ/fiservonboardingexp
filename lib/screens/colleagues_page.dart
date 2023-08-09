@@ -22,14 +22,14 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
       hobbies: 'Helping',
     ),
     Colleagues(
-      name: 'Emily Smith - Manager',
+      name: 'Emily Smith',
       position: 'Manager',
       phoneNumber: '1234567890',
       email: 'emilysmith@gmail.com',
       hobbies: 'Fishing',
     ),
     Colleagues(
-      name: 'Jane Kim - Developer',
+      name: 'Jane Kim',
       position: 'Developer',
       phoneNumber: '9876543210',
       email: 'janekim@gmail.com',
@@ -68,6 +68,9 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
                       backgroundColor: Color(0xFFFF6600),
                     ),
                     title: Text(colleagues[index].name),
+                    subtitle: colleagues[index].name == 'IT Support'
+                        ? null
+                        : Text(colleagues[index].position),
                     onTap: () {
                       _showColleagueDetails(colleagues[index]);
                     },
@@ -164,13 +167,18 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
   }
 
   void _launchEmail(String email) async {
-    final Uri emailUri = Uri(scheme: 'mailto', path: email);
-    final String emailUrl = emailUri.toString();
+    final Uri emailUri = Uri(
+      scheme: 'mailto',
+      path: email,
+      queryParameters: {'subject': 'Regarding Colleague Information'},
+    );
 
-    if (await canLaunch(emailUrl)) {
-      await launch(emailUrl);
+    final gmailUrl = 'googlegmail:///co?to=${emailUri.toString()}';
+
+    if (await canLaunch(gmailUrl)) {
+      await launch(gmailUrl);
     } else {
-      throw 'Could not launch $emailUrl';
+      throw 'Could not launch Gmail...';
     }
   }
 }
