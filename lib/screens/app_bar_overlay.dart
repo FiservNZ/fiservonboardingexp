@@ -39,7 +39,7 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                 context: context,
                 builder: (BuildContext context) {
                   return Container(
-                    height: 300,
+                    height: 320,
                     color: Colors.black,
                     child: Center(
                       child: Column(
@@ -116,6 +116,11 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                                     builder: (context) => SettingsPage()),
                               );
                             },
+                          ),
+
+                          const SizedBox(
+                            width: double.infinity,
+                            height: 30,
                           ),
                         ],
                       ),
