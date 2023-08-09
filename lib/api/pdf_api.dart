@@ -167,6 +167,27 @@ class PdfApi {
               );
             },
           );
+        } else {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: const Text('Notice:'),
+                content: const Text(
+                  'Something went wrong. Please try again.',
+                  style: TextStyle(fontStyle: FontStyle.italic),
+                ),
+                actions: <Widget>[
+                  TextButton(
+                    child: const Text('Close'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              );
+            },
+          );
         }
       });
     });
