@@ -119,20 +119,10 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
                 Row(
                   children: [
                     const Text('Email: '),
-                    RichText(
-                      text: TextSpan(
-                        children: [
-                          TextSpan(
-                            text: colleague.email,
-                            style: const TextStyle(color: Colors.blue),
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                _launchEmail(colleague.email);
-                              },
-                          ),
-                        ],
-                      ),
-                    ),
+                    Text(
+                      colleague.email,
+                      style: const TextStyle(color: Colors.black),
+                    )
                   ],
                 ),
                 Text('Hobbies: ${colleague.hobbies}'),
@@ -140,6 +130,35 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
             ),
           ),
           actions: [
+            ElevatedButton(
+              style: ElevatedButton.styleFrom(
+                backgroundColor: FiservColor,
+              ),
+              onPressed: () async {
+                String? encodeQueryParameters(Map<String, String> params) {
+                  return params.entries
+                      .map((MapEntry<String, String> e) =>
+                          '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
+                      .join('&');
+                }
+
+                final Uri emailUri = Uri(
+                  scheme: 'mailto',
+                  path: colleague.email,
+                  query: encodeQueryParameters(<String, String>{
+                    'subject': 'Regarding Colleague Information',
+                  }),
+                );
+
+                if (await canLaunchUrl(emailUri)) {
+                  launchUrl(emailUri);
+                  print("worked");
+                } else {
+                  throw Exception("Couldnt launch email: ${colleague.email}");
+                }
+              },
+              child: const Text('Send Email'),
+            ),
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFFFF6600),
@@ -163,29 +182,6 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
       await launch(phoneUrl);
     } else {
       throw 'Could not launch $phoneUrl';
-    }
-  }
-
-  void _launchEmail(String email) async {
-    String encodeQueryParameters(Map<String, String> params) {
-      return params.entries
-          .map((e) =>
-              '${Uri.encodeComponent(e.key)}=${Uri.encodeComponent(e.value)}')
-          .join('&');
-    }
-
-    final emailUri = Uri(
-      scheme: 'mailto',
-      path: email,
-      query: encodeQueryParameters(<String, String>{
-        'subject': 'Regarding Colleague Information',
-      }),
-    );
-
-    if (await canLaunchUrl(emailUri)) {
-      await launchUrl(emailUri);
-    } else {
-      throw Exception('Could not launch $emailUri');
     }
   }
 }
