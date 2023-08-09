@@ -24,15 +24,19 @@ class SettingsPage extends StatelessWidget {
           Align(
             alignment: Alignment.center,
             child: ListTile(
-              leading: const Icon(Icons.logout),
-              title: const Text('Logout'),
-              onTap: () async {
-                await FirebaseAuth.instance.signOut();
-                Navigator.of(context).pushAndRemoveUntil(
-                    MaterialPageRoute(builder: (context) => LoginPage()),
-                    (route) => false);
-              },
-            ),
+                leading: const Icon(Icons.logout),
+                title: const Text('Logout'),
+                onTap: () async {
+                  await FirebaseAuth.instance.signOut();
+                  Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
+                    MaterialPageRoute(
+                      builder: (BuildContext context) {
+                        return LoginPage();
+                      },
+                    ),
+                    (_) => false,
+                  );
+                }),
           ),
           Expanded(
             child: Align(

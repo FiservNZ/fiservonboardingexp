@@ -27,34 +27,41 @@ class _TrainingPage extends State<TrainingPage> {
       resizeToAvoidBottomInset: false,
       appBar: myAppBar,
       backgroundColor: myBackgroundColor,
-      //drawer: myDrawer,
       bottomNavigationBar: navBar,
-      body: Column(
-        children: [
-          const SizedBox(height: 15),
-          Text('My Training',
-              style: GoogleFonts.bebasNeue(fontSize: 30, color: fiservColor)),
-          const SizedBox(height: 10),
-          AspectRatio(
-            aspectRatio: 0.573,
-            child: ConstrainedBox(
-              constraints: const BoxConstraints(),
-              //width: double.infinity,
-              child: GridView.builder(
-                itemCount: moduleCategories.length,
-                padding: const EdgeInsets.all(12.0),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2, childAspectRatio: 1 / 1.5),
-                itemBuilder: (context, index) {
-                  return CategoryTile(
-                    categoryName: moduleCategories[index][0],
-                    iconName: moduleCategories[index][1],
-                  );
-                },
-              ),
-            ),
-          )
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Center(
+            child: SingleChildScrollView(
+          child: Column(
+            children: [
+              const SizedBox(height: 15),
+              Text('My Training',
+                  style:
+                      GoogleFonts.bebasNeue(fontSize: 30, color: fiservColor)),
+              const SizedBox(height: 10),
+              AspectRatio(
+                aspectRatio: 0.6,
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(),
+                  //width: double.infinity,
+                  child: GridView.builder(
+                    itemCount: moduleCategories.length,
+                    padding: const EdgeInsets.all(12.0),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2, childAspectRatio: 1 / 1.5),
+                    itemBuilder: (context, index) {
+                      return CategoryTile(
+                        categoryName: moduleCategories[index][0],
+                        iconName: moduleCategories[index][1],
+                      );
+                    },
+                  ),
+                ),
+              )
+            ],
+          ),
+        )),
       ),
     );
   }

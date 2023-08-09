@@ -5,6 +5,8 @@ import 'package:flutter/gestures.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../widgets/nav_bar.dart';
 
+import '../widgets/nav_bar.dart';
+
 class ColleaguesPage extends StatefulWidget {
   const ColleaguesPage({Key? key}) : super(key: key);
 
