@@ -214,7 +214,7 @@ class _ProfilePageState extends State<ProfilePage> {
                                 ),
                               );
                             } else {
-                              PdfApi pdfApi = PdfApi();
+                              PdfApi pdfApi = PdfApi(context);
                               final pdfFile = await pdfApi.generate();
 
                               PdfApi.openFile(pdfFile);
