@@ -8,14 +8,18 @@ filed to false (if you are unable to see the button.)
 import 'dart:io';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:flutter/material.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
-import 'package:pdf/widgets.dart';
+import 'package:pdf/widgets.dart' as pw;
 import 'package:firebase_storage/firebase_storage.dart' as firebase_storage;
 import 'package:sendgrid_mailer/sendgrid_mailer.dart' as sgm;
 
 class PdfApi {
+  PdfApi(this.context);
+  final BuildContext context;
+
   User? user = FirebaseAuth.instance.currentUser;
   late String firstName;
   late String lastName;
@@ -24,43 +28,43 @@ class PdfApi {
   late String futureSelf;
 
   Future<File> generate() async {
-    final pdf = Document();
+    final pdf = pw.Document();
 
     await fetchUser();
     pdf.addPage(
-      MultiPage(
-        build: (context) => <Widget>[
+      pw.MultiPage(
+        build: (context) => <pw.Widget>[
           customHeader(),
           customHeadline(firstName, lastName),
-          Header(
-            child: Text(
+          pw.Header(
+            child: pw.Text(
               'Biography',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              style: pw.TextStyle(fontWeight: pw.FontWeight.bold, fontSize: 16),
             ),
           ),
-          Paragraph(
+          pw.Paragraph(
             text: interestingFacts,
-            style: const TextStyle(fontSize: 12),
+            style: const pw.TextStyle(fontSize: 12),
           ),
-          Header(
-            child: Text(
+          pw.Header(
+            child: pw.Text(
               'Hobbies',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              style: pw.TextStyle(fontWeight: pw.FontWeight.bold, fontSize: 16),
             ),
           ),
-          Paragraph(
+          pw.Paragraph(
             text: hobbies,
-            style: const TextStyle(fontSize: 12),
+            style: const pw.TextStyle(fontSize: 12),
           ),
-          Header(
-            child: Text(
+          pw.Header(
+            child: pw.Text(
               'Future Aspirations',
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              style: pw.TextStyle(fontWeight: pw.FontWeight.bold, fontSize: 16),
             ),
           ),
-          Paragraph(
+          pw.Paragraph(
             text: futureSelf,
-            style: const TextStyle(fontSize: 12),
+            style: const pw.TextStyle(fontSize: 12),
           ),
         ],
       ),
@@ -69,39 +73,40 @@ class PdfApi {
     return saveToTemporaryFile(pdf);
   }
 
-  static Widget customHeadline(String firstName, String lastName) => Header(
-        child: Center(
-          child: Text(
+  static pw.Widget customHeadline(String firstName, String lastName) =>
+      pw.Header(
+        child: pw.Center(
+          child: pw.Text(
             '$firstName $lastName',
-            style: TextStyle(
+            style: pw.TextStyle(
                 fontSize: 21,
-                fontWeight: FontWeight.bold,
+                fontWeight: pw.FontWeight.bold,
                 color: PdfColors.white),
           ),
         ),
-        decoration: const BoxDecoration(color: PdfColors.red),
+        decoration: const pw.BoxDecoration(color: PdfColors.red),
       );
 
-  static Widget customHeader() => Container(
-        padding: const EdgeInsets.only(bottom: 3 * PdfPageFormat.mm),
-        decoration: const BoxDecoration(
-          border: Border(
-            bottom: BorderSide(width: 2, color: PdfColors.blue),
+  static pw.Widget customHeader() => pw.Container(
+        padding: const pw.EdgeInsets.only(bottom: 3 * PdfPageFormat.mm),
+        decoration: const pw.BoxDecoration(
+          border: pw.Border(
+            bottom: pw.BorderSide(width: 2, color: PdfColors.blue),
           ),
         ),
-        child: Row(
+        child: pw.Row(
           children: [
-            PdfLogo(),
-            SizedBox(width: 0.5 * PdfPageFormat.cm),
-            Text(
+            pw.PdfLogo(),
+            pw.SizedBox(width: 0.5 * PdfPageFormat.cm),
+            pw.Text(
               'Welcome to Fiserv',
-              style: const TextStyle(fontSize: 24, color: PdfColors.blue),
+              style: const pw.TextStyle(fontSize: 24, color: PdfColors.blue),
             ),
           ],
         ),
       );
 
-  Future<File> saveToTemporaryFile(Document pdf) async {
+  Future<File> saveToTemporaryFile(pw.Document pdf) async {
     // Generate the pedf and save it into firebase.
     final uniqueFileName =
         '${DateTime.now().millisecondsSinceEpoch}_${user!.email?.split('@')[0]}';
@@ -141,6 +146,28 @@ class PdfApi {
 
       mailer.send(email).then((result) {
         print('Email Sent: ${result.isValue}');
+        if (result.isValue) {
+          showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: const Text('Notice:'),
+                content: const Text(
+                  'An introduction has been sent out to your colleagues!',
+                  style: TextStyle(fontStyle: FontStyle.italic),
+                ),
+                actions: <Widget>[
+                  TextButton(
+                    child: const Text('Close'),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+              );
+            },
+          );
+        }
       });
     });
 
@@ -166,10 +193,10 @@ class PdfApi {
         hobbies = snapshot['Hobbies'];
         futureSelf = snapshot['Future Self'];
       } else {
-        Center(child: Text('Error, user not found!'));
+        pw.Center(child: pw.Text('Error, user not found!'));
       }
     } catch (e) {
-      Center(child: Text('Error fetching user data: $e'));
+      pw.Center(child: pw.Text('Error fetching user data: $e'));
     }
   }
 }
