@@ -108,6 +108,7 @@ class LoginPage extends StatelessWidget {
             }
           } else if (position == 'manager') {
             debugPrint('User is a manager.');
+            //handle the manager mode below.
           } else {
             debugPrint('User position unknown.');
           }
@@ -128,6 +129,7 @@ class LoginPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: fiservColor,
         centerTitle: true,
+        elevation: 0,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
