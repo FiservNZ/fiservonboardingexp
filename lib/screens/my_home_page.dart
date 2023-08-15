@@ -1,3 +1,4 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fiservonboardingexp/screens/training_page.dart';
 import 'package:flutter/material.dart';
 import 'Nav_App_Overlay.dart';
@@ -5,7 +6,8 @@ import 'achievements_page.dart';
 import 'colleagues_page.dart';
 import 'home_page.dart';
 import 'app_bar_overlay.dart';
-import 'urgent_tasks_page.dart';
+import 'checklist_page.dart';
+import '../main.dart'; // Import main.dart
 
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
@@ -20,7 +22,7 @@ class _MyHomePageState extends State<MyHomePage> {
   final List<Widget> pages = [
     const HomePage(),
     const TrainingPage(),
-    const UrgentTasksPage(),
+    ChecklistPage(firestore: FirebaseFirestore.instance),
     const AchievementsPage(),
     const ColleaguesPage(),
   ];
