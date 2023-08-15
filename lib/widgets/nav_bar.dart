@@ -1,8 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fiservonboardingexp/screens/achievements_page.dart';
 import 'package:fiservonboardingexp/screens/colleagues_page.dart';
 import 'package:fiservonboardingexp/screens/home_page.dart';
 import 'package:fiservonboardingexp/screens/training_page.dart';
-import 'package:fiservonboardingexp/screens/urgent_tasks_page.dart';
+import 'package:fiservonboardingexp/screens/checklist_page.dart';
 import 'package:flutter/material.dart';
 
 class CustomNavBar extends StatelessWidget {
@@ -25,7 +26,11 @@ class CustomNavBar extends StatelessWidget {
             Navigator.push(context, _instantPageRoute(const TrainingPage()));
             break;
           case 2:
-            Navigator.push(context, _instantPageRoute(const UrgentTasksPage()));
+            Navigator.push(
+                context,
+                _instantPageRoute(
+                  ChecklistPage(firestore: FirebaseFirestore.instance),
+                ));
             break;
           case 3:
             Navigator.push(
@@ -48,8 +53,8 @@ class CustomNavBar extends StatelessWidget {
           backgroundColor: Colors.black,
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.bookmarks_outlined),
-          label: 'Tasks',
+          icon: Icon(Icons.format_list_bulleted_sharp),
+          label: 'Checklist',
           backgroundColor: Colors.black,
         ),
         BottomNavigationBarItem(
