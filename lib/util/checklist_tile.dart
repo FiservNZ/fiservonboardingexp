@@ -46,13 +46,15 @@ class ChecklistTile extends StatelessWidget {
                 activeColor: FiservColor,
               ),
             ),
-            Text(
-              task['taskName'],
-              style: GoogleFonts.quicksand(
-                textStyle: const TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                  fontSize: 17,
+            Flexible(
+              child: Text(
+                task['taskName'],
+                style: GoogleFonts.quicksand(
+                  textStyle: const TextStyle(
+                    color: Colors.white,
+                    fontWeight: FontWeight.bold,
+                    fontSize: 17,
+                  ),
                 ),
               ),
             ),
