@@ -1,9 +1,11 @@
 import 'package:fiservonboardingexp/main.dart';
 import 'package:flutter/material.dart';
 import 'app_bar_overlay.dart';
+import 'change_password_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fiservonboardingexp/screens/login_page.dart';
 import 'package:get/get.dart';
+import '../widgets/nav_bar.dart';
 
 class SettingsPage extends StatelessWidget {
   const SettingsPage({Key? key}) : super(key: key);
@@ -12,10 +14,10 @@ class SettingsPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: const AppBarOverlay(),
+      bottomNavigationBar: const CustomNavBar(),
       body: Column(
         children: <Widget>[
           //Heading
-
           const Text(
             '\n Settings',
             style: TextStyle(
@@ -42,11 +44,14 @@ class SettingsPage extends StatelessWidget {
               }),
 
           //Change password
-
           ListTile(
               title: const Text('Change Password'),
               leading: const Icon(Icons.change_circle_outlined),
-              onTap: () {}),
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return const ChangePasswordPage();
+                }));
+              }),
 
           //Logout Button
           ListTile(
