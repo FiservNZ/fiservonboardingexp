@@ -1,8 +1,8 @@
-import 'profile_page.dart';
-import 'faq_page_placeholder.dart';
-import 'help_page.dart';
-import 'teaser.dart';
-import 'settings_page.dart';
+import '../screens/profile_page.dart';
+import '../screens/faq_page_placeholder.dart';
+import '../screens/help_page.dart';
+import '../screens/teaser.dart';
+import '../screens/settings_page.dart';
 import 'package:flutter/material.dart';
 
 class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
@@ -11,9 +11,6 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-        backgroundColor: Colors.black,
-        elevation: 0, //Removes the app bar shadow
-
         // Profile picture icon
         leading: IconButton(
           icon: const Image(image: AssetImage('assets/images/profile.png')),
@@ -26,14 +23,13 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
 
         // Rank Title
         title: const Center(
-          child:
-              Text('[Rank Title]', style: TextStyle(color: Color(0xFFFF6600))),
+          child: Text('[Rank Title]'),
         ),
 
         // Menu sheet
         actions: <Widget>[
           IconButton(
-            icon: const Icon(Icons.menu, color: Color(0xFFFF6600)),
+            icon: const Icon(Icons.menu),
             onPressed: () {
               showModalBottomSheet(
                 context: context,

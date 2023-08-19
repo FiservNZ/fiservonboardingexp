@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'app_bar_overlay.dart';
+import '../widgets/app_bar_overlay.dart';
 import '../widgets/nav_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
@@ -55,12 +55,12 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 25.0),
             child: Text(
-              'Enter your email and we will send you a passsword rest link',
+              'Please enter your email and a password reset link will be emailed to you',
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 20),
+              style: TextStyle(fontSize: 17),
             ),
           ),
-          SizedBox(height: 10),
+          SizedBox(height: 60),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 25.0),
             child: TextField(
@@ -78,7 +78,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
               ),
             ),
           ),
-          SizedBox(height: 10),
+          SizedBox(height: 70),
           MaterialButton(
             onPressed: passwordReset,
             child: Text('Reset Password'),
