@@ -2,8 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fiservonboardingexp/screens/home_page.dart';
 import 'package:fiservonboardingexp/screens/login_page.dart';
 import 'package:fiservonboardingexp/screens/main_screen.dart';
-import 'package:fiservonboardingexp/theme/dark_theme.dart';
-import 'package:fiservonboardingexp/theme/light_theme.dart';
+import 'package:fiservonboardingexp/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:fiservonboardingexp/firebase_options.dart';
@@ -28,9 +27,10 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Fiserv Onboarding',
-      theme: lightTheme,
-      darkTheme: darkTheme,
-      home: HomePage(),
+      themeMode: ThemeMode.system,
+      theme: MyThemes.lightTheme,
+      darkTheme: MyThemes.darkTheme,
+      home: const MainScreen(),
     );
   }
 }

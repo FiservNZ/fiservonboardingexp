@@ -11,6 +11,8 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
+        backgroundColor: Colors.black,
+
         // Profile picture icon
         leading: IconButton(
           icon: const Image(image: AssetImage('assets/images/profile.png')),
@@ -23,13 +25,19 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
 
         // Rank Title
         title: const Center(
-          child: Text('[Rank Title]'),
+          child: Text(
+            '[Rank Title]',
+            style: TextStyle(color: Color(0xFFFF6600)),
+          ),
         ),
 
-        // Menu sheet
+        // Nav draw
         actions: <Widget>[
           IconButton(
-            icon: const Icon(Icons.menu),
+            icon: const Icon(
+              Icons.menu,
+              color: Color(0xFFFF6600),
+            ),
             onPressed: () {
               showModalBottomSheet(
                 context: context,

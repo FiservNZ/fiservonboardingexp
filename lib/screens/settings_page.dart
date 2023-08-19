@@ -10,6 +10,10 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //  final Text = MediaQuery.of(context).platformBrightness == Brightness.dark
+    //  ? 'DarkTheme'
+    //  : 'Lightheme';
+
     return Scaffold(
       appBar: const AppBarOverlay(),
       bottomNavigationBar: const CustomNavBar(),
