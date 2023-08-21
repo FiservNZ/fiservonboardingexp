@@ -17,7 +17,6 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
 
     DocumentSnapshot<Map<String, dynamic>> snapshot =
         await userCollection.doc(currentUser.uid).get();
-
     if (snapshot.exists) {
       return snapshot.data() ?? {};
     } else {
@@ -42,50 +41,6 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
               MaterialPageRoute(builder: (context) => const ProfilePage()),
             );
           },
-        ),
-
-        // Exp bar
-        title: SizedBox(
-          width: 150, // Set the desired width for the SizedBox
-          child: Column(
-            children: [
-              FutureBuilder<Map<String, dynamic>>(
-                future: getUserData(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
-                    return const CircularProgressIndicator();
-                  } else if (snapshot.hasError) {
-                    return Text('Error: ${snapshot.error}');
-                  } else if (snapshot.hasData) {
-                    final level = snapshot.data!['Level'] ?? 0;
-                    final currentEXP = snapshot.data!['EXP'] ?? 0;
-                    final maxEXP = snapshot.data!['MaxEXP'] ?? 100;
-
-                    final expText = 'Level $level  $currentEXP/$maxEXP';
-
-                    return Column(
-                      children: [
-                        Text(
-                          expText,
-                          style: const TextStyle(
-                              color: Color(0xFFFF6600), fontSize: 16),
-                        ),
-                        LinearProgressIndicator(
-                          value: currentEXP / maxEXP,
-                          valueColor: const AlwaysStoppedAnimation<Color>(
-                            Color(0xFFFF6600),
-                          ),
-                          backgroundColor: Colors.grey,
-                        ),
-                      ],
-                    );
-                  } else {
-                    return const Text('No data available');
-                  }
-                },
-              ),
-            ],
-          ),
         ),
         // Menu sheet
         actions: <Widget>[
