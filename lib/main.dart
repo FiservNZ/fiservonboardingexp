@@ -9,6 +9,8 @@ import 'package:fiservonboardingexp/firebase_options.dart';
 
 import 'package:flutter/services.dart';
 
+import 'screens/main_page.dart';
+
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 int? initScreen;
 
@@ -28,9 +30,10 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Fiserv Onboarding',
       themeMode: ThemeMode.system,
-      theme: MyThemes.lightTheme,
-      darkTheme: MyThemes.darkTheme,
-      home: const MainScreen(),
+      theme: ThemeData(
+        primarySwatch: Colors.blue,
+      ),
+      home: MainPage(),
     );
   }
 }
