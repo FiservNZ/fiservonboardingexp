@@ -5,6 +5,8 @@ import 'package:flutter/gestures.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../widgets/nav_bar.dart';
 
+import '../widgets/nav_bar.dart';
+
 class ColleaguesPage extends StatefulWidget {
   const ColleaguesPage({Key? key}) : super(key: key);
 
@@ -167,18 +169,13 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
   }
 
   void _launchEmail(String email) async {
-    final Uri emailUri = Uri(
-      scheme: 'mailto',
-      path: email,
-      queryParameters: {'subject': 'Regarding Colleague Information'},
-    );
-
-    final gmailUrl = 'googlegmail:///co?to=${emailUri.toString()}';
-
-    if (await canLaunch(gmailUrl)) {
-      await launch(gmailUrl);
+    String subject = Uri.encodeComponent("Query");
+    print(subject); //output: Hello%20Flutter
+    Uri mail = Uri.parse("mailto:$email?subject=$subject");
+    if (await launchUrl(mail)) {
+      //email app opened
     } else {
-      throw 'Could not launch Gmail...';
+      //email app is not opened
     }
   }
 }

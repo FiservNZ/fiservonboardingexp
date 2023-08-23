@@ -1,8 +1,8 @@
-import 'profile_page.dart';
-import 'faq_page_placeholder.dart';
-import 'help_page.dart';
-import 'teaser.dart';
-import 'settings_page.dart';
+import '../screens/profile_page.dart';
+import '../screens/faq_page_placeholder.dart';
+import '../screens/help_page.dart';
+import '../screens/teaser.dart';
+import '../screens/settings_page.dart';
 import 'package:flutter/material.dart';
 
 class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
@@ -25,20 +25,25 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
 
         // Rank Title
         title: const Center(
-          child:
-              Text('[Rank Title]', style: TextStyle(color: Color(0xFFFF6600))),
+          child: Text(
+            '[Rank Title]',
+            style: TextStyle(color: Color(0xFFFF6600)),
+          ),
         ),
 
-        // Menu sheet
+        // Nav draw
         actions: <Widget>[
           IconButton(
-            icon: const Icon(Icons.menu, color: Color(0xFFFF6600)),
+            icon: const Icon(
+              Icons.menu,
+              color: Color(0xFFFF6600),
+            ),
             onPressed: () {
               showModalBottomSheet(
                 context: context,
                 builder: (BuildContext context) {
                   return Container(
-                    height: 300,
+                    height: 320,
                     color: Colors.black,
                     child: Center(
                       child: Column(
@@ -115,6 +120,11 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                                     builder: (context) => SettingsPage()),
                               );
                             },
+                          ),
+
+                          const SizedBox(
+                            width: double.infinity,
+                            height: 30,
                           ),
                         ],
                       ),

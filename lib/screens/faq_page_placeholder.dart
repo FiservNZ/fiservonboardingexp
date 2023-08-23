@@ -1,6 +1,6 @@
 import 'package:fiservonboardingexp/widgets/nav_bar.dart';
 import 'package:flutter/material.dart';
-import 'app_bar_overlay.dart';
+import '../widgets/app_bar_overlay.dart';
 
 class FaqPage extends StatelessWidget {
   @override
@@ -13,7 +13,7 @@ class FaqPage extends StatelessWidget {
         child: Align(
           alignment: Alignment.topLeft,
           child: Text(
-            'Faq Page',
+            'FAQ Page',
             style: TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.bold,

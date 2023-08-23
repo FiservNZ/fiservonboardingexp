@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import '../util/constants.dart';
 import '../widgets/nav_bar.dart';
-import 'checklist.dart';
 
 class AchievementsPage extends StatelessWidget {
   const AchievementsPage({super.key});

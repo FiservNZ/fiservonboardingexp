@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../screens/task_categories/compliance_page.dart';
+import '../screens/task_categories/customs_culture_page.dart';
 import '../screens/task_categories/health_and_safety_page.dart';
 import '../screens/task_categories/technical_training_page.dart';
 import '../screens/task_categories/week_one_page.dart';
@@ -44,13 +45,18 @@ class _CategoryTileState extends State<CategoryTile> {
             context,
             MaterialPageRoute(builder: (context) => const TechnicalTasks()),
           );
+        } else if (widget.categoryName == "Customs & Culture") {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => const CustomsCulturePage()),
+          );
         }
       },
       child: Padding(
         padding: const EdgeInsets.all(8.0),
         child: Container(
           decoration: BoxDecoration(
-            color: const Color.fromARGB(132, 255, 255, 255),
+            color: const Color.fromARGB(132, 90, 89, 89),
             borderRadius: BorderRadius.circular(12.0),
             /*boxShadow: [
               BoxShadow(

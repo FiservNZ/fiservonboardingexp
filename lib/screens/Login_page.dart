@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import 'help_page.dart';
+
 // class Global {
 //   static UserCredential? userCredential;
 // }
@@ -86,7 +88,14 @@ class LoginPage extends StatelessWidget {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const TeaserScreen()));
+                      builder: (context) => const TeaserScreen())).then(
+                (value) => Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const HelpPage(),
+                  ),
+                ),
+              );
               await FirebaseFirestore.instance
                   .collection('User')
                   .doc(uid)
@@ -99,6 +108,7 @@ class LoginPage extends StatelessWidget {
             }
           } else if (position == 'manager') {
             debugPrint('User is a manager.');
+            //handle the manager mode below.
           } else {
             debugPrint('User position unknown.');
           }
@@ -119,6 +129,7 @@ class LoginPage extends StatelessWidget {
       appBar: AppBar(
         backgroundColor: fiservColor,
         centerTitle: true,
+        elevation: 0,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
