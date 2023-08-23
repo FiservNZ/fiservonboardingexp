@@ -4,7 +4,7 @@ import 'app_bar_overlay.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
-  final ExpBar _expBar = const ExpBar(Barwidth: 150);
+  final ExpBar _expBar = const ExpBar(barwidth: 150);
 
   const HomePage({super.key});
 
@@ -36,7 +36,7 @@ class HomePage extends StatelessWidget {
                 Container(
                   alignment: Alignment.centerLeft,
                   child: const ExpBar(
-                    Barwidth: 150,
+                    barwidth: 150,
                   ),
                 ),
                 SizedBox(

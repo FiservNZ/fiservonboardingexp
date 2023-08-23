@@ -3,10 +3,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
 class ExpBar extends StatelessWidget {
-  final double Barwidth;
+  final double barwidth;
   const ExpBar({
     super.key,
-    required this.Barwidth,
+    required this.barwidth,
   });
   //Method to add exp and handle level up
   Future<void> addExperience(int expToAdd) async {
@@ -59,7 +59,7 @@ class ExpBar extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
-                  width: Barwidth,
+                  width: barwidth,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -83,7 +83,7 @@ class ExpBar extends StatelessWidget {
                   ),
                 ),
                 SizedBox(
-                  width: Barwidth,
+                  width: barwidth,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(5),
                     child: LinearProgressIndicator(
@@ -106,4 +106,5 @@ class ExpBar extends StatelessWidget {
   }
 }
 
+// ignore: constant_identifier_names
 const FiservColor = Color(0xFFFF6600);

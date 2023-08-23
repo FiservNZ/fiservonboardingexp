@@ -136,11 +136,11 @@ class _ProfilePageState extends State<ProfilePage> {
                     fontSize: 16,
                   ),
                 ),
-                //expBar
+                //ExpBar
                 Container(
                   alignment: Alignment.center,
                   child: const ExpBar(
-                    Barwidth: 200,
+                    barwidth: 200,
                   ),
                 ),
                 const SizedBox(height: 50),
