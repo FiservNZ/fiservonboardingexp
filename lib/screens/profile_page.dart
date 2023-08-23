@@ -88,191 +88,193 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text(
-          'Profile Page',
-          style: TextStyle(
-            color: Color(0xFFFF6600),
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text(
+            'Profile Page',
+            style: TextStyle(
+              color: Color(0xFFFF6600),
+            ),
           ),
+          backgroundColor: Colors.black,
         ),
-        backgroundColor: Colors.black,
-      ),
-      body: StreamBuilder<DocumentSnapshot>(
-        stream: FirebaseFirestore.instance
-            .collection("User")
-            .doc(currentUser.uid)
-            .snapshots(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            final userData = snapshot.data!.data() as Map<String, dynamic>;
+        body: StreamBuilder<DocumentSnapshot>(
+          stream: FirebaseFirestore.instance
+              .collection("User")
+              .doc(currentUser.uid)
+              .snapshots(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              final userData = snapshot.data!.data() as Map<String, dynamic>;
 
-            return ListView(
-              children: [
-                //This is just used for spacing between elements.
-                const SizedBox(height: 30),
-                //User profile picture, will be pulled from firebase.
-                //For now, we will use a placeholder.
-                IconButton(
-                  icon: const Icon(Icons.person),
-                  color: const Color(0xFFFF6600),
-                  iconSize: 50,
-                  onPressed: () {
-                    debugPrint(
-                        'Edit profile avatar/picture to be implemented...');
-                  },
-                ),
-                //User fullname.
-                //Using a place holder for now.
-                const SizedBox(height: 10),
-
-                Text(
-                  '${userData['firstName']} ${userData['lastName']}',
-                  textAlign: TextAlign.center,
-                  style: TextStyle(
-                    color: Colors.grey.shade700,
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
+              return ListView(
+                children: [
+                  //This is just used for spacing between elements.
+                  const SizedBox(height: 30),
+                  //User profile picture, will be pulled from firebase.
+                  //For now, we will use a placeholder.
+                  IconButton(
+                    icon: const Icon(Icons.person),
+                    color: const Color(0xFFFF6600),
+                    iconSize: 50,
+                    onPressed: () {
+                      debugPrint(
+                          'Edit profile avatar/picture to be implemented...');
+                    },
                   ),
-                ),
+                  //User fullname.
+                  //Using a place holder for now.
+                  const SizedBox(height: 10),
 
-                const SizedBox(height: 50),
-                Padding(
-                  padding: const EdgeInsets.only(left: 20.0),
-                  child: Text(
-                    'About Me:',
+                  Text(
+                    '${userData['firstName']} ${userData['lastName']}',
+                    textAlign: TextAlign.center,
                     style: TextStyle(
                       color: Colors.grey.shade700,
-                      fontStyle: FontStyle.italic,
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
                     ),
                   ),
-                ),
 
-                //Interesting fact field
-                CustomTextBox(
-                  text: userData['Interesting Facts'].toString().isEmpty
-                      ? interestingFacts
-                      : userData['Interesting Facts'],
-                  fieldName: 'Interesting Facts',
-                  onPressed: () => editField('Interesting Facts'),
-                ),
+                  const SizedBox(height: 50),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20.0),
+                    child: Text(
+                      'About Me:',
+                      style: TextStyle(
+                        color: Colors.grey.shade700,
+                        fontStyle: FontStyle.italic,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 16,
+                      ),
+                    ),
+                  ),
 
-                //Hobbies
-                CustomTextBox(
-                  text: userData['Hobbies'].toString().isEmpty
-                      ? hobbies
-                      : userData['Hobbies'],
-                  fieldName: 'Hobbies',
-                  onPressed: () => editField('Hobbies'),
-                ),
+                  //Interesting fact field
+                  CustomTextBox(
+                    text: userData['Interesting Facts'].toString().isEmpty
+                        ? interestingFacts
+                        : userData['Interesting Facts'],
+                    fieldName: 'Interesting Facts',
+                    onPressed: () => editField('Interesting Facts'),
+                  ),
 
-                //Future self
-                CustomTextBox(
-                  text: userData['Future Self'].toString().isEmpty
-                      ? futureSelf
-                      : userData['Future Self'],
-                  fieldName: 'Future Self',
-                  onPressed: () => editField('Future Self'),
-                ),
+                  //Hobbies
+                  CustomTextBox(
+                    text: userData['Hobbies'].toString().isEmpty
+                        ? hobbies
+                        : userData['Hobbies'],
+                    fieldName: 'Hobbies',
+                    onPressed: () => editField('Hobbies'),
+                  ),
 
-                const SizedBox(height: 50),
+                  //Future self
+                  CustomTextBox(
+                    text: userData['Future Self'].toString().isEmpty
+                        ? futureSelf
+                        : userData['Future Self'],
+                    fieldName: 'Future Self',
+                    onPressed: () => editField('Future Self'),
+                  ),
 
-                /*Submit button will generate a pdf
-          Then send that PDF to colleagues*/
-                /*I will set send introduction button to work only once.
-          After it had been pressed at least 1 time, the button will either disappear
-          or will become a logout button instead
-          I will still allow users to edit their "about me".*/
-                //To be implemented later.
-                userData['introduced'] == false
-                    ? Padding(
-                        padding: const EdgeInsets.only(
-                          left: 120.0,
-                          right: 120.0,
-                        ),
-                        child: ElevatedButton(
-                          style: ButtonStyle(
-                            backgroundColor: MaterialStateProperty.all<Color>(
-                              const Color(0xFFFF6600),
-                            ),
+                  const SizedBox(height: 50),
+
+                  /*Submit button will generate a pdf
+            Then send that PDF to colleagues*/
+                  /*I will set send introduction button to work only once.
+            After it had been pressed at least 1 time, the button will either disappear
+            or will become a logout button instead
+            I will still allow users to edit their "about me".*/
+                  //To be implemented later.
+                  userData['introduced'] == false
+                      ? Padding(
+                          padding: const EdgeInsets.only(
+                            left: 120.0,
+                            right: 120.0,
                           ),
-                          onPressed: () async {
-                            if (userData['Interesting Facts']
-                                    .toString()
-                                    .isEmpty ||
-                                userData['Hobbies'].toString().isEmpty ||
-                                userData['Future Self'].toString().isEmpty) {
-                              ScaffoldMessenger.of(context).showSnackBar(
-                                const SnackBar(
-                                  content: Text(
-                                    'Please fill the required information.',
-                                    style: TextStyle(color: Colors.red),
+                          child: ElevatedButton(
+                            style: ButtonStyle(
+                              backgroundColor: MaterialStateProperty.all<Color>(
+                                const Color(0xFFFF6600),
+                              ),
+                            ),
+                            onPressed: () async {
+                              if (userData['Interesting Facts']
+                                      .toString()
+                                      .isEmpty ||
+                                  userData['Hobbies'].toString().isEmpty ||
+                                  userData['Future Self'].toString().isEmpty) {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text(
+                                      'Please fill the required information.',
+                                      style: TextStyle(color: Colors.red),
+                                    ),
+                                    duration: Duration(seconds: 2),
                                   ),
-                                  duration: Duration(seconds: 2),
-                                ),
-                              );
-                            } else {
-                              PdfApi pdfApi = PdfApi(context);
-                              final pdfFile = await pdfApi.generate();
+                                );
+                              } else {
+                                PdfApi pdfApi = PdfApi(context);
+                                final pdfFile = await pdfApi.generate();
 
-                              PdfApi.openFile(pdfFile);
-                              debugPrint('Submit button pressed...');
-                              //After Send Introduction has been sent once, it will turn into a Logout button.
-                              setState(() async {
-                                await userCollection
-                                    .doc(currentUser.uid)
-                                    .update({'introduced': true});
-                              });
-                            }
-                          },
-                          child: const Text('Send Introduction'),
-                        ),
-                      )
-                    //The button will disappear once the introduction has been generated.
-                    : const SizedBox(height: 5),
-                // The code below will turn the functionality of the code above into a logout button
-                // if the user has already generated an introduction.
-                // : Padding(
-                //     padding: const EdgeInsets.only(
-                //       left: 120.0,
-                //       right: 120.0,
-                //     ),
-                //     child: ElevatedButton(
-                //       style: ButtonStyle(
-                //         backgroundColor: MaterialStateProperty.all<Color>(
-                //           Colors.grey.shade600,
-                //         ),
-                //       ),
-                //       onPressed: () {
-                //         debugPrint('Logout button pressed...');
-                //         FirebaseAuth.instance.signOut();
-                //         Navigator.pop(context);
-                //         Navigator.push(
-                //             context,
-                //             MaterialPageRoute(
-                //                 builder: (context) => LoginPage()));
-                //         //For testing purposes, we will revert back to Send Introduction button.
-                //         //Once fully implemented, it will be a Logout button permanently.
-                //         setState(() {
-                //           sendButtonPressed = false;
-                //         });
-                //       },
-                //       child: const Text('Logout'),
-                //     ),
-                //   ),
-              ],
+                                PdfApi.openFile(pdfFile);
+                                debugPrint('Submit button pressed...');
+                                //After Send Introduction has been sent once, it will turn into a Logout button.
+                                setState(() async {
+                                  await userCollection
+                                      .doc(currentUser.uid)
+                                      .update({'introduced': true});
+                                });
+                              }
+                            },
+                            child: const Text('Send Introduction'),
+                          ),
+                        )
+                      //The button will disappear once the introduction has been generated.
+                      : const SizedBox(height: 5),
+                  // The code below will turn the functionality of the code above into a logout button
+                  // if the user has already generated an introduction.
+                  // : Padding(
+                  //     padding: const EdgeInsets.only(
+                  //       left: 120.0,
+                  //       right: 120.0,
+                  //     ),
+                  //     child: ElevatedButton(
+                  //       style: ButtonStyle(
+                  //         backgroundColor: MaterialStateProperty.all<Color>(
+                  //           Colors.grey.shade600,
+                  //         ),
+                  //       ),
+                  //       onPressed: () {
+                  //         debugPrint('Logout button pressed...');
+                  //         FirebaseAuth.instance.signOut();
+                  //         Navigator.pop(context);
+                  //         Navigator.push(
+                  //             context,
+                  //             MaterialPageRoute(
+                  //                 builder: (context) => LoginPage()));
+                  //         //For testing purposes, we will revert back to Send Introduction button.
+                  //         //Once fully implemented, it will be a Logout button permanently.
+                  //         setState(() {
+                  //           sendButtonPressed = false;
+                  //         });
+                  //       },
+                  //       child: const Text('Logout'),
+                  //     ),
+                  //   ),
+                ],
+              );
+            } else if (snapshot.hasError) {
+              return Center(
+                child: Text('Error${snapshot.error}'),
+              );
+            }
+            return const Center(
+              child: CircularProgressIndicator(),
             );
-          } else if (snapshot.hasError) {
-            return Center(
-              child: Text('Error${snapshot.error}'),
-            );
-          }
-          return const Center(
-            child: CircularProgressIndicator(),
-          );
-        },
+          },
+        ),
       ),
     );
   }

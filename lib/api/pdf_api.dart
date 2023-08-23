@@ -6,6 +6,7 @@ To test pdf generation & email: Please go to firestore, set introduced
 filed to false (if you are unable to see the button.)
  */
 import 'dart:io';
+import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
@@ -26,15 +27,22 @@ class PdfApi {
   late String hobbies;
   late String interestingFacts;
   late String futureSelf;
+  Uint8List? imageData;
 
   Future<File> generate() async {
     final pdf = pw.Document();
 
     await fetchUser();
+    await fetchImageData();
+
     pdf.addPage(
       pw.MultiPage(
         build: (context) => <pw.Widget>[
           customHeader(),
+          //${user!.email?.split('@')[0]}/profile_${user!.email?.split('@')[0]}
+          imageData != null
+              ? pw.Image(pw.MemoryImage(imageData!))
+              : pw.Center(child: pw.Text('No Image Available')),
           customHeadline(firstName, lastName),
           pw.Header(
             child: pw.Text(
@@ -71,6 +79,14 @@ class PdfApi {
     );
 
     return saveToTemporaryFile(pdf);
+  }
+
+  Future<void> fetchImageData() async {
+    imageData = await firebase_storage.FirebaseStorage.instance
+        .ref()
+        .child(
+            '${user!.email?.split('@')[0]}/profile_${user!.email?.split('@')[0]}.jpg')
+        .getData(1000000);
   }
 
   static pw.Widget customHeadline(String firstName, String lastName) =>
@@ -111,6 +127,7 @@ class PdfApi {
     final uniqueFileName =
         '${DateTime.now().millisecondsSinceEpoch}_${user!.email?.split('@')[0]}';
     final storageRef = firebase_storage.FirebaseStorage.instance.ref();
+
     final folderRef = storageRef.child('${user!.email?.split('@')[0]}/');
     final pdfRef = folderRef.child(uniqueFileName);
 
