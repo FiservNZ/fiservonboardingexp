@@ -7,6 +7,7 @@ class HelpPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        //backgroundColor: Theme.of(context).colorScheme.background,
         body: Column(children: <Widget>[
       const Text(
         '\n App Tutorial',
