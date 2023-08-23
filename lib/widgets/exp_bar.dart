@@ -67,7 +67,7 @@ class ExpBar extends StatelessWidget {
                         levText,
                         style: const TextStyle(
                           color: Color(0xFFFF6600),
-                          fontSize: 12,
+                          fontSize: 15,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -75,15 +75,17 @@ class ExpBar extends StatelessWidget {
                         expText,
                         style: const TextStyle(
                           color: FiservColor,
-                          fontSize: 10,
+                          fontSize: 15,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
                     ],
                   ),
                 ),
+                const SizedBox(height: 3),
                 SizedBox(
                   width: barwidth,
+                  height: 10,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(5),
                     child: LinearProgressIndicator(

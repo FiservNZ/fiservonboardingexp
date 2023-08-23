@@ -11,22 +11,6 @@ import 'package:flutter/material.dart';
 class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
   const AppBarOverlay({super.key});
 
-  Future<Map<String, dynamic>> getUserData() async {
-    final currentUser = FirebaseAuth.instance.currentUser!;
-    final userCollection = FirebaseFirestore.instance.collection('User');
-
-    DocumentSnapshot<Map<String, dynamic>> snapshot =
-        await userCollection.doc(currentUser.uid).get();
-    if (snapshot.exists) {
-      return snapshot.data() ?? {};
-    } else {
-      return {};
-    }
-  }
-
-  void LevelUP(int level, double ExpUp) {}
-  void AddEXP(double exp) {}
-
   @override
   Widget build(BuildContext context) {
     return AppBar(
@@ -34,14 +18,19 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
         elevation: 0, //Removes the app bar shadow
 
         // Profile picture icon
-        leading: IconButton(
-          icon: const Image(image: AssetImage('assets/images/profile.png')),
-          onPressed: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const ProfilePage()),
-            );
-          },
+        leading: Row(
+          children: [
+            IconButton(
+              icon: const Image(image: AssetImage('assets/images/profile.png')),
+              onPressed: () {
+                Navigator.of(context).push(
+                  MaterialPageRoute(builder: (context) => const ProfilePage()),
+                );
+              },
+            ),
+          ],
         ),
+
         // Menu sheet
         actions: <Widget>[
           IconButton(

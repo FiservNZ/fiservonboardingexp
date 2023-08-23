@@ -4,7 +4,7 @@ import 'app_bar_overlay.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
-  final ExpBar _expBar = const ExpBar(barwidth: 150);
+  final ExpBar _expBar = const ExpBar(barwidth: 300);
 
   const HomePage({super.key});
 
@@ -32,14 +32,14 @@ class HomePage extends StatelessWidget {
             thumbVisibility: true,
             child: ListView(
               children: [
+                const SizedBox(height: 15),
                 //expBar
-                Container(
-                  alignment: Alignment.centerLeft,
-                  child: const ExpBar(
-                    barwidth: 150,
-                  ),
+                Padding(
+                  padding: const EdgeInsets.only(left: 12),
+                  child: Container(
+                      alignment: Alignment.centerLeft, child: _expBar),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
                 Container(
