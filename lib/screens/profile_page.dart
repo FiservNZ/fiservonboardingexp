@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fiservonboardingexp/api/pdf_api.dart';
 import 'package:fiservonboardingexp/widgets/custom_text_box.dart';
+import 'package:fiservonboardingexp/widgets/exp_bar.dart';
 import 'package:flutter/material.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -135,7 +136,13 @@ class _ProfilePageState extends State<ProfilePage> {
                     fontSize: 16,
                   ),
                 ),
-
+                //ExpBar
+                Container(
+                  alignment: Alignment.center,
+                  child: const ExpBar(
+                    barwidth: 200,
+                  ),
+                ),
                 const SizedBox(height: 50),
                 Padding(
                   padding: const EdgeInsets.only(left: 20.0),
