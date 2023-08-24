@@ -21,7 +21,7 @@ class HomePage extends StatelessWidget {
           backgroundColor: Colors.green,
           foregroundColor: Colors.white,
           onPressed: () {
-            int expToAdd = 10;
+            int expToAdd = 30;
             print("add");
             _expBar.addExperience(expToAdd);
             // _expBar.addExperience(expToAdd);
