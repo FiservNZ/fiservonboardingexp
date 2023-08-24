@@ -18,14 +18,15 @@ class ExpBar extends StatelessWidget {
     final userMap = userDoc.data() as Map<String, dynamic>;
 
     int currentEXP = userMap['EXP'] ?? 0;
-    int maxEXP = userMap['MaxEXP'] ?? 100;
+    var maxEXP = userMap['MaxEXP'] ?? 100;
     int level = userMap['Level'] ?? 0;
 
     currentEXP += expToAdd;
 
     if (currentEXP >= maxEXP) {
       level++;
-      maxEXP *= 2;
+      maxEXP += 150;
+      currentEXP = 0;
     }
 
     await userDocRef
@@ -49,7 +50,7 @@ class ExpBar extends StatelessWidget {
             final userDocument = snapshot.data!.data() as Map<String, dynamic>;
             final level = userDocument['Level'] ?? 0;
             final currentEXP = userDocument['EXP'] ?? 0;
-            final maxEXP = userDocument['MaxEXP'] ?? 100;
+            final maxEXP = (userDocument['MaxEXP'] ?? 100).toInt();
 
             final levText = 'LEVEL $level';
             final expText = '$currentEXP/$maxEXP';
@@ -66,7 +67,7 @@ class ExpBar extends StatelessWidget {
                       Text(
                         levText,
                         style: const TextStyle(
-                          color: Color(0xFFFF6600),
+                          color: FiservColor,
                           fontSize: 15,
                           fontWeight: FontWeight.bold,
                         ),
@@ -91,7 +92,7 @@ class ExpBar extends StatelessWidget {
                     child: LinearProgressIndicator(
                       value: currentEXP / maxEXP,
                       valueColor: const AlwaysStoppedAnimation<Color>(
-                        Color(0xFFFF6600),
+                        FiservColor,
                       ),
                       backgroundColor: Colors.grey,
                     ),
