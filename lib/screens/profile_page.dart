@@ -4,6 +4,7 @@ import 'package:fiservonboardingexp/api/pdf_api.dart';
 import 'package:fiservonboardingexp/screens/nav_app_overlay.dart';
 import 'package:fiservonboardingexp/widgets/custom_text_box.dart';
 import 'package:fiservonboardingexp/widgets/user_icons.dart';
+import 'package:fiservonboardingexp/widgets/exp_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -200,7 +201,13 @@ class _ProfilePageState extends State<ProfilePage> {
                     fontSize: 16,
                   ),
                 ),
-
+                //ExpBar
+                Container(
+                  alignment: Alignment.center,
+                  child: const ExpBar(
+                    barwidth: 200,
+                  ),
+                ),
                 const SizedBox(height: 50),
                 Padding(
                   padding: const EdgeInsets.only(left: 20.0),
