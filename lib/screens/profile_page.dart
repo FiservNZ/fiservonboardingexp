@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fiservonboardingexp/api/pdf_api.dart';
-import 'package:fiservonboardingexp/screens/nav_app_overlay.dart';
 import 'package:fiservonboardingexp/widgets/custom_text_box.dart';
 import 'package:fiservonboardingexp/widgets/user_icons.dart';
 import 'package:fiservonboardingexp/widgets/exp_bar.dart';
@@ -106,110 +105,89 @@ class _ProfilePageState extends State<ProfilePage> {
           ),
           backgroundColor: Colors.black,
         ),
-        backgroundColor: Colors.black,
-      ),
-      body: StreamBuilder<DocumentSnapshot>(
-        stream: FirebaseFirestore.instance
-            .collection("User")
-            .doc(currentUser.uid)
-            .snapshots(),
-        builder: (context, snapshot) {
-          if (snapshot.hasData) {
-            final userData = snapshot.data!.data() as Map<String, dynamic>;
+        body: StreamBuilder<DocumentSnapshot>(
+          stream: FirebaseFirestore.instance
+              .collection("User")
+              .doc(currentUser.uid)
+              .snapshots(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              final userData = snapshot.data!.data() as Map<String, dynamic>;
 
-            String selectedIcon = userData['selectedIcon'] ?? 'person';
-            String iconColor = userData['iconColor'] ?? '#000000';
+              String selectedIcon = userData['selectedIcon'] ?? 'person';
+              String iconColor = userData['iconColor'] ?? '#000000';
 
-            if (userData['selectedIcon'] == 'ghost') {
-              userIcon = Icon(
-                FontAwesomeIcons.ghost,
-                color: Color(int.parse(iconColor.replaceFirst('#', '0xFF'))),
-              );
-            } else if (userData['selectedIcon'] == 'seedling') {
-              userIcon = Icon(
-                FontAwesomeIcons.seedling,
-                color: Color(int.parse(iconColor.replaceFirst('#', '0xFF'))),
-              );
-            } else if (userData['selectedIcon'] == 'poo') {
-              userIcon = Icon(
-                FontAwesomeIcons.poo,
-                color: Color(int.parse(iconColor.replaceFirst('#', '0xFF'))),
-              );
-            } else if (userData['selectedIcon'] == 'fish') {
-              userIcon = Icon(
-                FontAwesomeIcons.fish,
-                color: Color(int.parse(iconColor.replaceFirst('#', '0xFF'))),
-              );
-            } else if (userData['selectedIcon'] == 'userNinja') {
-              userIcon = Icon(
-                FontAwesomeIcons.userNinja,
-                color: Color(int.parse(iconColor.replaceFirst('#', '0xFF'))),
-              );
-            } else if (userData['selectedIcon'] == 'dog') {
-              userIcon = Icon(
-                FontAwesomeIcons.dog,
-                color: Color(int.parse(iconColor.replaceFirst('#', '0xFF'))),
-              );
-            } else if (userData['selectedIcon'] == 'cat') {
-              userIcon = Icon(
-                FontAwesomeIcons.cat,
-                color: Color(int.parse(iconColor.replaceFirst('#', '0xFF'))),
-              );
-            } else if (userData['selectedIcon'] == 'frog') {
-              userIcon = Icon(
-                FontAwesomeIcons.frog,
-                color: Color(int.parse(iconColor.replaceFirst('#', '0xFF'))),
-              );
-            } else if (userData['selectedIcon'] == 'robot') {
-              userIcon = Icon(
-                FontAwesomeIcons.robot,
-                color: Color(int.parse(iconColor.replaceFirst('#', '0xFF'))),
-              );
-            } else {
-              userIcon = Icon(Icons.person,
-                  color: Color(int.parse(iconColor.replaceFirst('#', '0xFF'))));
-            }
+              if (userData['selectedIcon'] == 'ghost') {
+                userIcon = Icon(
+                  FontAwesomeIcons.ghost,
+                  color: Color(int.parse(iconColor.replaceFirst('#', '0xFF'))),
+                );
+              } else if (userData['selectedIcon'] == 'seedling') {
+                userIcon = Icon(
+                  FontAwesomeIcons.seedling,
+                  color: Color(int.parse(iconColor.replaceFirst('#', '0xFF'))),
+                );
+              } else if (userData['selectedIcon'] == 'poo') {
+                userIcon = Icon(
+                  FontAwesomeIcons.poo,
+                  color: Color(int.parse(iconColor.replaceFirst('#', '0xFF'))),
+                );
+              } else if (userData['selectedIcon'] == 'fish') {
+                userIcon = Icon(
+                  FontAwesomeIcons.fish,
+                  color: Color(int.parse(iconColor.replaceFirst('#', '0xFF'))),
+                );
+              } else if (userData['selectedIcon'] == 'userNinja') {
+                userIcon = Icon(
+                  FontAwesomeIcons.userNinja,
+                  color: Color(int.parse(iconColor.replaceFirst('#', '0xFF'))),
+                );
+              } else if (userData['selectedIcon'] == 'dog') {
+                userIcon = Icon(
+                  FontAwesomeIcons.dog,
+                  color: Color(int.parse(iconColor.replaceFirst('#', '0xFF'))),
+                );
+              } else if (userData['selectedIcon'] == 'cat') {
+                userIcon = Icon(
+                  FontAwesomeIcons.cat,
+                  color: Color(int.parse(iconColor.replaceFirst('#', '0xFF'))),
+                );
+              } else if (userData['selectedIcon'] == 'frog') {
+                userIcon = Icon(
+                  FontAwesomeIcons.frog,
+                  color: Color(int.parse(iconColor.replaceFirst('#', '0xFF'))),
+                );
+              } else if (userData['selectedIcon'] == 'robot') {
+                userIcon = Icon(
+                  FontAwesomeIcons.robot,
+                  color: Color(int.parse(iconColor.replaceFirst('#', '0xFF'))),
+                );
+              } else {
+                userIcon = Icon(Icons.person,
+                    color:
+                        Color(int.parse(iconColor.replaceFirst('#', '0xFF'))));
+              }
 
-            return ListView(
-              children: [
-                //This is just used for spacing between elements.
-                const SizedBox(height: 30),
-                //User profile picture, will be pulled from firebase.
-                //For now, we will use a placeholder.
-                UserIcon(
-                  initialUserIcon: userIcon,
-                  onIconChanged: (newIcon) {
-                    setState(() {
-                      userIcon = newIcon;
-                    });
-                  },
-                  userCollection: userCollection,
-                  userId: currentUser.uid,
-                  userData: userData,
-                  iconColor:
-                      Color(int.parse(iconColor.replaceFirst('#', '0x'))),
-                ),
-
-                //User fullname.
-                //Using a place holder for now.
-                const SizedBox(height: 10),
-
-
-                ),
-                //ExpBar
-                Container(
-                  alignment: Alignment.center,
-                  child: const ExpBar(
-                    barwidth: 200,
+              return ListView(
+                children: [
+                  //This is just used for spacing between elements.
+                  const SizedBox(height: 30),
+                  //User profile picture, will be pulled from firebase.
+                  //For now, we will use a placeholder.
+                  UserIcon(
+                    initialUserIcon: userIcon,
+                    onIconChanged: (newIcon) {
+                      setState(() {
+                        userIcon = newIcon;
+                      });
+                    },
+                    userCollection: userCollection,
+                    userId: currentUser.uid,
+                    userData: userData,
+                    iconColor:
+                        Color(int.parse(iconColor.replaceFirst('#', '0x'))),
                   ),
-                ),
-                const SizedBox(height: 50),
-                Padding(
-                  padding: const EdgeInsets.only(left: 20.0),
-                  child: Text(
-                    'About Me:',
                   const SizedBox(height: 10),
-
                   Text(
                     '${userData['firstName']} ${userData['lastName']}',
                     textAlign: TextAlign.center,
@@ -217,6 +195,14 @@ class _ProfilePageState extends State<ProfilePage> {
                       color: Colors.grey.shade700,
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
+                    ),
+                  ),
+                  const SizedBox(height: 10),
+                  //ExpBar
+                  Container(
+                    alignment: Alignment.center,
+                    child: const ExpBar(
+                      barwidth: 200,
                     ),
                   ),
 
