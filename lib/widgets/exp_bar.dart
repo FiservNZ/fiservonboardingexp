@@ -73,8 +73,6 @@ class ExpBar extends StatelessWidget {
             final expText = '$currentEXP/$maxEXP';
 
             return Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
                   width: barwidth,
