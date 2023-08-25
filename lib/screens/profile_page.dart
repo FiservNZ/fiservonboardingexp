@@ -7,6 +7,7 @@ import 'package:fiservonboardingexp/widgets/user_icons.dart';
 import 'package:fiservonboardingexp/widgets/exp_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:fiservonboardingexp/widgets/exp_bar.dart';
 
 class ProfilePage extends StatefulWidget {
   static const String routeName = '/Profile';
@@ -114,7 +115,6 @@ class _ProfilePageState extends State<ProfilePage> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final userData = snapshot.data!.data() as Map<String, dynamic>;
-
             String selectedIcon = userData['selectedIcon'] ?? 'person';
             String iconColor = userData['iconColor'] ?? '#000000';
 
@@ -204,11 +204,14 @@ class _ProfilePageState extends State<ProfilePage> {
                 //ExpBar
                 Container(
                   alignment: Alignment.center,
-                  child: const ExpBar(
-                    barwidth: 200,
+                  child: const Padding(
+                    padding: EdgeInsets.fromLTRB(10, 15, 10, 10),
+                    child: ExpBar(
+                      barwidth: 200,
+                    ),
                   ),
                 ),
-                const SizedBox(height: 50),
+                const SizedBox(height: 30),
                 Padding(
                   padding: const EdgeInsets.only(left: 20.0),
                   child: Text(
