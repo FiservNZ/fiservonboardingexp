@@ -10,6 +10,7 @@ import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
@@ -31,7 +32,7 @@ class PdfApi {
 
   Future<File> generate() async {
     final pdf = pw.Document();
-
+    const pageTheme = pw.PageTheme(pageFormat: PdfPageFormat.a4);
     await fetchUser();
     await fetchImageData();
 
@@ -39,10 +40,23 @@ class PdfApi {
       pw.MultiPage(
         build: (context) => <pw.Widget>[
           customHeader(),
+          pw.SizedBox(height: 10),
           //${user!.email?.split('@')[0]}/profile_${user!.email?.split('@')[0]}
           imageData != null
-              ? pw.Image(pw.MemoryImage(imageData!))
-              : pw.Center(child: pw.Text('No Image Available')),
+              ? pw.Center(
+                  child: pw.ClipRRect(
+                    horizontalRadius: 32,
+                    verticalRadius: 32,
+                    child: pw.Image(
+                      pw.MemoryImage(imageData!),
+                      width: pageTheme.pageFormat.availableWidth / 2,
+                    ),
+                  ),
+                )
+              : pw.Center(
+                  child: pw.Text('No Image Available',
+                      style: pw.TextStyle(
+                          fontSize: 16, fontWeight: pw.FontWeight.bold))),
           customHeadline(firstName, lastName),
           pw.Header(
             child: pw.Text(
@@ -82,11 +96,20 @@ class PdfApi {
   }
 
   Future<void> fetchImageData() async {
-    imageData = await firebase_storage.FirebaseStorage.instance
-        .ref()
-        .child(
-            '${user!.email?.split('@')[0]}/profile_${user!.email?.split('@')[0]}.jpg')
-        .getData(1000000);
+    final reference = firebase_storage.FirebaseStorage.instance.ref().child(
+        '${user!.email?.split('@')[0]}/profile_${user!.email?.split('@')[0]}.jpg');
+
+    try {
+      //final metadata = await reference.getMetadata();
+      imageData = await reference.getData(1000000);
+    } catch (error) {
+      if (error is firebase_storage.FirebaseException &&
+          error.code == 'object-not-found') {
+        imageData = null;
+      } else {
+        print('There was an error fetching image data.\nError: $error');
+      }
+    }
   }
 
   static pw.Widget customHeadline(String firstName, String lastName) =>
@@ -100,7 +123,7 @@ class PdfApi {
                 color: PdfColors.white),
           ),
         ),
-        decoration: const pw.BoxDecoration(color: PdfColors.red),
+        decoration: const pw.BoxDecoration(color: PdfColors.grey700),
       );
 
   static pw.Widget customHeader() => pw.Container(
@@ -112,7 +135,6 @@ class PdfApi {
         ),
         child: pw.Row(
           children: [
-            pw.PdfLogo(),
             pw.SizedBox(width: 0.5 * PdfPageFormat.cm),
             pw.Text(
               'Welcome to Fiserv',
