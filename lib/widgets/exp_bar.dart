@@ -17,18 +17,23 @@ class ExpBar extends StatelessWidget {
     final userDoc = await userDocRef.get();
     final userMap = userDoc.data() as Map<String, dynamic>;
 
-    int currentEXP = userMap['EXP'] ?? 0;
+    var currentEXP = userMap['EXP'] ?? 0;
     var maxEXP = userMap['MaxEXP'] ?? 100;
     int level = userMap['Level'] ?? 0;
 
-    currentEXP += expToAdd;
-
-    if (currentEXP >= maxEXP) {
-      level++;
-      maxEXP += 150;
-      currentEXP = 0;
+    if (level < 9) {
+      currentEXP += expToAdd;
+      if (currentEXP >= maxEXP) {
+        level++;
+        maxEXP += 150;
+        currentEXP = 0;
+      }
+    } else if (level == 9 && currentEXP <= maxEXP) {
+      currentEXP += expToAdd;
+      if (currentEXP >= maxEXP) {
+        currentEXP = maxEXP;
+      }
     }
-
     await userDocRef
         .update({'EXP': currentEXP, 'Level': level, 'MaxEXP': maxEXP});
   }
