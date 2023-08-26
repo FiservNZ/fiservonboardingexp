@@ -96,6 +96,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     // userIcon variable to change user icon.
     Icon userIcon = Icon(Icons.person);
+    ExpBar expBar = ExpBar(barwidth: 200);
 
     return Scaffold(
       appBar: AppBar(
@@ -115,6 +116,75 @@ class _ProfilePageState extends State<ProfilePage> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final userData = snapshot.data!.data() as Map<String, dynamic>;
+
+            // Not working unlocking icon implementation here @@
+            // String selectedIcon = userData['selectedIcon'] ?? 'person';
+            // String iconColor = userData['iconColor'] ?? '#000000';
+
+            // expBar.level.then((int level) {
+            //   setState(() {
+            //     final iconColorHex = userData['iconColor'] ?? '#000000';
+            //     final iconColorInt =
+            //         int.parse(iconColorHex.replaceFirst('#', '0xFF'));
+            //     if (level >= 1) {
+            //       userIcon = Icon(
+            //         FontAwesomeIcons.ghost,
+            //         color: Color(iconColorInt),
+            //       );
+            //     }
+            //     if (level >= 2) {
+            //       userIcon = Icon(
+            //         FontAwesomeIcons.seedling,
+            //         color: Color(iconColorInt),
+            //       );
+            //     }
+            //     if (level >= 3) {
+            //       userIcon = Icon(
+            //         FontAwesomeIcons.poo,
+            //         color: Color(iconColorInt),
+            //       );
+            //     }
+            //     if (level >= 4) {
+            //       userIcon = Icon(
+            //         FontAwesomeIcons.fish,
+            //         color: Color(iconColorInt),
+            //       );
+            //     }
+            //     if (level >= 5) {
+            //       userIcon = Icon(
+            //         FontAwesomeIcons.userNinja,
+            //         color: Color(iconColorInt),
+            //       );
+            //     }
+            //     if (level >= 6) {
+            //       userIcon = Icon(
+            //         FontAwesomeIcons.dog,
+            //         color: Color(iconColorInt),
+            //       );
+            //     }
+            //     if (level >= 7) {
+            //       userIcon = Icon(
+            //         FontAwesomeIcons.cat,
+            //         color: Color(iconColorInt),
+            //       );
+            //     }
+            //     if (level >= 8) {
+            //       userIcon = Icon(
+            //         FontAwesomeIcons.frog,
+            //         color: Color(iconColorInt),
+            //       );
+            //     }
+            //     if (level >= 9) {
+            //       userIcon = Icon(
+            //         FontAwesomeIcons.robot,
+            //         color: Color(iconColorInt),
+            //       );
+            //     }
+            //   });
+            // });
+
+            // Code that works without exp level unlocking icon stuff from here
+            // print(userLevel);
             String selectedIcon = userData['selectedIcon'] ?? 'person';
             String iconColor = userData['iconColor'] ?? '#000000';
 
@@ -184,8 +254,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   userCollection: userCollection,
                   userId: currentUser.uid,
                   userData: userData,
-                  iconColor:
-                      Color(int.parse(iconColor.replaceFirst('#', '0x'))),
+                  iconColor: Color(
+                      int.parse(userData['iconColor'].replaceFirst('#', '0x'))),
                 ),
 
                 //User fullname.
