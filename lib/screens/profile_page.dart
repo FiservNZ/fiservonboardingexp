@@ -123,70 +123,71 @@ class _ProfilePageState extends State<ProfilePage> {
 
             // expBar.level.then((int level) {
             //   setState(() {
-            //     final iconColorHex = userData['iconColor'] ?? '#000000';
             //     final iconColorInt =
-            //         int.parse(iconColorHex.replaceFirst('#', '0xFF'));
-            //     if (level >= 1) {
-            //       userIcon = Icon(
-            //         FontAwesomeIcons.ghost,
-            //         color: Color(iconColorInt),
-            //       );
-            //     }
-            //     if (level >= 2) {
-            //       userIcon = Icon(
-            //         FontAwesomeIcons.seedling,
-            //         color: Color(iconColorInt),
-            //       );
-            //     }
-            //     if (level >= 3) {
-            //       userIcon = Icon(
-            //         FontAwesomeIcons.poo,
-            //         color: Color(iconColorInt),
-            //       );
-            //     }
-            //     if (level >= 4) {
-            //       userIcon = Icon(
-            //         FontAwesomeIcons.fish,
-            //         color: Color(iconColorInt),
-            //       );
-            //     }
-            //     if (level >= 5) {
-            //       userIcon = Icon(
-            //         FontAwesomeIcons.userNinja,
-            //         color: Color(iconColorInt),
-            //       );
-            //     }
-            //     if (level >= 6) {
-            //       userIcon = Icon(
-            //         FontAwesomeIcons.dog,
-            //         color: Color(iconColorInt),
-            //       );
-            //     }
-            //     if (level >= 7) {
-            //       userIcon = Icon(
-            //         FontAwesomeIcons.cat,
-            //         color: Color(iconColorInt),
-            //       );
-            //     }
-            //     if (level >= 8) {
-            //       userIcon = Icon(
-            //         FontAwesomeIcons.frog,
-            //         color: Color(iconColorInt),
-            //       );
-            //     }
+            //         int.parse(iconColor.replaceFirst('#', '0xFF'));
+
+            //     IconData? iconData;
+
             //     if (level >= 9) {
-            //       userIcon = Icon(
-            //         FontAwesomeIcons.robot,
-            //         color: Color(iconColorInt),
-            //       );
+            //       iconData = FontAwesomeIcons.robot;
+            //     } else if (level >= 8) {
+            //       iconData = FontAwesomeIcons.frog;
+            //     } else if (level >= 7) {
+            //       iconData = FontAwesomeIcons.cat;
+            //     } else if (level >= 6) {
+            //       iconData = FontAwesomeIcons.dog;
+            //     } else if (level >= 5) {
+            //       iconData = FontAwesomeIcons.userNinja;
+            //     } else if (level >= 4) {
+            //       iconData = FontAwesomeIcons.fish;
+            //     } else if (level >= 3) {
+            //       iconData = FontAwesomeIcons.poo;
+            //     } else if (level >= 2) {
+            //       iconData = FontAwesomeIcons.seedling;
+            //     } else if (level >= 1) {
+            //       iconData = FontAwesomeIcons.ghost;
             //     }
+
+            //     print("Selected icon: $selectedIcon");
+            //     print("Level: $level");
+            //     print("Icon data: $iconData");
+
+            //     userIcon = Icon(
+            //       iconData ?? Icons.person,
+            //       color: Color(iconColorInt),
+            //     );
             //   });
             // });
 
+            // String selectedIcon = userData['selectedIcon'] ?? 'person';
+            // String iconColor = userData['iconColor'] ?? '#000000';
+
+            // expBar.level.then((int level) {
+            //   setState(() {
+            //     print("Level: $level");
+            //   });
+            // });
+
+            // Future<int> getLevel() async {
+            //   int level = await expBar.level;
+            //   return level;
+            // }
+
+            void asyncMethod(void Function(int) callback) {
+              expBar.level.then((int level) {
+                callback(level);
+              });
+            }
+
             // Code that works without exp level unlocking icon stuff from here
-            // print(userLevel);
             String selectedIcon = userData['selectedIcon'] ?? 'person';
             String iconColor = userData['iconColor'] ?? '#000000';
+            int levelHere;
+
+            asyncMethod((retrievedLevel) {
+              print(retrievedLevel);
+              levelHere = retrievedLevel;
+            });
 
             if (userData['selectedIcon'] == 'ghost') {
               userIcon = Icon(
@@ -237,6 +238,62 @@ class _ProfilePageState extends State<ProfilePage> {
               userIcon = Icon(Icons.person,
                   color: Color(int.parse(iconColor.replaceFirst('#', '0xFF'))));
             }
+
+            // asyncMethod((retrievedLevel) {
+            //   int level = retrievedLevel;
+            //   print("hi $level");
+
+            //   if (userData['selectedIcon'] == 'ghost') {
+            //     userIcon = Icon(
+            //       FontAwesomeIcons.ghost,
+            //       color: Color(int.parse(iconColor.replaceFirst('#', '0xFF'))),
+            //     );
+            //   } else if (userData['selectedIcon'] == 'seedling') {
+            //     userIcon = Icon(
+            //       FontAwesomeIcons.seedling,
+            //       color: Color(int.parse(iconColor.replaceFirst('#', '0xFF'))),
+            //     );
+            //   } else if (userData['selectedIcon'] == 'poo') {
+            //     userIcon = Icon(
+            //       FontAwesomeIcons.poo,
+            //       color: Color(int.parse(iconColor.replaceFirst('#', '0xFF'))),
+            //     );
+            //   } else if (userData['selectedIcon'] == 'fish') {
+            //     userIcon = Icon(
+            //       FontAwesomeIcons.fish,
+            //       color: Color(int.parse(iconColor.replaceFirst('#', '0xFF'))),
+            //     );
+            //   } else if (userData['selectedIcon'] == 'userNinja') {
+            //     userIcon = Icon(
+            //       FontAwesomeIcons.userNinja,
+            //       color: Color(int.parse(iconColor.replaceFirst('#', '0xFF'))),
+            //     );
+            //   } else if (userData['selectedIcon'] == 'dog') {
+            //     userIcon = Icon(
+            //       FontAwesomeIcons.dog,
+            //       color: Color(int.parse(iconColor.replaceFirst('#', '0xFF'))),
+            //     );
+            //   } else if (userData['selectedIcon'] == 'cat') {
+            //     userIcon = Icon(
+            //       FontAwesomeIcons.cat,
+            //       color: Color(int.parse(iconColor.replaceFirst('#', '0xFF'))),
+            //     );
+            //   } else if (userData['selectedIcon'] == 'frog') {
+            //     userIcon = Icon(
+            //       FontAwesomeIcons.frog,
+            //       color: Color(int.parse(iconColor.replaceFirst('#', '0xFF'))),
+            //     );
+            //   } else if (userData['selectedIcon'] == 'robot') {
+            //     userIcon = Icon(
+            //       FontAwesomeIcons.robot,
+            //       color: Color(int.parse(iconColor.replaceFirst('#', '0xFF'))),
+            //     );
+            //   } else {
+            //     userIcon = Icon(Icons.person,
+            //         color:
+            //             Color(int.parse(iconColor.replaceFirst('#', '0xFF'))));
+            //   }
+            // });
 
             return ListView(
               children: [
