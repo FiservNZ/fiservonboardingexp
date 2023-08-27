@@ -26,7 +26,7 @@ class _TrainingPage extends State<TrainingPage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       appBar: myAppBar,
-      backgroundColor: myBackgroundColor,
+      backgroundColor: darkBackgroundColor,
       bottomNavigationBar: navBar,
       body: Padding(
         padding: const EdgeInsets.all(8.0),
