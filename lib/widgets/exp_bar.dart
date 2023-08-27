@@ -34,6 +34,8 @@ class ExpBar extends StatelessWidget {
       if (currentEXP >= maxEXP) {
         currentEXP = maxEXP;
       }
+    } else if (level > 9) {
+      level = 9;
     }
     await userDocRef
         .update({'EXP': currentEXP, 'Level': level, 'MaxEXP': maxEXP});
