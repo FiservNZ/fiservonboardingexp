@@ -60,6 +60,8 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                   rankTitle,
                   style: TextStyle(color: Color(0xFFFF6600)),
                 );
+              } else {
+                return const Text('No data available');
               }
             },
           ),
