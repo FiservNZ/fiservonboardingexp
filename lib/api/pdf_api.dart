@@ -133,14 +133,11 @@ class PdfApi {
             bottom: pw.BorderSide(width: 2, color: PdfColors.blue),
           ),
         ),
-        child: pw.Row(
-          children: [
-            pw.SizedBox(width: 0.5 * PdfPageFormat.cm),
-            pw.Text(
-              'Welcome to Fiserv',
-              style: const pw.TextStyle(fontSize: 24, color: PdfColors.blue),
-            ),
-          ],
+        child: pw.Center(
+          child: pw.Text(
+            'Welcome to Fiserv',
+            style: const pw.TextStyle(fontSize: 24, color: PdfColors.blue),
+          ),
         ),
       );
 
