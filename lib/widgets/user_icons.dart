@@ -232,7 +232,7 @@ class _UserIconState extends State<UserIcon> {
             return Center(
               child: SizedBox(
                 width: 400,
-                height: 550, // Increased height to accommodate the content
+                height: 550,
                 child: AlertDialog(
                   title: const Text('My Icons', textAlign: TextAlign.center),
                   content: SingleChildScrollView(
@@ -240,8 +240,7 @@ class _UserIconState extends State<UserIcon> {
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         customContent,
-                        SizedBox(
-                            height: 20), // Add space between icons and text
+                        SizedBox(height: 20),
                         const Align(
                           alignment: Alignment.bottomLeft,
                           child: Padding(
