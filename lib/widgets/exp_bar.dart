@@ -47,7 +47,7 @@ class ExpBar extends StatelessWidget {
     final userDocRef = userCollection.doc(currentUser.uid);
     final userDoc = await userDocRef.get();
     final userMap = userDoc.data() as Map<String, dynamic>;
-    return userMap['Level'] ?? 0;
+    return userMap['Level'] ?? 1;
   }
 
   @override
@@ -73,8 +73,6 @@ class ExpBar extends StatelessWidget {
             final expText = '$currentEXP/$maxEXP';
 
             return Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 SizedBox(
                   width: barwidth,
