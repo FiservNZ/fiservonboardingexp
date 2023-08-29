@@ -1,4 +1,5 @@
 import 'package:fiservonboardingexp/screens/main_screen.dart';
+import 'package:fiservonboardingexp/screens/manager_page.dart';
 import 'package:fiservonboardingexp/screens/teaser.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -76,9 +77,10 @@ class LoginPage extends StatelessWidget {
             await FirebaseFirestore.instance.collection('User').doc(uid).get();
         if (snapshot.exists) {
           String position = snapshot.data()!['position'];
-          bool isFirstLogin = snapshot.data()!['firstlog'];
+
           // Determin logic based on position
           if (position == 'developer') {
+            bool isFirstLogin = snapshot.data()!['firstlog'];
             debugPrint('User is a developer.');
             // Update the 'firstlog' field if it's the first login
             Navigator.push(context,
@@ -109,6 +111,8 @@ class LoginPage extends StatelessWidget {
           } else if (position == 'manager') {
             debugPrint('User is a manager.');
             //handle the manager mode below.
+            Navigator.push(context,
+                MaterialPageRoute(builder: ((context) => const ManagerPage())));
           } else {
             debugPrint('User position unknown.');
           }

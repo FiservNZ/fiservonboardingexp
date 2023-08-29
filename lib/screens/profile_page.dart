@@ -2,12 +2,12 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fiservonboardingexp/api/pdf_api.dart';
 import 'package:fiservonboardingexp/screens/nav_app_overlay.dart';
+import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:fiservonboardingexp/widgets/custom_text_box.dart';
 import 'package:fiservonboardingexp/widgets/user_icons.dart';
 import 'package:fiservonboardingexp/widgets/exp_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:fiservonboardingexp/widgets/exp_bar.dart';
 
 class ProfilePage extends StatefulWidget {
   static const String routeName = '/Profile';
@@ -96,6 +96,7 @@ class _ProfilePageState extends State<ProfilePage> {
   Widget build(BuildContext context) {
     // userIcon variable to change user icon.
     Icon userIcon = Icon(Icons.person);
+    ExpBar expBar = ExpBar(barwidth: 200);
 
     return Scaffold(
       appBar: AppBar(
@@ -115,57 +116,71 @@ class _ProfilePageState extends State<ProfilePage> {
         builder: (context, snapshot) {
           if (snapshot.hasData) {
             final userData = snapshot.data!.data() as Map<String, dynamic>;
+            final level = userData['Level'] ?? 1;
+
+            void asyncMethod(void Function(int) callback) {
+              expBar.level.then((int level) {
+                callback(level);
+              });
+            }
+
+            // Code that works without exp level unlocking icon stuff from here
             String selectedIcon = userData['selectedIcon'] ?? 'person';
             String iconColor = userData['iconColor'] ?? '#000000';
 
-            if (userData['selectedIcon'] == 'ghost') {
+            VoidCallback? iconOnPressed;
+
+            if (userData['selectedIcon'] == 'ghost' && level >= 1) {
               userIcon = Icon(
                 FontAwesomeIcons.ghost,
                 color: Color(int.parse(iconColor.replaceFirst('#', '0xFF'))),
               );
-            } else if (userData['selectedIcon'] == 'seedling') {
+            } else if (userData['selectedIcon'] == 'seedling' && level >= 2) {
               userIcon = Icon(
                 FontAwesomeIcons.seedling,
                 color: Color(int.parse(iconColor.replaceFirst('#', '0xFF'))),
               );
-            } else if (userData['selectedIcon'] == 'poo') {
+            } else if (userData['selectedIcon'] == 'poo' && level >= 3) {
               userIcon = Icon(
                 FontAwesomeIcons.poo,
                 color: Color(int.parse(iconColor.replaceFirst('#', '0xFF'))),
               );
-            } else if (userData['selectedIcon'] == 'fish') {
+            } else if (userData['selectedIcon'] == 'fish' && level >= 4) {
               userIcon = Icon(
                 FontAwesomeIcons.fish,
                 color: Color(int.parse(iconColor.replaceFirst('#', '0xFF'))),
               );
-            } else if (userData['selectedIcon'] == 'userNinja') {
+            } else if (userData['selectedIcon'] == 'userNinja' && level >= 5) {
               userIcon = Icon(
                 FontAwesomeIcons.userNinja,
                 color: Color(int.parse(iconColor.replaceFirst('#', '0xFF'))),
               );
-            } else if (userData['selectedIcon'] == 'dog') {
+            } else if (userData['selectedIcon'] == 'dog' && level >= 6) {
               userIcon = Icon(
                 FontAwesomeIcons.dog,
                 color: Color(int.parse(iconColor.replaceFirst('#', '0xFF'))),
               );
-            } else if (userData['selectedIcon'] == 'cat') {
+            } else if (userData['selectedIcon'] == 'cat' && level >= 7) {
               userIcon = Icon(
                 FontAwesomeIcons.cat,
                 color: Color(int.parse(iconColor.replaceFirst('#', '0xFF'))),
               );
-            } else if (userData['selectedIcon'] == 'frog') {
+            } else if (userData['selectedIcon'] == 'frog' && level >= 8) {
               userIcon = Icon(
                 FontAwesomeIcons.frog,
                 color: Color(int.parse(iconColor.replaceFirst('#', '0xFF'))),
               );
-            } else if (userData['selectedIcon'] == 'robot') {
+            } else if (userData['selectedIcon'] == 'robot' && level >= 9) {
               userIcon = Icon(
                 FontAwesomeIcons.robot,
                 color: Color(int.parse(iconColor.replaceFirst('#', '0xFF'))),
               );
             } else {
-              userIcon = Icon(Icons.person,
-                  color: Color(int.parse(iconColor.replaceFirst('#', '0xFF'))));
+              userIcon = const Icon(
+                Icons.person,
+                color: fiservColor,
+              );
+              iconOnPressed = null;
             }
 
             return ListView(
@@ -176,6 +191,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 //For now, we will use a placeholder.
                 UserIcon(
                   initialUserIcon: userIcon,
+                  level: level,
                   onIconChanged: (newIcon) {
                     setState(() {
                       userIcon = newIcon;
@@ -184,8 +200,8 @@ class _ProfilePageState extends State<ProfilePage> {
                   userCollection: userCollection,
                   userId: currentUser.uid,
                   userData: userData,
-                  iconColor:
-                      Color(int.parse(iconColor.replaceFirst('#', '0x'))),
+                  iconColor: Color(
+                      int.parse(userData['iconColor'].replaceFirst('#', '0x'))),
                 ),
 
                 //User fullname.
