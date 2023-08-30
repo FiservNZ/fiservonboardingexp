@@ -45,7 +45,17 @@ Future<void> saveUserDetails(
         .collection('General Checklist')
         .doc('list')
         .set({
-      'tasks': [],
+      'Book onboarding checkpoint with Manager for Day 5': false,
+      'Catch up with buddy': false,
+      'Identify Buddy': false,
+      'Machine setup': false,
+      'Meet your Scrum Team': false,
+      'Onboarding Checkpoint with Manager': false,
+      'Provide feedback on onboarding process': false,
+      'Request access to UVMS dashboard': false,
+      'Request access to VersionOne (V1)': false,
+      'Request to join Product Development Distribution Group': false,
+      'Scrum Team Induction': false,
     });
 
     //Creating Quiz Task field (Specific to user to make tracking progress easier to implement)

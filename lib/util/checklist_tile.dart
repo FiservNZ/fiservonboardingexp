@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fiservonboardingexp/screens/nav_app_overlay.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
@@ -37,9 +38,12 @@ class ChecklistTile extends StatelessWidget {
               child: Checkbox(
                 value: taskCompleted,
                 onChanged: (value) {
+                  String uid = FirebaseAuth.instance.currentUser!.uid;
                   firestore
+                      .collection('User')
+                      .doc(uid)
                       .collection('General Checklist')
-                      .doc('ET9OmM0iAtcszMPWHINV')
+                      .doc('list')
                       .update({task['taskName']: value});
                   onChanged?.call(value);
                 },
