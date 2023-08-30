@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fiservonboardingexp/screens/manager_page.dart';
+import 'package:fiservonboardingexp/screens/manager/manager_view.dart';
 import 'package:flutter/material.dart';
 import 'package:fiservonboardingexp/screens/login_page.dart';
 import 'package:fiservonboardingexp/screens/main_screen.dart';
@@ -35,7 +35,7 @@ class _CheckUserState extends State<CheckUser> {
             context,
             MaterialPageRoute(
                 builder: (context) => position == 'manager'
-                    ? const ManagerPage()
+                    ? ManagerView()
                     : const MainScreen()));
       }
     });
