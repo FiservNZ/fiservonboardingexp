@@ -18,7 +18,7 @@ class _ManagerViewState extends State<ManagerView> {
   String? _selectedPosition;
   GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
-  final List<String> _positions = ['Manager', 'Developer'];
+  final List<String> _positions = ['manager', 'developer'];
 
   @override
   Widget build(BuildContext context) {
