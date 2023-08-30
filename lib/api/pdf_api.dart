@@ -1,14 +1,16 @@
 /*
 API KEY:
-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
+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
 
 To test pdf generation & email: Please go to firestore, set introduced
 filed to false (if you are unable to see the button.)
  */
 import 'dart:io';
+import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:open_file/open_file.dart';
 import 'package:path_provider/path_provider.dart';
 import 'package:pdf/pdf.dart';
@@ -26,15 +28,35 @@ class PdfApi {
   late String hobbies;
   late String interestingFacts;
   late String futureSelf;
+  Uint8List? imageData;
 
   Future<File> generate() async {
     final pdf = pw.Document();
-
+    const pageTheme = pw.PageTheme(pageFormat: PdfPageFormat.a4);
     await fetchUser();
+    await fetchImageData();
+
     pdf.addPage(
       pw.MultiPage(
         build: (context) => <pw.Widget>[
           customHeader(),
+          pw.SizedBox(height: 10),
+          //${user!.email?.split('@')[0]}/profile_${user!.email?.split('@')[0]}
+          imageData != null
+              ? pw.Center(
+                  child: pw.ClipRRect(
+                    horizontalRadius: 32,
+                    verticalRadius: 32,
+                    child: pw.Image(
+                      pw.MemoryImage(imageData!),
+                      width: pageTheme.pageFormat.availableWidth / 2,
+                    ),
+                  ),
+                )
+              : pw.Center(
+                  child: pw.Text('No Image Available',
+                      style: pw.TextStyle(
+                          fontSize: 16, fontWeight: pw.FontWeight.bold))),
           customHeadline(firstName, lastName),
           pw.Header(
             child: pw.Text(
@@ -73,6 +95,23 @@ class PdfApi {
     return saveToTemporaryFile(pdf);
   }
 
+  Future<void> fetchImageData() async {
+    final reference = firebase_storage.FirebaseStorage.instance.ref().child(
+        '${user!.email?.split('@')[0]}/profile_${user!.email?.split('@')[0]}.jpg');
+
+    try {
+      //final metadata = await reference.getMetadata();
+      imageData = await reference.getData(1000000);
+    } catch (error) {
+      if (error is firebase_storage.FirebaseException &&
+          error.code == 'object-not-found') {
+        imageData = null;
+      } else {
+        print('There was an error fetching image data.\nError: $error');
+      }
+    }
+  }
+
   static pw.Widget customHeadline(String firstName, String lastName) =>
       pw.Header(
         child: pw.Center(
@@ -84,7 +123,7 @@ class PdfApi {
                 color: PdfColors.white),
           ),
         ),
-        decoration: const pw.BoxDecoration(color: PdfColors.red),
+        decoration: const pw.BoxDecoration(color: PdfColors.grey700),
       );
 
   static pw.Widget customHeader() => pw.Container(
@@ -94,15 +133,11 @@ class PdfApi {
             bottom: pw.BorderSide(width: 2, color: PdfColors.blue),
           ),
         ),
-        child: pw.Row(
-          children: [
-            pw.PdfLogo(),
-            pw.SizedBox(width: 0.5 * PdfPageFormat.cm),
-            pw.Text(
-              'Welcome to Fiserv',
-              style: const pw.TextStyle(fontSize: 24, color: PdfColors.blue),
-            ),
-          ],
+        child: pw.Center(
+          child: pw.Text(
+            'Welcome to Fiserv',
+            style: const pw.TextStyle(fontSize: 24, color: PdfColors.blue),
+          ),
         ),
       );
 
@@ -111,6 +146,7 @@ class PdfApi {
     final uniqueFileName =
         '${DateTime.now().millisecondsSinceEpoch}_${user!.email?.split('@')[0]}';
     final storageRef = firebase_storage.FirebaseStorage.instance.ref();
+
     final folderRef = storageRef.child('${user!.email?.split('@')[0]}/');
     final pdfRef = folderRef.child(uniqueFileName);
 
@@ -124,7 +160,7 @@ class PdfApi {
 
     //Sending email to test recipient
     final mailer = sgm.Mailer(
-        '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');
+        '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');
     //Change toAddress to your own email for testing.
     const toAddress = sgm.Address('michaelcalbay.uni@gmail.com');
     const fromAddress = sgm.Address('rndproject96@gmail.com');

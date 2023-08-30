@@ -1,0 +1,106 @@
+{
+    "id": "quiz_task_1",
+    "title": "Harry Potter",
+    "image_url": "",
+    "description": "Quiz on Harry Potter",
+    "quiz_duration": 60,
+    "questions":[
+        {
+            "id": "q1",
+            "question": "What happens when the Dursley's take Harry to the Zoo",
+            "options": [
+                {
+                    "identifier": "1",
+                    "answer": "Nothing, Harry never went to the Zoo."
+                },
+                {
+                    "identifier": "2",
+                    "answer": "Harry makes the glass in the snake enclosure vanish."
+                },
+                {
+                    "identifier": "3",
+                    "answer": "Harry and Dudley get ice cream."
+                }
+            ],
+            "correct_answer": "1"
+        },
+        {
+            "id": "q2",
+            "question": "What did Harry's paternal grandfather develop that quadrupled  the Potter family wealth",
+            "options": [
+                {
+                    "identifier": "1",
+                    "answer": "Wizard's Sculpting Gel."
+                },
+                {
+                    "identifier": "2",
+                    "answer": "Sleekeazy's Hair Potion."
+                },
+                {
+                    "identifier": "3",
+                    "answer": "Polyjuice Potion."
+                }
+            ],
+            "correct_answer": "2"
+        },
+        {
+            "id": "q3",
+            "question": "Where did Harry's Mom, Lily Evans, grow up?",
+            "options": [
+                {
+                    "identifier": "1",
+                    "answer": "Godric's Hollow."
+                },
+                {
+                    "identifier": "2",
+                    "answer": "Cokesworth."
+                },
+                {
+                    "identifier": "3",
+                    "answer": "Hogsmeade."
+                }
+            ],
+            "correct_answer": "2"
+        },
+        {
+            "id": "q4",
+            "question": "How many Unforgiveable Curses are there?",
+            "options": [
+                {
+                    "identifier": "1",
+                    "answer": "1"
+                },
+                {
+                    "identifier": "2",
+                    "answer": "2"
+                },
+                {
+                    "identifier": "3",
+                    "answer": "3"
+                }
+            ],
+            "correct_answer": "3"
+        },
+        {
+            "id": "q5",
+            "question": "What Wizarding School was founded by a descendant of Salazar Slytherin?",
+            "options": [
+                {
+                    "identifier": "1",
+                    "answer": "Durmstrang Institute"
+                },
+                {
+                    "identifier": "2",
+                    "answer": "Castelobruxo"
+                },
+                {
+                    "identifier": "3",
+                    "answer": "Ilvermorny School of Witchcraft and Wizardry"
+                }
+            ],
+            "correct_answer": "3"
+        }
+
+    ]
+
+}
