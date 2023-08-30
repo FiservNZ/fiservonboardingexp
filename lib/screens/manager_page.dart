@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../util/constants.dart';
 import '../widgets/nav_bar.dart';
+import 'Login_page.dart';
 
 class ManagerPage extends StatelessWidget {
   const ManagerPage({super.key});
@@ -15,9 +17,9 @@ class ManagerPage extends StatelessWidget {
         ),
         backgroundColor: Colors.black,
       ),
-      body: const Column(
+      body: Column(
         children: [
-          Padding(
+          const Padding(
             padding: EdgeInsets.only(top: 16, left: 16),
             child: Align(
               alignment: Alignment.topLeft,
@@ -30,6 +32,24 @@ class ManagerPage extends StatelessWidget {
               ),
             ),
           ),
+          const SizedBox(height: 30),
+          ElevatedButton(
+            onPressed: () async {
+              await FirebaseAuth.instance.signOut();
+              Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
+                MaterialPageRoute(
+                  builder: (BuildContext context) {
+                    return LoginPage();
+                  },
+                ),
+                (_) => false,
+              );
+            },
+            style: ElevatedButton.styleFrom(
+              backgroundColor: Colors.black,
+            ),
+            child: const Text("logout", style: TextStyle()),
+          )
         ],
       ),
     );
