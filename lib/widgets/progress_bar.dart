@@ -12,10 +12,11 @@ class ProgressBar extends StatefulWidget {
 class _ProgressBarState extends State<ProgressBar> {
   Widget build(BuildContext context) {
     return Scaffold(
-        body: LinearPercentIndicator(
-            lineHeight: 20,
-            percent: 0.5,
-            progressColor: fiservColor,
-            backgroundColor: Color.fromARGB(193, 238, 192, 106)));
+      body: LinearPercentIndicator(
+          lineHeight: 20,
+          percent: 0.5,
+          progressColor: fiservColor,
+          backgroundColor: Color.fromARGB(193, 238, 192, 106)),
+    );
   }
 }

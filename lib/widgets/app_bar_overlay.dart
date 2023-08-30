@@ -3,7 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fiservonboardingexp/widgets/exp_bar.dart';
 
 import '../screens/profile_page.dart';
-import '../screens/faq_page_placeholder.dart';
+import '../screens/faq_page.dart';
 import '../screens/help_page.dart';
 import '../screens/teaser.dart';
 import '../screens/settings_page.dart';
