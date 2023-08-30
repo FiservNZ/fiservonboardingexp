@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../util/task_tile.dart';
+import '../../util/task_components/task_tile.dart';
 import '../../util/constants.dart';
 import '../../widgets/nav_bar.dart';
 
