@@ -28,7 +28,7 @@ class _TrainingPage extends State<TrainingPage> {
     return Scaffold(
       resizeToAvoidBottomInset: false,
       //appBar: myAppBar,
-      backgroundColor: myBackgroundColor,
+      backgroundColor: darkBackgroundColor,
       drawer: myDrawer,
       //bottomNavigationBar: navBar,
       body: Column(
