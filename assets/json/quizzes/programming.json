@@ -1,0 +1,48 @@
+{"id": "quiz_task_3",
+    "title": "Programming",
+    "image_url": "",
+    "description": "Quiz on Harry Potter",
+    "quiz_duration": 60,
+    "questions":[
+        {
+            "id": "q1",
+            "question": "What happens when the Dursley's take Harry to the Zoo",
+            "options": [
+                {
+                    "identifier": "1",
+                    "answer": "Nothing, Harry never went to the Zoo."
+                },
+                {
+                    "identifier": "2",
+                    "answer": "Harry makes the glass in the snake enclosure vanish."
+                },
+                {
+                    "identifier": "3",
+                    "answer": "Harry and Dudley get ice cream."
+                }
+            ],
+            "correct_answer": "1"
+        },
+        {
+            "id": "q2",
+            "question": "What did Harry's paternal grandfather develop that quadrupled  the Potter family wealth",
+            "options": [
+                {
+                    "identifier": "1",
+                    "answer": "Wizard's Sculpting Gel."
+                },
+                {
+                    "identifier": "2",
+                    "answer": "Sleekeazy's Hair Potion."
+                },
+                {
+                    "identifier": "3",
+                    "answer": "Polyjuice Potion."
+                }
+            ],
+            "correct_answer": "2"
+        }
+
+    ]
+
+}
