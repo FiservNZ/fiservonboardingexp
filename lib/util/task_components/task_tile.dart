@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fiservonboardingexp/screens/task_categories/task_page.dart';
-import 'package:fiservonboardingexp/util/task.dart';
+import 'package:fiservonboardingexp/util/task_components/task.dart';
 import 'package:flutter/material.dart';
 import 'package:lottie/lottie.dart';
 
@@ -33,6 +33,7 @@ class _MyTaskTileState extends State<TaskTile> {
                     var documentData = data[index].data();
                     var taskName = documentData['name'];
                     var popUpContent = documentData['popUpContent'];
+                    var taskType = documentData['type'];
                     return Padding(
                       padding: const EdgeInsets.all(8),
                       child: Container(
@@ -46,11 +47,11 @@ class _MyTaskTileState extends State<TaskTile> {
                               borderRadius: BorderRadius.circular(12),
                             ),
                             title: Text(taskName),
-                            subtitle: Text(documentData['type']),
+                            subtitle: Text(taskType),
                             leading: Lottie.asset(
                                 'assets/animations/reading_book.json'),
                             onTap: () => _showPopup(context, taskName,
-                                popUpContent, data[index].id)),
+                                popUpContent, data[index].id, taskType)),
                       ),
                     );
                   },
@@ -72,7 +73,7 @@ class _MyTaskTileState extends State<TaskTile> {
 }
 
 void _showPopup(BuildContext context, String taskName, String popUpContent,
-    String documentId) {
+    String documentId, String taskType) {
   var collection = FirebaseFirestore.instance.collection("Task");
   showDialog(
     context: context,
@@ -116,16 +117,31 @@ void _showPopup(BuildContext context, String taskName, String popUpContent,
                         Task task = Task(
                           id: documentId,
                           name: taskName,
-                          type: snapshot.data()!['type'],
+                          type: taskType,
+                          //type: snapshot.data()!['type'],
                           popUpContent: popUpContent,
                         );
                         // ignore: use_build_context_synchronously
-                        Navigator.push(
+                        if (taskName == "Video Task") {
+                          // ignore: use_build_context_synchronously
+                          await Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: ((context) => TaskPage(
+                                builder: (context) => TaskPage(
                                       task: task,
-                                    ))));
+                                    )),
+                          );
+                        } else if (taskName == "Quiz Task") {
+                          // ignore: use_build_context_synchronously
+                          await Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => TaskPage(
+                                task: task,
+                              ),
+                            ),
+                          );
+                        }
                       }
                     }),
               ],

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../util/task_tile.dart';
+import '../../util/task_components/task_tile.dart';
 import '../../util/constants.dart';
 import 'package:fiservonboardingexp/widgets/nav_bar.dart';
 
@@ -29,8 +29,7 @@ class _SecurityTaskPage extends State<SecurityTasks> {
                 //heading
                 Text(
                   "Security Tasks",
-                  style:
-                      GoogleFonts.bebasNeue(fontSize: 30, color: fiservColor),
+                  style: headerFontStyle,
                 ),
                 const SizedBox(height: 10),
                 //list of tasks
