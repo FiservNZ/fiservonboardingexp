@@ -1,6 +1,8 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
 
+import '../Login_page.dart';
 import 'manager_functions.dart';
 
 class ManagerView extends StatefulWidget {
@@ -25,6 +27,22 @@ class _ManagerViewState extends State<ManagerView> {
       appBar: AppBar(
         backgroundColor: Colors.black,
         title: const Text('Manager View', style: TextStyle(color: fiservColor)),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.logout),
+            onPressed: () async {
+              await FirebaseAuth.instance.signOut();
+              Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
+                MaterialPageRoute(
+                  builder: (BuildContext context) {
+                    return LoginPage();
+                  },
+                ),
+                (_) => false,
+              );
+            },
+          )
+        ],
       ),
       body: Form(
         key: _formKey,
