@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 import '../../util/constants.dart';
-import '../../util/task.dart';
+import '../../util/task_components/task.dart';
 import '../../widgets/nav_bar.dart';
 
 class TaskPage extends StatelessWidget {
   final Task task;
 
-  const TaskPage({super.key, required this.task});
+  TaskPage({super.key, required this.task});
 
   @override
   Widget build(BuildContext context) {
