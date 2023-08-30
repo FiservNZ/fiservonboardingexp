@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../util/faq_item.dart';
 
+// Interacts with Firebase
 class FaqList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -9,7 +10,7 @@ class FaqList extends StatelessWidget {
       stream: FirebaseFirestore.instance.collection('FAQ').snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
-          return CircularProgressIndicator();
+          return const CircularProgressIndicator();
         }
 
         final faqDocs = snapshot.data!.docs;
@@ -19,7 +20,11 @@ class FaqList extends StatelessWidget {
           itemBuilder: (context, index) {
             final data = faqDocs[index].data() as Map<String, dynamic>;
 
-            return FaqItem(data: data);
+            final question =
+                data['question'] as String? ?? 'No question available';
+            final answer = data['answer'] as String? ?? 'No answer available';
+
+            return FaqItem(question: question, answer: answer);
           },
         );
       },
