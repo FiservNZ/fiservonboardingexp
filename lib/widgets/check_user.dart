@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fiservonboardingexp/firebase_references/firebase_refs.dart';
-import 'package:fiservonboardingexp/screens/manager/manager_view.dart';
+import 'package:fiservonboardingexp/screens/manager_page.dart';
 import 'package:flutter/material.dart';
 import 'package:fiservonboardingexp/screens/login_page.dart';
 import 'package:fiservonboardingexp/screens/main_screen.dart';
@@ -24,7 +24,7 @@ class _CheckUserState extends State<CheckUser> {
     await fetchUser();
     print(position);
 
-    fireAuth.authStateChanges().listen((User? user) {
+    FirebaseAuth.instance.authStateChanges().listen((User? user) {
       if (user == null) {
         // User is not logged in, navigate to the LoginPage.
         Navigator.pushReplacement(
@@ -35,7 +35,7 @@ class _CheckUserState extends State<CheckUser> {
             context,
             MaterialPageRoute(
                 builder: (context) => position == 'manager'
-                    ? ManagerView()
+                    ? const ManagerPage()
                     : const MainScreen()));
       }
     });
@@ -46,16 +46,19 @@ class _CheckUserState extends State<CheckUser> {
     return const Scaffold(
       body: Center(
         child: CircularProgressIndicator(),
+    return const Scaffold(
+      body: Center(
+        child: CircularProgressIndicator(),
       ),
     );
   }
 
   Future<void> fetchUser() async {
     try {
-      String uid = fireAuth.currentUser!.uid;
-      //final userCollection = FirebaseFirestore.instance.collection('User');
+      String uid = FirebaseAuth.instance.currentUser!.uid;
+      final userCollection = FirebaseFirestore.instance.collection('User');
 
-      DocumentSnapshot snapshot = await userColRef.doc(uid).get();
+      DocumentSnapshot snapshot = await userCollection.doc(uid).get();
 
       if (snapshot.exists) {
         setState(() {
