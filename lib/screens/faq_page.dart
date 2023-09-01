@@ -1,6 +1,5 @@
 import 'package:fiservonboardingexp/widgets/nav_bar.dart';
 import 'package:flutter/material.dart';
-import '../widgets/nav_bar.dart';
 import '../widgets/app_bar_overlay.dart';
 import '../widgets/faq_list.dart';
 

@@ -30,7 +30,8 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
     };
 
     return AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: Color(0xFF111211),
+        elevation: 0.0,
 
         // Profile picture icon
         leading: IconButton(
