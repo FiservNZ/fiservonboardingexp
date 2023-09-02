@@ -1,7 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fiservonboardingexp/screens/home_page.dart';
-import 'package:fiservonboardingexp/screens/login_page.dart';
-import 'package:fiservonboardingexp/screens/main_screen.dart';
 import 'package:fiservonboardingexp/theme/theme_provider.dart';
 import 'package:fiservonboardingexp/widgets/check_user.dart';
 import 'package:flutter/material.dart';
