@@ -1,16 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../constants.dart';
+import 'package:fiservonboardingexp/util/elle_testing/widgets/progressBar.dart';
 
-class DeviceSetUp extends StatefulWidget {
-  const DeviceSetUp({super.key});
+class PlatypusRead extends StatefulWidget {
+  const PlatypusRead({super.key});
+  final ProgressBar _progressBar = const ProgressBar();
 
   @override
-  DeviceSetUpState createState() => DeviceSetUpState();
+  PlatypusReadState createState() => PlatypusReadState();
 }
 
-class DeviceSetUpState extends State<DeviceSetUp> {
-  DeviceSetUpState();
+class PlatypusReadState extends State<PlatypusRead> {
+  PlatypusReadState();
 
   @override
   Widget build(BuildContext context) {
@@ -33,19 +35,24 @@ class DeviceSetUpState extends State<DeviceSetUp> {
 
                   //Title
                   Padding(
-                    padding: const EdgeInsets.all(20.0),
+                    padding: const EdgeInsets.all(7.0),
                     child: Text(
                       '${data['title']}',
                       textAlign: TextAlign.center,
                       style: const TextStyle(
                         color: fiservColor,
                         fontWeight: FontWeight.bold,
-                        fontSize: 32,
+                        fontSize: 42,
                       ),
                     ),
                   ),
 
-                  const SizedBox(height: 60),
+                  //Image (from local assets folder not firebase)
+                  const Padding(
+                    padding: EdgeInsets.all(40.0),
+                    child:
+                        Image(image: AssetImage('assets/images/platypus.webp')),
+                  ),
 
                   //Content
                   Padding(
@@ -60,6 +67,7 @@ class DeviceSetUpState extends State<DeviceSetUp> {
                     ),
                   ),
 
+                  //Close button
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 120),
                     child: ElevatedButton(
@@ -77,10 +85,14 @@ class DeviceSetUpState extends State<DeviceSetUp> {
                     ),
                   ),
 
+                  //Task finished button
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 120),
                     child: ElevatedButton(
                       onPressed: () {
+                        //int points = 1;
+                        //_progressBar.addpPoints(points);
+
                         Navigator.of(context).pop();
                       },
                       style: ElevatedButton.styleFrom(

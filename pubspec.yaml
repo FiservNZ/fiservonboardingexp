@@ -105,6 +105,8 @@ flutter:
       - assets/icon/start-button.png
 
       - assets/json/quizzes/
+      #Read task
+      - assets/images/platypus.webp
       
 
 
