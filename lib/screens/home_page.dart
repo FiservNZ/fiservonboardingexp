@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 
 class HomePage extends StatelessWidget {
   final ExpBar _expBar = const ExpBar(barwidth: 300);
+  final ProgressBar _progressBar = const ProgressBar();
 
   const HomePage({super.key});
 
@@ -28,7 +29,6 @@ class HomePage extends StatelessWidget {
           onPressed: () {
             int expToAdd = 200;
             _expBar.addExperience(expToAdd);
-            // _expBar.addExperience(expToAdd);
           },
         ),
 
@@ -48,11 +48,11 @@ class HomePage extends StatelessWidget {
 
             const SizedBox(height: 30),
 
-            //navBar
+            //Progress bar
             Padding(
-              padding: const EdgeInsets.only(left: 100),
+              padding: const EdgeInsets.only(left: 10),
               child: Container(
-                  alignment: Alignment.centerLeft, child: const ProgressBar()),
+                  alignment: Alignment.centerLeft, child: _progressBar),
             ),
             const SizedBox(
               height: 30,
@@ -60,6 +60,7 @@ class HomePage extends StatelessWidget {
 
             const SizedBox(height: 200),
 
+            //Read task
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 120),
               child: ElevatedButton(

@@ -8,7 +8,7 @@ class ProgressBar extends StatelessWidget {
   const ProgressBar({super.key});
 
   //Method to add points
-  Future<void> addpPoints(int points) async {
+  Future<void> addPoints(int points) async {
     final currentUser = FirebaseAuth.instance.currentUser!;
     final userCollection = FirebaseFirestore.instance.collection('User');
 
@@ -56,7 +56,7 @@ class ProgressBar extends StatelessWidget {
             return Column(
               children: [
                 SizedBox(
-                  width: 10,
+                  width: 200,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
@@ -81,7 +81,7 @@ class ProgressBar extends StatelessWidget {
                 ),
                 const SizedBox(height: 3),
                 SizedBox(
-                  width: 10,
+                  width: 200,
                   height: 10,
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(5),
