@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../constants.dart';
-import 'package:fiservonboardingexp/util/elle_testing/widgets/progressBar.dart';
+import 'package:fiservonboardingexp/widgets/progress_bar.dart';
 
-class PlatypusRead extends StatefulWidget {
-  const PlatypusRead({super.key});
+class PlatypusRead extends StatelessWidget {
   final ProgressBar _progressBar = const ProgressBar();
+  const PlatypusRead({super.key});
 
-  @override
-  PlatypusReadState createState() => PlatypusReadState();
-}
+  // @override
+  //PlatypusReadState createState() => PlatypusReadState();
+//}
 
-class PlatypusReadState extends State<PlatypusRead> {
-  PlatypusReadState();
+//class PlatypusReadState extends State<PlatypusRead> {
+  //PlatypusReadState();
 
   @override
   Widget build(BuildContext context) {
@@ -90,9 +90,8 @@ class PlatypusReadState extends State<PlatypusRead> {
                     padding: const EdgeInsets.symmetric(horizontal: 120),
                     child: ElevatedButton(
                       onPressed: () {
-                        //int points = 1;
-                        //_progressBar.addpPoints(points);
-
+                        int points = 1;
+                        _progressBar.addPoints(points);
                         Navigator.of(context).pop();
                       },
                       style: ElevatedButton.styleFrom(
