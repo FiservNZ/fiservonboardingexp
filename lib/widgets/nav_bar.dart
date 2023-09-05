@@ -33,8 +33,7 @@ class CustomNavBar extends StatelessWidget {
                 ));
             break;
           case 3:
-            Navigator.push(
-                context, _instantPageRoute(const AchievementsPage()));
+            Navigator.push(context, _instantPageRoute(AchievementsPage()));
             break;
           case 4:
             Navigator.push(context, _instantPageRoute(const ColleaguesPage()));

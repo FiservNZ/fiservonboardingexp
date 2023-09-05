@@ -21,7 +21,7 @@ class _MainScreenState extends State<MainScreen> {
     const HomePage(),
     const SecurityTasks(),
     ChecklistPage(firestore: FirebaseFirestore.instance),
-    const AchievementsPage(),
+    AchievementsPage(),
     const ColleaguesPage(),
   ];
 

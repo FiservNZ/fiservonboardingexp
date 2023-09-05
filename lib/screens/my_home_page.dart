@@ -23,7 +23,7 @@ class _MyHomePageState extends State<MyHomePage> {
     const HomePage(),
     const TrainingPage(),
     ChecklistPage(firestore: FirebaseFirestore.instance),
-    const AchievementsPage(),
+    AchievementsPage(),
     const ColleaguesPage(),
   ];
 
