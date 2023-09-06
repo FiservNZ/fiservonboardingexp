@@ -3,6 +3,7 @@ import 'package:fiservonboardingexp/screens/manager/manager_view.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:get/get.dart';
 
 import 'help_page.dart';
 import 'teaser pages/teaser.dart';
@@ -103,16 +104,12 @@ class LoginPage extends StatelessWidget {
                   .doc(uid)
                   .update({'firstlog': false});
             } else {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: ((context) => const MainScreen())));
+              Get.off("/mainScreen");
             }
           } else if (position == 'manager') {
             debugPrint('User is a manager.');
             //handle the manager mode below.
-            Navigator.push(context,
-                MaterialPageRoute(builder: ((context) => ManagerView())));
+            Get.offAndToNamed("/manager");
           } else {
             debugPrint('User position unknown.');
           }
