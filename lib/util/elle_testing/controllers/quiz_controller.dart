@@ -11,6 +11,7 @@ import '../firebase_ref/firebase_ref.dart';
 import '../models/quiz_model.dart';
 import '../screens/question_screen.dart';
 import '../services/firebase_storage_service.dart';
+import '../widgets/popup_widget.dart';
 
 class QuizController extends GetxController {
   late final QuizModel quiz;
