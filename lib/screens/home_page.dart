@@ -65,9 +65,6 @@ class HomePage extends StatelessWidget {
               padding: const EdgeInsets.symmetric(horizontal: 120),
               child: ElevatedButton(
                 onPressed: () {
-                  //int points = 1;
-                  //_progressBar.addpPoints(points);
-
                   Navigator.of(context).push(
                     MaterialPageRoute(
                         builder: (context) => const PlatypusRead()),
