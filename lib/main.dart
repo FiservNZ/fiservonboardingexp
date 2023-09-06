@@ -6,7 +6,7 @@ import 'package:fiservonboardingexp/theme/theme_provider.dart';
 import 'package:fiservonboardingexp/widgets/check_user.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:fiservonboardingexp/firebase_options.dart';
+import 'package:fiservonboardingexp/firebase_references/firebase_options.dart';
 
 import 'package:flutter/services.dart';
 
