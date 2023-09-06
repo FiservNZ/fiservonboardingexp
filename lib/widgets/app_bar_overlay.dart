@@ -110,7 +110,6 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                                 fontWeight: FontWeight.bold,
                               ).merge(GoogleFonts
                                   .quicksand()), // Merge styles with GoogleFonts
-                            ),
                             onTap: () {
                               Get.toNamed("/teaser");
                             },
@@ -130,7 +129,6 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                                 fontWeight: FontWeight.bold,
                               ).merge(GoogleFonts
                                   .quicksand()), // Merge styles with GoogleFonts
-                            ),
                             onTap: () {
                               Get.toNamed("/help");
                             },
@@ -150,7 +148,6 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                                 fontWeight: FontWeight.bold,
                               ).merge(GoogleFonts
                                   .quicksand()), // Merge styles with GoogleFonts
-                            ),
                             onTap: () {
                               Get.toNamed("/faq");
                             },
@@ -190,7 +187,6 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                                 fontWeight: FontWeight.bold,
                               ).merge(GoogleFonts
                                   .quicksand()), // Merge styles with GoogleFonts
-                            ),
                             onTap: () {
                               Navigator.of(context).push(
                                 MaterialPageRoute(

@@ -23,7 +23,7 @@ Future<void> saveUserDetails(
     String? uid, String firstName, String lastName, String position) async {
   try {
     await userColRef.doc(uid).set({
-      'user': firstName,
+      'firstName': firstName,
       'lastName': lastName,
       'position': position,
       'Future Self': '',
