@@ -21,11 +21,11 @@ Future<void> main() async {
   await Firebase.initializeApp();
   //InitialBindings().dependencies();
 
-  runApp(const QuizApp());
+  runApp(const MyApp());
 }
 
-class QuizApp extends StatelessWidget {
-  const QuizApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
