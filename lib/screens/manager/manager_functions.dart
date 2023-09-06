@@ -35,6 +35,9 @@ Future<void> saveUserDetails(
       'iconColor': '#ff6600',
       'introduced': false,
       'selectedIcon': 'person',
+      'curPoints': 0,
+      'maxPoints': 4,
+      'categoryCompletion': false
     });
 
     //Creating a General Checklist collection specific to the user to have it more specific to the user
