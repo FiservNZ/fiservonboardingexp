@@ -4,8 +4,6 @@ import 'package:fiservonboardingexp/screens/feedback_page.dart';
 import 'package:get/get.dart';
 import 'package:flutter/material.dart';
 
-import '../screens/teaser pages/teaser.dart';
-
 class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
   const AppBarOverlay({super.key});
   @override
