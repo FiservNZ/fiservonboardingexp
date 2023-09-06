@@ -15,11 +15,11 @@ Future<void> main() async {
   //InitialBindings().dependencies();
   Get.put(ReadController());
 
-  runApp(const QuizApp());
+  runApp(const MyApp());
 }
 
-class QuizApp extends StatelessWidget {
-  const QuizApp({super.key});
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
