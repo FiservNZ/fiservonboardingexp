@@ -15,6 +15,7 @@ import '../firebase_ref/firebase_ref.dart';
 class QuestionController extends GetxController {
   final loadingStatus = LoadingStatus.loading.obs;
   late QuizModel quizModel;
+
   final allQuizQuestions = <Question>[];
   final questionIndex = 0.obs;
   bool get isFirstQuestion => questionIndex.value > 0; // false
