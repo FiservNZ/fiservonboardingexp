@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 
+import '../firebase_references/firebase_refs.dart';
 import 'help_page.dart';
 import 'teaser pages/teaser.dart';
 
@@ -26,7 +27,8 @@ class LoginPage extends StatelessWidget {
     try {
       //detect the user account.
       UserCredential userCredential =
-          await FirebaseAuth.instance.signInWithEmailAndPassword(
+          //instance is pulled from references now
+          await fireAuth.signInWithEmailAndPassword(
         email: username,
         password: password,
       );
@@ -69,7 +71,8 @@ class LoginPage extends StatelessWidget {
 
   // Check user position
   void checkUserPosition(context) async {
-    User? user = FirebaseAuth.instance.currentUser;
+    // instance pulled from references
+    User? user = fireAuth.currentUser;
     if (user != null) {
       String uid = user.uid;
 
