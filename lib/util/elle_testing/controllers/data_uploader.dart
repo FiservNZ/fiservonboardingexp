@@ -18,6 +18,7 @@ class DataUploader extends GetxController {
 
   final loadingStatus = LoadingStatus.loading.obs;
 
+  // uploads data from json files to the firestore database
   Future<void> uploadData() async {
     loadingStatus.value = LoadingStatus.loading;
 
