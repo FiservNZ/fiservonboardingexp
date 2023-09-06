@@ -167,7 +167,6 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                                 fontWeight: FontWeight.bold,
                               ).merge(GoogleFonts
                                   .quicksand()), // Merge styles with GoogleFonts
-                            ),
                             onTap: () {
                               Get.toNamed("/settings");
                             },
