@@ -39,8 +39,8 @@ class HomePage extends StatelessWidget {
 
             //expBar
             Padding(
-              padding: const EdgeInsets.only(left: 12),
-              child: Container(alignment: Alignment.centerLeft, child: _expBar),
+              padding: const EdgeInsets.only(left: 0),
+              child: Container(alignment: Alignment.center, child: _expBar),
             ),
             const SizedBox(
               height: 30,
