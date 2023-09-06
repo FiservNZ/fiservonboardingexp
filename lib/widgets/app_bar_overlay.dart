@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fiservonboardingexp/widgets/exp_bar.dart';
+import 'package:get/get.dart';
 
 import '../screens/profile_page.dart';
 import '../screens/faq_page.dart';
@@ -37,9 +38,8 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
         leading: IconButton(
           icon: const Image(image: AssetImage('assets/images/profile.png')),
           onPressed: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const ProfilePage()),
-            );
+            // Get.offAndToNamed deletes home page off the stack
+            Get.toNamed("/profile");
           },
         ),
 
@@ -99,10 +99,7 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                               style: TextStyle(color: Color(0xFFFF6600)),
                             ),
                             onTap: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                    builder: (context) => const TeaserScreen()),
-                              );
+                              Get.toNamed("/teaser");
                             },
                           ),
 
@@ -117,10 +114,7 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                               style: TextStyle(color: Color(0xFFFF6600)),
                             ),
                             onTap: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                    builder: (context) => const HelpPage()),
-                              );
+                              Get.toNamed("/help");
                             },
                           ),
 
@@ -135,10 +129,7 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                               style: TextStyle(color: Color(0xFFFF6600)),
                             ),
                             onTap: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                    builder: (context) => FaqPage()),
-                              );
+                              Get.toNamed("/faq");
                             },
                           ),
 
@@ -153,10 +144,7 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                               style: TextStyle(color: Color(0xFFFF6600)),
                             ),
                             onTap: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                    builder: (context) => SettingsPage()),
-                              );
+                              Get.toNamed("/settings");
                             },
                           ),
 

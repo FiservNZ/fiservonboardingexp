@@ -3,38 +3,36 @@ import 'package:fiservonboardingexp/screens/feedback_page.dart';
 import 'package:fiservonboardingexp/screens/home_page.dart';
 import 'package:fiservonboardingexp/screens/login_page.dart';
 import 'package:fiservonboardingexp/screens/main_screen.dart';
-import 'package:fiservonboardingexp/theme/theme_provider.dart';
 import 'package:fiservonboardingexp/widgets/check_user.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:fiservonboardingexp/firebase_references/firebase_options.dart';
 
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 
-final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+import 'routes/routes.dart';
+
+//final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 int? initScreen;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  await Firebase.initializeApp();
+  //InitialBindings().dependencies();
 
-  runApp(const MyApp());
+  runApp(const QuizApp());
 }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+class QuizApp extends StatelessWidget {
+  const QuizApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Fiserv Onboarding',
-      themeMode: ThemeMode.system,
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: FeedBack(),
-      //CheckUser()
+      initialRoute: '/',
+      getPages: FiservAppRoutes.routes(),
     );
   }
 }
