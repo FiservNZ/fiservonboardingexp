@@ -5,9 +5,10 @@ import 'package:fiservonboardingexp/widgets/exp_bar.dart';
 import '../screens/profile_page.dart';
 import '../screens/faq_page.dart';
 import '../screens/help_page.dart';
-import '../screens/teaser.dart';
 import '../screens/settings_page.dart';
 import 'package:flutter/material.dart';
+
+import '../screens/teaser pages/teaser.dart';
 
 class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
   const AppBarOverlay({super.key});
@@ -29,7 +30,8 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
     };
 
     return AppBar(
-        backgroundColor: Colors.black,
+        backgroundColor: Color(0xFF111211),
+        elevation: 0.0,
 
         // Profile picture icon
         leading: IconButton(

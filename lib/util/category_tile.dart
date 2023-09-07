@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import '../screens/task_categories/compliance_page.dart';
-import '../screens/task_categories/customs_culture_page.dart';
-import '../screens/task_categories/health_and_safety_page.dart';
-import '../screens/task_categories/technical_training_page.dart';
-import '../screens/task_categories/week_one_page.dart';
+import '../screens/training categories/compliance_page.dart';
+import '../screens/training categories/customs_culture_page.dart';
+import '../screens/training categories/health_and_safety_page.dart';
+import '../screens/training categories/technical_training_page.dart';
+import '../screens/training categories/week_one_page.dart';
 
 class CategoryTile extends StatefulWidget {
   final String categoryName;

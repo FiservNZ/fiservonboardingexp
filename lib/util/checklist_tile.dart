@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fiservonboardingexp/screens/nav_app_overlay.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -26,14 +25,14 @@ class ChecklistTile extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(15),
         decoration: BoxDecoration(
-          color: Colors.black87,
+          color: Color(0xFF1b1b1d),
           borderRadius: BorderRadius.circular(12),
         ),
         child: Row(
           children: [
             Theme(
               data: ThemeData(
-                unselectedWidgetColor: FiservColor,
+                unselectedWidgetColor: fiservColor,
               ),
               child: Checkbox(
                 value: taskCompleted,
@@ -47,7 +46,7 @@ class ChecklistTile extends StatelessWidget {
                       .update({task['taskName']: value});
                   onChanged?.call(value);
                 },
-                activeColor: FiservColor,
+                activeColor: fiservColor,
               ),
             ),
             Flexible(
