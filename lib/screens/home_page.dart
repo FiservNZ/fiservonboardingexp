@@ -1,7 +1,10 @@
-import 'package:fiservonboardingexp/util/kt_testing/platypus_read_task.dart';
+import 'package:fiservonboardingexp/util/kt_testing/read_controller.dart';
+import 'package:fiservonboardingexp/util/kt_testing/read_page.dart';
 import 'package:fiservonboardingexp/widgets/progress_bar.dart';
 import 'package:fiservonboardingexp/widgets/exp_bar.dart';
 import 'package:fiservonboardingexp/widgets/nav_bar.dart';
+
+import 'package:get/get.dart';
 import '../util/constants.dart';
 import '../widgets/app_bar_overlay.dart';
 import 'package:flutter/material.dart';
@@ -60,14 +63,15 @@ class HomePage extends StatelessWidget {
 
             const SizedBox(height: 200),
 
-            //Read task
+            //Read task for platypus article
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 120),
               child: ElevatedButton(
                 onPressed: () {
                   Navigator.of(context).push(
                     MaterialPageRoute(
-                        builder: (context) => const PlatypusRead()),
+                        builder: (context) =>
+                            ReadPage(model: ReadController.allReadTasks[0])),
                   );
                 },
                 style: ElevatedButton.styleFrom(
