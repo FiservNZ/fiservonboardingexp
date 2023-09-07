@@ -1,21 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fiservonboardingexp/widgets/exp_bar.dart';
-
-import '../screens/profile_page.dart';
-import '../screens/faq_page.dart';
-import '../screens/help_page.dart';
-import '../screens/settings_page.dart';
+import 'package:fiservonboardingexp/firebase_references/firebase_refs.dart';
+import 'package:get/get.dart';
 import 'package:flutter/material.dart';
-
-import '../screens/teaser pages/teaser.dart';
 
 class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
   const AppBarOverlay({super.key});
   @override
   Widget build(BuildContext context) {
-    final currentUser = FirebaseAuth.instance.currentUser!;
-    final userCollection = FirebaseFirestore.instance.collection('User');
+    //final currentUser = FirebaseAuth.instance.currentUser!; No need
+    //final userCollection = FirebaseFirestore.instance.collection('User'); No need for this
 
     final rankTitleMap = {
       1: 'Novice 1',
@@ -37,16 +30,16 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
         leading: IconButton(
           icon: const Image(image: AssetImage('assets/images/profile.png')),
           onPressed: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const ProfilePage()),
-            );
+            // Get.offAndToNamed deletes home page off the stack
+            Get.toNamed("/profile");
           },
         ),
 
         // Rank Title
         title: Center(
           child: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
-            stream: userCollection.doc(currentUser.uid).snapshots(),
+            // reference from file
+            stream: userColRef.doc(currentUser.uid).snapshots(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const CircularProgressIndicator();
@@ -99,10 +92,7 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                               style: TextStyle(color: Color(0xFFFF6600)),
                             ),
                             onTap: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                    builder: (context) => const TeaserScreen()),
-                              );
+                              Get.toNamed("/teaser");
                             },
                           ),
 
@@ -117,10 +107,7 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                               style: TextStyle(color: Color(0xFFFF6600)),
                             ),
                             onTap: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                    builder: (context) => const HelpPage()),
-                              );
+                              Get.toNamed("/help");
                             },
                           ),
 
@@ -135,10 +122,7 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                               style: TextStyle(color: Color(0xFFFF6600)),
                             ),
                             onTap: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                    builder: (context) => FaqPage()),
-                              );
+                              Get.toNamed("/faq");
                             },
                           ),
 
@@ -153,10 +137,7 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                               style: TextStyle(color: Color(0xFFFF6600)),
                             ),
                             onTap: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                    builder: (context) => SettingsPage()),
-                              );
+                              Get.toNamed("/settings");
                             },
                           ),
 
