@@ -75,7 +75,7 @@ class QuestionController extends GetxController {
         } else {
           loadingStatus.value = LoadingStatus.error;
         }
-      }
+      } */
     } catch (e) {
       if (kDebugMode) {
         print(e.toString());
