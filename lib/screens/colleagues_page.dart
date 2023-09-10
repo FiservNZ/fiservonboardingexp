@@ -120,23 +120,48 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Colleague Details'),
+          backgroundColor: Colors.grey[900],
+          title: Text(
+            'COLLEAGUE DETAILS',
+            style: GoogleFonts.quicksand(
+              textStyle: TextStyle(
+                color: fiservColor,
+                fontWeight: FontWeight.bold, // Colleague Details Font Colour
+                fontSize: 22,
+              ),
+            ),
+          ),
           content: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text('Name: ${colleague.name}'),
-                Text('Position: ${colleague.position}'),
+                Text(
+                  'Name: ${colleague.name}',
+                  style: TextStyle(
+                    color: Colors.white, // Colleague Name Font Colour
+                  ),
+                ),
+                Text(
+                  'Position: ${colleague.position}',
+                  style: TextStyle(
+                    color: Colors.white, // Colleague Position Font Colour
+                  ),
+                ),
                 Row(
                   children: [
-                    const Text('Phone Number: '),
+                    const Text(
+                      'Phone Number: ',
+                      style: TextStyle(
+                          color: Colors
+                              .white), // Colleague Phone Number Font Colour
+                    ),
                     RichText(
                       text: TextSpan(
                         children: [
                           TextSpan(
                             text: colleague.phoneNumber,
-                            style: TextStyle(color: Colors.blue),
+                            style: TextStyle(color: fiservColor),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
                                 _launchPhoneNumber(colleague.phoneNumber);
@@ -149,13 +174,16 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
                 ),
                 Row(
                   children: [
-                    const Text('Email: '),
+                    const Text('Email: ',
+                        style: TextStyle(
+                            color:
+                                Colors.white)), // Colleague Email Font Colour
                     RichText(
                       text: TextSpan(
                         children: [
                           TextSpan(
                             text: colleague.email,
-                            style: const TextStyle(color: Colors.blue),
+                            style: const TextStyle(color: fiservColor),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
                                 _launchEmail(colleague.email);
@@ -166,7 +194,9 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
                     ),
                   ],
                 ),
-                Text('Hobbies: ${colleague.hobbies}'),
+                Text('Hobbies: ${colleague.hobbies}',
+                    style: TextStyle(
+                        color: Colors.white)), // Colleague Hobbies Font Colour
               ],
             ),
           ),
@@ -186,6 +216,7 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
     );
   }
 
+// Launch dial application on android device
   void _launchPhoneNumber(String phoneNumber) async {
     final Uri phoneUri = Uri(scheme: 'tel', path: phoneNumber);
     final String phoneUrl = phoneUri.toString();
@@ -197,6 +228,7 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
     }
   }
 
+// Launch default gmail/mail application on device
   void _launchEmail(String email) async {
     String subject = Uri.encodeComponent("Query");
     print(subject); //output: Hello%20Flutter

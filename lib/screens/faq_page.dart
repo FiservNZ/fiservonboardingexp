@@ -28,7 +28,7 @@ class _FaqPageState extends State<FaqPage> {
               Text(
                 'Frequently asked questions',
                 style: GoogleFonts.quicksand(
-                  fontSize: 24,
+                  fontSize: 25,
                   fontWeight: FontWeight.bold,
                   color: fiservColor,
                 ),
