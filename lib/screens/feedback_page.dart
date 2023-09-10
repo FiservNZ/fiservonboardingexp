@@ -31,7 +31,7 @@ class _FeedBackState extends State<FeedBack> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
+            const Text(
               "Congratulations, you have completed the onboarding journey!",
               style: TextStyle(
                 fontSize: 20,
