@@ -21,7 +21,7 @@ class CustomNavBar extends StatelessWidget {
       onTap: (int newIndex) {
         switch (newIndex) {
           case 0:
-            Navigator.of(context).push(_instantPageRoute(const HomePage()));
+            Navigator.of(context).push(_instantPageRoute(HomePage()));
             break;
           case 1:
             Navigator.push(context, _instantPageRoute(const TrainingPage()));
