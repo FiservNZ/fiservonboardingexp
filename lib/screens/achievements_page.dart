@@ -7,21 +7,21 @@ import '../util/achievement_components/achievement_tile.dart';
 import '../util/constants.dart';
 
 class AchievementsPage extends StatefulWidget {
-  AchievementsPage({super.key});
+  const AchievementsPage({super.key});
   @override
-  _Achievementpage createState() => _Achievementpage();
+  Achievementpage createState() => Achievementpage();
 }
 
-class _Achievementpage extends State<AchievementsPage> {
+class Achievementpage extends State<AchievementsPage> {
   final achievementDoc = userColRef
       .doc(currentUser.uid)
       .collection("Achievement")
       .doc("achievement");
-  final achievementCloc =
+  final achievementColRef =
       userColRef.doc(currentUser.uid).collection("Achievement");
   bool isCircle = false;
 
-  List<Map<String, dynamic>> AchievementContent = [];
+  List<Map<String, dynamic>> _achievementContent = [];
   @override
   void initState() {
     super.initState();
@@ -51,7 +51,7 @@ class _Achievementpage extends State<AchievementsPage> {
     return Scaffold(
       appBar: myAppBar,
       bottomNavigationBar: navBar,
-      backgroundColor: Color.fromARGB(128, 20, 13, 32),
+      backgroundColor: const Color.fromARGB(128, 20, 13, 32),
       body: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
           stream: achievementDoc.snapshots(),
           builder: (context, snapshot) {
@@ -60,11 +60,11 @@ class _Achievementpage extends State<AchievementsPage> {
               children: <Widget>[
                 Container(
                   height: 170,
-                  color: Color.fromARGB(255, 112, 107, 243),
+                  color: const Color.fromARGB(255, 112, 107, 243),
                   child: const Row(
                     children: [
                       Padding(
-                        padding: const EdgeInsets.fromLTRB(10, 20, 0, 100),
+                        padding: EdgeInsets.fromLTRB(10, 20, 0, 100),
                         child: Text(
                           "My Honor",
                           style: TextStyle(
@@ -83,17 +83,17 @@ class _Achievementpage extends State<AchievementsPage> {
                     aspectRatio: 1.0,
                     //width: double.infinity,
                     child: GridView.builder(
-                      itemCount: AchievementContent.length,
+                      itemCount: _achievementContent.length,
                       padding: const EdgeInsets.fromLTRB(2, 10, 2, 0),
                       gridDelegate:
                           const SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 2, childAspectRatio: 1 / 1.5),
                       itemBuilder: (context, index) {
                         return Achievement(
-                          title: AchievementContent[index]['name'],
+                          title: _achievementContent[index]['name'],
                           iconName: IconList[index][0],
                           description: '',
-                          isCompleted: AchievementContent[index]['IsComplete'],
+                          isCompleted: _achievementContent[index]['IsComplete'],
                         );
                       },
                     ),
@@ -106,7 +106,7 @@ class _Achievementpage extends State<AchievementsPage> {
                 const Text("isCircle"),
                 ElevatedButton(
                   child: const Text("Show"),
-                  onPressed: () => show(context),
+                  onPressed: () => show(context, "Level 9"),
                 ),
               ],
             );
@@ -114,7 +114,7 @@ class _Achievementpage extends State<AchievementsPage> {
     );
   }
 
-  void show(BuildContext context) {
+  void show(BuildContext context, String name) {
     AchievementView(
       // title: "Yeaaah!",
       subTitle: "Training completed successfully!",
@@ -122,26 +122,43 @@ class _Achievementpage extends State<AchievementsPage> {
       typeAnimationContent: AnimationTypeAchievement.fadeSlideToLeft,
       listener: print,
     ).show(context);
+    updateAchievement(name);
+  }
+
+  Future<void> updateAchievement(String targetName) async {
+    // 查询文档中 name 字段等于 "level 9" 的文档
+    QuerySnapshot querySnapshot =
+        await achievementColRef.where('name', isEqualTo: targetName).get();
+
+    // 遍历匹配的文档并更新 isCompleted 字段
+    for (QueryDocumentSnapshot docSnapshot in querySnapshot.docs) {
+      // 获取文档的引用
+      DocumentReference docRef = achievementColRef.doc(docSnapshot.id);
+
+      // 更新 isCompleted 字段为 true
+      await docRef.update({'IsComplete': true});
+    }
   }
 
   Future<void> fetchAndStoreAchievement() async {
-    // 获取 Achievement 集合中的所有文档
-    QuerySnapshot querySnapshot = await achievementCloc.get();
+    // Get doc in achievement collection
+    QuerySnapshot querySnapshot = await achievementColRef.get();
 
     List<Map<String, dynamic>> newAchievementContent = [];
 
     querySnapshot.docs.forEach((doc) {
+      //Get value from firestone
       Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
-      String name = data['name'] ?? ""; // 获取 name 变量
-      bool isComplete = data['IsComplete'] ?? false; // 获取 isComplete 值
+      String name = data['name'] ?? "";
+      bool isComplete = data['IsComplete'] ?? false;
       newAchievementContent.add({
         'name': name,
         'IsComplete': isComplete,
       });
     });
-    // 更新 AchievementContent 列表
+    // Update AchievementContent
     setState(() {
-      AchievementContent = newAchievementContent;
+      _achievementContent = newAchievementContent;
     });
     // print(AchievementContent);
   }
