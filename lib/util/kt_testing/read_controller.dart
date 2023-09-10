@@ -4,34 +4,8 @@ import 'package:fiservonboardingexp/util/kt_testing/read_model.dart';
 import 'package:get/get.dart';
 
 class ReadController extends GetxController {
-  //final loadingStatus = LoadingStat.loading.obs;
-  late ReadModel read;
+  late ReadModel document;
   final allReadTasks = <ReadModel>[];
-
-/*
-  @override
-  void onReady() {
-    final readTask = Get.arguments as ReadModel;
-    // test to see if it can pull the read document id from the collection
-    print(readTask.id);
-    loadData(readTask);
-    super.onReady();
-  }
-
-  Future<void> loadData(ReadModel readTask) async {
-    readModel = readTask;
-    //loadingStatus.value = LoadingStat.loading;
-
-    try {
-      // Query the 'Read' collection for documents
-      final QuerySnapshot<Map<String, dynamic>> readQuery =
-          await readref.doc(readTask.id).collection("Read").get();
-    } catch (e) {
-      if (kDebugMode) {
-        print(e.toString());
-      }
-    }
-    */
 
   @override
   void onReady() {
@@ -42,8 +16,16 @@ class ReadController extends GetxController {
   Future<void> getAllReadTasks() async {
     try {
       QuerySnapshot<Map<String, dynamic>> data = await readref.get();
-      final readList =
-          data.docs.map((read) => ReadModel.fromSnapshot(read)).toList();
+      final readList = data.docs.map((document) {
+        // Convert each document to a ReadModel
+        return ReadModel(
+          id: document.id, // The doc ID.
+          title: document['title'], // The field name
+          content: document['content'], // The field name
+        );
+      }).toList();
+
+      // Assign the list of ReadModel objects to allReadTasks
       allReadTasks.assignAll(readList);
     } catch (e) {
       print(e);
