@@ -22,22 +22,16 @@ class Achievementpage extends State<AchievementsPage> {
   bool isCircle = false;
 
   List<Map<String, dynamic>> _achievementContent = [];
+
+  // fetch the achievement list in initialization
   @override
   void initState() {
     super.initState();
-    fetchAndStoreAchievement(); // fetch the achievement list in initialization
+    fetchAndStoreAchievement();
   }
 
-  // List AchievementContent = [
-  //   // [categoryName, categoryImage]
-  //   // Orientation (First Week), Compliance, Customs and Culture, Technical training, Health &Safety
-  //   ["Kevin", 'assets/icon/welcome.png'],
-  //   ["Customs & Culture", 'assets/icon/worldwide.png'],
-  //   ["Compliance", 'assets/icon/compliance.png'],
-  //   ["Health & Safety", 'assets/icon/guidelines.png'],
-  //   ["Technical training", 'assets/icon/technical.png'],
-  // ];
   // ignore: non_constant_identifier_names
+  // List to store the icon
   List IconList = [
     ['assets/icon/welcome.png'],
     ['assets/icon/worldwide.png'],
@@ -126,16 +120,14 @@ class Achievementpage extends State<AchievementsPage> {
   }
 
   Future<void> updateAchievement(String targetName) async {
-    // 查询文档中 name 字段等于 "level 9" 的文档
+    // Seach the name where is equal to the traget name
     QuerySnapshot querySnapshot =
         await achievementColRef.where('name', isEqualTo: targetName).get();
 
-    // 遍历匹配的文档并更新 isCompleted 字段
+    // Update isCompleted field
     for (QueryDocumentSnapshot docSnapshot in querySnapshot.docs) {
-      // 获取文档的引用
       DocumentReference docRef = achievementColRef.doc(docSnapshot.id);
 
-      // 更新 isCompleted 字段为 true
       await docRef.update({'IsComplete': true});
     }
   }
