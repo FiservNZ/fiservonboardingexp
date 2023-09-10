@@ -4,8 +4,7 @@ import '../model/colleagues.dart';
 import 'package:flutter/gestures.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../widgets/nav_bar.dart';
-
-import '../widgets/nav_bar.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class ColleaguesPage extends StatefulWidget {
   const ColleaguesPage({Key? key}) : super(key: key);
@@ -37,6 +36,13 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
       email: 'janekim@gmail.com',
       hobbies: 'Cooking',
     ),
+    Colleagues(
+      name: 'Bob Lee',
+      position: 'Developer',
+      phoneNumber: '1232323232',
+      email: 'boblee@gmail.com',
+      hobbies: 'Gaming',
+    ),
   ];
 
   @override
@@ -44,35 +50,58 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
     return Scaffold(
       appBar: myAppBar,
       bottomNavigationBar: const CustomNavBar(),
+      backgroundColor: Color.fromARGB(255, 27, 27, 27),
       body: Padding(
         padding: EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Text(
-              'Colleagues List',
-              style: TextStyle(
-                fontSize: 20,
-                fontWeight: FontWeight.bold,
+            Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Center(
+                child: Text(
+                  'COLLEAGUES LIST',
+                  style: GoogleFonts.quicksand(
+                    fontSize: 27,
+                    fontWeight: FontWeight.bold,
+                    color: fiservColor,
+                  ),
+                ),
               ),
             ),
-            const SizedBox(height: 16),
+            const SizedBox(height: 10),
             Expanded(
               child: ListView.builder(
                 itemCount: colleagues.length,
                 itemBuilder: (context, index) {
                   return ListTile(
                     leading: const CircleAvatar(
+                      radius: 22,
                       child: Icon(
                         Icons.person,
                         color: Colors.white,
                       ),
                       backgroundColor: Color(0xFFFF6600),
                     ),
-                    title: Text(colleagues[index].name),
-                    subtitle: colleagues[index].name == 'IT Support'
-                        ? null
-                        : Text(colleagues[index].position),
+                    title: Text(
+                      colleagues[index].name,
+                      style: GoogleFonts.quicksand(
+                        textStyle: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18,
+                        ),
+                      ),
+                    ),
+                    subtitle: Text(
+                      colleagues[index].position,
+                      style: GoogleFonts.quicksand(
+                        textStyle: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
+                    ),
                     onTap: () {
                       _showColleagueDetails(colleagues[index]);
                     },
@@ -91,23 +120,48 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          title: const Text('Colleague Details'),
+          backgroundColor: Colors.grey[900],
+          title: Text(
+            'COLLEAGUE DETAILS',
+            style: GoogleFonts.quicksand(
+              textStyle: TextStyle(
+                color: fiservColor,
+                fontWeight: FontWeight.bold, // Colleague Details Font Colour
+                fontSize: 22,
+              ),
+            ),
+          ),
           content: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
-                Text('Name: ${colleague.name}'),
-                Text('Position: ${colleague.position}'),
+                Text(
+                  'Name: ${colleague.name}',
+                  style: TextStyle(
+                    color: Colors.white, // Colleague Name Font Colour
+                  ),
+                ),
+                Text(
+                  'Position: ${colleague.position}',
+                  style: TextStyle(
+                    color: Colors.white, // Colleague Position Font Colour
+                  ),
+                ),
                 Row(
                   children: [
-                    const Text('Phone Number: '),
+                    const Text(
+                      'Phone Number: ',
+                      style: TextStyle(
+                          color: Colors
+                              .white), // Colleague Phone Number Font Colour
+                    ),
                     RichText(
                       text: TextSpan(
                         children: [
                           TextSpan(
                             text: colleague.phoneNumber,
-                            style: TextStyle(color: Colors.blue),
+                            style: TextStyle(color: fiservColor),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
                                 _launchPhoneNumber(colleague.phoneNumber);
@@ -120,13 +174,16 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
                 ),
                 Row(
                   children: [
-                    const Text('Email: '),
+                    const Text('Email: ',
+                        style: TextStyle(
+                            color:
+                                Colors.white)), // Colleague Email Font Colour
                     RichText(
                       text: TextSpan(
                         children: [
                           TextSpan(
                             text: colleague.email,
-                            style: const TextStyle(color: Colors.blue),
+                            style: const TextStyle(color: fiservColor),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
                                 _launchEmail(colleague.email);
@@ -137,7 +194,9 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
                     ),
                   ],
                 ),
-                Text('Hobbies: ${colleague.hobbies}'),
+                Text('Hobbies: ${colleague.hobbies}',
+                    style: TextStyle(
+                        color: Colors.white)), // Colleague Hobbies Font Colour
               ],
             ),
           ),
@@ -157,6 +216,7 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
     );
   }
 
+// Launch dial application on android device
   void _launchPhoneNumber(String phoneNumber) async {
     final Uri phoneUri = Uri(scheme: 'tel', path: phoneNumber);
     final String phoneUrl = phoneUri.toString();
@@ -168,6 +228,7 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
     }
   }
 
+// Launch default gmail/mail application on device
   void _launchEmail(String email) async {
     String subject = Uri.encodeComponent("Query");
     print(subject); //output: Hello%20Flutter
