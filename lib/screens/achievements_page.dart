@@ -25,7 +25,7 @@ class Achievementpage extends State<AchievementsPage> {
   @override
   void initState() {
     super.initState();
-    fetchAndStoreAchievement(); // 在初始化时获取数据
+    fetchAndStoreAchievement(); // fetch the achievement list in initialization
   }
 
   // List AchievementContent = [
