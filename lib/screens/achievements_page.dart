@@ -19,7 +19,6 @@ class Achievementpage extends State<AchievementsPage> {
       .doc("achievement");
   final achievementColRef =
       userColRef.doc(currentUser.uid).collection("Achievement");
-  bool isCircle = false;
 
   List<Map<String, dynamic>> _achievementContent = [];
 
@@ -93,11 +92,6 @@ class Achievementpage extends State<AchievementsPage> {
                     ),
                   ),
                 ),
-                Checkbox(
-                  value: isCircle,
-                  onChanged: (change) => setState(() => isCircle = change!),
-                ),
-                const Text("isCircle"),
                 ElevatedButton(
                   child: const Text("Show"),
                   onPressed: () => show(context, "Level 9"),
@@ -108,15 +102,24 @@ class Achievementpage extends State<AchievementsPage> {
     );
   }
 
-  void show(BuildContext context, String name) {
+  void show(BuildContext context, String targetName) {
+    //Pop out when complete certain achievement
     AchievementView(
-      // title: "Yeaaah!",
-      subTitle: "Training completed successfully!",
-      isCircle: isCircle,
-      typeAnimationContent: AnimationTypeAchievement.fadeSlideToLeft,
-      listener: print,
-    ).show(context);
-    updateAchievement(name);
+            // title: "Yeaaah!",
+            subTitle: "$targetName completed successfully!",
+            icon: const Icon(
+              Icons.check_circle_outline_outlined,
+              color: Colors.white,
+            ),
+            textStyleSubTitle: const TextStyle(
+              color: fiservColor,
+            ),
+            color: Colors.black,
+            isCircle: true,
+            typeAnimationContent: AnimationTypeAchievement.fade,
+            duration: Duration(seconds: 2))
+        .show(context);
+    updateAchievement(targetName);
   }
 
   Future<void> updateAchievement(String targetName) async {
