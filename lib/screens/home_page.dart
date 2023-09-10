@@ -1,7 +1,10 @@
-import 'package:fiservonboardingexp/util/kt_testing/platypus_read_task.dart';
+import 'package:fiservonboardingexp/util/kt_testing/read_controller.dart';
+import 'package:fiservonboardingexp/util/kt_testing/read_page.dart';
 import 'package:fiservonboardingexp/widgets/progress_bar.dart';
 import 'package:fiservonboardingexp/widgets/exp_bar.dart';
 import 'package:fiservonboardingexp/widgets/nav_bar.dart';
+
+import 'package:get/get.dart';
 import '../util/constants.dart';
 import '../widgets/app_bar_overlay.dart';
 import 'package:flutter/material.dart';
@@ -10,10 +13,11 @@ class HomePage extends StatelessWidget {
   final ExpBar _expBar = const ExpBar(barwidth: 300);
   final ProgressBar _progressBar = const ProgressBar();
 
-  const HomePage({super.key});
+  HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
+    ReadController readController = Get.find();
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -60,20 +64,28 @@ class HomePage extends StatelessWidget {
 
             const SizedBox(height: 200),
 
-            //Read task
+            //Read task for platypus article
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 120),
               child: ElevatedButton(
                 onPressed: () {
-                  Navigator.of(context).push(
-                    MaterialPageRoute(
-                        builder: (context) => const PlatypusRead()),
-                  );
+                  if (readController.allReadTasks.isNotEmpty) {
+                    Navigator.of(context).push(
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            ReadPage(model: readController.allReadTasks[0]),
+                      ),
+                    );
+                  } else {
+                    // Where allReadTasks is empty or data is not available.
+                    print("Sorry, no data available");
+                  }
                 },
                 style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.black,
-                    foregroundColor: fiservColor,
-                    fixedSize: Size(120, 35)),
+                  backgroundColor: Colors.black,
+                  foregroundColor: fiservColor,
+                  fixedSize: Size(120, 35),
+                ),
                 child: const Text('Read Task'),
               ),
             ),

@@ -22,7 +22,7 @@ class QuestionController extends GetxController {
     try {
       final QuerySnapshot<Map<String, dynamic>> questionQuery =
           await quizref.doc(quizQuestion.id).collection("questions").get();
-
+/*
       final questions = questionQuery.docs
           .map((snapshot) => Question.fromSnapshot(snapshot))
           .toList();
@@ -47,7 +47,7 @@ class QuestionController extends GetxController {
             quizQuestion.questions!.isNotEmpty) {
           allQuizQuestions.assignAll(quizQuestion.questions!);
         }
-      }
+      } */
     } catch (e) {
       if (kDebugMode) {
         print(e.toString());

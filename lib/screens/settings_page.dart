@@ -10,10 +10,6 @@ class SettingsPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //  final Text = MediaQuery.of(context).platformBrightness == Brightness.dark
-    //  ? 'DarkTheme'
-    //  : 'Lightheme';
-
     return Scaffold(
       appBar: const AppBarOverlay(),
       bottomNavigationBar: const CustomNavBar(),
@@ -40,6 +36,16 @@ class SettingsPage extends StatelessWidget {
               title: const Text('Dark/Light Mode'),
               leading: const Icon(Icons.lightbulb),
               onTap: () {}),
+
+/*
+          SwitchListTile(
+              title: Text("Dark Mode"),
+              onChanged: (val) {
+                themeNotifier.toggleTheme();
+              },
+              value: themeNotifier.darkTheme,
+            ),
+          )*/
 
           //Change password
           ListTile(
