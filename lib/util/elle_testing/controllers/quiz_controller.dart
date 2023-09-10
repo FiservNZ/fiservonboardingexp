@@ -47,15 +47,15 @@ class QuizController extends GetxController {
     if (tryAgain) {
       Get.back();
     } else {
-      showPopupAlertDialog();
+      showPopupAlertDialog(quizModel: quiz);
       //Get.toNamed(QuizQuestionScreen.routeName, arguments: quiz);
     }
   }
 
-  void showPopupAlertDialog() {
+  void showPopupAlertDialog({required QuizModel quizModel}) {
     Get.dialog(
         Popups().showPopup(onTap: () {
-          Get.toNamed(QuestionScreen.routeName, arguments: quiz);
+          Get.toNamed(QuestionScreen.routeName, arguments: quizModel);
           //Naviagte to Quiz Page
         }),
         barrierDismissible: false);

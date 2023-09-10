@@ -68,6 +68,7 @@ class Question {
       correctAnswer; // the correct answer within the different options given
   // the collection in the questions document which holds the different options
   List<Option>? options; // that the user can choose their answer from
+  String? selectedAnswer;
 
   Question({
     required this.id,

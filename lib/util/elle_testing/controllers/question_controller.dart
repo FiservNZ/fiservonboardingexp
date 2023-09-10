@@ -9,8 +9,10 @@ import '../firebase_ref/firebase_ref.dart';
 class QuestionController extends GetxController {
   final loadingStatus = LoadingStatus.loading.obs;
   late QuizModel quizModel;
-
   final allQuizQuestions = <Question>[];
+  final questionIndex = 0.obs;
+  bool get isFirstQuestion => questionIndex.value > 0; // false
+  bool get isLastQuestion => questionIndex.value >= allQuizQuestions.length - 1;
   Rxn<Question> currentQuestion = Rxn<Question>();
 
   @override
@@ -61,6 +63,7 @@ class QuestionController extends GetxController {
         if (quizQuestion.questions != null &&
             quizQuestion.questions!.isNotEmpty) {
           allQuizQuestions.assignAll(quizQuestion.questions!);
+          currentQuestion.value = quizQuestion.questions![0];
           //print(quizQuestion.questions![0]);
           loadingStatus.value = LoadingStatus.completed;
         } else {
@@ -71,6 +74,32 @@ class QuestionController extends GetxController {
       if (kDebugMode) {
         print(e.toString());
       }
+    }
+  }
+
+  void selectedAnswer(String? answer) {
+    currentQuestion.value!.selectedAnswer = answer;
+    // points to the GetBuilder that has the id, answers_list
+    update(['answers_list']);
+  }
+
+  void nextQuestion() {
+    if (questionIndex.value >= allQuizQuestions.length - 1) {
+      // return as there is no more questions
+      return;
+    } else {
+      questionIndex.value++;
+      currentQuestion.value = allQuizQuestions[questionIndex.value];
+    }
+  }
+
+  void prevQuestion() {
+    if (questionIndex.value <= 0) {
+      // return as there is no more questions
+      return;
+    } else {
+      questionIndex.value--;
+      currentQuestion.value = allQuizQuestions[questionIndex.value];
     }
   }
 }
