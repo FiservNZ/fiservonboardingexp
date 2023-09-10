@@ -7,8 +7,10 @@ import 'package:fiservonboardingexp/widgets/check_user.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:fiservonboardingexp/firebase_references/firebase_options.dart';
+import 'package:fiservonboardingexp/util/kt_testing/read_controller.dart';
 
 import 'package:flutter/services.dart';
+import 'package:get/get.dart';
 
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 int? initScreen;
@@ -16,6 +18,7 @@ int? initScreen;
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  Get.put(ReadController());
 
   runApp(const MyApp());
 }
