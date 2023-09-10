@@ -46,7 +46,7 @@ class _ChecklistPageState extends State<ChecklistPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF000000),
+      backgroundColor: Color.fromARGB(255, 27, 27, 27),
       appBar: AppBarOverlay(),
       bottomNavigationBar: CustomNavBar(),
       body: SingleChildScrollView(

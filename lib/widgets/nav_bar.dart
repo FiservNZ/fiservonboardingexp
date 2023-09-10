@@ -70,7 +70,7 @@ class CustomNavBar extends StatelessWidget {
       ],
       selectedItemColor: FiservColor,
       unselectedItemColor: FiservColor,
-      backgroundColor: Color(0xFF111211),
+      backgroundColor: Colors.black,
       selectedFontSize: 12.0,
       unselectedFontSize: 12.0,
     );
