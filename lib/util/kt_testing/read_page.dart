@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import '../../widgets/app_bar_overlay.dart';
 import '../../widgets/nav_bar.dart';
 import '../constants.dart';
@@ -16,6 +17,7 @@ class ReadPage extends GetView<ReadController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       appBar: const AppBarOverlay(),
       bottomNavigationBar: const CustomNavBar(),
       body: SafeArea(
@@ -31,21 +33,24 @@ class ReadPage extends GetView<ReadController> {
               // Data has been loaded successfully
               return ListView(
                 children: [
+                  const SizedBox(height: 30),
+
                   // Title
                   Padding(
                     padding: const EdgeInsets.all(7.0),
                     child: Text(
                       model.title,
                       textAlign: TextAlign.center,
-                      style: const TextStyle(
-                        color: fiservColor,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 42,
+                      style: GoogleFonts.quicksand(
+                        textStyle: const TextStyle(
+                            fontSize: 32,
+                            fontWeight: FontWeight.bold,
+                            color: fiservColor),
                       ),
                     ),
                   ),
 
-                  // Image (from local assets folder not firebase). Needs to be chagned as its hard coded.
+                  // Image (from local assets folder not firebase). Needs to be changed as its hard coded.
                   const Padding(
                     padding: EdgeInsets.all(40.0),
                     child:
@@ -55,58 +60,82 @@ class ReadPage extends GetView<ReadController> {
                   // Content
                   Padding(
                     padding: const EdgeInsets.all(22.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: model.content.split('\n').map((paragraph) {
-                        return Text(
-                          paragraph
-                              .trim(), // Remove leading/trailing whitespace
-                          textAlign: TextAlign.justify,
-                          style: const TextStyle(
-                            color: Colors.black,
-                            fontSize: 16,
+                    child: RichText(
+                      textAlign: TextAlign
+                          .justify, // Justify alignment for the entire text
+                      text: TextSpan(
+                        style: GoogleFonts.quicksand(
+                          textStyle: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.white,
                           ),
-                        );
-                      }).toList(),
-                    ),
-                  ),
-
-                  // Close button
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 120),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).pop();
-                      },
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.black),
-                      child: const Text(
-                        'Back',
-                        style: TextStyle(
-                          color: Color(0xFFFF6600),
                         ),
+                        children: model.content.split('\n').map((paragraph) {
+                          return TextSpan(
+                            text:
+                                '${paragraph.trim()}\n\n', // Add two newlines for paragraph spacing
+                          );
+                        }).toList(),
                       ),
                     ),
                   ),
 
-                  // Task finished button
+                  const SizedBox(height: 30),
+
                   Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 120),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        int points = 1;
-                        _progressBar.addPoints(points);
-                        Navigator.of(context).pop();
-                      },
-                      style: ElevatedButton.styleFrom(
-                          backgroundColor: Colors.black,
-                          foregroundColor: fiservColor,
-                          fixedSize: const Size(120, 35)),
-                      child: const Text('Task Finished'),
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        //Back button
+                        Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: fiservColor,
+                              width: 2.0,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          child: ElevatedButton(
+                            onPressed: () {
+                              Navigator.of(context).pop();
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.black,
+                              foregroundColor: fiservColor,
+                            ),
+                            child: const Text('Back'),
+                          ),
+                        ),
+
+                        // Task finished button
+                        Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: fiservColor,
+                              width: 2.0,
+                            ),
+                            borderRadius: BorderRadius.circular(8.0),
+                          ),
+                          child: ElevatedButton(
+                            onPressed: () {
+                              int points = 1;
+                              _progressBar.addPoints(points);
+                              Navigator.of(context).pop();
+                            },
+                            style: ElevatedButton.styleFrom(
+                              backgroundColor: Colors.black,
+                              foregroundColor: fiservColor,
+                            ),
+                            child: const Text('Task Finished'),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
 
-                  const SizedBox(height: 30),
+                  const SizedBox(height: 50),
                 ],
               );
             }
