@@ -26,9 +26,9 @@ class _FaqPageState extends State<FaqPage> {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Text(
-                'Frequently asked questions',
+                'FREQUENTLY ASKED QUESTIONS',
                 style: GoogleFonts.quicksand(
-                  fontSize: 25,
+                  fontSize: 23,
                   fontWeight: FontWeight.bold,
                   color: fiservColor,
                 ),
