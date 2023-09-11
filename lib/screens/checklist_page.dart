@@ -19,7 +19,7 @@ class ChecklistPage extends StatefulWidget {
 }
 
 class _ChecklistPageState extends State<ChecklistPage> {
-  late Map<String, bool> checklistData;
+  Map<String, bool>? checklistData; // Change to nullable type
 
   @override
   void initState() {
@@ -73,20 +73,21 @@ class _ChecklistPageState extends State<ChecklistPage> {
                 ),
               ),
             ),
-            for (var taskName in checklistData?.keys ?? <String>[])
-              ChecklistTile(
-                task: {
-                  'taskName': taskName,
-                  'taskCompleted': checklistData[taskName] ?? false,
-                },
-                onChanged: (value) {
-                  // Update checklist locally when a task is checked/unchecked
-                  setState(() {
-                    checklistData[taskName] = value ?? false;
-                  });
-                },
-                firestore: widget.firestore,
-              ),
+            if (checklistData != null)
+              for (var taskName in checklistData!.keys)
+                ChecklistTile(
+                  task: {
+                    'taskName': taskName,
+                    'taskCompleted': checklistData![taskName] ?? false,
+                  },
+                  onChanged: (value) {
+                    // Update checklist locally when a task is checked/unchecked
+                    setState(() {
+                      checklistData![taskName] = value ?? false;
+                    });
+                  },
+                  firestore: widget.firestore,
+                ),
           ],
         ),
       ),
