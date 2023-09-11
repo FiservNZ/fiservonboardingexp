@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+// This class is used to create the
 class Achievement extends StatefulWidget {
   final String title;
   final String description;
@@ -15,10 +16,10 @@ class Achievement extends StatefulWidget {
   });
 
   @override
-  _AchievenmentState createState() => _AchievenmentState();
+  AchievenmentState createState() => AchievenmentState();
 }
 
-class _AchievenmentState extends State<Achievement> {
+class AchievenmentState extends State<Achievement> {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
