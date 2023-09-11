@@ -8,6 +8,7 @@ import '../screens/feedback_page.dart';
 
 class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
   const AppBarOverlay({super.key});
+
   @override
   Widget build(BuildContext context) {
     //final currentUser = FirebaseAuth.instance.currentUser!; No need
@@ -173,7 +174,9 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
               );
             },
           ),
-        ]);
+        ],
+      ),
+    );
   }
 
   @override
