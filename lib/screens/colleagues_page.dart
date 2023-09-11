@@ -120,7 +120,7 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
-          backgroundColor: Colors.grey[900],
+          backgroundColor: Color.fromARGB(255, 27, 27, 27),
           title: Text(
             'COLLEAGUE DETAILS',
             style: GoogleFonts.quicksand(
