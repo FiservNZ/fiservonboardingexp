@@ -92,7 +92,7 @@ flutter:
       - assets/animations/health_checkup.json
       - assets/animations/security_system.json
       - assets/animations/people.json
-
+      - assets/icon/
       - assets/icon/compliance.png
       - assets/icon/compliant.png
       - assets/icon/guidelines.png

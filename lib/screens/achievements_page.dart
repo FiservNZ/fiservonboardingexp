@@ -4,6 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import '../firebase_references/firebase_refs.dart';
 import '../util/achievement_components/achievement_tile.dart';
+import '../util/achievement_components/achievement_tracker.dart';
 import '../util/constants.dart';
 
 class AchievementsPage extends StatefulWidget {
@@ -13,6 +14,8 @@ class AchievementsPage extends StatefulWidget {
 }
 
 class Achievementpage extends State<AchievementsPage> {
+  AchievementTracker achievementTracker = AchievementTracker();
+  //Extract the data from achievement collection
   final achievementColRef =
       userColRef.doc(currentUser.uid).collection("Achievement");
 
@@ -25,8 +28,8 @@ class Achievementpage extends State<AchievementsPage> {
     fetchAndStoreAchievement();
   }
 
+  // List for storing the icon
   // ignore: non_constant_identifier_names
-  // List to store the icon
   List IconList = [
     ['assets/icon/welcome.png'],
     ['assets/icon/worldwide.png'],
@@ -44,24 +47,101 @@ class Achievementpage extends State<AchievementsPage> {
       body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
         stream: achievementColRef.snapshots(),
         builder: (context, snapshot) {
+          // Store all the achievement information in list
           fetchAndStoreAchievement();
+          final numberOfAchievement = _achievementContent.length;
           return CustomScrollView(
             slivers: <Widget>[
-              SliverAppBar(
-                pinned: false,
-                expandedHeight: 170.0,
-                backgroundColor: const Color.fromARGB(255, 112, 107, 243),
-                flexibleSpace: const FlexibleSpaceBar(
-                  title: Text(
-                    "My Honor",
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontSize: 25,
-                      fontWeight: FontWeight.bold,
-                    ),
+              // SliverAppBar(
+              //   pinned: false,
+              //   expandedHeight: 170.0,
+              //   backgroundColor: Color.fromARGB(255, 112, 107, 243),
+              //   flexibleSpace: FlexibleSpaceBar(
+              //     // background: AchievementTracker(),
+              //     background: Image.asset(
+              //       'assets/icon/welcome.png',
+              //       width: 100,
+              //       height: 100,
+              //       alignment: Alignment.centerRight,
+              //     ),
+              //     title: Text(
+              //       "My Honor",
+              //       style: TextStyle(
+              //         color: Colors.white,
+              //         fontSize: 25,
+              //         fontWeight: FontWeight.bold,
+              //       ),
+              //     ),
+              //     titlePadding: EdgeInsets.only(left: 16.0, bottom: 65),
+              //   ),
+              // ),
+              // SliverToBoxAdapter(
+              //   child: Container(
+              //     height: 170.0,
+              //     decoration: BoxDecoration(
+              //       color: Color.fromARGB(255, 112, 107, 243),
+              //       // image: DecorationImage(
+              //       //   image: AssetImage('assets/icon/vest.png'),
+              //       //   alignment: Alignment.topRight,
+              //       //   fit: BoxFit.scaleDown,
+              //       // ),
+              //     ),
+              //     child: Row(
+              //       children: [
+              //         Padding(
+              //           padding: EdgeInsets.only(left: 16.0, bottom: 65),
+              //           child: Text(
+              //             "My Honor",
+              //             style: TextStyle(
+              //               color: Colors.white,
+              //               fontSize: 25,
+              //               fontWeight: FontWeight.bold,
+              //             ),
+              //           ),
+              //         ),
+              //       ],
+              //     ),
+              //   ),
+              // ),
+
+              SliverToBoxAdapter(
+                child: Container(
+                  height: 170.0,
+                  decoration: BoxDecoration(
+                    color: Color.fromARGB(255, 112, 107, 243),
                   ),
-                  titlePadding: EdgeInsets.only(left: 16.0, bottom: 65),
+                  child: Stack(
+                    children: [
+                      Positioned(
+                        top: 10.0,
+                        right: 10.0,
+                        child: Image.asset(
+                          'assets/icon/welcome.png',
+                          width: 100.0,
+                          height: 100.0,
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(left: 16.0, top: 25),
+                        child: Text(
+                          "My Honor",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 25,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                      ),
+                      Padding(
+                        padding: EdgeInsets.only(left: 16.0, top: 75),
+                        child: achievementTracker,
+                      )
+                    ],
+                  ),
                 ),
+              ),
+              const SliverToBoxAdapter(
+                child: SizedBox(height: 20),
               ),
               SliverGrid(
                 gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -77,10 +157,10 @@ class Achievementpage extends State<AchievementsPage> {
                       isCompleted: _achievementContent[index]['IsComplete'],
                     );
                   },
-                  childCount: _achievementContent.length,
+                  childCount: numberOfAchievement,
                 ),
               ),
-              SliverToBoxAdapter(
+              const SliverToBoxAdapter(
                 child: SizedBox(height: 100),
               ),
               SliverToBoxAdapter(
@@ -89,10 +169,6 @@ class Achievementpage extends State<AchievementsPage> {
                   onPressed: () => show(context, "Level 9"),
                 ),
               ),
-              // ElevatedButton(
-              //   child: const Text("Show"),
-              //   onPressed: () => show(context, "Level 9"),
-              // ),
             ],
           );
         },
@@ -100,6 +176,7 @@ class Achievementpage extends State<AchievementsPage> {
     );
   }
 
+  // When certain achievement has been completed then call this function to update the data.
   //Pop out a information when complete target achievement
   void show(BuildContext context, String targetName) {
     // The widget implement pop out
@@ -116,7 +193,7 @@ class Achievementpage extends State<AchievementsPage> {
             color: Colors.black,
             isCircle: true,
             typeAnimationContent: AnimationTypeAchievement.fade,
-            duration: Duration(seconds: 2))
+            duration: const Duration(seconds: 2))
         .show(context);
     updateAchievement(targetName);
   }
@@ -156,4 +233,6 @@ class Achievementpage extends State<AchievementsPage> {
     });
     // print(AchievementContent);
   }
+
+  // To Do: Sort the order of the achievements
 }
