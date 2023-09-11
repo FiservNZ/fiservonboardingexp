@@ -4,7 +4,6 @@ import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-// Handles the interaction between user and firebase database (inc updates, etc)
 class ChecklistTile extends StatelessWidget {
   final Map<String, dynamic> task;
   Function(bool?)? onChanged;
@@ -38,13 +37,18 @@ class ChecklistTile extends StatelessWidget {
                 value: taskCompleted,
                 onChanged: (value) {
                   String uid = FirebaseAuth.instance.currentUser!.uid;
+
+                  // Update the checklist in Firestore
                   firestore
                       .collection('User')
                       .doc(uid)
-                      .collection('General Checklist')
-                      .doc('list')
-                      .update({task['taskName']: value});
-                  onChanged?.call(value);
+                      .collection('Checklist')
+                      .doc('List')
+                      .update({task['taskName']: value}).then((_) {
+                    onChanged?.call(value);
+                  }).catchError((error) {
+                    print("Error updating Firestore: $error");
+                  });
                 },
                 activeColor: fiservColor,
               ),
