@@ -13,10 +13,6 @@ class AchievementsPage extends StatefulWidget {
 }
 
 class Achievementpage extends State<AchievementsPage> {
-  final achievementDoc = userColRef
-      .doc(currentUser.uid)
-      .collection("Achievement")
-      .doc("achievement");
   final achievementColRef =
       userColRef.doc(currentUser.uid).collection("Achievement");
 
@@ -45,65 +41,68 @@ class Achievementpage extends State<AchievementsPage> {
       appBar: myAppBar,
       bottomNavigationBar: navBar,
       backgroundColor: const Color.fromARGB(128, 20, 13, 32),
-      body: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
-          stream: achievementDoc.snapshots(),
-          builder: (context, snapshot) {
-            fetchAndStoreAchievement();
-            return ListView(
-              children: <Widget>[
-                Container(
-                  height: 170,
-                  color: const Color.fromARGB(255, 112, 107, 243),
-                  child: const Row(
-                    children: [
-                      Padding(
-                        padding: EdgeInsets.fromLTRB(10, 20, 0, 100),
-                        child: Text(
-                          "My Honor",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 35,
-                            fontWeight: FontWeight.bold,
-                          ),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(0.0),
-                  child: AspectRatio(
-                    aspectRatio: 1.0,
-                    //width: double.infinity,
-                    child: GridView.builder(
-                      itemCount: _achievementContent.length,
-                      padding: const EdgeInsets.fromLTRB(2, 10, 2, 0),
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2, childAspectRatio: 1 / 1.5),
-                      itemBuilder: (context, index) {
-                        return Achievement(
-                          title: _achievementContent[index]['name'],
-                          iconName: IconList[index][0],
-                          description: '',
-                          isCompleted: _achievementContent[index]['IsComplete'],
-                        );
-                      },
+      body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+        stream: achievementColRef.snapshots(),
+        builder: (context, snapshot) {
+          fetchAndStoreAchievement();
+          return CustomScrollView(
+            slivers: <Widget>[
+              SliverAppBar(
+                pinned: false,
+                expandedHeight: 170.0,
+                backgroundColor: const Color.fromARGB(255, 112, 107, 243),
+                flexibleSpace: const FlexibleSpaceBar(
+                  title: Text(
+                    "My Honor",
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 25,
+                      fontWeight: FontWeight.bold,
                     ),
                   ),
+                  titlePadding: EdgeInsets.only(left: 16.0, bottom: 65),
                 ),
-                ElevatedButton(
+              ),
+              SliverGrid(
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: 1 / 1.5,
+                ),
+                delegate: SliverChildBuilderDelegate(
+                  (BuildContext context, int index) {
+                    return Achievement(
+                      title: _achievementContent[index]['name'],
+                      iconName: IconList[index][0],
+                      description: '',
+                      isCompleted: _achievementContent[index]['IsComplete'],
+                    );
+                  },
+                  childCount: _achievementContent.length,
+                ),
+              ),
+              SliverToBoxAdapter(
+                child: SizedBox(height: 100),
+              ),
+              SliverToBoxAdapter(
+                child: ElevatedButton(
                   child: const Text("Show"),
                   onPressed: () => show(context, "Level 9"),
                 ),
-              ],
-            );
-          }),
+              ),
+              // ElevatedButton(
+              //   child: const Text("Show"),
+              //   onPressed: () => show(context, "Level 9"),
+              // ),
+            ],
+          );
+        },
+      ),
     );
   }
 
+  //Pop out a information when complete target achievement
   void show(BuildContext context, String targetName) {
-    //Pop out when complete certain achievement
+    // The widget implement pop out
     AchievementView(
             // title: "Yeaaah!",
             subTitle: "$targetName completed successfully!",
