@@ -1,4 +1,7 @@
+import 'package:fiservonboardingexp/screens/themes_page.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import '../themes/theme_provider.dart';
 import '../widgets/app_bar_overlay.dart';
 import 'change_password_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -32,11 +35,14 @@ class SettingsPage extends StatelessWidget {
               height: 150,
             ),
 
-            //Dark Mode
             ListTile(
-              title: const Text('Dark/Light Mode'),
-              leading: const Icon(Icons.lightbulb),
-              onTap: () {},
+              title: const Text('Change Theme'),
+              leading: const Icon(Icons.color_lens),
+              onTap: () {
+                Navigator.push(context, MaterialPageRoute(builder: (context) {
+                  return const ThemesPage();
+                }));
+              },
             ),
 
             //Change password
