@@ -13,52 +13,45 @@ class SettingsPage extends StatelessWidget {
     return Scaffold(
       appBar: const AppBarOverlay(),
       bottomNavigationBar: const CustomNavBar(),
-      body: Column(
-        children: <Widget>[
-          //Heading
-          const Text(
-            '\n Settings',
-            style: TextStyle(
-              fontSize: 30,
-              fontWeight: FontWeight.bold,
-              color: Color(0xFFFF6600),
+      body: SafeArea(
+        child: Column(
+          children: <Widget>[
+            //Heading
+            const Text(
+              '\n Settings',
+              style: TextStyle(
+                fontSize: 30,
+                fontWeight: FontWeight.bold,
+                color: Color(0xFFFF6600),
+              ),
             ),
-          ),
 
-          //Spacing
-          const SizedBox(
-            width: double.infinity,
-            height: 150,
-          ),
+            //Spacing
+            const SizedBox(
+              width: double.infinity,
+              height: 150,
+            ),
 
-          //Dark Mode
-          ListTile(
+            //Dark Mode
+            ListTile(
               title: const Text('Dark/Light Mode'),
               leading: const Icon(Icons.lightbulb),
-              onTap: () {}),
-
-/*
-          SwitchListTile(
-              title: Text("Dark Mode"),
-              onChanged: (val) {
-                themeNotifier.toggleTheme();
-              },
-              value: themeNotifier.darkTheme,
+              onTap: () {},
             ),
-          )*/
 
-          //Change password
-          ListTile(
+            //Change password
+            ListTile(
               title: const Text('Change Password'),
               leading: const Icon(Icons.change_circle_outlined),
               onTap: () {
                 Navigator.push(context, MaterialPageRoute(builder: (context) {
                   return const ChangePasswordPage();
                 }));
-              }),
+              },
+            ),
 
-          //Logout Button
-          ListTile(
+            //Logout Button
+            ListTile(
               title: const Text('Logout'),
               leading: const Icon(Icons.logout),
               onTap: () async {
@@ -71,27 +64,30 @@ class SettingsPage extends StatelessWidget {
                   ),
                   (_) => false,
                 );
-              }),
+              },
+            ),
 
-          //Close button
-          Expanded(
-            child: Align(
-              alignment: Alignment.center,
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
-                child: const Text(
-                  'Close',
-                  style: TextStyle(
-                    color: Color(0xFFFF6600),
+            //Close button
+            Expanded(
+              child: Align(
+                alignment: Alignment.center,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  style:
+                      ElevatedButton.styleFrom(backgroundColor: Colors.black),
+                  child: const Text(
+                    'Close',
+                    style: TextStyle(
+                      color: Color(0xFFFF6600),
+                    ),
                   ),
                 ),
               ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

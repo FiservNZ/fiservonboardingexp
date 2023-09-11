@@ -37,59 +37,62 @@ class HomePage extends StatelessWidget {
         ),
 
         //Home Page
-        body: ListView(
-          children: [
-            const SizedBox(height: 15),
+        body: SafeArea(
+          child: ListView(
+            children: [
+              const SizedBox(height: 15),
 
-            //expBar
-            Padding(
-              padding: const EdgeInsets.only(left: 12),
-              child: Container(alignment: Alignment.centerLeft, child: _expBar),
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-
-            const SizedBox(height: 30),
-
-            //Progress bar
-            Padding(
-              padding: const EdgeInsets.only(left: 10),
-              child: Container(
-                  alignment: Alignment.centerLeft, child: _progressBar),
-            ),
-            const SizedBox(
-              height: 30,
-            ),
-
-            const SizedBox(height: 200),
-
-            //Read task for platypus article
-            Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 120),
-              child: ElevatedButton(
-                onPressed: () {
-                  if (readController.allReadTasks.isNotEmpty) {
-                    Navigator.of(context).push(
-                      MaterialPageRoute(
-                        builder: (context) =>
-                            ReadPage(model: readController.allReadTasks[0]),
-                      ),
-                    );
-                  } else {
-                    // Where allReadTasks is empty or data is not available.
-                    print("Sorry, no data available");
-                  }
-                },
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.black,
-                  foregroundColor: fiservColor,
-                  fixedSize: Size(120, 35),
-                ),
-                child: const Text('Read Task'),
+              //expBar
+              Padding(
+                padding: const EdgeInsets.only(left: 12),
+                child:
+                    Container(alignment: Alignment.centerLeft, child: _expBar),
               ),
-            ),
-          ],
+              const SizedBox(
+                height: 30,
+              ),
+
+              const SizedBox(height: 30),
+
+              //Progress bar
+              Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: Container(
+                    alignment: Alignment.centerLeft, child: _progressBar),
+              ),
+              const SizedBox(
+                height: 30,
+              ),
+
+              const SizedBox(height: 200),
+
+              //Read task for platypus article
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 120),
+                child: ElevatedButton(
+                  onPressed: () {
+                    if (readController.allReadTasks.isNotEmpty) {
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) =>
+                              ReadPage(model: readController.allReadTasks[0]),
+                        ),
+                      );
+                    } else {
+                      // Where allReadTasks is empty or data is not available.
+                      print("Sorry, no data available");
+                    }
+                  },
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.black,
+                    foregroundColor: fiservColor,
+                    fixedSize: Size(120, 35),
+                  ),
+                  child: const Text('Read Task'),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

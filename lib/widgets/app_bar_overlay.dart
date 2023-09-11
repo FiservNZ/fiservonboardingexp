@@ -12,6 +12,7 @@ import '../screens/teaser pages/teaser.dart';
 
 class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
   const AppBarOverlay({super.key});
+
   @override
   Widget build(BuildContext context) {
     final currentUser = FirebaseAuth.instance.currentUser!;
@@ -29,7 +30,8 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
       9: 'Novice 9'
     };
 
-    return AppBar(
+    return SafeArea(
+      child: AppBar(
         backgroundColor: Color(0xFF111211),
         elevation: 0.0,
 
@@ -172,7 +174,9 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
               );
             },
           ),
-        ]);
+        ],
+      ),
+    );
   }
 
   @override

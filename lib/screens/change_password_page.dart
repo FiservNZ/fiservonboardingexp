@@ -49,42 +49,44 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
     return Scaffold(
       appBar: const AppBarOverlay(),
       bottomNavigationBar: const CustomNavBar(),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 25.0),
-            child: Text(
-              'Please enter your email and a password reset link will be emailed to you',
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 17),
-            ),
-          ),
-          const SizedBox(height: 60),
-          Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 25.0),
-            child: TextField(
-              controller: _emailController,
-              decoration: const InputDecoration(
-                enabledBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Colors.white),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderSide: BorderSide(color: Color(0xFFFF6600)),
-                ),
-                hintText: 'Email',
-                fillColor: Color.fromARGB(255, 207, 211, 212),
-                filled: true,
+      body: SafeArea(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 25.0),
+              child: Text(
+                'Please enter your email and a password reset link will be emailed to you',
+                textAlign: TextAlign.center,
+                style: TextStyle(fontSize: 17),
               ),
             ),
-          ),
-          const SizedBox(height: 70),
-          MaterialButton(
-            onPressed: passwordReset,
-            color: const Color(0xFFFF6600),
-            child: const Text('Reset Password'),
-          ),
-        ],
+            const SizedBox(height: 60),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 25.0),
+              child: TextField(
+                controller: _emailController,
+                decoration: const InputDecoration(
+                  enabledBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Colors.white),
+                  ),
+                  focusedBorder: OutlineInputBorder(
+                    borderSide: BorderSide(color: Color(0xFFFF6600)),
+                  ),
+                  hintText: 'Email',
+                  fillColor: Color.fromARGB(255, 207, 211, 212),
+                  filled: true,
+                ),
+              ),
+            ),
+            const SizedBox(height: 70),
+            MaterialButton(
+              onPressed: passwordReset,
+              color: const Color(0xFFFF6600),
+              child: const Text('Reset Password'),
+            ),
+          ],
+        ),
       ),
     );
   }
