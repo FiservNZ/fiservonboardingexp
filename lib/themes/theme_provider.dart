@@ -1,14 +1,13 @@
+import 'package:fiservonboardingexp/themes/light_theme.dart';
 import 'package:flutter/material.dart';
 
-class ThemeNotifier with ChangeNotifier {
-  ThemeData _themeData;
+class ThemeProvider extends ChangeNotifier {
+  ThemeData _currentTheme = lightTheme; // Default theme.
 
-  ThemeNotifier(this._themeData);
+  ThemeData get currentTheme => _currentTheme;
 
-  getTheme() => _themeData;
-
-  setTheme(ThemeData themeData) async {
-    _themeData = themeData;
-    notifyListeners();
+  void setTheme(ThemeData theme) {
+    _currentTheme = theme;
+    notifyListeners(); // Notify listeners about the theme change
   }
 }

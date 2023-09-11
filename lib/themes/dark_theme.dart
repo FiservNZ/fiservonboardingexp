@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
-/*
 final ThemeData darkTheme = ThemeData(
   brightness: Brightness.dark,
+
   //appbar
   appBarTheme: const AppBarTheme(
     backgroundColor: Colors.black,
@@ -14,17 +14,11 @@ final ThemeData darkTheme = ThemeData(
       color: Color(0xFFFF6600),
     ),
   ),
+
   //Other colours
   colorScheme: ColorScheme.dark(
     background: const Color.fromARGB(255, 0, 0, 0),
     primary: const Color.fromARGB(255, 75, 73, 73)!,
     secondary: const Color(0xFFFF6600),
   ),
-);*/
-
-final darkTheme = ThemeData(
-  primaryColor: Colors.black,
-  brightness: Brightness.dark,
-  colorScheme: ColorScheme.fromSwatch(primarySwatch: Colors.grey)
-      .copyWith(background: const Color(0xFF212121)),
 );

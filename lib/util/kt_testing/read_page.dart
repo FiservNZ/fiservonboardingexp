@@ -65,6 +65,8 @@ class ReadPage extends GetView<ReadController> {
                             color: Colors.white,
                           ),
                         ),
+
+                        // Find '\n' in the 'content' field, split it and save into a map called paragraph
                         children: model.content.split('\n').map((paragraph) {
                           return TextSpan(
                             text:

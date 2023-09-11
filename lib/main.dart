@@ -6,6 +6,7 @@ import 'package:fiservonboardingexp/util/kt_testing/read_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 
 int? initScreen;
 
@@ -15,7 +16,12 @@ Future<void> main() async {
   //InitialBindings().dependencies();
   Get.put(ReadController());
 
-  runApp(const MyApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => ThemeProvider(),
+      child: const MyApp(),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
