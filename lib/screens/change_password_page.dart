@@ -50,12 +50,12 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBarOverlay(),
-      bottomNavigationBar: CustomNavBar(),
+      appBar: const AppBarOverlay(),
+      bottomNavigationBar: const CustomNavBar(),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          Padding(
+          const Padding(
             padding: EdgeInsets.symmetric(horizontal: 25.0),
             child: Text(
               'Please enter your email and a password reset link will be emailed to you',
@@ -63,12 +63,12 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
               style: TextStyle(fontSize: 17),
             ),
           ),
-          SizedBox(height: 60),
+          const SizedBox(height: 60),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 25.0),
+            padding: const EdgeInsets.symmetric(horizontal: 25.0),
             child: TextField(
               controller: _emailController,
-              decoration: InputDecoration(
+              decoration: const InputDecoration(
                 enabledBorder: OutlineInputBorder(
                   borderSide: BorderSide(color: Colors.white),
                 ),
@@ -81,11 +81,11 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
               ),
             ),
           ),
-          SizedBox(height: 70),
+          const SizedBox(height: 70),
           MaterialButton(
             onPressed: passwordReset,
-            child: Text('Reset Password'),
-            color: Color(0xFFFF6600),
+            color: const Color(0xFFFF6600),
+            child: const Text('Reset Password'),
           ),
         ],
       ),

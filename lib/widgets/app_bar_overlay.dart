@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fiservonboardingexp/firebase_references/firebase_refs.dart';
 import 'package:get/get.dart';
+
 import 'package:flutter/material.dart';
 
 class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
@@ -23,7 +24,7 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
     };
 
     return AppBar(
-        backgroundColor: Color(0xFF111211),
+        backgroundColor: Colors.black,
         elevation: 0.0,
 
         // Profile picture icon
@@ -74,7 +75,7 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                 context: context,
                 builder: (BuildContext context) {
                   return Container(
-                    height: 320,
+                    height: 350,
                     color: Colors.black,
                     child: Center(
                       child: Column(
@@ -141,9 +142,26 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                             },
                           ),
 
+                          ListTile(
+                            leading: const Icon(
+                              Icons.feedback_outlined,
+                              color: Color(0xFFFF6600),
+                            ),
+                            title: const Text(
+                              'Feedback',
+                              style: TextStyle(color: Color(0xFFFF6600)),
+                            ),
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                    builder: (context) => FeedBack()),
+                              );
+                            },
+                          ),
+
                           const SizedBox(
                             width: double.infinity,
-                            height: 30,
+                            height: 65,
                           ),
                         ],
                       ),

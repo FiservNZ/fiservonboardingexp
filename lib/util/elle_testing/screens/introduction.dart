@@ -1,4 +1,5 @@
 import 'package:fiservonboardingexp/util/constants.dart';
+import 'package:fiservonboardingexp/util/elle_testing/screens/question_screen.dart';
 import 'package:fiservonboardingexp/util/elle_testing/widgets/app_circle_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -17,16 +18,20 @@ class IntroductionScreen extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              const Icon(Icons.star, size: 65, color: Colors.black),
+              const Icon(Icons.star, size: 65, color: fiservColor),
               const SizedBox(height: 40),
               Text(
                 "This is a quiz app.",
-                style: fontStyle,
+                style: darkBodyFontStyle,
               ),
               const SizedBox(height: 40),
               AppCircleButton(
                 onTap: () => Get.offAndToNamed("/home"),
-                child: const Icon(Icons.arrow_forward, size: 35),
+                child: const Icon(
+                  Icons.arrow_forward,
+                  size: 35,
+                  color: fiservColor,
+                ),
               ),
             ],
           ),

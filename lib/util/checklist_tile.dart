@@ -5,7 +5,6 @@ import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-// Handles the interaction between user and firebase database (inc updates, etc)
 class ChecklistTile extends StatelessWidget {
   final Map<String, dynamic> task;
   Function(bool?)? onChanged;
@@ -21,12 +20,13 @@ class ChecklistTile extends StatelessWidget {
   Widget build(BuildContext context) {
     bool taskCompleted = task['taskCompleted'];
 
+    // UI of the Checklist Tiles
     return Padding(
       padding: const EdgeInsets.fromLTRB(25, 0, 25, 15),
       child: Container(
         padding: const EdgeInsets.all(15),
         decoration: BoxDecoration(
-          color: Color(0xFF1b1b1d),
+          color: Colors.black87,
           borderRadius: BorderRadius.circular(12),
         ),
         child: Row(
@@ -42,17 +42,22 @@ class ChecklistTile extends StatelessWidget {
                   firestore
                       .collection('User')
                       .doc(uid)
-                      .collection('General Checklist')
-                      .doc('list')
-                      .update({task['taskName']: value});
-                  onChanged?.call(value);
+                      .collection('Checklist')
+                      .doc('List')
+                      .update({task['taskName']: value}).then((_) {
+                    onChanged?.call(value);
+                  }).catchError((error) {
+                    print(
+                        "Error updating Firestore: $error"); // Error Handling but idk too much about it tbh
+                  });
                 },
-                activeColor: fiservColor,
+                activeColor: fiservColor, // Checkbox checked colour HERE
               ),
             ),
             Flexible(
               child: Text(
-                task['taskName'],
+                task[
+                    'taskName'], // Task name display and stuff below it is the text style (font, colour, size, etc)
                 style: GoogleFonts.quicksand(
                   textStyle: const TextStyle(
                     color: Colors.white,
