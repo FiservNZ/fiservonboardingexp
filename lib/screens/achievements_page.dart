@@ -154,7 +154,7 @@ class Achievementpage extends State<AchievementsPage> {
                     return Achievement(
                       title: _achievementContent[index]['name'],
                       iconName: _achievementContent[index]['iconData'],
-                      description: '',
+                      award: '',
                       isCompleted: _achievementContent[index]['IsComplete'],
                     );
                   },
