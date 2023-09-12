@@ -30,12 +30,12 @@ class Achievementpage extends State<AchievementsPage> {
 
   // List for storing the icon
   // ignore: non_constant_identifier_names
-  List IconList = [
-    ['assets/icon/welcome.png'],
-    ['assets/icon/worldwide.png'],
-    ['assets/icon/compliance.png'],
-    ['assets/icon/guidelines.png'],
-    ['assets/icon/technical.png'],
+  final List IconList = [
+    'assets/icon/welcome.png',
+    'assets/icon/worldwide.png',
+    'assets/icon/compliance.png',
+    'assets/icon/guidelines.png',
+    'assets/icon/technical.png',
   ];
 
   @override
@@ -50,6 +50,7 @@ class Achievementpage extends State<AchievementsPage> {
           // Store all the achievement information in list
           fetchAndStoreAchievement();
           final numberOfAchievement = _achievementContent.length;
+
           return CustomScrollView(
             slivers: <Widget>[
               // SliverAppBar(
@@ -122,7 +123,7 @@ class Achievementpage extends State<AchievementsPage> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(left: 16.0, top: 25),
+                        padding: EdgeInsets.only(left: 16.0, top: 40),
                         child: Text(
                           "My Honor",
                           style: TextStyle(
@@ -152,7 +153,7 @@ class Achievementpage extends State<AchievementsPage> {
                   (BuildContext context, int index) {
                     return Achievement(
                       title: _achievementContent[index]['name'],
-                      iconName: IconList[index][0],
+                      iconName: _achievementContent[index]['iconData'],
                       description: '',
                       isCompleted: _achievementContent[index]['IsComplete'],
                     );
@@ -222,16 +223,25 @@ class Achievementpage extends State<AchievementsPage> {
       Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
       String name = data['name'] ?? "";
       bool isComplete = data['IsComplete'] ?? false;
+
+      // Find the corresponding icon data based on the name
+      // List iconData = IconList.firstWhere(
+      //   (iconData) => iconData[0] == 'assets/icon/$name.png',
+      //   orElse: () => [],
+      // );
+
       newAchievementContent.add({
         'name': name,
         'IsComplete': isComplete,
+        'iconData':
+            IconList.isNotEmpty ? IconList[newAchievementContent.length] : '',
       });
     });
     // Update AchievementContent
     setState(() {
       _achievementContent = newAchievementContent;
     });
-    // print(AchievementContent);
+    // print(_achievementContent);
   }
 
   // To Do: Sort the order of the achievements
