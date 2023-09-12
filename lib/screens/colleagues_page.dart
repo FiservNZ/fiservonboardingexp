@@ -60,7 +60,7 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
               padding: const EdgeInsets.all(8.0),
               child: Center(
                 child: Text(
-                  'COLLEAGUES LIST',
+                  'COLLEAGUES',
                   style: GoogleFonts.quicksand(
                     fontSize: 27,
                     fontWeight: FontWeight.bold,
