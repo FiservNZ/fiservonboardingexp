@@ -85,6 +85,7 @@ flutter:
   assets:
       - assets/images/Fiserv_logo.png
       - assets/images/profile.png
+      - assets/images/successful.png
       # My Training page
       - assets/animations/iso_marketing_ agency_interior.json
       - assets/animations/digital_workspace.json

@@ -11,8 +11,8 @@ const fontWeight = FontWeight.bold;
 const headerFontSize = 24.0;
 const bodyFontSize = 18.0;
 var fontStyle = GoogleFonts.quicksand();
-var headerFontStyle =
-    GoogleFonts.quicksand(fontWeight: fontWeight, fontSize: headerFontSize);
+var headerFontStyle = GoogleFonts.quicksand(
+    fontWeight: fontWeight, fontSize: headerFontSize, color: fiservColor);
 var bodyFontStyle =
     GoogleFonts.quicksand(fontWeight: fontWeight, fontSize: bodyFontSize);
 
@@ -27,7 +27,7 @@ var lightTextColor = Colors.black;
 
 // Dark Mode Colors
 // Nav/App Bar uses black & fiserv color.
-var darkBackgroundColor = Colors.blueGrey[50];
+var darkBackgroundColor = const Color.fromARGB(255, 27, 27, 27);
 var darkBars = Colors.black;
 var darkTileColor = Colors.black87;
 var darkTextColor = Colors.white;
