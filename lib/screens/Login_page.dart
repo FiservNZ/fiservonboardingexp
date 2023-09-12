@@ -1,11 +1,11 @@
 import 'package:fiservonboardingexp/screens/main_screen.dart';
 import 'package:fiservonboardingexp/screens/manager/manager_view.dart';
-import 'package:fiservonboardingexp/screens/teaser.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import 'help_page.dart';
+import 'teaser pages/teaser.dart';
 
 // class Global {
 //   static UserCredential? userCredential;

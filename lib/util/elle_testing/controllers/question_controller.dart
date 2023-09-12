@@ -40,7 +40,7 @@ class QuestionController extends GetxController {
       final QuerySnapshot<Map<String, dynamic>> questionQuery =
           await quizref.doc(quizQuestion.id).collection("questions").get();
 
-      // Takes a document snapshot and converts into a 'Question' object
+/*
       final questions = questionQuery.docs
           .map((snapshot) => Question.fromSnapshot(snapshot))
           .toList();
@@ -75,7 +75,7 @@ class QuestionController extends GetxController {
         } else {
           loadingStatus.value = LoadingStatus.error;
         }
-      }
+      } */
     } catch (e) {
       if (kDebugMode) {
         print(e.toString());

@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fiservonboardingexp/api/pdf_api.dart';
-import 'package:fiservonboardingexp/screens/nav_app_overlay.dart';
+import 'package:fiservonboardingexp/idk/nav_app_overlay.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:fiservonboardingexp/widgets/custom_text_box.dart';
 import 'package:fiservonboardingexp/widgets/user_icons.dart';
@@ -124,12 +124,11 @@ class _ProfilePageState extends State<ProfilePage> {
               });
             }
 
-            // Code that works without exp level unlocking icon stuff from here
             String selectedIcon = userData['selectedIcon'] ?? 'person';
             String iconColor = userData['iconColor'] ?? '#000000';
-
             VoidCallback? iconOnPressed;
 
+            // Code for user's selected icon display here
             if (userData['selectedIcon'] == 'ghost' && level >= 1) {
               userIcon = Icon(
                 FontAwesomeIcons.ghost,
