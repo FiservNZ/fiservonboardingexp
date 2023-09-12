@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fiservonboardingexp/api/pdf_api.dart';
+import 'package:fiservonboardingexp/firebase_references/firebase_refs.dart';
 import 'package:fiservonboardingexp/idk/nav_app_overlay.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:fiservonboardingexp/widgets/custom_text_box.dart';
@@ -26,8 +27,10 @@ class ProfilePage extends StatefulWidget {
 
 class _ProfilePageState extends State<ProfilePage> {
   Icon userIcon = const Icon(Icons.person);
-  final currentUser = FirebaseAuth.instance.currentUser!;
-  final userCollection = FirebaseFirestore.instance.collection('User');
+  // uses references from file
+  final currentUser = fireAuth.currentUser!;
+
+  //final userCollection = FirebaseFirestore.instance.collection('User'); // dont need this anymore
   /*This will show an alert dialogue which will enable us to edit
   information about ourselves which will be saved into
   our database later.*/
@@ -88,7 +91,8 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
     );
     if (newValue.isNotEmpty) {
-      await userCollection.doc(currentUser.uid).update({fieldName: newValue});
+      //uses references from file
+      await userColRef.doc(currentUser.uid).update({fieldName: newValue});
     }
   }
 
@@ -196,7 +200,7 @@ class _ProfilePageState extends State<ProfilePage> {
                       userIcon = newIcon;
                     });
                   },
-                  userCollection: userCollection,
+                  userCollection: userColRef,
                   userId: currentUser.uid,
                   userData: userData,
                   iconColor: Color(
@@ -311,7 +315,7 @@ class _ProfilePageState extends State<ProfilePage> {
                               debugPrint('Submit button pressed...');
                               //After Send Introduction has been sent once, it will turn into a Logout button.
                               setState(() async {
-                                await userCollection
+                                await userColRef
                                     .doc(currentUser.uid)
                                     .update({'introduced': true});
                               });

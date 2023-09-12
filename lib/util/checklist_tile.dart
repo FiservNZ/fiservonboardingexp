@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fiservonboardingexp/firebase_references/firebase_refs.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -37,10 +38,7 @@ class ChecklistTile extends StatelessWidget {
               child: Checkbox(
                 value: taskCompleted,
                 onChanged: (value) {
-                  String uid = FirebaseAuth.instance.currentUser!
-                      .uid; // Gets the current user's UID.
-
-                  // Update the checklist in Firestore when the checkbox is checked.
+                  String uid = fireAuth.currentUser!.uid;
                   firestore
                       .collection('User')
                       .doc(uid)
