@@ -153,7 +153,6 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                             },
                           ),
 
-                          // Settings
                           ListTile(
                             leading: Icon(
                               Icons.settings,
