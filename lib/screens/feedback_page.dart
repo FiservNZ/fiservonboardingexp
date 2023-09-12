@@ -48,7 +48,7 @@ class _FeedBackState extends State<FeedBack> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Congratulations, you have completed the onboarding journey!",
+                "Tell us what you love about the app, or what we could be doing better!",
                 style: GoogleFonts.quicksand(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
