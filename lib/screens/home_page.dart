@@ -1,3 +1,5 @@
+import 'package:fiservonboardingexp/screens/achievements_page.dart';
+import 'package:fiservonboardingexp/util/achievement_components/achievement_tile.dart';
 import 'package:fiservonboardingexp/util/kt_testing/platypus_read_task.dart';
 import 'package:fiservonboardingexp/util/achievement_components/achievement_tracker.dart';
 import 'package:fiservonboardingexp/widgets/progress_bar.dart';
@@ -11,7 +13,14 @@ class HomePage extends StatelessWidget {
   final ExpBar _expBar = const ExpBar(barwidth: 300);
   final ProgressBar _progressBar = const ProgressBar();
   final AchievementTracker _achievementTracker = const AchievementTracker();
-  const HomePage({super.key});
+  final Achievementpage _achievementpage = Achievementpage();
+
+  HomePage({super.key});
+
+  void DetectIncompletedAchi() {
+    List<Map<String, dynamic>> _achievementContent = [];
+    _achievementpage.fetchAndStoreAchievement(_achievementContent);
+  }
 
   @override
   Widget build(BuildContext context) {

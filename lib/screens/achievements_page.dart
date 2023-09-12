@@ -22,11 +22,11 @@ class Achievementpage extends State<AchievementsPage> {
   List<Map<String, dynamic>> _achievementContent = [];
 
   // fetch the achievement list in initialization
-  @override
-  void initState() {
-    super.initState();
-    fetchAndStoreAchievement();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   fetchAndStoreAchievement();
+  // }
 
   // List for storing the icon
   // ignore: non_constant_identifier_names
@@ -48,63 +48,11 @@ class Achievementpage extends State<AchievementsPage> {
         stream: achievementColRef.snapshots(),
         builder: (context, snapshot) {
           // Store all the achievement information in list
-          fetchAndStoreAchievement();
+          fetchAndStoreAchievement(_achievementContent);
           final numberOfAchievement = _achievementContent.length;
 
           return CustomScrollView(
             slivers: <Widget>[
-              // SliverAppBar(
-              //   pinned: false,
-              //   expandedHeight: 170.0,
-              //   backgroundColor: Color.fromARGB(255, 112, 107, 243),
-              //   flexibleSpace: FlexibleSpaceBar(
-              //     // background: AchievementTracker(),
-              //     background: Image.asset(
-              //       'assets/icon/welcome.png',
-              //       width: 100,
-              //       height: 100,
-              //       alignment: Alignment.centerRight,
-              //     ),
-              //     title: Text(
-              //       "My Honor",
-              //       style: TextStyle(
-              //         color: Colors.white,
-              //         fontSize: 25,
-              //         fontWeight: FontWeight.bold,
-              //       ),
-              //     ),
-              //     titlePadding: EdgeInsets.only(left: 16.0, bottom: 65),
-              //   ),
-              // ),
-              // SliverToBoxAdapter(
-              //   child: Container(
-              //     height: 170.0,
-              //     decoration: BoxDecoration(
-              //       color: Color.fromARGB(255, 112, 107, 243),
-              //       // image: DecorationImage(
-              //       //   image: AssetImage('assets/icon/vest.png'),
-              //       //   alignment: Alignment.topRight,
-              //       //   fit: BoxFit.scaleDown,
-              //       // ),
-              //     ),
-              //     child: Row(
-              //       children: [
-              //         Padding(
-              //           padding: EdgeInsets.only(left: 16.0, bottom: 65),
-              //           child: Text(
-              //             "My Honor",
-              //             style: TextStyle(
-              //               color: Colors.white,
-              //               fontSize: 25,
-              //               fontWeight: FontWeight.bold,
-              //             ),
-              //           ),
-              //         ),
-              //       ],
-              //     ),
-              //   ),
-              // ),
-
               SliverToBoxAdapter(
                 child: Container(
                   height: 170.0,
@@ -212,11 +160,12 @@ class Achievementpage extends State<AchievementsPage> {
     }
   }
 
-  Future<void> fetchAndStoreAchievement() async {
+  Future<List> fetchAndStoreAchievement(
+      List<Map<String, dynamic>> newAchievementContent) async {
     // Get doc in achievement collection
     QuerySnapshot querySnapshot = await achievementColRef.get();
 
-    List<Map<String, dynamic>> newAchievementContent = [];
+    // List<Map<String, dynamic>> newAchievementContent = [];
 
     querySnapshot.docs.forEach((doc) {
       //Get value from firestone
@@ -237,12 +186,65 @@ class Achievementpage extends State<AchievementsPage> {
             IconList.isNotEmpty ? IconList[newAchievementContent.length] : '',
       });
     });
+    print(newAchievementContent);
+    return newAchievementContent;
     // Update AchievementContent
-    setState(() {
-      _achievementContent = newAchievementContent;
-    });
-    // print(_achievementContent);
+    // setState(() {
+    //   _achievementContent = newAchievementContent;
+    // });
   }
 
   // To Do: Sort the order of the achievements
 }
+
+              // SliverAppBar(
+              //   pinned: false,
+              //   expandedHeight: 170.0,
+              //   backgroundColor: Color.fromARGB(255, 112, 107, 243),
+              //   flexibleSpace: FlexibleSpaceBar(
+              //     // background: AchievementTracker(),
+              //     background: Image.asset(
+              //       'assets/icon/welcome.png',
+              //       width: 100,
+              //       height: 100,
+              //       alignment: Alignment.centerRight,
+              //     ),
+              //     title: Text(
+              //       "My Honor",
+              //       style: TextStyle(
+              //         color: Colors.white,
+              //         fontSize: 25,
+              //         fontWeight: FontWeight.bold,
+              //       ),
+              //     ),
+              //     titlePadding: EdgeInsets.only(left: 16.0, bottom: 65),
+              //   ),
+              // ),
+              // SliverToBoxAdapter(
+              //   child: Container(
+              //     height: 170.0,
+              //     decoration: BoxDecoration(
+              //       color: Color.fromARGB(255, 112, 107, 243),
+              //       // image: DecorationImage(
+              //       //   image: AssetImage('assets/icon/vest.png'),
+              //       //   alignment: Alignment.topRight,
+              //       //   fit: BoxFit.scaleDown,
+              //       // ),
+              //     ),
+              //     child: Row(
+              //       children: [
+              //         Padding(
+              //           padding: EdgeInsets.only(left: 16.0, bottom: 65),
+              //           child: Text(
+              //             "My Honor",
+              //             style: TextStyle(
+              //               color: Colors.white,
+              //               fontSize: 25,
+              //               fontWeight: FontWeight.bold,
+              //             ),
+              //           ),
+              //         ),
+              //       ],
+              //     ),
+              //   ),
+              // ),
