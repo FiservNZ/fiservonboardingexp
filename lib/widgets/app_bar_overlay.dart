@@ -74,7 +74,7 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                 context: context,
                 builder: (BuildContext context) {
                   return Container(
-                    height: 320,
+                    height: 350,
                     color: Colors.black,
                     child: Center(
                       child: Column(
@@ -141,9 +141,26 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                             },
                           ),
 
+                          ListTile(
+                            leading: const Icon(
+                              Icons.feedback_outlined,
+                              color: Color(0xFFFF6600),
+                            ),
+                            title: const Text(
+                              'Feedback',
+                              style: TextStyle(color: Color(0xFFFF6600)),
+                            ),
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                    builder: (context) => FeedBack()),
+                              );
+                            },
+                          ),
+
                           const SizedBox(
                             width: double.infinity,
-                            height: 30,
+                            height: 65,
                           ),
                         ],
                       ),
