@@ -19,6 +19,7 @@ class ChecklistTile extends StatelessWidget {
   Widget build(BuildContext context) {
     bool taskCompleted = task['taskCompleted'];
 
+    // UI of the Checklist Tiles
     return Padding(
       padding: const EdgeInsets.fromLTRB(25, 0, 25, 15),
       child: Container(
@@ -36,9 +37,10 @@ class ChecklistTile extends StatelessWidget {
               child: Checkbox(
                 value: taskCompleted,
                 onChanged: (value) {
-                  String uid = FirebaseAuth.instance.currentUser!.uid;
+                  String uid = FirebaseAuth.instance.currentUser!
+                      .uid; // Gets the current user's UID.
 
-                  // Update the checklist in Firestore
+                  // Update the checklist in Firestore when the checkbox is checked.
                   firestore
                       .collection('User')
                       .doc(uid)
@@ -47,15 +49,17 @@ class ChecklistTile extends StatelessWidget {
                       .update({task['taskName']: value}).then((_) {
                     onChanged?.call(value);
                   }).catchError((error) {
-                    print("Error updating Firestore: $error");
+                    print(
+                        "Error updating Firestore: $error"); // Error Handling but idk too much about it tbh
                   });
                 },
-                activeColor: fiservColor,
+                activeColor: fiservColor, // Checkbox checked colour HERE
               ),
             ),
             Flexible(
               child: Text(
-                task['taskName'],
+                task[
+                    'taskName'], // Task name display and stuff below it is the text style (font, colour, size, etc)
                 style: GoogleFonts.quicksand(
                   textStyle: const TextStyle(
                     color: Colors.white,
