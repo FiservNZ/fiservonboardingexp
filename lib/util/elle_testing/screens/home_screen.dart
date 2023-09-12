@@ -1,39 +1,65 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:fiservonboardingexp/util/constants.dart';
+import 'package:fiservonboardingexp/util/elle_testing/firebase_ref/firebase_ref.dart';
+import 'package:fiservonboardingexp/util/elle_testing/screens/question_card.dart';
+import 'package:fiservonboardingexp/util/elle_testing/themes/ui_parameters.dart';
+import 'package:fiservonboardingexp/util/elle_testing/widgets/content_area.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 import '../controllers/quiz_controller.dart';
+import '../widgets/task_screen_app_bar.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);
+  static const String routeName = "/home";
 
   @override
   Widget build(BuildContext context) {
     QuizController quizController = Get.find();
     return Scaffold(
-      body: Obx(() => ListView.separated(
-          itemBuilder: (BuildContext context, int index) {
-            return ClipRRect(
-              //key: Key('image_$index'),
-              child: SizedBox(
-                height: 200,
-                width: 200,
-                child: CachedNetworkImage(
-                  imageUrl: quizController.allQuizzes[index].imageUrl ?? "",
-                  placeholder: (context, url) => Container(
-                    alignment: Alignment.center,
-                    child: const CircularProgressIndicator(),
-                  ),
-                  errorWidget: (context, url, error) =>
-                      Image.asset("assets/images/Fiserv_logo.png"),
-                ),
+      backgroundColor: darkBackgroundColor,
+      body: Column(
+        children: [
+          // will need to change to pull the title from whatever category has been chosen.
+          //Expanded(
+          Padding(
+            padding: const EdgeInsets.only(top: 50, bottom: 20),
+            child: SizedBox(
+              child: Text(
+                "A Collection's Task Page",
+                style: GoogleFonts.bebasNeue(fontSize: 35, color: fiservColor),
               ),
-            );
-          },
-          separatorBuilder: (BuildContext context, int index) {
-            return const SizedBox(height: 20);
-          },
-          itemCount: quizController.allQuizzes.length)),
+            ),
+          ),
+          SizedBox(
+            child: Text(
+              "A Collection's Task Page",
+              style: headerFontStyle,
+            ),
+          ),
+          //),
+          Expanded(
+            child: ContentArea(
+              addPadding: false,
+              child: Obx(
+                () => ListView.separated(
+                    padding: UIParameters.mobileScreenPadding,
+                    itemBuilder: (BuildContext context, int index) {
+                      return QuestionCard(
+                        model: quizController.allQuizzes[index],
+                      );
+                    },
+                    separatorBuilder: (BuildContext context, int index) {
+                      return const SizedBox(height: 20);
+                    },
+                    itemCount: quizController.allQuizzes.length),
+              ),
+            ),
+          ),
+        ],
+      ),
+
       //itemCount: quizController.allQuizzes.length)),
     );
   }

@@ -35,15 +35,17 @@ class QuizModel {
             .map((dynamic e) => Question.fromJSON(e as Map<String, dynamic>))
             .toList();
 
-  QuizModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> json)
-      : id = json.id,
-        title = json['title'],
-        imageUrl = json['image_url'],
-        description = json['description'],
-        quizDuration = json['quiz_duration'],
-        questionCount = json['question_count'] as int,
+  // Converts data from Firebase into Map
+  QuizModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> snapshot)
+      : id = snapshot.id,
+        title = snapshot['title'],
+        imageUrl = snapshot['image_url'],
+        description = snapshot['description'],
+        quizDuration = snapshot['quiz_duration'],
+        questionCount = snapshot['question_count'] as int,
         questions = [];
 
+  String timeConverter() => "${(quizDuration / 60).ceil()} mins";
   // Converts the properties of the QuizModel object into JSON
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> quizModelData = <String, dynamic>{};
@@ -66,6 +68,7 @@ class Question {
       correctAnswer; // the correct answer within the different options given
   // the collection in the questions document which holds the different options
   List<Option>? options; // that the user can choose their answer from
+  String? selectedAnswer;
 
   Question({
     required this.id,
@@ -82,6 +85,7 @@ class Question {
             (json['options'] as List).map((e) => Option.fromJSON(e)).toList(),
         correctAnswer = json['correct_answer'];
 
+  // Converts data from Firebase into Map
   Question.fromSnapshot(QueryDocumentSnapshot<Map<String, dynamic>> snapshot)
       : id = snapshot.id,
         question = snapshot['question'],
@@ -118,11 +122,12 @@ class Option {
       : identifier = json['identifier'],
         answer = json['answer'];
 
+  // Converts data from Firebase into Map
   Option.fromSnapshot(QueryDocumentSnapshot<Map<String, dynamic>> snapshot)
       : identifier = snapshot['identifier'] as String?,
         answer = snapshot['answer'] as String?;
 
-// Converts the properties of the Option object into JSON
+  // Converts the properties of the Option object into JSON
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> optionsData = <String, dynamic>{};
     optionsData['identifier'] = identifier;
