@@ -1,6 +1,8 @@
+import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import '../../widgets/app_bar_overlay.dart';
 import '../../widgets/nav_bar.dart';
 import '../constants.dart';
@@ -16,8 +18,10 @@ class ReadPage extends GetView<ReadController> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    ThemeData selectedTheme = themeProvider.currentTheme;
     return Scaffold(
-      backgroundColor: Colors.black,
+      backgroundColor: selectedTheme.colorScheme.background,
       appBar: const AppBarOverlay(),
       bottomNavigationBar: const CustomNavBar(),
       body: SafeArea(
@@ -42,10 +46,10 @@ class ReadPage extends GetView<ReadController> {
                       model.title,
                       textAlign: TextAlign.center,
                       style: GoogleFonts.quicksand(
-                        textStyle: const TextStyle(
+                        textStyle: TextStyle(
                             fontSize: 32,
                             fontWeight: FontWeight.bold,
-                            color: fiservColor),
+                            color: selectedTheme.colorScheme.secondary),
                       ),
                     ),
                   ),
@@ -60,28 +64,20 @@ class ReadPage extends GetView<ReadController> {
                   // Content
                   Padding(
                     padding: const EdgeInsets.all(22.0),
-                    child: RichText(
-                      textAlign: TextAlign
-                          .justify, // Justify alignment for the entire text
-                      text: TextSpan(
-                        style: GoogleFonts.quicksand(
-                          textStyle: const TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.white,
-                          ),
-                        ),
-
-                        // Find '\n' in the 'content' field, split it and save into a map called paragraph
-                        children: model.content.split('\n').map((paragraph) {
-                          return TextSpan(
-                            text:
-                                '${paragraph.trim()}\n\n', // Add two newlines for paragraph spacing
-                          );
-                        }).toList(),
+                    child: Text(
+                      model.content,
+                      style: GoogleFonts.quicksand(
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: selectedTheme.colorScheme.primary,
                       ),
+                      maxLines: 4,
+                      overflow: TextOverflow.ellipsis,
+                      textAlign: TextAlign.left,
                     ),
                   ),
+
+                  //String textFromDatabase = "lorem ipsum \n another line \n\n another line";
 
                   const SizedBox(height: 30),
 
@@ -91,46 +87,44 @@ class ReadPage extends GetView<ReadController> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         //Back button
-                        Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: fiservColor,
-                              width: 2.0,
-                            ),
-                            borderRadius: BorderRadius.circular(8.0),
+
+                        ElevatedButton(
+                          onPressed: () {
+                            Navigator.of(context).pop();
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: selectedTheme.colorScheme.tertiary,
                           ),
-                          child: ElevatedButton(
-                            onPressed: () {
-                              Navigator.of(context).pop();
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.black,
-                              foregroundColor: fiservColor,
-                            ),
-                            child: const Text('Back'),
+                          child: Text(
+                            'Back',
+                            style: TextStyle(
+                              color: selectedTheme.colorScheme.secondary,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ).merge(GoogleFonts
+                                .quicksand()), // Merge styles with GoogleFonts
                           ),
                         ),
 
                         // Task finished button
-                        Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: fiservColor,
-                              width: 2.0,
-                            ),
-                            borderRadius: BorderRadius.circular(8.0),
+
+                        ElevatedButton(
+                          onPressed: () {
+                            int points = 1;
+                            _progressBar.addPoints(points);
+                            Navigator.of(context).pop();
+                          },
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: selectedTheme.colorScheme.tertiary,
                           ),
-                          child: ElevatedButton(
-                            onPressed: () {
-                              int points = 1;
-                              _progressBar.addPoints(points);
-                              Navigator.of(context).pop();
-                            },
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: Colors.black,
-                              foregroundColor: fiservColor,
-                            ),
-                            child: const Text('Task Finished'),
+                          child: Text(
+                            'Task Finished',
+                            style: TextStyle(
+                              color: selectedTheme.colorScheme.secondary,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ).merge(GoogleFonts
+                                .quicksand()), // Merge styles with GoogleFonts
                           ),
                         ),
                       ],

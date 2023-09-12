@@ -1,4 +1,5 @@
 import 'package:fiservonboardingexp/screens/main_screen.dart';
+import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -65,13 +66,16 @@ class HelpPage extends StatelessWidget {
                       ),
                     );
                   },
-                  style:
-                      ElevatedButton.styleFrom(backgroundColor: Colors.black),
-                  child: const Text(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: selectedTheme.colorScheme.tertiary),
+                  child: Text(
                     'Close',
                     style: TextStyle(
-                      color: Color(0xFFFF6600),
-                    ),
+                      color: selectedTheme.colorScheme.secondary,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ).merge(GoogleFonts
+                        .quicksand()), // Merge styles with GoogleFonts
                   ),
                 ),
               ),
