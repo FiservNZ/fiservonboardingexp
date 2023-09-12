@@ -128,12 +128,11 @@ class _ProfilePageState extends State<ProfilePage> {
               });
             }
 
-            // Code that works without exp level unlocking icon stuff from here
             String selectedIcon = userData['selectedIcon'] ?? 'person';
             String iconColor = userData['iconColor'] ?? '#000000';
-
             VoidCallback? iconOnPressed;
 
+            // Code for user's selected icon display here
             if (userData['selectedIcon'] == 'ghost' && level >= 1) {
               userIcon = Icon(
                 FontAwesomeIcons.ghost,

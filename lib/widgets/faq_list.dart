@@ -8,10 +8,12 @@ import 'package:google_fonts/google_fonts.dart';
 class FaqList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    // Changes in the FAQ collection in firestore
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance.collection('FAQ').snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
+          // Loading animation while getting the FAQ questions and answers
           return const CircularProgressIndicator();
         }
 
@@ -22,9 +24,11 @@ class FaqList extends StatelessWidget {
           itemBuilder: (context, index) {
             final data = faqlist[index].data() as Map<String, dynamic>;
 
+            // Gets the question and answers from firestore data
             final question = data['question'] as String? ?? 'No questions';
             final answer = data['answer'] as String? ?? 'No answers';
 
+            // The UI part of the FAQ List (Font, text size, text colour, alignment)
             return Padding(
               padding: const EdgeInsets.fromLTRB(0, 7, 0, 7),
               child: ExpansionTile(

@@ -19,7 +19,7 @@ class ChecklistPage extends StatefulWidget {
 }
 
 class _ChecklistPageState extends State<ChecklistPage> {
-  Map<String, bool>? checklistData; // Change to nullable type
+  Map<String, bool>? checklistData;
 
   @override
   void initState() {
@@ -27,16 +27,17 @@ class _ChecklistPageState extends State<ChecklistPage> {
     loadChecklistData();
   }
 
+  // Loads the current users (UID) checklist data from firestore.
   Future<void> loadChecklistData() async {
     String uid = FirebaseAuth.instance.currentUser!.uid;
     try {
-      DocumentSnapshot<Map<String, dynamic>> checklistSnapshot = await widget
-          .firestore
-          .collection('User')
-          .doc(uid)
-          .collection('Checklist')
-          .doc('List')
-          .get();
+      DocumentSnapshot<Map<String, dynamic>> checklistSnapshot =
+          await widget.firestore
+              .collection('User')
+              .doc(uid)
+              .collection('Checklist') // Collection name
+              .doc('List') // Document name of the collection
+              .get();
 
       if (checklistSnapshot.exists) {
         // Retrieve checklist from Firestore and set it in the local state
@@ -50,6 +51,7 @@ class _ChecklistPageState extends State<ChecklistPage> {
     }
   }
 
+  // General checklist UI
   @override
   Widget build(BuildContext context) {
     return Scaffold(

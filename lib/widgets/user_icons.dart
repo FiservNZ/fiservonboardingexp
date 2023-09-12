@@ -29,6 +29,7 @@ class _UserIconState extends State<UserIcon> {
   late Icon userIcon;
   late Color iconColor;
 
+  // Initial values for userIcon and iconColor are set based on what the user has selected / or default.
   @override
   void initState() {
     super.initState();
@@ -39,6 +40,8 @@ class _UserIconState extends State<UserIcon> {
   @override
   Widget build(BuildContext context) {
     print('Firebase User Level: ${widget.level}');
+
+    // Triggers the popup when the user icon is pressed
     return IconButton(
       icon: widget.initialUserIcon,
       color: widget.iconColor,
@@ -53,7 +56,9 @@ class _UserIconState extends State<UserIcon> {
                   alignment: WrapAlignment.center,
                   spacing: 20.0,
                   children: [
-                    if (widget.level >= 1)
+                    // When icon is pressed, it updates the user icon, icon colour and is updated to the firebase here.
+                    if (widget.level >=
+                        1) // If the user is level 1 or higher, the ghost icon is available
                       IconButton(
                         icon: FaIcon(FontAwesomeIcons.ghost),
                         iconSize: 55,
@@ -72,7 +77,8 @@ class _UserIconState extends State<UserIcon> {
                           widget.onIconChanged(userIcon);
                         },
                       ),
-                    if (widget.level >= 2)
+                    if (widget.level >=
+                        2) // If the user is level 2 or higher, the ghost, seedling icon is available
                       IconButton(
                         icon: Icon(FontAwesomeIcons.seedling),
                         iconSize: 55,
@@ -91,7 +97,8 @@ class _UserIconState extends State<UserIcon> {
                           widget.onIconChanged(userIcon);
                         },
                       ),
-                    if (widget.level >= 3)
+                    if (widget.level >=
+                        3) // If the user is level 3 or higher, the ghost, seedling, poo icon is available
                       IconButton(
                         icon: Icon(FontAwesomeIcons.poo),
                         iconSize: 55,
@@ -110,7 +117,8 @@ class _UserIconState extends State<UserIcon> {
                           widget.onIconChanged(userIcon);
                         },
                       ),
-                    if (widget.level >= 4)
+                    if (widget.level >=
+                        4) // If the user is level 4 or higher, the ghost, seedling, poo, fish icon is available
                       IconButton(
                         icon: Icon(FontAwesomeIcons.fish),
                         iconSize: 55,
@@ -129,7 +137,8 @@ class _UserIconState extends State<UserIcon> {
                           widget.onIconChanged(userIcon);
                         },
                       ),
-                    if (widget.level >= 5)
+                    if (widget.level >=
+                        5) // If the user is level 5 or higher, the ghost, seedling, poo, fish, ninja icon is available
                       IconButton(
                         icon: Icon(FontAwesomeIcons.userNinja),
                         iconSize: 55,
@@ -148,7 +157,8 @@ class _UserIconState extends State<UserIcon> {
                           widget.onIconChanged(userIcon);
                         },
                       ),
-                    if (widget.level >= 6)
+                    if (widget.level >=
+                        6) // If the user is level 6 or higher, the ghost, seedling, poo, fish, ninja, dog icon is available
                       IconButton(
                         icon: Icon(FontAwesomeIcons.dog),
                         iconSize: 55,
@@ -167,7 +177,8 @@ class _UserIconState extends State<UserIcon> {
                           widget.onIconChanged(userIcon);
                         },
                       ),
-                    if (widget.level >= 7)
+                    if (widget.level >=
+                        7) // If the user is level 7 or higher, the ghost, seedling, poo, fish, ninja, dog, cat icon is available
                       IconButton(
                         icon: Icon(FontAwesomeIcons.cat),
                         iconSize: 55,
@@ -186,7 +197,8 @@ class _UserIconState extends State<UserIcon> {
                           widget.onIconChanged(userIcon);
                         },
                       ),
-                    if (widget.level >= 8)
+                    if (widget.level >=
+                        8) // If the user is level 8 or higher, the ghost, seedling, poo, fish, ninja, dog, cat, frog icon is available
                       IconButton(
                         icon: Icon(FontAwesomeIcons.frog),
                         iconSize: 55,
@@ -205,7 +217,8 @@ class _UserIconState extends State<UserIcon> {
                           widget.onIconChanged(userIcon);
                         },
                       ),
-                    if (widget.level >= 9)
+                    if (widget.level >=
+                        9) // If the user is level 9, the ghost, seedling, poo, fish, ninja, dog, cat, frog, robot icon is available (all icons unlocked)
                       IconButton(
                         icon: Icon(FontAwesomeIcons.robot),
                         iconSize: 55,
@@ -229,6 +242,7 @@ class _UserIconState extends State<UserIcon> {
               ],
             );
 
+            // Popup window implementation when the user icon is pressed
             return Center(
               child: SizedBox(
                 width: 400,
@@ -258,6 +272,7 @@ class _UserIconState extends State<UserIcon> {
                     ),
                   ),
                   actions: [
+                    // Close button implementation here
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFFFF6600),

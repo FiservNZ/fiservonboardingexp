@@ -20,12 +20,15 @@ class CustomNavBar extends StatelessWidget {
       type: BottomNavigationBarType.fixed,
       onTap: (int newIndex) {
         switch (newIndex) {
+          // Directs user to Home Page
           case 0:
             Navigator.of(context).push(_instantPageRoute(HomePage()));
             break;
+          // Directs user to Training Page
           case 1:
             Navigator.push(context, _instantPageRoute(const TrainingPage()));
             break;
+          // Directs user to the General Checklist Page
           case 2:
             Navigator.push(
                 context,
@@ -33,10 +36,12 @@ class CustomNavBar extends StatelessWidget {
                   ChecklistPage(firestore: firestore),
                 ));
             break;
+          // Directs user to the Achievements Page
           case 3:
             Navigator.push(
                 context, _instantPageRoute(const AchievementsPage()));
             break;
+          // Directs user to the Colleagues Page
           case 4:
             Navigator.push(context, _instantPageRoute(const ColleaguesPage()));
             break;
@@ -77,6 +82,7 @@ class CustomNavBar extends StatelessWidget {
     );
   }
 
+  // Implementation for page transitions (purposely made it so that it has no animation and transition effect)
   PageRouteBuilder _instantPageRoute(Widget page) {
     return PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) => page,

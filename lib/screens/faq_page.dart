@@ -35,6 +35,7 @@ class _FaqPageState extends State<FaqPage> {
                 textAlign: TextAlign.center,
               ),
               const SizedBox(height: 16),
+              // Gets the Questions and Answers here (Dropdown widget thing)
               Expanded(
                 child: FaqList(),
               ),
