@@ -21,10 +21,10 @@ class QuestionCard extends GetView<QuizController> {
     return Container(
       decoration: BoxDecoration(
           borderRadius: UIParameters.cardBorderRadius,
-          color: Theme.of(context).cardColor),
+          color: darkTileColor /*Theme.of(context).cardColor*/),
       child: InkWell(
         onTap: () {
-          print('${model.title}');
+          //print('${model.title}');
           controller.navigateToQuestions(quiz: model);
         },
         child: Padding(
@@ -61,17 +61,21 @@ class QuestionCard extends GetView<QuizController> {
                       children: [
                         Text(model.title,
                             style: TextStyle(
-                                color: UIParameters.isDarkMode()
-                                    ? Theme.of(context)
-                                        .textTheme
-                                        .bodySmall!
-                                        .color
-                                    : Theme.of(context).primaryColor,
+                                color: darkTextColor,
+                                // color: UIParameters.isDarkMode()
+                                //     ? Theme.of(context)
+                                //         .textTheme
+                                //         .bodySmall!
+                                //         .color
+                                //     : Theme.of(context).primaryColor,
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold)),
                         Padding(
                           padding: const EdgeInsets.only(top: 10.0, bottom: 15),
-                          child: Text(model.description),
+                          child: Text(
+                            model.description,
+                            style: TextStyle(color: darkTextColor),
+                          ),
                         ),
                         Row(children: [
                           AppIconText(
@@ -124,9 +128,9 @@ class QuestionCard extends GetView<QuizController> {
                     child: Container(
                       padding: const EdgeInsets.symmetric(
                           vertical: 12, horizontal: 20),
-                      child: Icon(Icons.start, color: fiservColor),
+                      child: Icon(Icons.play_arrow_rounded, color: fiservColor),
                       decoration: BoxDecoration(
-                          color: Colors.black87,
+                          color: Color.fromARGB(255, 43, 42, 42),
                           borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(cardBorderPadding),
                               bottomRight: Radius.circular(cardBorderPadding))),

@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 
 import '../controllers/question_controller.dart';
 import '../screens/introduction.dart';
+import '../screens/quiz_outcome_screen.dart';
 
 class AppRoutes {
   static List<GetPage> routes() => [
@@ -37,8 +38,12 @@ class AppRoutes {
           name: QuestionScreen.routeName,
           page: () => const QuestionScreen(),
           binding: BindingsBuilder(() {
-            Get.put(QuestionController());
+            Get.put<QuestionController>(QuestionController());
           }),
+        ),
+        GetPage(
+          name: QuizOutcomeScreen.routeName,
+          page: () => const QuizOutcomeScreen(),
         ),
       ];
 }

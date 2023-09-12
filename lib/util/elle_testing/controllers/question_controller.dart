@@ -1,6 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fiservonboardingexp/util/elle_testing/controllers/auth_controller.dart';
+import 'package:fiservonboardingexp/util/elle_testing/controllers/extension_question_controller.dart';
+import 'package:fiservonboardingexp/util/elle_testing/controllers/quiz_controller.dart';
 import 'package:fiservonboardingexp/util/elle_testing/firebase_ref/loading_status.dart';
 import 'package:fiservonboardingexp/util/elle_testing/models/quiz_model.dart';
+import 'package:fiservonboardingexp/util/elle_testing/screens/home_screen.dart';
+import 'package:fiservonboardingexp/util/elle_testing/screens/quiz_outcome_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
@@ -101,5 +107,26 @@ class QuestionController extends GetxController {
       questionIndex.value--;
       currentQuestion.value = allQuizQuestions[questionIndex.value];
     }
+  }
+
+  String get completedTest {
+    final answered = allQuizQuestions
+        .where((element) => element.selectedAnswer != null)
+        .toList()
+        .length;
+    return 'You answered $answered out of ${allQuizQuestions.length} questions';
+  }
+
+  void complete() {
+    Get.offAllNamed(QuizOutcomeScreen.routeName);
+  }
+
+  void tryAgain() {
+    Get.find<QuizController>()
+        .navigateToQuestions(quiz: quizModel, tryAgain: true);
+  }
+
+  void navigateToHome() {
+    Get.offNamedUntil(HomeScreen.routeName, (route) => false);
   }
 }
