@@ -13,6 +13,7 @@ class ColleaguesPage extends StatefulWidget {
   _ColleaguesPageState createState() => _ColleaguesPageState();
 }
 
+// List of colleagues and details written in here
 class _ColleaguesPageState extends State<ColleaguesPage> {
   List<Colleagues> colleagues = [
     Colleagues(
@@ -45,6 +46,7 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
     ),
   ];
 
+  // UI implementation of the colleagues page
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,6 +61,7 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Center(
+                // Colleagues Title here
                 child: Text(
                   'COLLEAGUES',
                   style: GoogleFonts.quicksand(
@@ -70,11 +73,13 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
               ),
             ),
             const SizedBox(height: 10),
+            // Shows the Colleagues names, role, and icon here
             Expanded(
               child: ListView.builder(
                 itemCount: colleagues.length,
                 itemBuilder: (context, index) {
                   return ListTile(
+                    // Colleagues icon set to the person icon by default
                     leading: const CircleAvatar(
                       radius: 22,
                       child: Icon(
@@ -83,6 +88,7 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
                       ),
                       backgroundColor: Color(0xFFFF6600),
                     ),
+                    // UI for Colleague Name here
                     title: Text(
                       colleagues[index].name,
                       style: GoogleFonts.quicksand(
@@ -93,6 +99,7 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
                         ),
                       ),
                     ),
+                    // UI for Colleague Position here
                     subtitle: Text(
                       colleagues[index].position,
                       style: GoogleFonts.quicksand(
@@ -102,6 +109,7 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
                         ),
                       ),
                     ),
+                    // When the user presses a colleague, it shows the popup with the colleague details
                     onTap: () {
                       _showColleagueDetails(colleagues[index]);
                     },
@@ -115,33 +123,38 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
     );
   }
 
+  // Implementation of the popup of colleagues details.
   void _showColleagueDetails(Colleagues colleague) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
         return AlertDialog(
           backgroundColor: Color.fromARGB(255, 27, 27, 27),
+          // Colleague details title
           title: Text(
             'COLLEAGUE DETAILS',
             style: GoogleFonts.quicksand(
               textStyle: TextStyle(
                 color: fiservColor,
-                fontWeight: FontWeight.bold, // Colleague Details Font Colour
+                fontWeight: FontWeight.bold,
                 fontSize: 22,
               ),
             ),
           ),
+          // SingleChildScrollView is used to prevent pixel overflow
           content: SingleChildScrollView(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               mainAxisSize: MainAxisSize.min,
               children: [
+                // Colleague Name UI here
                 Text(
                   'Name: ${colleague.name}',
                   style: TextStyle(
                     color: Colors.white, // Colleague Name Font Colour
                   ),
                 ),
+                // Colleague Position UI here
                 Text(
                   'Position: ${colleague.position}',
                   style: TextStyle(
@@ -149,6 +162,7 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
                   ),
                 ),
                 Row(
+                  // Colleague Phone Number UI here
                   children: [
                     const Text(
                       'Phone Number: ',
@@ -156,6 +170,7 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
                           color: Colors
                               .white), // Colleague Phone Number Font Colour
                     ),
+                    // Implementation when the user presses the phone number, the phone dial app opens with the phone number in it
                     RichText(
                       text: TextSpan(
                         children: [
@@ -164,7 +179,8 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
                             style: TextStyle(color: fiservColor),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
-                                _launchPhoneNumber(colleague.phoneNumber);
+                                _launchPhoneNumber(colleague
+                                    .phoneNumber); // Launch dial app here with the colleague phone number
                               },
                           ),
                         ],
@@ -172,6 +188,7 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
                     ),
                   ],
                 ),
+                // Colleague Email UI
                 Row(
                   children: [
                     const Text('Email: ',
@@ -186,7 +203,8 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
                             style: const TextStyle(color: fiservColor),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
-                                _launchEmail(colleague.email);
+                                _launchEmail(colleague
+                                    .email); // Launch default email (gmail) app with the colleagues email preentered in the app
                               },
                           ),
                         ],
@@ -194,12 +212,14 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
                     ),
                   ],
                 ),
+                // Colleague Hobbies UI
                 Text('Hobbies: ${colleague.hobbies}',
                     style: TextStyle(
                         color: Colors.white)), // Colleague Hobbies Font Colour
               ],
             ),
           ),
+          // Close Button UI, returns to previous page/screen
           actions: [
             ElevatedButton(
               style: ElevatedButton.styleFrom(
@@ -216,7 +236,7 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
     );
   }
 
-// Launch dial application on android device
+// Implementation to launch dial application on android device
   void _launchPhoneNumber(String phoneNumber) async {
     final Uri phoneUri = Uri(scheme: 'tel', path: phoneNumber);
     final String phoneUrl = phoneUri.toString();
@@ -228,10 +248,10 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
     }
   }
 
-// Launch default gmail/mail application on device
+// Implementation to launch default gmail/mail application on device
   void _launchEmail(String email) async {
     String subject = Uri.encodeComponent("Query");
-    print(subject); //output: Hello%20Flutter
+    print(subject);
     Uri mail = Uri.parse("mailto:$email?subject=$subject");
     if (await launchUrl(mail)) {
       //email app opened

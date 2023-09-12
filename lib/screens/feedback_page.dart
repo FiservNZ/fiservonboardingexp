@@ -40,13 +40,14 @@ class _FeedBackState extends State<FeedBack> {
         backgroundColor: fiservColor,
       ),
       backgroundColor: Color.fromARGB(255, 27, 27, 27),
+      // SingleChildScrollView was used to get rid of pixel overflow
       body: SingleChildScrollView(
-        // Wrap your Column with SingleChildScrollView
         child: Padding(
           padding: const EdgeInsets.all(20.0),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              // Text on the top of the feedback screen
               Text(
                 "Tell us what you love about the app, or what we could be doing better!",
                 style: GoogleFonts.quicksand(
@@ -59,14 +60,15 @@ class _FeedBackState extends State<FeedBack> {
               Text(
                 "How do you rate this app?",
                 style: GoogleFonts.quicksand(
-                  // Set the font to Quicksand
                   fontSize: 17,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
               ),
+              // Star Rating Class to get the star rating system (5 stars)
               StarRating(
                 onRatingChanged: (rating) {
+                  // Updates the star depending on what the user has selected
                   setState(() {
                     userRating = rating;
                     isRatingSelected = true;
@@ -78,12 +80,12 @@ class _FeedBackState extends State<FeedBack> {
               Text(
                 "Enter your feedback:",
                 style: GoogleFonts.quicksand(
-                  // Set the font to Quicksand
                   fontSize: 17,
                   fontWeight: FontWeight.bold,
                   color: Colors.white,
                 ),
               ),
+              // Text field for user feedback written input
               Container(
                 margin: const EdgeInsets.only(top: 15.0),
                 child: TextField(
@@ -93,20 +95,22 @@ class _FeedBackState extends State<FeedBack> {
                       userFeedback = text;
                     });
                   },
-                  // Writing field for user feedback
+                  // Prompt in the text field above ^ for user feedback field, disappears when user types
                   decoration: InputDecoration(
                     hintText: 'Type your feedback here',
                     hintStyle: GoogleFonts.quicksand(
                       color: Colors.grey,
                     ),
+                    // Feedback textfield outline border
                     focusedBorder: OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.black54),
                     ),
                   ),
-                  maxLines: 10,
+                  maxLines:
+                      10, // You can make the feedback text field bigger here
                   style: TextStyle(
-                      color: Colors
-                          .white), // User typing font colour CHANGE HERE @@@@@@@@@
+                      color:
+                          Colors.white), // User typing font colour CHANGE HERE
                 ),
               ),
               Padding(
@@ -134,7 +138,7 @@ class _FeedBackState extends State<FeedBack> {
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
                               builder: (context) =>
-                                  MainScreen(), // Replace with your MainScreen widget
+                                  MainScreen(), // Redirects user to 'main screen' after submitting
                             ),
                           );
 
@@ -146,6 +150,7 @@ class _FeedBackState extends State<FeedBack> {
                   child: Container(
                     width: double.infinity,
                     child: Center(
+                      // Submit Feedback Button Implementation
                       child: Text("Submit Feedback",
                           style: TextStyle(fontSize: 16)), // Submit Button
                     ),
