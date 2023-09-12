@@ -18,7 +18,10 @@ final ThemeData darkTheme = ThemeData(
   //Other colours
   colorScheme: ColorScheme.dark(
     background: const Color.fromARGB(255, 0, 0, 0),
-    primary: const Color.fromARGB(255, 75, 73, 73)!,
-    secondary: const Color(0xFFFF6600),
+    onBackground: const Color.fromARGB(255, 53, 49, 49), //App bar
+    primary:
+        Color.fromARGB(255, 255, 255, 255)!, // Mainly used for the text colour
+    secondary: const Color(0xFFFF6600), // Mainly used for headings
+    tertiary: Color.fromARGB(255, 129, 127, 125), // Mainly used for buttons
   ),
 );

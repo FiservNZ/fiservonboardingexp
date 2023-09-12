@@ -10,7 +10,7 @@ import 'package:provider/provider.dart';
 
 int? initScreen;
 
-Future<void> main() async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   //InitialBindings().dependencies();
@@ -18,7 +18,7 @@ Future<void> main() async {
 
   runApp(
     ChangeNotifierProvider(
-      create: (_) => ThemeProvider(),
+      create: (_) => ThemeProvider(), // Initialize ThemeProvider here
       child: const MyApp(),
     ),
   );

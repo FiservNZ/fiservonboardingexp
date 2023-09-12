@@ -5,6 +5,9 @@ import 'package:fiservonboardingexp/widgets/exp_bar.dart';
 import 'package:fiservonboardingexp/widgets/nav_bar.dart';
 
 import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+import '../themes/theme_provider.dart';
 import '../util/constants.dart';
 import '../widgets/app_bar_overlay.dart';
 import 'package:flutter/material.dart';
@@ -17,11 +20,14 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    ThemeData selectedTheme = themeProvider.currentTheme;
     ReadController readController = Get.find();
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        // //appbar
+        backgroundColor: selectedTheme.colorScheme.background,
         appBar: const AppBarOverlay(),
         bottomNavigationBar: const CustomNavBar(),
 
@@ -84,11 +90,18 @@ class HomePage extends StatelessWidget {
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.black,
-                    foregroundColor: fiservColor,
+                    backgroundColor: selectedTheme.colorScheme.tertiary,
                     fixedSize: Size(120, 35),
                   ),
-                  child: const Text('Read Task'),
+                  child: Text(
+                    'Read Task',
+                    style: TextStyle(
+                      color: selectedTheme.colorScheme.secondary,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ).merge(GoogleFonts
+                        .quicksand()), // Merge styles with GoogleFonts
+                  ),
                 ),
               ),
             ],

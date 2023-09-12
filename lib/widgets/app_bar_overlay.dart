@@ -57,7 +57,12 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
 
                 return Text(
                   rankTitle,
-                  style: TextStyle(color: Color(0xFFFF6600)),
+                  style: TextStyle(
+                    color: selectedTheme.colorScheme.secondary,
+                    fontSize: 27,
+                    fontWeight: FontWeight.bold,
+                  ).merge(
+                      GoogleFonts.quicksand()), // Merge styles with GoogleFonts
                 );
               } else {
                 return const Text('No data available');
@@ -69,9 +74,9 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
         // Nav draw
         actions: <Widget>[
           IconButton(
-            icon: const Icon(
+            icon: Icon(
               Icons.menu,
-              color: Color(0xFFFF6600),
+              color: selectedTheme.colorScheme.secondary,
             ),
             onPressed: () {
               showModalBottomSheet(
@@ -87,14 +92,18 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                         children: <Widget>[
                           //Intro teaser
                           ListTile(
-                            leading: const Icon(
+                            leading: Icon(
                               Icons.list,
-                              color: Color(0xFFFF6600),
+                              color: selectedTheme.colorScheme.primary,
                             ),
-                            title: const Text(
+                            title: Text(
                               'Intro Teaser',
-                              style: TextStyle(color: Color(0xFFFF6600)),
-                            ),
+                              style: TextStyle(
+                                color: selectedTheme.colorScheme.primary,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ).merge(GoogleFonts
+                                  .quicksand()), // Merge styles with GoogleFonts
                             onTap: () {
                               Get.toNamed("/teaser");
                             },
@@ -102,14 +111,18 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
 
                           // Help pop up
                           ListTile(
-                            leading: const Icon(
+                            leading: Icon(
                               Icons.question_mark,
-                              color: Color(0xFFFF6600),
+                              color: selectedTheme.colorScheme.primary,
                             ),
-                            title: const Text(
+                            title: Text(
                               'Help',
-                              style: TextStyle(color: Color(0xFFFF6600)),
-                            ),
+                              style: TextStyle(
+                                color: selectedTheme.colorScheme.primary,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ).merge(GoogleFonts
+                                  .quicksand()), // Merge styles with GoogleFonts
                             onTap: () {
                               Get.toNamed("/help");
                             },
@@ -117,14 +130,18 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
 
                           // FAQ
                           ListTile(
-                            leading: const Icon(
+                            leading: Icon(
                               Icons.question_answer,
-                              color: Color(0xFFFF6600),
+                              color: selectedTheme.colorScheme.primary,
                             ),
-                            title: const Text(
+                            title: Text(
                               'FAQ',
-                              style: TextStyle(color: Color(0xFFFF6600)),
-                            ),
+                              style: TextStyle(
+                                color: selectedTheme.colorScheme.primary,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ).merge(GoogleFonts
+                                  .quicksand()), // Merge styles with GoogleFonts
                             onTap: () {
                               Get.toNamed("/faq");
                             },
@@ -132,11 +149,11 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
 
                           // Settings
                           ListTile(
-                            leading: const Icon(
+                            leading: Icon(
                               Icons.settings,
-                              color: Color(0xFFFF6600),
+                              color: selectedTheme.colorScheme.primary,
                             ),
-                            title: const Text(
+                            title: Text(
                               'Settings',
                               style: TextStyle(color: Color(0xFFFF6600)),
                             ),
