@@ -1,24 +1,38 @@
-import 'package:fiservonboardingexp/themes/dark_theme.dart';
-import 'package:fiservonboardingexp/themes/light_theme.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fiservonboardingexp/themes/Theme_database.dart';
 import 'package:fiservonboardingexp/themes/pastel_theme.dart';
 import 'package:fiservonboardingexp/themes/rainforest_theme.dart';
 import 'package:fiservonboardingexp/themes/theme_provider.dart';
+
 import 'package:fiservonboardingexp/util/constants.dart';
-import 'package:fiservonboardingexp/widgets/app_bar_overlay.dart';
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-class ThemesPage extends StatelessWidget {
-  const ThemesPage({super.key});
+class ThemesPage extends StatefulWidget {
+  ThemesPage({Key? key}) : super(key: key);
+
+  @override
+  _ThemesPageState createState() => _ThemesPageState();
+}
+
+class _ThemesPageState extends State<ThemesPage> {
+  final ThemeDatabase _firebaseTheme = ThemeDatabase();
+
+  void _handleThemeChange(ThemeData theme, ThemeProvider themeProvider) {
+    themeProvider.setTheme(theme);
+
+    // Save the selected theme mode to Firebase Firestore
+    final currentUser = FirebaseAuth.instance.currentUser;
+    if (currentUser != null) {
+      _firebaseTheme.saveThemePreference(currentUser.uid, theme);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
     ThemeData selectedTheme = themeProvider.currentTheme;
-
-    void _handleThemeChange(ThemeData theme) {
-      themeProvider.setTheme(theme);
-    }
 
     return Scaffold(
       backgroundColor: selectedTheme.colorScheme.background,
@@ -28,97 +42,89 @@ class ThemesPage extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            const Padding(
-              padding: EdgeInsets.all(16.0),
+            const SizedBox(
+              height: 30,
+            ),
+
+            // Heading
+            Padding(
+              padding: const EdgeInsets.all(30.0),
               child: Text(
                 'Select a Theme:',
-                style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+                style: TextStyle(
+                  color: selectedTheme.colorScheme.secondary,
+                  fontSize: 27,
+                  fontWeight: FontWeight.bold,
+                ).merge(
+                  GoogleFonts.quicksand(), // Merge styles with GoogleFonts
+                ),
               ),
             ),
 
-            //Light theme
-            Theme(
-              data: Theme.of(context).copyWith(
-                unselectedWidgetColor: selectedTheme
-                    .colorScheme.primary, // Set the unselected icon color
-              ),
-              child: RadioListTile<ThemeData>(
-                title: Text(
-                  'Light Theme',
-                  style: TextStyle(color: selectedTheme.colorScheme.primary),
-                ),
-                value: lightTheme,
-                groupValue: selectedTheme,
-                onChanged: (value) {
-                  _handleThemeChange(lightTheme);
-                },
-              ),
-            ),
-
-            //Dark theme
-            Theme(
-              data: Theme.of(context).copyWith(
-                unselectedWidgetColor: selectedTheme
-                    .colorScheme.primary, // Set the unselected icon color
-              ),
-              child: RadioListTile<ThemeData>(
-                title: Text(
-                  'Dark Theme',
-                  style: TextStyle(color: selectedTheme.colorScheme.primary),
-                ),
-                value: darkTheme,
-                groupValue: selectedTheme,
-                onChanged: (value) {
-                  _handleThemeChange(darkTheme);
-                },
-              ),
-            ),
+            const SizedBox(height: 40),
 
             // Rainforest theme
-            Theme(
-              data: Theme.of(context).copyWith(
-                unselectedWidgetColor: selectedTheme
-                    .colorScheme.primary, // Set the unselected icon color
-              ),
-              child: RadioListTile<ThemeData>(
-                title: Text(
-                  'Rainforest Theme',
-                  style: TextStyle(color: selectedTheme.colorScheme.primary),
+            Container(
+              margin: const EdgeInsets.symmetric(
+                  horizontal: 50), // Adjust the vertical margin as needed
+              child: Theme(
+                data: Theme.of(context).copyWith(
+                  unselectedWidgetColor: selectedTheme
+                      .colorScheme.primary, // Set the unselected icon color
                 ),
-                value: rainforestTheme,
-                groupValue: selectedTheme,
-                onChanged: (value) {
-                  _handleThemeChange(rainforestTheme);
-                },
-                activeColor: selectedTheme
-                    .colorScheme.primary, // Set the selected icon color
+                child: RadioListTile<ThemeData>(
+                  title: Text(
+                    'Rainforest Theme',
+                    style: TextStyle(
+                      color: selectedTheme.colorScheme.primary,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ).merge(GoogleFonts
+                        .quicksand()), // Merge styles with GoogleFonts
+                  ),
+                  value: rainforestTheme,
+                  groupValue: selectedTheme,
+                  onChanged: (value) {
+                    _handleThemeChange(rainforestTheme, themeProvider);
+                  },
+                  activeColor: selectedTheme
+                      .colorScheme.primary, // Set the selected icon color
+                ),
               ),
             ),
 
             // Pastel theme
-            Theme(
-              data: Theme.of(context).copyWith(
-                unselectedWidgetColor: selectedTheme
-                    .colorScheme.primary, // Set the unselected icon color
-              ),
-              child: RadioListTile<ThemeData>(
-                title: Text(
-                  'Pastel Theme',
-                  style: TextStyle(color: selectedTheme.colorScheme.primary),
+            Container(
+              margin: const EdgeInsets.symmetric(
+                  horizontal: 50), // Adjust the vertical margin as needed
+              child: Theme(
+                data: Theme.of(context).copyWith(
+                  unselectedWidgetColor: selectedTheme
+                      .colorScheme.primary, // Set the unselected icon color
                 ),
-                value: pastelTheme,
-                groupValue: selectedTheme,
-                onChanged: (value) {
-                  _handleThemeChange(pastelTheme);
-                },
-                activeColor: selectedTheme
-                    .colorScheme.primary, // Set the selected icon color
+                child: RadioListTile<ThemeData>(
+                  title: Text(
+                    'Pastel Theme',
+                    style: TextStyle(
+                      color: selectedTheme.colorScheme.primary,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ).merge(GoogleFonts
+                        .quicksand()), // Merge styles with GoogleFonts
+                  ),
+                  value: pastelTheme,
+                  groupValue: selectedTheme,
+                  onChanged: (value) {
+                    _handleThemeChange(pastelTheme, themeProvider);
+                  },
+                  activeColor: selectedTheme
+                      .colorScheme.primary, // Set the selected icon color
+                ),
               ),
             ),
 
-            const SizedBox(height: 150),
+            const SizedBox(height: 80),
 
-            // Apply button
             Center(
               child: ElevatedButton(
                 onPressed: () {
@@ -126,12 +132,17 @@ class ThemesPage extends StatelessWidget {
                 },
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(
-                    selectedTheme.colorScheme.secondary,
+                    selectedTheme.colorScheme.tertiary,
                   ),
                 ),
                 child: Text(
-                  'Apply Theme',
-                  style: TextStyle(color: selectedTheme.colorScheme.primary),
+                  'Back',
+                  style: TextStyle(
+                    color: selectedTheme.colorScheme.secondary,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ).merge(
+                      GoogleFonts.quicksand()), // Merge styles with GoogleFonts
                 ),
               ),
             ),

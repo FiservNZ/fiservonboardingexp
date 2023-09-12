@@ -19,7 +19,10 @@ final ThemeData pastelTheme = ThemeData(
   //Other colours
   colorScheme: const ColorScheme.light(
     background: Color.fromARGB(255, 245, 203, 232),
-    primary: Color.fromARGB(255, 76, 173, 197),
-    secondary: Color.fromARGB(255, 194, 154, 226),
+    onBackground: Color.fromARGB(255, 228, 226, 101), //App bar
+    primary:
+        Color.fromARGB(255, 76, 173, 197), // Mainly used for the text colour
+    secondary: Color.fromARGB(255, 171, 133, 231), // Mainly used for headings
+    tertiary: Color.fromARGB(255, 81, 216, 182), // Mainly used for buttons
   ),
 );

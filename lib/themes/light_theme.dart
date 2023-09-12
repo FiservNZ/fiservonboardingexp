@@ -19,7 +19,10 @@ final ThemeData lightTheme = ThemeData(
   //Other colours
   colorScheme: const ColorScheme.light(
     background: Colors.white,
-    primary: Color.fromARGB(255, 165, 161, 161),
-    secondary: Color(0xFFFF6600),
+    onBackground: Color.fromARGB(255, 204, 157, 26), //App bar
+    primary:
+        Color.fromARGB(255, 165, 161, 161), // Mainly used for the text colour
+    secondary: Color(0xFFFF6600), // Mainly used for headings
+    tertiary: Color.fromARGB(255, 214, 192, 177), // Mainly used for buttons
   ),
 );

@@ -1,6 +1,9 @@
+import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class ExpBar extends StatelessWidget {
   final double barwidth;
@@ -56,6 +59,8 @@ class ExpBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final currentUser = FirebaseAuth.instance.currentUser!;
     final userCollection = FirebaseFirestore.instance.collection('User');
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    ThemeData selectedTheme = themeProvider.currentTheme;
 
     return SizedBox(
       child: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
@@ -83,19 +88,21 @@ class ExpBar extends StatelessWidget {
                     children: [
                       Text(
                         levText,
-                        style: const TextStyle(
-                          color: FiservColor,
+                        style: TextStyle(
+                          color: selectedTheme.colorScheme.primary,
                           fontSize: 15,
                           fontWeight: FontWeight.bold,
-                        ),
+                        ).merge(GoogleFonts
+                            .quicksand()), // Merge styles with GoogleFonts
                       ),
                       Text(
                         expText,
-                        style: const TextStyle(
-                          color: FiservColor,
+                        style: TextStyle(
+                          color: selectedTheme.colorScheme.primary,
                           fontSize: 15,
                           fontWeight: FontWeight.bold,
-                        ),
+                        ).merge(GoogleFonts
+                            .quicksand()), // Merge styles with GoogleFonts
                       ),
                     ],
                   ),
@@ -108,10 +115,10 @@ class ExpBar extends StatelessWidget {
                     borderRadius: BorderRadius.circular(5),
                     child: LinearProgressIndicator(
                       value: currentEXP / maxEXP,
-                      valueColor: const AlwaysStoppedAnimation<Color>(
-                        FiservColor,
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        selectedTheme.colorScheme.secondary,
                       ),
-                      backgroundColor: Colors.grey,
+                      backgroundColor: const Color.fromARGB(255, 190, 188, 184),
                     ),
                   ),
                 ),

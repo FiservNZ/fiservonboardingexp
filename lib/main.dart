@@ -14,14 +14,14 @@ import 'package:provider/provider.dart';
 final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 int? initScreen;
 
-Future<void> main() async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   Get.put(ReadController());
 
   runApp(
     ChangeNotifierProvider(
-      create: (_) => ThemeProvider(),
+      create: (_) => ThemeProvider(), // Initialize ThemeProvider here
       child: const MyApp(),
     ),
   );
@@ -32,7 +32,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Fiserv Onboarding',
       home: CheckUser(),
