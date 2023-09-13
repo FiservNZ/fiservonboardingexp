@@ -21,6 +21,7 @@ Future<String?> signUpWithEmailAndPassword(
 Future<void> saveUserDetails(
     String? uid, String firstName, String lastName, String position) async {
   try {
+    //Setting default user variables
     await FirebaseFirestore.instance.collection('User').doc(uid).set({
       'firstName': firstName,
       'lastName': lastName,
@@ -58,12 +59,24 @@ Future<void> saveUserDetails(
       'Scrum Team Induction': false,
     });
 
-    //Creating Quiz Task field (Specific to user to make tracking progress easier to implement)
+    initialiseOrientationTasks(uid);
+    initialiseCCTasks(uid);
+    initialiseComplianceTasks(uid);
+    initialiseHSTasks(uid);
+  } catch (e) {
+    debugPrint('Exception Found: $e');
+  }
+}
+
+//Used to initialise Orientation-Related Tasks
+Future<void> initialiseOrientationTasks(String? uid) async {
+  try {
+    //Creating Orientation-related Quiz Task field (Specific to user to make tracking progress easier to implement)
     await FirebaseFirestore.instance
         .collection('User')
         .doc(uid)
         .collection('Tasks')
-        .doc('Quiz')
+        .doc('Orientation')
         .collection('Quiz')
         .doc('quiz_task_1')
         .set({
@@ -76,7 +89,7 @@ Future<void> saveUserDetails(
         .collection('User')
         .doc(uid)
         .collection('Tasks')
-        .doc('Quiz')
+        .doc('Orientation')
         .collection('Quiz')
         .doc('quiz_task_1')
         .collection('questions')
@@ -87,12 +100,12 @@ Future<void> saveUserDetails(
       'correct_option': '',
     });
 
-    //Creating Read Task field (Specific to user to make tracking progress easier to implement)
+    //Creating Orientation-related Read Task field (Specific to user to make tracking progress easier to implement)
     await FirebaseFirestore.instance
         .collection('User')
         .doc(uid)
         .collection('Tasks')
-        .doc('Read')
+        .doc('Orientation')
         .collection('Read')
         .doc('read_task_1')
         .set({
@@ -100,12 +113,198 @@ Future<void> saveUserDetails(
       'title': '',
     });
 
-    //Creating Video Task field (Specific to user to make tracking progress easier to implement)
+    //Creating Orientation-related Video Task field (Specific to user to make tracking progress easier to implement)
     await FirebaseFirestore.instance
         .collection('User')
         .doc(uid)
         .collection('Tasks')
-        .doc('Watch')
+        .doc('Orientation')
+        .collection('Watch')
+        .doc('watch_task_1')
+        .set({
+      'title': '',
+      'videoUrl': '',
+    });
+  } catch (e) {
+    debugPrint('Exception Found: $e');
+  }
+}
+
+//Used to initialise Customs&Culture-Related Tasks
+Future<void> initialiseCCTasks(String? uid) async {
+  try {
+    //Creating Customs&Culture-related Quiz Task field (Specific to user to make tracking progress easier to implement)
+    await FirebaseFirestore.instance
+        .collection('User')
+        .doc(uid)
+        .collection('Tasks')
+        .doc('Customs & Culture')
+        .collection('Quiz')
+        .doc('quiz_task_1')
+        .set({
+      'description': '',
+      'title': '',
+      'question_count': 1,
+      'duration': 10,
+    });
+    await FirebaseFirestore.instance
+        .collection('User')
+        .doc(uid)
+        .collection('Tasks')
+        .doc('Customs & Culture')
+        .collection('Quiz')
+        .doc('quiz_task_1')
+        .collection('questions')
+        .doc('q1')
+        .set({
+      'question': '',
+      'options': [],
+      'correct_option': '',
+    });
+
+    //Creating Customs&Culture-related Read Task field (Specific to user to make tracking progress easier to implement)
+    await FirebaseFirestore.instance
+        .collection('User')
+        .doc(uid)
+        .collection('Tasks')
+        .doc('Customs & Culture')
+        .collection('Read')
+        .doc('read_task_1')
+        .set({
+      'content': '',
+      'title': '',
+    });
+
+    //Creating Customs&Culture-related Video Task field (Specific to user to make tracking progress easier to implement)
+    await FirebaseFirestore.instance
+        .collection('User')
+        .doc(uid)
+        .collection('Tasks')
+        .doc('Customs & Culture')
+        .collection('Watch')
+        .doc('watch_task_1')
+        .set({
+      'title': '',
+      'videoUrl': '',
+    });
+  } catch (e) {
+    debugPrint('Exception Found: $e');
+  }
+}
+
+//Used to initialise Compliance-Related Tasks
+Future<void> initialiseComplianceTasks(String? uid) async {
+  try {
+    //Creating Compliance-related Quiz Task field (Specific to user to make tracking progress easier to implement)
+    await FirebaseFirestore.instance
+        .collection('User')
+        .doc(uid)
+        .collection('Tasks')
+        .doc('Compliance')
+        .collection('Quiz')
+        .doc('quiz_task_1')
+        .set({
+      'description': '',
+      'title': '',
+      'question_count': 1,
+      'duration': 10,
+    });
+    await FirebaseFirestore.instance
+        .collection('User')
+        .doc(uid)
+        .collection('Tasks')
+        .doc('Compliance')
+        .collection('Quiz')
+        .doc('quiz_task_1')
+        .collection('questions')
+        .doc('q1')
+        .set({
+      'question': '',
+      'options': [],
+      'correct_option': '',
+    });
+
+    //Creating Compliance-related Read Task field (Specific to user to make tracking progress easier to implement)
+    await FirebaseFirestore.instance
+        .collection('User')
+        .doc(uid)
+        .collection('Tasks')
+        .doc('Compliance')
+        .collection('Read')
+        .doc('read_task_1')
+        .set({
+      'content': '',
+      'title': '',
+    });
+
+    //Creating Compliance-related Video Task field (Specific to user to make tracking progress easier to implement)
+    await FirebaseFirestore.instance
+        .collection('User')
+        .doc(uid)
+        .collection('Tasks')
+        .doc('Compliance')
+        .collection('Watch')
+        .doc('watch_task_1')
+        .set({
+      'title': '',
+      'videoUrl': '',
+    });
+  } catch (e) {
+    debugPrint('Exception Found: $e');
+  }
+}
+
+//Used to initialise Health&Safety-Related Tasks
+Future<void> initialiseHSTasks(String? uid) async {
+  try {
+    //Creating Health&Safety-related Quiz Task field (Specific to user to make tracking progress easier to implement)
+    await FirebaseFirestore.instance
+        .collection('User')
+        .doc(uid)
+        .collection('Tasks')
+        .doc('Health & Safety')
+        .collection('Quiz')
+        .doc('quiz_task_1')
+        .set({
+      'description': '',
+      'title': '',
+      'question_count': 1,
+      'duration': 10,
+    });
+    await FirebaseFirestore.instance
+        .collection('User')
+        .doc(uid)
+        .collection('Tasks')
+        .doc('Health & Safety')
+        .collection('Quiz')
+        .doc('quiz_task_1')
+        .collection('questions')
+        .doc('q1')
+        .set({
+      'question': '',
+      'options': [],
+      'correct_option': '',
+    });
+
+    //Creating Health&Safety-related Read Task field (Specific to user to make tracking progress easier to implement)
+    await FirebaseFirestore.instance
+        .collection('User')
+        .doc(uid)
+        .collection('Tasks')
+        .doc('Health & Safety')
+        .collection('Read')
+        .doc('read_task_1')
+        .set({
+      'content': '',
+      'title': '',
+    });
+
+    //Creating Health&Safety-related Video Task field (Specific to user to make tracking progress easier to implement)
+    await FirebaseFirestore.instance
+        .collection('User')
+        .doc(uid)
+        .collection('Tasks')
+        .doc('Health & Safety')
         .collection('Watch')
         .doc('watch_task_1')
         .set({
