@@ -14,12 +14,12 @@ class AchievementsPage extends StatefulWidget {
 }
 
 class Achievementpage extends State<AchievementsPage> {
-  AchievementTracker achievementTracker = AchievementTracker();
+  AchievementTracker achievementTracker = const AchievementTracker();
   //Extract the data from achievement collection
   final achievementColRef =
       userColRef.doc(currentUser.uid).collection("Achievement");
 
-  List<Map<String, dynamic>> _achievementContent = [];
+  List<Map<String, dynamic>> contentInAchv = [];
 
   // fetch the achievement list in initialization
   // @override
@@ -48,15 +48,14 @@ class Achievementpage extends State<AchievementsPage> {
         stream: achievementColRef.snapshots(),
         builder: (context, snapshot) {
           // Store all the achievement information in list
-          fetchAndStoreAchievement(_achievementContent);
-          final numberOfAchievement = _achievementContent.length;
+          fetchAndStoreAchievement(contentInAchv);
 
           return CustomScrollView(
             slivers: <Widget>[
               SliverToBoxAdapter(
                 child: Container(
                   height: 170.0,
-                  decoration: BoxDecoration(
+                  decoration: const BoxDecoration(
                     color: Color.fromARGB(255, 112, 107, 243),
                   ),
                   child: Stack(
@@ -70,7 +69,7 @@ class Achievementpage extends State<AchievementsPage> {
                           height: 100.0,
                         ),
                       ),
-                      Padding(
+                      const Padding(
                         padding: EdgeInsets.only(left: 16.0, top: 40),
                         child: Text(
                           "My Honor",
@@ -82,7 +81,7 @@ class Achievementpage extends State<AchievementsPage> {
                         ),
                       ),
                       Padding(
-                        padding: EdgeInsets.only(left: 16.0, top: 75),
+                        padding: const EdgeInsets.only(left: 16.0, top: 75),
                         child: achievementTracker,
                       )
                     ],
@@ -100,13 +99,14 @@ class Achievementpage extends State<AchievementsPage> {
                 delegate: SliverChildBuilderDelegate(
                   (BuildContext context, int index) {
                     return Achievement(
-                      title: _achievementContent[index]['name'],
-                      iconName: _achievementContent[index]['iconData'],
+                      size: 3,
+                      title: contentInAchv[index]['name'],
+                      iconName: contentInAchv[index]['iconData'],
                       award: '',
-                      isCompleted: _achievementContent[index]['IsComplete'],
+                      isCompleted: contentInAchv[index]['IsComplete'],
                     );
                   },
-                  childCount: numberOfAchievement,
+                  childCount: contentInAchv.length,
                 ),
               ),
               const SliverToBoxAdapter(
@@ -160,7 +160,7 @@ class Achievementpage extends State<AchievementsPage> {
     }
   }
 
-  Future<List> fetchAndStoreAchievement(
+  Future<void> fetchAndStoreAchievement(
       List<Map<String, dynamic>> newAchievementContent) async {
     // Get doc in achievement collection
     QuerySnapshot querySnapshot = await achievementColRef.get();
@@ -186,8 +186,8 @@ class Achievementpage extends State<AchievementsPage> {
             IconList.isNotEmpty ? IconList[newAchievementContent.length] : '',
       });
     });
-    print(newAchievementContent);
-    return newAchievementContent;
+    // print(newAchievementContent);
+    // return newAchievementContent;
     // Update AchievementContent
     // setState(() {
     //   _achievementContent = newAchievementContent;
@@ -196,55 +196,3 @@ class Achievementpage extends State<AchievementsPage> {
 
   // To Do: Sort the order of the achievements
 }
-
-              // SliverAppBar(
-              //   pinned: false,
-              //   expandedHeight: 170.0,
-              //   backgroundColor: Color.fromARGB(255, 112, 107, 243),
-              //   flexibleSpace: FlexibleSpaceBar(
-              //     // background: AchievementTracker(),
-              //     background: Image.asset(
-              //       'assets/icon/welcome.png',
-              //       width: 100,
-              //       height: 100,
-              //       alignment: Alignment.centerRight,
-              //     ),
-              //     title: Text(
-              //       "My Honor",
-              //       style: TextStyle(
-              //         color: Colors.white,
-              //         fontSize: 25,
-              //         fontWeight: FontWeight.bold,
-              //       ),
-              //     ),
-              //     titlePadding: EdgeInsets.only(left: 16.0, bottom: 65),
-              //   ),
-              // ),
-              // SliverToBoxAdapter(
-              //   child: Container(
-              //     height: 170.0,
-              //     decoration: BoxDecoration(
-              //       color: Color.fromARGB(255, 112, 107, 243),
-              //       // image: DecorationImage(
-              //       //   image: AssetImage('assets/icon/vest.png'),
-              //       //   alignment: Alignment.topRight,
-              //       //   fit: BoxFit.scaleDown,
-              //       // ),
-              //     ),
-              //     child: Row(
-              //       children: [
-              //         Padding(
-              //           padding: EdgeInsets.only(left: 16.0, bottom: 65),
-              //           child: Text(
-              //             "My Honor",
-              //             style: TextStyle(
-              //               color: Colors.white,
-              //               fontSize: 25,
-              //               fontWeight: FontWeight.bold,
-              //             ),
-              //           ),
-              //         ),
-              //       ],
-              //     ),
-              //   ),
-              // ),

@@ -7,6 +7,7 @@ class Achievement extends StatefulWidget {
   final String iconName;
   final bool isCompleted;
   final String award;
+  final int size;
 
   Achievement({
     super.key,
@@ -14,6 +15,7 @@ class Achievement extends StatefulWidget {
     required this.title,
     required this.iconName,
     required this.isCompleted,
+    required this.size,
   });
 
   @override
@@ -27,6 +29,8 @@ class AchievenmentState extends State<Achievement> {
     return Padding(
       padding: const EdgeInsets.all(5.0),
       child: Container(
+        width: 100,
+        height: 150,
         decoration: BoxDecoration(
           color: const Color.fromARGB(255, 30, 32, 67),
           borderRadius: BorderRadius.circular(6.0),
@@ -39,44 +43,46 @@ class AchievenmentState extends State<Achievement> {
           //   ),
           // ],
         ),
-        child: Column(
-          children: [
-            const SizedBox(height: 20),
-            Text(
-              widget.title,
-              style: const TextStyle(
-                fontSize: 25,
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
+        child: Container(
+          child: Column(
+            children: [
+              const SizedBox(height: 20),
+              Text(
+                widget.title,
+                style: const TextStyle(
+                  fontSize: 25,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            const SizedBox(height: 5),
-            Text(
-              widget.title,
-              style: const TextStyle(
-                fontFamily: 'Roboto',
-                fontSize: 16,
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
+              const SizedBox(height: 5),
+              Text(
+                widget.title,
+                style: const TextStyle(
+                  fontFamily: 'Roboto',
+                  fontSize: 16,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-            Padding(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 40.0, vertical: 20.0),
-              child: Image.asset(
-                widget.iconName,
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                    horizontal: 40.0, vertical: 20.0),
+                child: Image.asset(
+                  widget.iconName,
+                ),
               ),
-            ),
-            const SizedBox(height: 10),
-            Text(
-              widget.isCompleted ? "Completed" : "InCompleted",
-              style: const TextStyle(
-                fontSize: 12,
-                color: Colors.white,
-                fontWeight: FontWeight.bold,
+              const SizedBox(height: 10),
+              Text(
+                widget.isCompleted ? "Completed" : "InCompleted",
+                style: const TextStyle(
+                  fontSize: 12,
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
