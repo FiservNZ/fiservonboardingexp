@@ -29,7 +29,7 @@ class IncompletedAchievement extends StatelessWidget {
               Container(
                 width: 400,
                 height: 250,
-                color: Colors.red,
+                // color: Colors.red,
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,
                   itemCount: incompletedAchievements.length,
