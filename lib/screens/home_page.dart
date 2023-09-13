@@ -8,6 +8,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../themes/theme_provider.dart';
+import '../util/achievement_components/incompleted_achievement.dart';
 import '../util/constants.dart';
 import '../widgets/app_bar_overlay.dart';
 import 'package:flutter/material.dart';
@@ -69,7 +70,14 @@ class HomePage extends StatelessWidget {
               const SizedBox(
                 height: 30,
               ),
-
+              // IncompletedAchievement
+              Padding(
+                padding: const EdgeInsets.only(left: 10),
+                child: Container(
+                  alignment: Alignment.centerLeft,
+                  child: IncompletedAchievement(),
+                ),
+              ),
               const SizedBox(height: 200),
 
               //Read task for platypus article

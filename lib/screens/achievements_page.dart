@@ -56,14 +56,15 @@ class Achievementpage extends State<AchievementsPage> {
                 child: Container(
                   height: 170.0,
                   decoration: const BoxDecoration(
+                    //
                     color: Color.fromARGB(255, 112, 107, 243),
                   ),
                   child: Stack(
                     children: [
                       // Image config
                       Positioned(
-                        top: 10.0,
-                        right: 10.0,
+                        top: 35.0,
+                        right: 30.0,
                         child: Image.asset(
                           'assets/icon/welcome.png',
                           width: 100.0,
@@ -71,18 +72,18 @@ class Achievementpage extends State<AchievementsPage> {
                         ),
                       ),
                       const Padding(
-                        padding: EdgeInsets.only(left: 16.0, top: 40),
+                        padding: EdgeInsets.only(left: 18.0, top: 50),
                         child: Text(
-                          "My Honor",
+                          "ACHIEVEMENTS",
                           style: TextStyle(
                             color: Colors.white,
-                            fontSize: 25,
+                            fontSize: 27,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                       ),
                       Padding(
-                        padding: const EdgeInsets.only(left: 16.0, top: 75),
+                        padding: const EdgeInsets.only(left: 16.0, top: 85),
                         child: achievementTracker,
                       )
                     ],

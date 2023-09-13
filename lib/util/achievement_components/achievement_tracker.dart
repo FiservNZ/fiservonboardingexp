@@ -42,7 +42,7 @@ class AchievementTracker extends StatelessWidget {
                       ),
                       const SizedBox(width: 5),
                       const Text(
-                        "Achievements",
+                        "  Completed ",
                         style: TextStyle(
                           color: Colors.amber,
                           fontSize: 15,
