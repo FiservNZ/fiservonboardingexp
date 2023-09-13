@@ -15,6 +15,7 @@ class ReadPage extends GetView<ReadController> {
   final ReadModel model;
 
   const ReadPage({super.key, required this.model});
+  static const String routeName = '/readTaskPage';
 
   @override
   Widget build(BuildContext context) {
@@ -22,8 +23,8 @@ class ReadPage extends GetView<ReadController> {
     ThemeData selectedTheme = themeProvider.currentTheme;
     return Scaffold(
       backgroundColor: selectedTheme.colorScheme.background,
-      appBar: const AppBarOverlay(),
-      bottomNavigationBar: const CustomNavBar(),
+      //appBar: const AppBarOverlay(),
+      //bottomNavigationBar: const CustomNavBar(),
       body: SafeArea(
         child: FutureBuilder<ReadModel>(
           builder: (context, snapshot) {
@@ -54,6 +55,7 @@ class ReadPage extends GetView<ReadController> {
                     ),
                   ),
 
+                  // This needs to be changed.
                   // Image (from local assets folder not firebase). Needs to be changed as its hard coded.
                   const Padding(
                     padding: EdgeInsets.all(40.0),
@@ -105,7 +107,6 @@ class ReadPage extends GetView<ReadController> {
                                 .quicksand()), // Merge styles with GoogleFonts
                           ),
                         ),
-
                         // Task finished button
 
                         ElevatedButton(

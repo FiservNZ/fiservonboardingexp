@@ -13,6 +13,8 @@ import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
+import 'controllers/quiz controllers/initial_bindings.dart';
+import 'routes/quiz_test_routes.dart';
 import 'routes/routes.dart';
 
 //final FirebaseFirestore _firestore = FirebaseFirestore.instance;
@@ -21,7 +23,7 @@ int? initScreen;
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  //InitialBindings().dependencies();
+  InitialBindings().dependencies();
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   Get.put(ReadController());
@@ -41,8 +43,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/',
-      getPages: FiservAppRoutes.routes(),
+      //initialRoute: '/',
+      getPages: AppRoutes.routes(),
     );
   }
 }
