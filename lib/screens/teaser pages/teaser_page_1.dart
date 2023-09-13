@@ -5,7 +5,7 @@ class TeaserPage1 extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color.fromARGB(255, 255, 181, 70),
+      color: Color.fromARGB(255, 255, 232, 232),
       child: Center(
         child: Padding(
           padding: EdgeInsets.only(
@@ -15,8 +15,8 @@ class TeaserPage1 extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
               Image.asset(
-                'assets/images/teaser1.png',
-                width: 250,
+                'assets/images/welcomehandshake.png',
+                width: 350,
                 height: 350,
                 fit: BoxFit.contain,
               ),
@@ -25,6 +25,7 @@ class TeaserPage1 extends StatelessWidget {
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(255, 255, 81, 0),
                 ),
               ),
               SizedBox(
