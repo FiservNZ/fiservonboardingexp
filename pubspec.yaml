@@ -102,15 +102,17 @@ flutter:
       - assets/icon/worldwide.png
       - assets/icon/vest.png
       - assets/icon/book.png
-      #Task Tile Page
+      # Task Tile Page
       - assets/animations/reading_book.json
       - assets/icon/start-button.png
 
       - assets/json/quizzes/
-      #Read task
+      # Read task
       - assets/images/platypus.webp
       #Achievement
       - assets/icon/achievement/
+      # Teaser
+      - assets/images/teaser1.png
       
 
 
