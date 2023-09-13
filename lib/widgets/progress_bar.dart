@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:percent_indicator/percent_indicator.dart';
+import '../firebase_references/firebase_refs.dart';
 import '../util/constants.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -9,10 +10,10 @@ class ProgressBar extends StatelessWidget {
 
   //Method to add points
   Future<void> addPoints(int points) async {
-    final currentUser = FirebaseAuth.instance.currentUser!;
-    final userCollection = FirebaseFirestore.instance.collection('User');
+    //final currentUser = FirebaseAuth.instance.currentUser!;
+    //final userCollection = FirebaseFirestore.instance.collection('User');
 
-    final userDocRef = userCollection.doc(currentUser.uid);
+    final userDocRef = userColRef.doc(currentUser.uid);
     final userDoc = await userDocRef.get();
     final userMap = userDoc.data() as Map<String, dynamic>;
 
@@ -36,12 +37,12 @@ class ProgressBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final currentUser = FirebaseAuth.instance.currentUser!;
-    final userCollection = FirebaseFirestore.instance.collection('User');
+    //final currentUser = FirebaseAuth.instance.currentUser!;
+    //final userCollection = FirebaseFirestore.instance.collection('User');
 
     return SizedBox(
       child: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
-        stream: userCollection.doc(currentUser.uid).snapshots(),
+        stream: userColRef.doc(currentUser.uid).snapshots(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const CircularProgressIndicator();

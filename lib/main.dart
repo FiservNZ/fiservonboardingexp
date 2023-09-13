@@ -12,10 +12,17 @@ import 'package:fiservonboardingexp/util/kt_testing/read_controller.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 
+
+import 'routes/routes.dart';
+
+//final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 int? initScreen;
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  //InitialBindings().dependencies();
+
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
   Get.put(ReadController());
@@ -29,7 +36,8 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      getPages: AppRoutes.routes(),
+      initialRoute: '/',
+      getPages: FiservAppRoutes.routes(),
     );
   }
 }
