@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import '../task_components/task_tile.dart';
 import '../../util/constants.dart';
-import '../../idk/task_components/task.dart';
-import '../../widgets/nav_bar.dart';
+import 'package:fiservonboardingexp/widgets/nav_bar.dart';
 
-class TaskPage extends StatelessWidget {
-  final Task task;
+class CustomsCulturePage extends StatefulWidget {
+  const CustomsCulturePage({super.key});
 
-  TaskPage({super.key, required this.task});
+  @override
+  State<CustomsCulturePage> createState() => _CustomsCulturePage();
+}
 
+class _CustomsCulturePage extends State<CustomsCulturePage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -24,13 +26,17 @@ class TaskPage extends StatelessWidget {
             child: Column(
               children: [
                 const SizedBox(height: 20),
-                //title of page pulled from the name field in firestore
+                //heading
                 Text(
-                  task.name,
+                  "Learn about Fiserv Customs and Culture!",
                   style:
                       GoogleFonts.bebasNeue(fontSize: 30, color: fiservColor),
                 ),
                 const SizedBox(height: 10),
+                //list of tasks
+                const Expanded(
+                  child: TaskTile(),
+                )
               ],
             ),
           ),

@@ -1,5 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fiservonboardingexp/api/pdf_api.dart';
 import 'package:fiservonboardingexp/firebase_references/firebase_refs.dart';
 import 'package:fiservonboardingexp/idk/nav_app_overlay.dart';
