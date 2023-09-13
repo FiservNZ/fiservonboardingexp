@@ -57,6 +57,7 @@ class HelpPage extends StatelessWidget {
                 alignment: Alignment.center,
                 child: ElevatedButton(
                   onPressed: () {
+                    //change to pop function
                     Navigator.push(
                       context,
                       MaterialPageRoute(
@@ -75,6 +76,7 @@ class HelpPage extends StatelessWidget {
                     ).merge(GoogleFonts
                         .quicksand()), // Merge styles with GoogleFonts
                   ),
+
                 ),
               ),
             ),

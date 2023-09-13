@@ -1,3 +1,5 @@
+
+import 'package:fiservonboardingexp/firebase_references/firebase_refs.dart';
 import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -24,18 +26,20 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
 
   Future passwordReset() async {
     try {
-      await FirebaseAuth.instance
-          .sendPasswordResetEmail(email: _emailController.text.trim());
+      // pull reference from the file
+      await fireAuth.sendPasswordResetEmail(
+          email: _emailController.text.trim());
+      // ignore: use_build_context_synchronously
       showDialog(
         context: context,
         builder: (context) {
-          return AlertDialog(
+          return const AlertDialog(
             content: Text('Reset link sent! Please check your email'),
           );
         },
       );
     } on FirebaseAuthException catch (e) {
-      print(e);
+      //print(e);
       showDialog(
         context: context,
         builder: (context) {

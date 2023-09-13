@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fiservonboardingexp/firebase_references/firebase_refs.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -31,7 +32,8 @@ class _ManagerViewState extends State<ManagerView> {
           IconButton(
             icon: const Icon(Icons.logout),
             onPressed: () async {
-              await FirebaseAuth.instance.signOut();
+              // pull reference from the file
+              await fireAuth.signOut();
               Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
                 MaterialPageRoute(
                   builder: (BuildContext context) {

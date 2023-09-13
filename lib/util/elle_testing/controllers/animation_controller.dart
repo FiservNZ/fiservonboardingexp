@@ -1,6 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fiservonboardingexp/util/elle_testing/models/quiz_model.dart';
-import 'package:fiservonboardingexp/util/quiz_components/quiz.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';

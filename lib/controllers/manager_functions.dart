@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fiservonboardingexp/firebase_references/firebase_refs.dart';
 import 'package:flutter/material.dart';
 
 Future<String?> signUpWithEmailAndPassword(
@@ -21,8 +22,8 @@ Future<String?> signUpWithEmailAndPassword(
 Future<void> saveUserDetails(
     String? uid, String firstName, String lastName, String position) async {
   try {
-    await FirebaseFirestore.instance.collection('User').doc(uid).set({
-      'firstName': firstName,
+    await userColRef.doc(uid).set({
+      'user': firstName,
       'lastName': lastName,
       'position': position,
       'Future Self': '',
