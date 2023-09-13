@@ -13,7 +13,7 @@ class HomePage extends StatelessWidget {
   final ExpBar _expBar = const ExpBar(barwidth: 300);
   final ProgressBar _progressBar = const ProgressBar();
 
-  HomePage({Key? key}) : super(key: key);
+  const HomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
