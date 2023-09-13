@@ -25,105 +25,113 @@ class HomePage extends StatelessWidget {
           currentUser: currentUser,
         ),
         bottomNavigationBar: const CustomNavBar(),
-        body: SafeArea(
-          child: ListView(
-            children: [
-              const SizedBox(height: 15),
+        body: Container(
+          decoration: BoxDecoration(
+              image: DecorationImage(
+                  image: AssetImage("assets/images/randShapes.png"),
+                  colorFilter: ColorFilter.mode(
+                      Colors.white.withOpacity(0.15), BlendMode.modulate),
+                  fit: BoxFit.cover)),
+          child: SafeArea(
+            child: ListView(
+              children: [
+                const SizedBox(height: 15),
 
-              // Getting user name
-              StreamBuilder<DocumentSnapshot>(
-                stream: FirebaseFirestore.instance
-                    .collection("User")
-                    .doc(currentUser?.uid)
-                    .snapshots(),
-                builder: (context, snapshot) {
-                  if (snapshot.hasData) {
-                    final userData =
-                        snapshot.data!.data() as Map<String, dynamic>;
-                    final firstName = userData['firstName'] ?? 'First Name';
-                    final lastName = userData['lastName'] ?? 'Last Name';
+                // Getting user name
+                StreamBuilder<DocumentSnapshot>(
+                  stream: FirebaseFirestore.instance
+                      .collection("User")
+                      .doc(currentUser?.uid)
+                      .snapshots(),
+                  builder: (context, snapshot) {
+                    if (snapshot.hasData) {
+                      final userData =
+                          snapshot.data!.data() as Map<String, dynamic>;
+                      final firstName = userData['firstName'] ?? 'First Name';
+                      final lastName = userData['lastName'] ?? 'Last Name';
 
-                    return Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        // Welcome message + name
-                        Padding(
-                          padding: const EdgeInsets.symmetric(
-                            horizontal: 16,
-                          ),
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Welcome back,',
-                                style: TextStyle(
-                                  color: selectedTheme.colorScheme.secondary,
-                                  fontSize: 24,
-                                  fontWeight: FontWeight.bold,
+                      return Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          // Welcome message + name
+                          Padding(
+                            padding: const EdgeInsets.symmetric(
+                              horizontal: 16,
+                            ),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Welcome back,',
+                                  style: TextStyle(
+                                    color: selectedTheme.colorScheme.secondary,
+                                    fontSize: 24,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                '$firstName $lastName',
-                                style: TextStyle(
-                                  color: selectedTheme.colorScheme.secondary,
-                                  fontSize: 21,
+                                Text(
+                                  '$firstName $lastName',
+                                  style: TextStyle(
+                                    color: selectedTheme.colorScheme.secondary,
+                                    fontSize: 21,
+                                  ),
                                 ),
-                              ),
-                            ],
+                              ],
+                            ),
                           ),
-                        ),
 
-                        const SizedBox(height: 20),
+                          const SizedBox(height: 20),
 
-                        // Display exp bar
-                        Padding(
-                          padding: const EdgeInsets.fromLTRB(20, 30, 0, 0),
-                          child: const ExpBar(barwidth: 300),
-                        ),
-                      ],
-                    );
-                  } else if (snapshot.hasError) {
-                    return Text('Error: ${snapshot.error}');
-                  }
-                  return CircularProgressIndicator();
-                },
-              ),
-
-              const SizedBox(height: 30),
-
-              // Achievement title text
-              Padding(
-                padding: const EdgeInsets.symmetric(
-                  horizontal: 16,
+                          // Display exp bar
+                          Padding(
+                            padding: const EdgeInsets.fromLTRB(20, 30, 0, 0),
+                            child: const ExpBar(barwidth: 300),
+                          ),
+                        ],
+                      );
+                    } else if (snapshot.hasError) {
+                      return Text('Error: ${snapshot.error}');
+                    }
+                    return CircularProgressIndicator();
+                  },
                 ),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
-                      child: Text(
-                        'Achievements',
-                        style: TextStyle(
-                          color: selectedTheme.colorScheme.secondary,
-                          fontSize: 24,
-                          fontWeight: FontWeight.bold,
+
+                const SizedBox(height: 30),
+
+                // Achievement title text
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 16,
+                  ),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(0, 0, 0, 5),
+                        child: Text(
+                          'Achievements',
+                          style: TextStyle(
+                            color: selectedTheme.colorScheme.secondary,
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
                         ),
                       ),
-                    ),
-                  ],
+                    ],
+                  ),
                 ),
-              ),
 
-              // Achievement tiles
-              Padding(
-                padding: const EdgeInsets.only(left: 10),
-                child: Container(
-                  alignment: Alignment.centerLeft,
-                  child: IncompletedAchievement(),
+                // Achievement tiles
+                Padding(
+                  padding: const EdgeInsets.only(left: 10),
+                  child: Container(
+                    alignment: Alignment.centerLeft,
+                    child: IncompletedAchievement(),
+                  ),
                 ),
-              ),
-              const SizedBox(height: 200),
-            ],
+                const SizedBox(height: 200),
+              ],
+            ),
           ),
         ),
       ),

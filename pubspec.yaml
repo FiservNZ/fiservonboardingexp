@@ -119,6 +119,10 @@ flutter:
       - assets/images/teaser3.png    
       - assets/images/welcomehandshake.png     
       - assets/images/happyppl.png
+      # HomePage
+      - assets/images/bkgnd.png
+      - assets/images/randShapes.png
+
 
 
 
