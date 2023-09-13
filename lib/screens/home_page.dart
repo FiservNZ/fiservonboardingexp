@@ -131,9 +131,6 @@ class HomePage extends StatelessWidget {
   }
 }
 
-
-
-
 // PREVIOUS HOMEPAGE IMPLEMENTATION HERE LEFT IT JUST INCASE SOME1 NEEDS IT NO PROBLEM
 
 // class HomePage extends StatelessWidget {
