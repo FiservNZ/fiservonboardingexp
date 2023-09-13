@@ -67,7 +67,7 @@ class HelpPage extends StatelessWidget {
                     );
                   },
                   style: ElevatedButton.styleFrom(
-                      backgroundColor: selectedTheme.colorScheme.tertiary),
+                      backgroundColor: selectedTheme.colorScheme.onBackground),
                   child: Text(
                     'Close',
                     style: TextStyle(
