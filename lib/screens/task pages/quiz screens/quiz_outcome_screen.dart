@@ -6,7 +6,7 @@ import 'package:fiservonboardingexp/widgets/quiz%20widgets/quiz_app_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import '../../../util/elle_testing/themes/ui_parameters.dart';
+import '../../../themes/quiz themes/ui_parameters.dart';
 
 class QuizOutcomeScreen extends GetView<QuestionController> {
   const QuizOutcomeScreen({Key? key}) : super(key: key);

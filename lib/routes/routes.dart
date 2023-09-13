@@ -4,11 +4,10 @@ import 'package:fiservonboardingexp/screens/login_page.dart';
 import 'package:fiservonboardingexp/screens/main_screen.dart';
 import 'package:fiservonboardingexp/screens/manager/manager_view.dart';
 import 'package:fiservonboardingexp/screens/profile_page.dart';
-import 'package:fiservonboardingexp/screens/settings_page.dart';
+import 'package:fiservonboardingexp/screens/menu%20drawer/settings_page.dart';
 import 'package:fiservonboardingexp/controllers/check_user.dart';
 import 'package:get/get.dart';
-
-import '../screens/help_page.dart';
+import '../screens/menu drawer/help_page.dart';
 import '../screens/teaser pages/teaser.dart';
 
 class FiservAppRoutes {

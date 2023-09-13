@@ -1,5 +1,5 @@
 import 'package:fiservonboardingexp/model/quiz_model.dart';
-import 'package:fiservonboardingexp/util/elle_testing/themes/ui_parameters.dart';
+import 'package:fiservonboardingexp/themes/quiz%20themes/ui_parameters.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 

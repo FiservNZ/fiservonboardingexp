@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import '../util/constants.dart';
-import '../widgets/app_bar_overlay.dart';
-import '../widgets/faq_list.dart';
-import '../widgets/star_rating.dart';
+import '../../util/constants.dart';
+import '../../widgets/app_bar_overlay.dart';
+import '../../widgets/faq_list.dart';
+import '../../widgets/star_rating.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'main_screen.dart';
+import '../main_screen.dart';
 
 class FeedBack extends StatefulWidget {
   const FeedBack({super.key});

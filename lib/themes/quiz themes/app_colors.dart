@@ -1,5 +1,5 @@
-import 'package:fiservonboardingexp/util/elle_testing/themes/app_light_theme.dart';
-import 'package:fiservonboardingexp/util/elle_testing/themes/ui_parameters.dart';
+import 'package:fiservonboardingexp/themes/quiz%20themes/app_light_theme.dart';
+import 'package:fiservonboardingexp/themes/quiz%20themes/ui_parameters.dart';
 import 'package:flutter/material.dart';
 
 import 'app_dark_theme.dart';

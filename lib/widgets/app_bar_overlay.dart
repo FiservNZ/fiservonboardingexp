@@ -1,5 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fiservonboardingexp/screens/feedback_page.dart';
+import 'package:fiservonboardingexp/screens/menu%20drawer/feedback_page.dart';
 import 'package:get/get.dart';
 import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:google_fonts/google_fonts.dart';

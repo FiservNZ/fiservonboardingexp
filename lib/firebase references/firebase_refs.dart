@@ -42,6 +42,13 @@ DocumentReference taskTypeRef({
 }) =>
     taskRef(userId: userId, taskType: taskType).collection(taskCol).doc(taskId);
 
+// Used for the current fuctionality of the tasks
+final readref = firestore.collection('Read');
+
+DocumentReference readRef({
+  required String readId,
+}) =>
+    readref.doc(readId);
 // reference to the Quizzes collection in the Firestore database
 final quizref = firestore.collection('Quizzes');
 
