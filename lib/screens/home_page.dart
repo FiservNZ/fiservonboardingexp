@@ -1,8 +1,5 @@
-import 'package:fiservonboardingexp/screens/achievements_page.dart';
-import 'package:fiservonboardingexp/util/achievement_components/achievement_tile.dart';
 import 'package:fiservonboardingexp/util/achievement_components/incompleted_achievement.dart';
 import 'package:fiservonboardingexp/util/kt_testing/platypus_read_task.dart';
-import 'package:fiservonboardingexp/util/achievement_components/achievement_tracker.dart';
 import 'package:fiservonboardingexp/widgets/progress_bar.dart';
 import 'package:fiservonboardingexp/widgets/exp_bar.dart';
 import 'package:fiservonboardingexp/widgets/nav_bar.dart';
@@ -13,15 +10,8 @@ import 'package:flutter/material.dart';
 class HomePage extends StatelessWidget {
   final ExpBar _expBar = const ExpBar(barwidth: 300);
   final ProgressBar _progressBar = const ProgressBar();
-  final AchievementTracker _achievementTracker = const AchievementTracker();
-  final Achievementpage _achievementpage = Achievementpage();
 
-  HomePage({super.key});
-
-  void DetectIncompletedAchi() {
-    List<Map<String, dynamic>> _achievementContent = [];
-    _achievementpage.fetchAndStoreAchievement(_achievementContent);
-  }
+  const HomePage({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -34,13 +24,13 @@ class HomePage extends StatelessWidget {
 
         //Floating action button
         floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.navigation),
           backgroundColor: Colors.green,
           foregroundColor: Colors.white,
           onPressed: () {
             int expToAdd = 200;
             _expBar.addExperience(expToAdd);
           },
+          child: const Icon(Icons.navigation),
         ),
 
         //Home Page

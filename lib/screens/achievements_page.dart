@@ -60,6 +60,7 @@ class Achievementpage extends State<AchievementsPage> {
                   ),
                   child: Stack(
                     children: [
+                      // Image config
                       Positioned(
                         top: 10.0,
                         right: 10.0,
@@ -193,6 +194,4 @@ class Achievementpage extends State<AchievementsPage> {
     //   _achievementContent = newAchievementContent;
     // });
   }
-
-  // To Do: Sort the order of the achievements
 }
