@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fiservonboardingexp/themes/beach_theme.dart';
 import 'package:fiservonboardingexp/themes/dark_theme.dart';
 import 'package:fiservonboardingexp/themes/light_theme.dart';
 import 'package:fiservonboardingexp/themes/pastel_theme.dart';
@@ -14,6 +15,8 @@ String themeDataToString(ThemeData theme) {
     return 'pastel';
   } else if (theme == rainforestTheme) {
     return 'rainforest';
+  } else if (theme == beachTheme) {
+    return 'beach';
   }
   // Handle any other themes here
   return 'light'; // Default theme if none of the above matches
@@ -27,7 +30,9 @@ ThemeData stringToThemeData(String theme) {
   } else if (theme == 'pastel') {
     return pastelTheme;
   } else if (theme == 'rainforest') {
-    return rainforestTheme; // Use rainforestTheme here, not pastelTheme
+    return rainforestTheme;
+  } else if (theme == 'beach') {
+    return beachTheme;
   } else {
     // Return a default theme (you can customize this)
     return lightTheme;
