@@ -50,21 +50,21 @@ class AchievenmentState extends State<Achievement> {
               Text(
                 widget.title,
                 style: const TextStyle(
-                  fontSize: 25,
+                  fontSize: 15,
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               const SizedBox(height: 5),
-              Text(
-                widget.title,
-                style: const TextStyle(
-                  fontFamily: 'Roboto',
-                  fontSize: 16,
-                  color: Colors.white,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              // Text(
+              //   widget.title,
+              //   style: const TextStyle(
+              //     fontFamily: 'Roboto',
+              //     fontSize: 16,
+              //     color: Colors.white,
+              //     fontWeight: FontWeight.bold,
+              //   ),
+              // ),
               Padding(
                 padding: const EdgeInsets.symmetric(
                     horizontal: 40.0, vertical: 20.0),
