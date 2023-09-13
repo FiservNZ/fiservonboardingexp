@@ -109,6 +109,8 @@ flutter:
       - assets/json/quizzes/
       #Read task
       - assets/images/platypus.webp
+      #Achievement
+      - assets/icon/achievement/
       
 
 

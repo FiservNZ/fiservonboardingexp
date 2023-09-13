@@ -36,6 +36,28 @@ class Achievementpage extends State<AchievementsPage> {
     'assets/icon/compliance.png',
     'assets/icon/guidelines.png',
     'assets/icon/technical.png',
+    'assets/icon/technical.png',
+    'assets/icon/technical.png',
+    'assets/icon/technical.png',
+    'assets/icon/technical.png',
+    'assets/icon/technical.png',
+    'assets/icon/technical.png',
+    'assets/icon/technical.png',
+  ];
+
+  final List SubiconList = [
+    'assets/icon/achievement/First Time login!.png',
+    'assets/icon/achievement/Completing checklist!.png',
+    'assets/icon/achievement/Completed orientation!.png',
+    'assets/icon/achievement/Completed Compliance!.png',
+    'assets/icon/achievement/Completed Health & Safety!.png',
+    'assets/icon/achievement/Completed Technical Training!.png',
+    'assets/icon/achievement/Completed Customs & Culture!.png',
+    'assets/icon/achievement/Completed all the modules!.png',
+    'assets/icon/achievement/Unlocked all icons!.png',
+    'assets/icon/achievement/Unlocked all themes!.png',
+    'assets/icon/achievement/Submitted feedback!.png',
+    'assets/icon/achievement/Changed Icon!.png',
   ];
 
   @override
@@ -103,7 +125,7 @@ class Achievementpage extends State<AchievementsPage> {
                     return Achievement(
                       size: 3,
                       title: contentInAchv[index]['name'],
-                      iconName: contentInAchv[index]['iconData'],
+                      iconName: contentInAchv[index]['iconData'] ?? "",
                       award: '',
                       isCompleted: contentInAchv[index]['IsComplete'],
                     );
@@ -188,7 +210,7 @@ class Achievementpage extends State<AchievementsPage> {
             IconList.isNotEmpty ? IconList[newAchievementContent.length] : '',
       });
     });
-    // print(newAchievementContent);
+    print(newAchievementContent);
     // return newAchievementContent;
     // Update AchievementContent
     // setState(() {
