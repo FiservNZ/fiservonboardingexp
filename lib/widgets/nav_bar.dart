@@ -1,9 +1,10 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fiservonboardingexp/firebase_references/firebase_refs.dart';
 import 'package:fiservonboardingexp/screens/achievements_page.dart';
 import 'package:fiservonboardingexp/screens/colleagues_page.dart';
 import 'package:fiservonboardingexp/screens/home_page.dart';
 import 'package:fiservonboardingexp/screens/training_page.dart';
 import 'package:fiservonboardingexp/screens/checklist_page.dart';
+import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
 
 class CustomNavBar extends StatelessWidget {
@@ -32,7 +33,7 @@ class CustomNavBar extends StatelessWidget {
             Navigator.push(
                 context,
                 _instantPageRoute(
-                  ChecklistPage(firestore: FirebaseFirestore.instance),
+                  ChecklistPage(firestore: firestore),
                 ));
             break;
           // Directs user to the Achievements Page
@@ -47,37 +48,38 @@ class CustomNavBar extends StatelessWidget {
         }
       },
 
+      items: [
       // Implementation for the icons, icon colours and icon label names
-      items: const [
         BottomNavigationBarItem(
-          icon: Icon(Icons.home),
+          icon: const Icon(Icons.home),
           label: 'Home',
-          backgroundColor: Colors.black,
+          backgroundColor: darkBars,
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.my_library_books),
+          icon: const Icon(Icons.my_library_books),
           label: 'Modules',
-          backgroundColor: Colors.black,
+          backgroundColor: darkBars,
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.format_list_bulleted_sharp),
+          icon: const Icon(Icons.format_list_bulleted_sharp),
           label: 'Checklist',
-          backgroundColor: Colors.black,
+          backgroundColor: darkBars,
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.task_alt),
+          icon: const Icon(Icons.task_alt),
           label: 'Achievements',
-          backgroundColor: Colors.black,
+          backgroundColor: darkBars,
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.person_search_outlined),
+          icon: const Icon(Icons.person_search_outlined),
           label: 'Colleagues',
-          backgroundColor: Colors.black,
+          backgroundColor: darkBars,
         ),
       ],
-      selectedItemColor: FiservColor,
-      unselectedItemColor: FiservColor,
-      backgroundColor: Colors.black,
+
+      selectedItemColor: fiservColor,
+      unselectedItemColor: fiservColor,
+      backgroundColor: Color(0xFF111211),
       selectedFontSize: 12.0,
       unselectedFontSize: 12.0,
     );
@@ -93,5 +95,3 @@ class CustomNavBar extends StatelessWidget {
     );
   }
 }
-
-const FiservColor = Color(0xFFFF6600);

@@ -1,3 +1,4 @@
+import 'package:fiservonboardingexp/firebase_references/firebase_refs.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -11,10 +12,10 @@ class ExpBar extends StatelessWidget {
 
   //Method to add exp and handle level up
   Future<void> addExperience(int expToAdd) async {
-    final currentUser = FirebaseAuth.instance.currentUser!;
-    final userCollection = FirebaseFirestore.instance.collection('User');
+    //final currentUser = FirebaseAuth.instance.currentUser!;
+    //final userCollection = FirebaseFirestore.instance.collection('User');
 
-    final userDocRef = userCollection.doc(currentUser.uid);
+    final userDocRef = userColRef.doc(currentUser.uid);
     final userDoc = await userDocRef.get();
     final userMap = userDoc.data() as Map<String, dynamic>;
 
@@ -43,10 +44,10 @@ class ExpBar extends StatelessWidget {
 
   // Get the Level
   Future<int> get level async {
-    final currentUser = FirebaseAuth.instance.currentUser!;
-    final userCollection = FirebaseFirestore.instance.collection('User');
+    //final currentUser = FirebaseAuth.instance.currentUser!;
+    //final userCollection = FirebaseFirestore.instance.collection('User');
 
-    final userDocRef = userCollection.doc(currentUser.uid);
+    final userDocRef = userColRef.doc(currentUser.uid);
     final userDoc = await userDocRef.get();
     final userMap = userDoc.data() as Map<String, dynamic>;
     return userMap['Level'] ?? 1;
@@ -54,12 +55,12 @@ class ExpBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final currentUser = FirebaseAuth.instance.currentUser!;
-    final userCollection = FirebaseFirestore.instance.collection('User');
+    //final currentUser = FirebaseAuth.instance.currentUser!;
+    //final userCollection = FirebaseFirestore.instance.collection('User');
 
     return SizedBox(
       child: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
-        stream: userCollection.doc(currentUser.uid).snapshots(),
+        stream: userColRef.doc(currentUser.uid).snapshots(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const CircularProgressIndicator();
