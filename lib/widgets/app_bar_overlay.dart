@@ -174,7 +174,7 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                             onTap: () {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
-                                    builder: (context) => FeedBack()),
+                                    builder: (context) => const FeedBack()),
                               );
                             },
                           ),
