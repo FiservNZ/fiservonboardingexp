@@ -7,6 +7,8 @@ import 'package:fiservonboardingexp/screens/login_page.dart';
 import 'package:fiservonboardingexp/screens/main_screen.dart';
 
 class CheckUser extends StatefulWidget {
+  const CheckUser({super.key});
+
   @override
   _CheckUserState createState() => _CheckUserState();
 }
