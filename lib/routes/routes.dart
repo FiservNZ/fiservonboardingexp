@@ -5,6 +5,10 @@ import 'package:fiservonboardingexp/screens/main_screen.dart';
 import 'package:fiservonboardingexp/screens/manager/manager_view.dart';
 import 'package:fiservonboardingexp/screens/profile_page.dart';
 import 'package:fiservonboardingexp/screens/settings_page.dart';
+import 'package:fiservonboardingexp/util/mc_testing/category%20screens/cc_screen.dart';
+import 'package:fiservonboardingexp/util/mc_testing/category%20screens/compliance_screen.dart';
+import 'package:fiservonboardingexp/util/mc_testing/category%20screens/hs_screen.dart';
+import 'package:fiservonboardingexp/util/mc_testing/category%20screens/orientation_screen.dart';
 import 'package:fiservonboardingexp/widgets/check_user.dart';
 import 'package:get/get.dart';
 
@@ -31,7 +35,7 @@ class FiservAppRoutes {
         ),
         GetPage(
           name: "/home",
-          page: () => const HomePage(),
+          page: () => HomePage(),
         ),
         GetPage(
           name: "/manager",
@@ -52,6 +56,23 @@ class FiservAppRoutes {
         GetPage(
           name: "/profile",
           page: () => const ProfilePage(),
+        ),
+        GetPage(
+          name: OrientationScreen.routeName,
+          page: () => const OrientationScreen(),
+        ),
+        GetPage(
+          name: CustomsCultureScreen.routeName,
+          page: () => const CustomsCultureScreen(),
+        ),
+        GetPage(
+          name: HealthSafetyScreen.routeName,
+          page: () => const HealthSafetyScreen(),
+        ),
+
+        GetPage(
+          name: ComplianceScreen.routeName,
+          page: () => const ComplianceScreen(),
         ),
 
         // GetPage(

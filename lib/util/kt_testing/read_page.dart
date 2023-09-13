@@ -15,6 +15,7 @@ class ReadPage extends GetView<ReadController> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: FutureBuilder<ReadModel>(
+        future: Future.value(model),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             // While data is still loading
