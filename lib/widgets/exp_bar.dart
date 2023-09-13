@@ -16,9 +16,6 @@ class ExpBar extends StatelessWidget {
 
   //Method to add exp and handle level up
   Future<void> addExperience(int expToAdd) async {
-    //final currentUser = FirebaseAuth.instance.currentUser!;
-    //final userCollection = FirebaseFirestore.instance.collection('User');
-
     final userDocRef = userColRef.doc(currentUser.uid);
     final userDoc = await userDocRef.get();
     final userMap = userDoc.data() as Map<String, dynamic>;
