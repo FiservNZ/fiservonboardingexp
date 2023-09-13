@@ -111,7 +111,14 @@ flutter:
       - assets/images/platypus.webp
       # Teaser
       - assets/images/teaser1.png
-      
+      - assets/images/beach.png
+      - assets/images/forest.png
+      - assets/images/pastel.png
+      - assets/images/confetti.png
+      - assets/images/starbackground.png
+      - assets/images/teaser3.png    
+      - assets/images/welcomehandshake.png     
+      - assets/images/happyppl.png
 
 
 
