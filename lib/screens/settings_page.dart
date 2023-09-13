@@ -205,7 +205,7 @@ class _SettingsPageState extends State<SettingsPage> {
                     Navigator.pop(context);
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: selectedTheme.colorScheme.tertiary,
+                    backgroundColor: selectedTheme.colorScheme.onBackground,
                   ),
                   child: Text(
                     'Close',

@@ -132,7 +132,7 @@ class _ThemesPageState extends State<ThemesPage> {
                 },
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(
-                    selectedTheme.colorScheme.tertiary,
+                    selectedTheme.colorScheme.onBackground,
                   ),
                 ),
                 child: Text(

@@ -69,7 +69,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                 'Please enter your email and a password reset link will be emailed to you',
                 textAlign: TextAlign.center,
                 style: TextStyle(
-                  color: selectedTheme.colorScheme.secondary,
+                  color: selectedTheme.colorScheme.primary,
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
                 ).merge(
@@ -85,16 +85,16 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
               child: TextField(
                 controller: _emailController,
                 decoration: InputDecoration(
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: BorderSide(
-                        color: const Color.fromARGB(255, 150, 78, 78)),
+                  enabledBorder: const OutlineInputBorder(
+                    borderSide:
+                        BorderSide(color: Color.fromARGB(255, 150, 78, 78)),
                   ),
                   focusedBorder: OutlineInputBorder(
                     borderSide:
                         BorderSide(color: selectedTheme.colorScheme.secondary),
                   ),
                   hintText: 'Email',
-                  fillColor: selectedTheme.colorScheme.primary,
+                  fillColor: Colors.white,
                   filled: true,
                 ),
               ),
@@ -105,7 +105,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
             // Reset password button
             MaterialButton(
               onPressed: passwordReset,
-              color: selectedTheme.colorScheme.tertiary,
+              color: selectedTheme.colorScheme.onBackground,
               child: Text(
                 'Reset Password',
                 style: TextStyle(
@@ -124,7 +124,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                 },
                 style: ButtonStyle(
                   backgroundColor: MaterialStateProperty.all<Color>(
-                    selectedTheme.colorScheme.tertiary,
+                    selectedTheme.colorScheme.onBackground,
                   ),
                 ),
                 child: Text(

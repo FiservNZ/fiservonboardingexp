@@ -94,7 +94,7 @@ class ProgressBar extends StatelessWidget {
                       valueColor: AlwaysStoppedAnimation<Color>(
                         selectedTheme.colorScheme.secondary,
                       ),
-                      backgroundColor: selectedTheme.colorScheme.tertiary,
+                      backgroundColor: const Color.fromARGB(255, 190, 188, 184),
                     ),
                   ),
                 ),

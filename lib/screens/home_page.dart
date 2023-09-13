@@ -90,7 +90,7 @@ class HomePage extends StatelessWidget {
                     }
                   },
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: selectedTheme.colorScheme.tertiary,
+                    backgroundColor: selectedTheme.colorScheme.onBackground,
                     fixedSize: Size(120, 35),
                   ),
                   child: Text(

@@ -94,12 +94,12 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                           ListTile(
                             leading: Icon(
                               Icons.list,
-                              color: selectedTheme.colorScheme.primary,
+                              color: selectedTheme.colorScheme.secondary,
                             ),
                             title: Text(
                               'Intro Teaser',
                               style: TextStyle(
-                                color: selectedTheme.colorScheme.primary,
+                                color: selectedTheme.colorScheme.secondary,
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
                               ).merge(GoogleFonts
@@ -113,12 +113,12 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                           ListTile(
                             leading: Icon(
                               Icons.question_mark,
-                              color: selectedTheme.colorScheme.primary,
+                              color: selectedTheme.colorScheme.secondary,
                             ),
                             title: Text(
                               'Help',
                               style: TextStyle(
-                                color: selectedTheme.colorScheme.primary,
+                                color: selectedTheme.colorScheme.secondary,
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
                               ).merge(GoogleFonts
@@ -132,12 +132,12 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                           ListTile(
                             leading: Icon(
                               Icons.question_answer,
-                              color: selectedTheme.colorScheme.primary,
+                              color: selectedTheme.colorScheme.secondary,
                             ),
                             title: Text(
                               'FAQ',
                               style: TextStyle(
-                                color: selectedTheme.colorScheme.primary,
+                                color: selectedTheme.colorScheme.secondary,
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
                               ).merge(GoogleFonts
@@ -151,7 +151,7 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                           ListTile(
                             leading: Icon(
                               Icons.settings,
-                              color: selectedTheme.colorScheme.primary,
+                              color: selectedTheme.colorScheme.secondary,
                             ),
                             title: Text(
                               'Settings',

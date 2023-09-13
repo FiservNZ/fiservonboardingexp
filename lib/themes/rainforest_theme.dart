@@ -18,10 +18,10 @@ final ThemeData rainforestTheme = ThemeData(
 
   //Other colours
   colorScheme: const ColorScheme.light(
-    background: Color.fromARGB(255, 80, 129, 95),
-    onBackground: Colors.black, //App bar
-    primary: Color.fromARGB(255, 70, 53, 8), // Mainly used for the text colour
-    secondary: Color.fromARGB(255, 8, 66, 32), // Mainly used for headings
-    tertiary: Color.fromARGB(255, 151, 114, 33), // Mainly used for buttons
+    background: Color.fromARGB(255, 80, 129, 95), // Background
+    onBackground: Colors.black, // Tiles
+    tertiary: Color.fromARGB(255, 151, 114, 33), // App/nav bars
+    primary: Color.fromARGB(255, 70, 53, 8), // Main text colour
+    secondary: Color.fromARGB(255, 8, 66, 32), // Headings
   ),
 );
