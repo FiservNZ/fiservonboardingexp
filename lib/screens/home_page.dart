@@ -33,13 +33,13 @@ class HomePage extends StatelessWidget {
 
         //Floating action button
         floatingActionButton: FloatingActionButton(
-          child: Icon(Icons.navigation),
           backgroundColor: Colors.green,
           foregroundColor: Colors.white,
           onPressed: () {
             int expToAdd = 200;
             _expBar.addExperience(expToAdd);
           },
+          child: const Icon(Icons.navigation),
         ),
 
         //Home Page

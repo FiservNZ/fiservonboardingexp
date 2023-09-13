@@ -1,19 +1,19 @@
-import 'package:fiservonboardingexp/firebase_references/firebase_refs.dart';
 import 'package:flutter/material.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../screens/achievements_page.dart';
 import 'achievement_tile.dart';
 
 class IncompletedAchievement extends StatelessWidget {
   final Achievementpage _achievementpage = Achievementpage();
 
+  IncompletedAchievement({super.key});
+
   @override
   Widget build(BuildContext context) {
     return FutureBuilder<List<Map<String, dynamic>>>(
-      future: DetectIncompletedAchi(),
+      future: detectIncompletedAchi(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return CircularProgressIndicator();
+          return const CircularProgressIndicator();
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         } else if (snapshot.hasData) {
@@ -44,17 +44,17 @@ class IncompletedAchievement extends StatelessWidget {
                   },
                 ),
               ),
-              SizedBox(height: 3),
+              const SizedBox(height: 3),
             ],
           );
         } else {
-          return Text('No data available');
+          return const Text('No data available');
         }
       },
     );
   }
 
-  Future<List<Map<String, dynamic>>> DetectIncompletedAchi() async {
+  Future<List<Map<String, dynamic>>> detectIncompletedAchi() async {
     List<Map<String, dynamic>> contentInAchv = [];
 
     // Invoke fetchAndStoreAchievement method to retrieve the latest achievement data.
