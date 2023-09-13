@@ -7,8 +7,8 @@ import '../../widgets/app_bar_overlay.dart';
 import '../../widgets/nav_bar.dart';
 import '../constants.dart';
 import 'package:fiservonboardingexp/widgets/progress_bar.dart';
-import 'package:fiservonboardingexp/util/kt_testing/read_controller.dart';
-import 'package:fiservonboardingexp/util/kt_testing/read_model.dart';
+import 'package:fiservonboardingexp/controllers/read_controller.dart';
+import 'package:fiservonboardingexp/model/read_model.dart';
 
 class ReadPage extends GetView<ReadController> {
   final ProgressBar _progressBar = const ProgressBar();

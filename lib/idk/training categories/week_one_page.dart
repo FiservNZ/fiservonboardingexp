@@ -1,15 +1,18 @@
+import 'package:fiservonboardingexp/widgets/nav_bar.dart';
+import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../task_components/task_tile.dart';
 
-import '../../util/constants.dart';
-import '../../idk/task_components/task.dart';
-import '../../widgets/nav_bar.dart';
+class WeekOnePage extends StatefulWidget {
+  const WeekOnePage({Key? key}) : super(key: key);
 
-class TaskPage extends StatelessWidget {
-  final Task task;
+  @override
+  // ignore: library_private_types_in_public_api
+  _WeekOnePage createState() => _WeekOnePage();
+}
 
-  TaskPage({super.key, required this.task});
-
+class _WeekOnePage extends State<WeekOnePage> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -24,13 +27,17 @@ class TaskPage extends StatelessWidget {
             child: Column(
               children: [
                 const SizedBox(height: 20),
-                //title of page pulled from the name field in firestore
+                //heading
                 Text(
-                  task.name,
+                  "Week One Tasks",
                   style:
                       GoogleFonts.bebasNeue(fontSize: 30, color: fiservColor),
                 ),
                 const SizedBox(height: 10),
+                //list of tasks
+                const Expanded(
+                  child: TaskTile(),
+                )
               ],
             ),
           ),
