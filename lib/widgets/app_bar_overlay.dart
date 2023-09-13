@@ -1,14 +1,20 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fiservonboardingexp/firebase_references/firebase_refs.dart';
+import 'package:fiservonboardingexp/screens/feedback_page.dart';
 import 'package:get/get.dart';
+import 'package:fiservonboardingexp/themes/theme_provider.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+
 import 'package:flutter/material.dart';
 
 class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
   const AppBarOverlay({super.key});
+
   @override
   Widget build(BuildContext context) {
-    //final currentUser = FirebaseAuth.instance.currentUser!; No need
-    //final userCollection = FirebaseFirestore.instance.collection('User'); No need for this
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    ThemeData selectedTheme = themeProvider.currentTheme;
 
     final rankTitleMap = {
       1: 'Novice 1',
@@ -22,8 +28,9 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
       9: 'Novice 9'
     };
 
-    return AppBar(
-        backgroundColor: Color(0xFF111211),
+    return SafeArea(
+      child: AppBar(
+        backgroundColor: selectedTheme.colorScheme.tertiary,
         elevation: 0.0,
 
         // Profile picture icon
@@ -53,7 +60,12 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
 
                 return Text(
                   rankTitle,
-                  style: TextStyle(color: Color(0xFFFF6600)),
+                  style: TextStyle(
+                    color: selectedTheme.colorScheme.secondary,
+                    fontSize: 27,
+                    fontWeight: FontWeight.bold,
+                  ).merge(
+                      GoogleFonts.quicksand()), // Merge styles with GoogleFonts
                 );
               } else {
                 return const Text('No data available');
@@ -65,17 +77,17 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
         // Nav draw
         actions: <Widget>[
           IconButton(
-            icon: const Icon(
+            icon: Icon(
               Icons.menu,
-              color: Color(0xFFFF6600),
+              color: selectedTheme.colorScheme.secondary,
             ),
             onPressed: () {
               showModalBottomSheet(
                 context: context,
                 builder: (BuildContext context) {
                   return Container(
-                    height: 320,
-                    color: Colors.black,
+                    height: 350,
+                    color: selectedTheme.colorScheme.tertiary,
                     child: Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -83,13 +95,18 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                         children: <Widget>[
                           //Intro teaser
                           ListTile(
-                            leading: const Icon(
+                            leading: Icon(
                               Icons.list,
-                              color: Color(0xFFFF6600),
+                              color: selectedTheme.colorScheme.secondary,
                             ),
-                            title: const Text(
+                            title: Text(
                               'Intro Teaser',
-                              style: TextStyle(color: Color(0xFFFF6600)),
+                              style: TextStyle(
+                                color: selectedTheme.colorScheme.secondary,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ).merge(GoogleFonts
+                                  .quicksand()), // Merge styles with GoogleFonts
                             ),
                             onTap: () {
                               Get.toNamed("/teaser");
@@ -98,13 +115,18 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
 
                           // Help pop up
                           ListTile(
-                            leading: const Icon(
+                            leading: Icon(
                               Icons.question_mark,
-                              color: Color(0xFFFF6600),
+                              color: selectedTheme.colorScheme.secondary,
                             ),
-                            title: const Text(
+                            title: Text(
                               'Help',
-                              style: TextStyle(color: Color(0xFFFF6600)),
+                              style: TextStyle(
+                                color: selectedTheme.colorScheme.secondary,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ).merge(GoogleFonts
+                                  .quicksand()), // Merge styles with GoogleFonts
                             ),
                             onTap: () {
                               Get.toNamed("/help");
@@ -113,13 +135,18 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
 
                           // FAQ
                           ListTile(
-                            leading: const Icon(
+                            leading: Icon(
                               Icons.question_answer,
-                              color: Color(0xFFFF6600),
+                              color: selectedTheme.colorScheme.secondary,
                             ),
-                            title: const Text(
+                            title: Text(
                               'FAQ',
-                              style: TextStyle(color: Color(0xFFFF6600)),
+                              style: TextStyle(
+                                color: selectedTheme.colorScheme.secondary,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ).merge(GoogleFonts
+                                  .quicksand()), // Merge styles with GoogleFonts
                             ),
                             onTap: () {
                               Get.toNamed("/faq");
@@ -128,22 +155,44 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
 
                           // Settings
                           ListTile(
-                            leading: const Icon(
+                            leading: Icon(
                               Icons.settings,
-                              color: Color(0xFFFF6600),
+                              color: selectedTheme.colorScheme.secondary,
                             ),
-                            title: const Text(
+                            title: Text(
                               'Settings',
-                              style: TextStyle(color: Color(0xFFFF6600)),
+                              style: TextStyle(
+                                color: selectedTheme.colorScheme.secondary,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ).merge(GoogleFonts
+                                  .quicksand()), // Merge styles with GoogleFonts
                             ),
                             onTap: () {
                               Get.toNamed("/settings");
                             },
                           ),
 
+                          ListTile(
+                            leading: const Icon(
+                              Icons.feedback_outlined,
+                              color: Color(0xFFFF6600),
+                            ),
+                            title: const Text(
+                              'Feedback',
+                              style: TextStyle(color: Color(0xFFFF6600)),
+                            ),
+                            onTap: () {
+                              Navigator.of(context).push(
+                                MaterialPageRoute(
+                                    builder: (context) => const FeedBack()),
+                              );
+                            },
+                          ),
+
                           const SizedBox(
                             width: double.infinity,
-                            height: 30,
+                            height: 65,
                           ),
                         ],
                       ),
@@ -153,7 +202,9 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
               );
             },
           ),
-        ]);
+        ],
+      ),
+    );
   }
 
   @override

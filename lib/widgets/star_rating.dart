@@ -1,6 +1,7 @@
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
 
+// This class creates a row of star icons for the user rating
 class StarRating extends StatefulWidget {
   final Function(int) onRatingChanged;
 
@@ -15,6 +16,7 @@ class _StarRatingState extends State<StarRating> {
 
   @override
   Widget build(BuildContext context) {
+    // Star rating system implementation here
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: List.generate(5, (index) {
@@ -27,6 +29,7 @@ class _StarRatingState extends State<StarRating> {
               size: 45.0,
             ),
             onPressed: () {
+              // Updates the rating here
               setState(() {
                 _rating = star;
                 widget.onRatingChanged(_rating);

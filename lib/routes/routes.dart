@@ -15,7 +15,7 @@ class FiservAppRoutes {
   static List<GetPage> routes() => [
         GetPage(
           name: "/",
-          page: () => CheckUser(),
+          page: () => const CheckUser(),
         ),
         GetPage(
           name: "/login",
@@ -47,7 +47,7 @@ class FiservAppRoutes {
         ),
         GetPage(
           name: "/settings",
-          page: () => const SettingsPage(),
+          page: () => SettingsPage(),
         ),
         GetPage(
           name: "/profile",

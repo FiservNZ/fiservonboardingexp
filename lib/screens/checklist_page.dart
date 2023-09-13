@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fiservonboardingexp/widgets/app_bar_overlay.dart';
 import 'package:fiservonboardingexp/idk/nav_app_overlay.dart';
 import 'package:fiservonboardingexp/util/checklist_tile.dart';
@@ -9,7 +10,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_core/firebase_core.dart';
 import '../main.dart';
 
-// Handles the UI for the checklist
 class ChecklistPage extends StatefulWidget {
   final FirebaseFirestore firestore;
   const ChecklistPage({Key? key, required this.firestore}) : super(key: key);
@@ -19,34 +19,43 @@ class ChecklistPage extends StatefulWidget {
 }
 
 class _ChecklistPageState extends State<ChecklistPage> {
-  // ALL the tasks in the General Checklist collection from firebase.
-  List<Map<String, dynamic>> tasks = [
-    {
-      'taskName': 'Book onboarding checkpoint with Manager for Day 5',
-      'taskCompleted': false
-    },
-    {'taskName': 'Catch up with buddy', 'taskCompleted': false},
-    {'taskName': 'Identify Buddy', 'taskCompleted': false},
-    {'taskName': 'Machine setup', 'taskCompleted': false},
-    {'taskName': 'Meet your Scrum Team', 'taskCompleted': false},
-    {'taskName': 'Onboarding Checkpoint with Manager', 'taskCompleted': false},
-    {
-      'taskName': 'Provide feedback on onboarding process',
-      'taskCompleted': false
-    },
-    {'taskName': 'Request access to UVMS dashboard', 'taskCompleted': false},
-    {'taskName': 'Request access to VersionOne (V1)', 'taskCompleted': false},
-    {
-      'taskName': 'Request to join Product Development Distribution Group',
-      'taskCompleted': false
-    },
-    {'taskName': 'Scrum Team Induction', 'taskCompleted': false},
-  ];
+  Map<String, bool>? checklistData;
 
+  @override
+  void initState() {
+    super.initState();
+    loadChecklistData();
+  }
+
+  // Loads the current users (UID) checklist data from firestore.
+  Future<void> loadChecklistData() async {
+    String uid = FirebaseAuth.instance.currentUser!.uid;
+    try {
+      DocumentSnapshot<Map<String, dynamic>> checklistSnapshot =
+          await widget.firestore
+              .collection('User')
+              .doc(uid)
+              .collection('Checklist') // Collection name
+              .doc('List') // Document name of the collection
+              .get();
+
+      if (checklistSnapshot.exists) {
+        // Retrieve checklist from Firestore and set it in the local state
+        setState(() {
+          checklistData =
+              Map<String, bool>.from(checklistSnapshot.data() ?? {});
+        });
+      }
+    } catch (error) {
+      print("Error loading checklist data: $error");
+    }
+  }
+
+  // General checklist UI
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFF000000),
+      backgroundColor: Color.fromARGB(255, 27, 27, 27),
       appBar: AppBarOverlay(),
       bottomNavigationBar: CustomNavBar(),
       body: SingleChildScrollView(
@@ -66,16 +75,21 @@ class _ChecklistPageState extends State<ChecklistPage> {
                 ),
               ),
             ),
-            for (var task in tasks)
-              ChecklistTile(
-                task: task,
-                onChanged: (value) {
-                  setState(() {
-                    task['taskCompleted'] = value;
-                  });
-                },
-                firestore: widget.firestore,
-              ),
+            if (checklistData != null)
+              for (var taskName in checklistData!.keys)
+                ChecklistTile(
+                  task: {
+                    'taskName': taskName,
+                    'taskCompleted': checklistData![taskName] ?? false,
+                  },
+                  onChanged: (value) {
+                    // Update checklist locally when a task is checked/unchecked
+                    setState(() {
+                      checklistData![taskName] = value ?? false;
+                    });
+                  },
+                  firestore: widget.firestore,
+                ),
           ],
         ),
       ),
