@@ -168,7 +168,7 @@ class _ThemesPageState extends State<ThemesPage> {
                     ).merge(GoogleFonts
                         .quicksand()), // Merge styles with GoogleFonts
                   ),
-                  value: pastelTheme,
+                  value: beachTheme,
                   groupValue: selectedTheme,
                   onChanged: (value) {
                     _handleThemeChange(beachTheme, themeProvider);
