@@ -1,10 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:fiservonboardingexp/widgets/app_bar_overlay.dart';
 import 'package:fiservonboardingexp/idk/nav_app_overlay.dart';
 import 'package:fiservonboardingexp/util/checklist_tile.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../widgets/nav_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -54,8 +56,11 @@ class _ChecklistPageState extends State<ChecklistPage> {
   // General checklist UI
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    ThemeData selectedTheme = themeProvider.currentTheme;
+
     return Scaffold(
-      backgroundColor: Color.fromARGB(255, 27, 27, 27),
+      backgroundColor: selectedTheme.colorScheme.onBackground,
       appBar: AppBarOverlay(),
       bottomNavigationBar: CustomNavBar(),
       body: SingleChildScrollView(
@@ -68,10 +73,10 @@ class _ChecklistPageState extends State<ChecklistPage> {
               child: Text(
                 "GENERAL CHECKLIST",
                 style: GoogleFonts.quicksand(
-                  textStyle: const TextStyle(
+                  textStyle: TextStyle(
                       fontSize: 27,
                       fontWeight: FontWeight.bold,
-                      color: fiservColor),
+                      color: selectedTheme.colorScheme.secondary),
                 ),
               ),
             ),
