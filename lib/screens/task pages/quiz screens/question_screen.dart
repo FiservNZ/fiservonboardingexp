@@ -1,7 +1,7 @@
 import 'package:fiservonboardingexp/controllers/quiz%20controllers/animation_controller.dart';
 import 'package:fiservonboardingexp/widgets/quiz%20widgets/loading_status.dart';
 import 'package:fiservonboardingexp/screens/task%20pages/quiz%20screens/quiz_outcome_screen.dart';
-import 'package:fiservonboardingexp/util/elle_testing/themes/ui_parameters.dart';
+import 'package:fiservonboardingexp/themes/quiz%20themes/ui_parameters.dart';
 import 'package:fiservonboardingexp/widgets/quiz%20widgets/background_decoration.dart';
 import 'package:fiservonboardingexp/widgets/quiz%20widgets/content_area.dart';
 import 'package:fiservonboardingexp/widgets/quiz%20widgets/question_placeholder.dart';

@@ -1,14 +1,11 @@
 import 'package:fiservonboardingexp/util/constants.dart';
-import 'package:fiservonboardingexp/util/elle_testing/firebase_ref/firebase_ref.dart';
 import 'package:fiservonboardingexp/screens/task%20pages/quiz%20screens/question_card.dart';
-import 'package:fiservonboardingexp/util/elle_testing/themes/ui_parameters.dart';
+import 'package:fiservonboardingexp/themes/quiz%20themes/ui_parameters.dart';
 import 'package:fiservonboardingexp/widgets/quiz%20widgets/content_area.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../../../controllers/quiz controllers/quiz_controller.dart';
-import '../../../widgets/quiz widgets/task_screen_app_bar.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({Key? key}) : super(key: key);

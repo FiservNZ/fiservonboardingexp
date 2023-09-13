@@ -4,11 +4,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import '../firebase references/firebase_refs.dart';
-import 'help_page.dart';
+import 'menu drawer/help_page.dart';
 import 'teaser pages/teaser.dart';
 
-// class Global {
-//   static UserCredential? userCredential;
+// class Global {'menu drawer/help_page.dart'rCredential? userCredential;
 // }
 
 class LoginPage extends StatelessWidget {

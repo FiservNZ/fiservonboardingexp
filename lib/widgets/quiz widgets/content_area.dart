@@ -1,4 +1,4 @@
-import 'package:fiservonboardingexp/util/elle_testing/themes/ui_parameters.dart';
+import 'package:fiservonboardingexp/themes/quiz%20themes/ui_parameters.dart';
 import 'package:flutter/material.dart';
 
 import '../../util/constants.dart';

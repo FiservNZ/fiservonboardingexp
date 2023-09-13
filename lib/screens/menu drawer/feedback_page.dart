@@ -1,16 +1,13 @@
-import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
-import 'package:provider/provider.dart';
-import '../util/constants.dart';
-import '../widgets/app_bar_overlay.dart';
-import '../widgets/faq_list.dart';
-import '../widgets/star_rating.dart';
+import '../../util/constants.dart';
+import '../../widgets/app_bar_overlay.dart';
+import '../../widgets/faq_list.dart';
+import '../../widgets/star_rating.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import 'main_screen.dart';
+import '../main_screen.dart';
 
 class FeedBack extends StatefulWidget {
   const FeedBack({super.key});
@@ -28,9 +25,6 @@ class _FeedBackState extends State<FeedBack> {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-    ThemeData selectedTheme = themeProvider.currentTheme;
-
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
@@ -40,12 +34,12 @@ class _FeedBackState extends State<FeedBack> {
           style: GoogleFonts.quicksand(
             fontWeight: FontWeight.bold,
             fontSize: 21,
-            color: selectedTheme.colorScheme.primary,
+            color: Colors.white,
           ),
         ),
-        backgroundColor: selectedTheme.colorScheme.secondary,
+        backgroundColor: fiservColor,
       ),
-      backgroundColor: selectedTheme.colorScheme.background,
+      backgroundColor: Color.fromARGB(255, 27, 27, 27),
       // SingleChildScrollView was used to get rid of pixel overflow
       body: SingleChildScrollView(
         child: Padding(
@@ -59,7 +53,7 @@ class _FeedBackState extends State<FeedBack> {
                 style: GoogleFonts.quicksand(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  color: selectedTheme.colorScheme.primary,
+                  color: Colors.white,
                 ),
               ),
               const SizedBox(height: 30),
@@ -68,7 +62,7 @@ class _FeedBackState extends State<FeedBack> {
                 style: GoogleFonts.quicksand(
                   fontSize: 17,
                   fontWeight: FontWeight.bold,
-                  color: selectedTheme.colorScheme.primary,
+                  color: Colors.white,
                 ),
               ),
               // Star Rating Class to get the star rating system (5 stars)
@@ -88,7 +82,7 @@ class _FeedBackState extends State<FeedBack> {
                 style: GoogleFonts.quicksand(
                   fontSize: 17,
                   fontWeight: FontWeight.bold,
-                  color: selectedTheme.colorScheme.primary,
+                  color: Colors.white,
                 ),
               ),
               // Text field for user feedback written input
@@ -158,15 +152,13 @@ class _FeedBackState extends State<FeedBack> {
                     child: Center(
                       // Submit Feedback Button Implementation
                       child: Text("Submit Feedback",
-                          style: TextStyle(
-                            fontSize: 16,
-                            color: selectedTheme.colorScheme.primary,
-                          )), // Submit Button
+                          style: TextStyle(fontSize: 16)), // Submit Button
                     ),
                   ),
                   style: ElevatedButton.styleFrom(
-                      padding: EdgeInsets.symmetric(horizontal: 20),
-                      backgroundColor: selectedTheme.colorScheme.secondary),
+                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    backgroundColor: fiservColor,
+                  ),
                 ),
               ),
             ],

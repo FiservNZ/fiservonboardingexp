@@ -14,8 +14,7 @@ import 'package:fiservonboardingexp/util/mc_testing/watch/video_player.dart';
 import 'package:fiservonboardingexp/util/mc_testing/watch/video_thumbnail.dart';
 import 'package:fiservonboardingexp/util/mc_testing/watch/watch_tasks_container.dart';
 import 'package:get/get.dart';
-
-import '../screens/help_page.dart';
+import '../screens/menu drawer/help_page.dart';
 import '../screens/teaser pages/teaser.dart';
 
 class FiservAppRoutes {

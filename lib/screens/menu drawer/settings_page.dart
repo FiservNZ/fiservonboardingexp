@@ -1,13 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fiservonboardingexp/screens/change_password_page.dart';
+import 'package:fiservonboardingexp/screens/menu%20drawer/change_password_page.dart';
 import 'package:fiservonboardingexp/screens/login_page.dart';
 import 'package:fiservonboardingexp/themes/Theme_database.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import '../themes/theme_provider.dart';
-import '../widgets/app_bar_overlay.dart';
+import '../../themes/theme_provider.dart';
+import '../../widgets/app_bar_overlay.dart';
 import 'package:fiservonboardingexp/screens/themes_page.dart';
 import 'package:fiservonboardingexp/themes/dark_theme.dart';
 import 'package:fiservonboardingexp/themes/light_theme.dart';

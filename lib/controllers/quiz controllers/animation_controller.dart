@@ -3,8 +3,6 @@ import 'package:fiservonboardingexp/model/quiz_model.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
-
-import '../../util/elle_testing/firebase_ref/firebase_ref.dart';
 import '../../firebase references/services/firebase_storage_service.dart';
 
 // Using GetX for progress bar animation state.

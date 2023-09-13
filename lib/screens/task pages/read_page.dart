@@ -5,7 +5,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../widgets/app_bar_overlay.dart';
 import '../../widgets/nav_bar.dart';
-import '../constants.dart';
+import '../../util/constants.dart';
 import 'package:fiservonboardingexp/widgets/progress_bar.dart';
 import 'package:fiservonboardingexp/controllers/read_controller.dart';
 import 'package:fiservonboardingexp/model/read_model.dart';
