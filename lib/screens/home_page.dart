@@ -1,5 +1,6 @@
 import 'package:fiservonboardingexp/screens/achievements_page.dart';
 import 'package:fiservonboardingexp/util/achievement_components/achievement_tile.dart';
+import 'package:fiservonboardingexp/util/achievement_components/incompleted_achievement.dart';
 import 'package:fiservonboardingexp/util/kt_testing/platypus_read_task.dart';
 import 'package:fiservonboardingexp/util/achievement_components/achievement_tracker.dart';
 import 'package:fiservonboardingexp/widgets/progress_bar.dart';
@@ -71,7 +72,7 @@ class HomePage extends StatelessWidget {
               padding: const EdgeInsets.only(left: 10),
               child: Container(
                 alignment: Alignment.centerLeft,
-                child: _achievementTracker,
+                child: IncompletedAchievement(),
               ),
             ),
             const SizedBox(height: 200),
