@@ -6,10 +6,10 @@ final ThemeData pastelTheme = ThemeData(
 
   //Other colours
   colorScheme: const ColorScheme.light(
-    background: Color.fromARGB(255, 245, 213, 235), // Background
-    onBackground: Color.fromARGB(255, 231, 230, 151), // Tiles
-    tertiary: Color.fromARGB(255, 159, 224, 176), // App/nav bars
-    primary: Color.fromARGB(255, 79, 187, 214), // Main text colour
-    secondary: Color.fromARGB(255, 171, 133, 231), // Headings
+    background: Color(0xFFfdf6f6), // Background
+    onBackground: Color(0xFFffeeb9a2), // Tiles
+    tertiary: Color(0xFFc0d8e3), // App/nav bars
+    primary: Color(0xFFe18a7a), // Main text colour
+    secondary: Color(0xFFa78d8a), // Headings
   ),
 );

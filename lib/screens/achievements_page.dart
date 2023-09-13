@@ -1,7 +1,9 @@
 import 'package:achievement_view/achievement_view.dart';
 import 'package:achievement_view/achievement_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../firebase_references/firebase_refs.dart';
 import '../util/achievement_components/achievement_tile.dart';
 import '../util/achievement_components/achievement_tracker.dart';
@@ -40,10 +42,12 @@ class Achievementpage extends State<AchievementsPage> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    ThemeData selectedTheme = themeProvider.currentTheme;
     return Scaffold(
       appBar: myAppBar,
       bottomNavigationBar: navBar,
-      backgroundColor: const Color.fromARGB(128, 20, 13, 32),
+      backgroundColor: selectedTheme.colorScheme.background,
       body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
         stream: achievementColRef.snapshots(),
         builder: (context, snapshot) {
@@ -55,9 +59,9 @@ class Achievementpage extends State<AchievementsPage> {
               SliverToBoxAdapter(
                 child: Container(
                   height: 170.0,
-                  decoration: const BoxDecoration(
+                  decoration: BoxDecoration(
                     //
-                    color: Color.fromARGB(255, 112, 107, 243),
+                    color: selectedTheme.colorScheme.onBackground,
                   ),
                   child: Stack(
                     children: [

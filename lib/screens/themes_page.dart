@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fiservonboardingexp/themes/Theme_database.dart';
+import 'package:fiservonboardingexp/themes/beach_theme.dart';
 import 'package:fiservonboardingexp/themes/pastel_theme.dart';
 import 'package:fiservonboardingexp/themes/rainforest_theme.dart';
 import 'package:fiservonboardingexp/themes/theme_provider.dart';
@@ -10,7 +11,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class ThemesPage extends StatefulWidget {
-  ThemesPage({Key? key}) : super(key: key);
+  const ThemesPage({Key? key}) : super(key: key);
 
   @override
   _ThemesPageState createState() => _ThemesPageState();
@@ -116,6 +117,36 @@ class _ThemesPageState extends State<ThemesPage> {
                   groupValue: selectedTheme,
                   onChanged: (value) {
                     _handleThemeChange(pastelTheme, themeProvider);
+                  },
+                  activeColor: selectedTheme
+                      .colorScheme.primary, // Set the selected icon color
+                ),
+              ),
+            ),
+
+            // Beach theme
+            Container(
+              margin: const EdgeInsets.symmetric(
+                  horizontal: 50), // Adjust the vertical margin as needed
+              child: Theme(
+                data: Theme.of(context).copyWith(
+                  unselectedWidgetColor: selectedTheme
+                      .colorScheme.primary, // Set the unselected icon color
+                ),
+                child: RadioListTile<ThemeData>(
+                  title: Text(
+                    'Beach Theme',
+                    style: TextStyle(
+                      color: selectedTheme.colorScheme.primary,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ).merge(GoogleFonts
+                        .quicksand()), // Merge styles with GoogleFonts
+                  ),
+                  value: pastelTheme,
+                  groupValue: selectedTheme,
+                  onChanged: (value) {
+                    _handleThemeChange(beachTheme, themeProvider);
                   },
                   activeColor: selectedTheme
                       .colorScheme.primary, // Set the selected icon color

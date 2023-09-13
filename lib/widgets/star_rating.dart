@@ -1,5 +1,7 @@
+import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 // This class creates a row of star icons for the user rating
 class StarRating extends StatefulWidget {
@@ -16,6 +18,9 @@ class _StarRatingState extends State<StarRating> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    ThemeData selectedTheme = themeProvider.currentTheme;
+
     // Star rating system implementation here
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
@@ -25,7 +30,7 @@ class _StarRatingState extends State<StarRating> {
           child: IconButton(
             icon: Icon(
               _rating >= star ? Icons.star : Icons.star_border,
-              color: fiservColor,
+              color: selectedTheme.colorScheme.secondary,
               size: 45.0,
             ),
             onPressed: () {

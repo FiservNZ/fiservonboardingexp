@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fiservonboardingexp/firebase_references/firebase_refs.dart';
+import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class ChecklistTile extends StatelessWidget {
   final Map<String, dynamic> task;
@@ -18,6 +20,8 @@ class ChecklistTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    ThemeData selectedTheme = themeProvider.currentTheme;
     bool taskCompleted = task['taskCompleted'];
 
     // UI of the Checklist Tiles
@@ -26,14 +30,14 @@ class ChecklistTile extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(15),
         decoration: BoxDecoration(
-          color: Colors.black87,
+          color: selectedTheme.colorScheme.background,
           borderRadius: BorderRadius.circular(12),
         ),
         child: Row(
           children: [
             Theme(
               data: ThemeData(
-                unselectedWidgetColor: fiservColor,
+                unselectedWidgetColor: selectedTheme.colorScheme.secondary,
               ),
               child: Checkbox(
                 value: taskCompleted,
@@ -51,7 +55,8 @@ class ChecklistTile extends StatelessWidget {
                         "Error updating Firestore: $error"); // Error Handling but idk too much about it tbh
                   });
                 },
-                activeColor: fiservColor, // Checkbox checked colour HERE
+                activeColor: selectedTheme
+                    .colorScheme.secondary, // Checkbox checked colour HERE
               ),
             ),
             Flexible(
@@ -59,8 +64,8 @@ class ChecklistTile extends StatelessWidget {
                 task[
                     'taskName'], // Task name display and stuff below it is the text style (font, colour, size, etc)
                 style: GoogleFonts.quicksand(
-                  textStyle: const TextStyle(
-                    color: Colors.white,
+                  textStyle: TextStyle(
+                    color: selectedTheme.colorScheme.primary,
                     fontWeight: FontWeight.bold,
                     fontSize: 17,
                   ),

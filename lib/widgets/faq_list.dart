@@ -1,6 +1,8 @@
+import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:provider/provider.dart';
 import '../util/faq_item.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -8,6 +10,9 @@ import 'package:google_fonts/google_fonts.dart';
 class FaqList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    ThemeData selectedTheme = themeProvider.currentTheme;
+
     // Changes in the FAQ collection in firestore
     return StreamBuilder<QuerySnapshot>(
       stream: FirebaseFirestore.instance.collection('FAQ').snapshots(),
@@ -35,8 +40,9 @@ class FaqList extends StatelessWidget {
                 title: Text(
                   question,
                   style: GoogleFonts.quicksand(
-                    textStyle: const TextStyle(
-                      color: Colors.white, // Question Colour
+                    textStyle: TextStyle(
+                      color:
+                          selectedTheme.colorScheme.primary, // Question Colour
                       fontWeight: FontWeight.bold,
                       fontSize: 17,
                     ),
@@ -48,8 +54,9 @@ class FaqList extends StatelessWidget {
                     child: Text(
                       answer,
                       style: GoogleFonts.quicksand(
-                        textStyle: const TextStyle(
-                          color: fiservColor, // Answer Colour
+                        textStyle: TextStyle(
+                          color: selectedTheme
+                              .colorScheme.secondary, // Answer Colour
                           fontWeight: FontWeight.bold,
                           fontSize: 15,
                         ),
