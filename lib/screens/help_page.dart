@@ -1,8 +1,8 @@
 import 'package:fiservonboardingexp/screens/main_screen.dart';
-import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import 'package:fiservonboardingexp/themes/theme_provider.dart';
 
 class HelpPage extends StatelessWidget {
   const HelpPage({super.key});
