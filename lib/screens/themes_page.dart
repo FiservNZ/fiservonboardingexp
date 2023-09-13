@@ -149,6 +149,36 @@ class _ThemesPageState extends State<ThemesPage> {
               ),
             ),
 
+            // Beach theme
+            Container(
+              margin: const EdgeInsets.symmetric(
+                  horizontal: 50), // Adjust the vertical margin as needed
+              child: Theme(
+                data: Theme.of(context).copyWith(
+                  unselectedWidgetColor: selectedTheme
+                      .colorScheme.primary, // Set the unselected icon color
+                ),
+                child: RadioListTile<ThemeData>(
+                  title: Text(
+                    'Beach Theme',
+                    style: TextStyle(
+                      color: selectedTheme.colorScheme.primary,
+                      fontSize: 18,
+                      fontWeight: FontWeight.bold,
+                    ).merge(GoogleFonts
+                        .quicksand()), // Merge styles with GoogleFonts
+                  ),
+                  value: pastelTheme,
+                  groupValue: selectedTheme,
+                  onChanged: (value) {
+                    _handleThemeChange(beachTheme, themeProvider);
+                  },
+                  activeColor: selectedTheme
+                      .colorScheme.primary, // Set the selected icon color
+                ),
+              ),
+            ),
+
             const SizedBox(height: 80),
 
             Center(
