@@ -1,7 +1,9 @@
+import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:fiservonboardingexp/widgets/nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import '../widgets/app_bar_overlay.dart';
 import '../widgets/faq_list.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -15,10 +17,13 @@ class FaqPage extends StatefulWidget {
 class _FaqPageState extends State<FaqPage> {
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    ThemeData selectedTheme = themeProvider.currentTheme;
+
     return Scaffold(
       appBar: AppBarOverlay(),
       bottomNavigationBar: CustomNavBar(),
-      backgroundColor: Color.fromARGB(255, 27, 27, 27),
+      backgroundColor: selectedTheme.colorScheme.background,
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Container(
@@ -30,7 +35,7 @@ class _FaqPageState extends State<FaqPage> {
                 style: GoogleFonts.quicksand(
                   fontSize: 23,
                   fontWeight: FontWeight.bold,
-                  color: fiservColor,
+                  color: selectedTheme.colorScheme.secondary,
                 ),
                 textAlign: TextAlign.center,
               ),

@@ -175,14 +175,20 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                             },
                           ),
 
+                          // Feedback
                           ListTile(
-                            leading: const Icon(
+                            leading: Icon(
                               Icons.feedback_outlined,
-                              color: Color(0xFFFF6600),
+                              color: selectedTheme.colorScheme.secondary,
                             ),
-                            title: const Text(
+                            title: Text(
                               'Feedback',
-                              style: TextStyle(color: Color(0xFFFF6600)),
+                              style: TextStyle(
+                                color: selectedTheme.colorScheme.secondary,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ).merge(GoogleFonts
+                                  .quicksand()), // Merge styles with GoogleFonts
                             ),
                             onTap: () {
                               Navigator.of(context).push(
