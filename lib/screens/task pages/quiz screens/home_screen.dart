@@ -25,14 +25,8 @@ class HomeScreen extends StatelessWidget {
             child: SizedBox(
               child: Text(
                 "A Collection's Task Page",
-                style: GoogleFonts.bebasNeue(fontSize: 35, color: fiservColor),
+                style: headerFontStyle,
               ),
-            ),
-          ),
-          SizedBox(
-            child: Text(
-              "A Collection's Task Page",
-              style: headerFontStyle,
             ),
           ),
           //),
