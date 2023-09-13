@@ -8,6 +8,7 @@ class UserModel {
   String position;
   String iconColor;
   String selectedIcon;
+  String theme;
 
   String? interestingFacts;
   String? futureSelf;
@@ -39,6 +40,7 @@ class UserModel {
     //this.checklist,
     required this.hasIntroduced,
     required this.isFirstLog,
+    required this.theme,
   });
 
   UserModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> snapshot)
@@ -51,11 +53,13 @@ class UserModel {
         interestingFacts = snapshot['Interesting Facts'],
         futureSelf = snapshot['Future Self'],
         hobbies = snapshot['Hobbies'],
+        theme = snapshot['theme'],
         exp = snapshot['question_count'] as int,
         level = snapshot['Level'] as int,
         maxEXP = snapshot['MaxEXP'] as int,
         hasIntroduced = snapshot['introduced'] as bool,
         isFirstLog = snapshot['firstlog'] as bool;
+
   //tasks = [];
   //checklist = [];
 }
