@@ -58,10 +58,10 @@ class ReadPage extends GetView<ReadController> {
                     padding: const EdgeInsets.all(22.0),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
-                      children: model.content.split(r'\n').map((paragraph) {
+                      children: model.content.split(r'\n\n').map((paragraph) {
                         // Replace '\n' with two new lines '\n\n', and trim leading/trailing spaces.
                         final trimmedParagraph =
-                            paragraph.replaceAll(r'\n', '\n' '\n').trim();
+                            paragraph.replaceAll(r'\n\n', '\n' '\n').trim();
                         return Column(
                           children: [
                             // Display the trimmed paragraph as text.
