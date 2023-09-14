@@ -27,6 +27,7 @@ class ReadPage extends GetView<ReadController> {
       //bottomNavigationBar: const CustomNavBar(),
       body: SafeArea(
         child: FutureBuilder<ReadModel>(
+          future: Future.value(model),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               // While data is still loading
