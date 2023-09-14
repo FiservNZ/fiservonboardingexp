@@ -21,7 +21,7 @@ class ReadController extends GetxController {
         return ReadModel(
           id: document.id, // The doc ID.
           title: document['title'], // The field name
-          content: document['content'], // The field name
+          content: document['content'], // Join paragraphs back with line breaks
         );
       }).toList();
 
