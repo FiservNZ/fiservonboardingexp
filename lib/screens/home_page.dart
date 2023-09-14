@@ -317,15 +317,15 @@ Widget getUserIcon(Map<String, dynamic> userData, ThemeData selectedTheme) {
 //                 padding: const EdgeInsets.symmetric(horizontal: 120),
 //                 child: ElevatedButton(
 //                   onPressed: () {
-                    readController
-                        .setSelectedIndex(0); // Set the desired index here
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (context) => ReadPage(),
-                      ),
-                    );
-                  },
+//                    readController
+//                        .setSelectedIndex(0); // Set the desired index here
+//                    Navigator.push(
+//                      context,
+//                      MaterialPageRoute(
+//                       builder: (context) => ReadPage(),
+//                      ),
+//s                    );
+//                  },
 //                   style: ElevatedButton.styleFrom(
 //                     backgroundColor: selectedTheme.colorScheme.onBackground,
 //                     fixedSize: Size(120, 35),
