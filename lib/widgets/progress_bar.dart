@@ -1,21 +1,16 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fiservonboardingexp/firebase_references/firebase_refs.dart';
 import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:percent_indicator/percent_indicator.dart';
-import '../firebase_references/firebase_refs.dart';
 import 'package:provider/provider.dart';
-import '../util/constants.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class ProgressBar extends StatelessWidget {
   const ProgressBar({super.key});
 
-  //Method to add points
+  // Method to add points to the user's progress
   Future<void> addPoints(int points) async {
-    //final currentUser = FirebaseAuth.instance.currentUser!;
-    //final userCollection = FirebaseFirestore.instance.collection('User');
-
+    // Fetch the current user's document from Firestore
     final userDocRef = userColRef.doc(currentUser.uid);
     final userDoc = await userDocRef.get();
     final userMap = userDoc.data() as Map<String, dynamic>;
@@ -24,6 +19,7 @@ class ProgressBar extends StatelessWidget {
     var maxPoints = userMap['maxPoints'] ?? 4;
     bool completed = userMap['categoryCompletion'] ?? false;
 
+    // Increment the current points and check for completion
     if (curPoints < maxPoints) {
       curPoints += points;
       if (curPoints == maxPoints) {
@@ -31,6 +27,7 @@ class ProgressBar extends StatelessWidget {
       }
     }
 
+    // Update the user's document in Firestore with the new data
     await userDocRef.update({
       'curPoints': curPoints,
       'maxPoints': maxPoints,
@@ -43,21 +40,24 @@ class ProgressBar extends StatelessWidget {
     final themeProvider = Provider.of<ThemeProvider>(context);
     ThemeData selectedTheme = themeProvider.currentTheme;
 
-
     return SizedBox(
       child: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
         stream: userColRef.doc(currentUser.uid).snapshots(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
+            // Show a loading indicator while fetching user data
             return const CircularProgressIndicator();
           } else if (snapshot.hasError) {
+            // Display an error message if there's an error
             return Text('Error: ${snapshot.error}');
           } else if (snapshot.hasData) {
+            // Extract user data from the snapshot
             final userDocument = snapshot.data!.data() as Map<String, dynamic>;
             final curPoints = userDocument['curPoints'] ?? 0;
             final maxPoints = (userDocument['maxPoints'] ?? 4).toInt();
             final pointsText = '$curPoints/$maxPoints';
 
+            // Display the progress bar and points information
             return Column(
               children: [
                 SizedBox(
@@ -71,8 +71,7 @@ class ProgressBar extends StatelessWidget {
                           color: selectedTheme.colorScheme.primary,
                           fontSize: 18,
                           fontWeight: FontWeight.bold,
-                        ).merge(GoogleFonts
-                            .quicksand()), // Merge styles with GoogleFonts
+                        ).merge(GoogleFonts.quicksand()),
                       ),
                       Text(
                         pointsText,
@@ -103,6 +102,7 @@ class ProgressBar extends StatelessWidget {
               ],
             );
           } else {
+            // Show a message when there's no data available
             return const Text('No data available');
           }
         },

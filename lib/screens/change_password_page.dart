@@ -1,12 +1,10 @@
-
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fiservonboardingexp/firebase_references/firebase_refs.dart';
 import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import '../widgets/app_bar_overlay.dart';
-import '../widgets/nav_bar.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import '../util/constants.dart';
 
 class ChangePasswordPage extends StatefulWidget {
   const ChangePasswordPage({Key? key}) : super(key: key);
@@ -16,20 +14,24 @@ class ChangePasswordPage extends StatefulWidget {
 }
 
 class _ChangePasswordPageState extends State<ChangePasswordPage> {
+  // Create a TextEditingController to manage the email input field.
   final _emailController = TextEditingController();
 
   @override
   void dispose() {
+    // Dispose of the _emailController when the widget is disposed.
     _emailController.dispose();
     super.dispose();
   }
 
+  // Function to reset the password.
   Future passwordReset() async {
     try {
-      // pull reference from the file
+      // Send a password reset email using Firebase Authentication.
       await fireAuth.sendPasswordResetEmail(
           email: _emailController.text.trim());
-      // ignore: use_build_context_synchronously
+
+      // Show a success dialog when the reset link is sent.
       showDialog(
         context: context,
         builder: (context) {
@@ -39,7 +41,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
         },
       );
     } on FirebaseAuthException catch (e) {
-      //print(e);
+      // Handle FirebaseAuthException and show an error dialog.
       showDialog(
         context: context,
         builder: (context) {
@@ -53,20 +55,21 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
 
   @override
   Widget build(BuildContext context) {
+    // Access the current theme from the theme provider.
     final themeProvider = Provider.of<ThemeProvider>(context);
     ThemeData selectedTheme = themeProvider.currentTheme;
 
     return Scaffold(
       backgroundColor: selectedTheme.colorScheme.background,
-      appBar: const AppBarOverlay(),
-      bottomNavigationBar: const CustomNavBar(),
+      appBar: myAppBar,
+      bottomNavigationBar: navBar,
       body: SafeArea(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            // Text
+            // Text: Instructions
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 25.0),
+              padding: const EdgeInsets.symmetric(horizontal: 25.0),
               child: Text(
                 'Please enter your email and a password reset link will be emailed to you',
                 textAlign: TextAlign.center,
@@ -74,14 +77,13 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                   color: selectedTheme.colorScheme.primary,
                   fontSize: 18,
                   fontWeight: FontWeight.bold,
-                ).merge(
-                    GoogleFonts.quicksand()), // Merge styles with GoogleFonts
+                ).merge(GoogleFonts.quicksand()),
               ),
             ),
 
             const SizedBox(height: 60),
 
-            // Email textfield
+            // Email input field
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 25.0),
               child: TextField(
@@ -98,45 +100,6 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
                   hintText: 'Email',
                   fillColor: Colors.white,
                   filled: true,
-                ),
-              ),
-            ),
-
-            const SizedBox(height: 70),
-
-            // Reset password button
-            MaterialButton(
-              onPressed: passwordReset,
-              color: selectedTheme.colorScheme.onBackground,
-              child: Text(
-                'Reset Password',
-                style: TextStyle(
-                  color: selectedTheme.colorScheme.secondary,
-                  fontSize: 18,
-                  fontWeight: FontWeight.bold,
-                ).merge(
-                    GoogleFonts.quicksand()), // Merge styles with GoogleFonts
-              ),
-            ),
-
-            Center(
-              child: ElevatedButton(
-                onPressed: () {
-                  Navigator.pop(context);
-                },
-                style: ButtonStyle(
-                  backgroundColor: MaterialStateProperty.all<Color>(
-                    selectedTheme.colorScheme.onBackground,
-                  ),
-                ),
-                child: Text(
-                  'Back',
-                  style: TextStyle(
-                    color: selectedTheme.colorScheme.secondary,
-                    fontSize: 18,
-                    fontWeight: FontWeight.bold,
-                  ).merge(
-                      GoogleFonts.quicksand()), // Merge styles with GoogleFonts
                 ),
               ),
             ),
