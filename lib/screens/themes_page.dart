@@ -4,7 +4,6 @@ import 'package:fiservonboardingexp/themes/beach_theme.dart';
 import 'package:fiservonboardingexp/themes/pastel_theme.dart';
 import 'package:fiservonboardingexp/themes/rainforest_theme.dart';
 import 'package:fiservonboardingexp/themes/theme_provider.dart';
-
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -152,11 +151,10 @@ class _ThemesPageState extends State<ThemesPage> {
             // Beach theme
             Container(
               margin: const EdgeInsets.symmetric(
-                  horizontal: 50), // Adjust the vertical margin as needed
+                  horizontal: 50), // Adjust the vertical margin
               child: Theme(
                 data: Theme.of(context).copyWith(
-                  unselectedWidgetColor: selectedTheme
-                      .colorScheme.primary, // Set the unselected icon color
+                  unselectedWidgetColor: selectedTheme.colorScheme.primary,
                 ),
                 child: RadioListTile<ThemeData>(
                   title: Text(
@@ -165,16 +163,14 @@ class _ThemesPageState extends State<ThemesPage> {
                       color: selectedTheme.colorScheme.primary,
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
-                    ).merge(GoogleFonts
-                        .quicksand()), // Merge styles with GoogleFonts
+                    ).merge(GoogleFonts.quicksand()),
                   ),
                   value: beachTheme,
                   groupValue: selectedTheme,
                   onChanged: (value) {
                     _handleThemeChange(beachTheme, themeProvider);
                   },
-                  activeColor: selectedTheme
-                      .colorScheme.primary, // Set the selected icon color
+                  activeColor: selectedTheme.colorScheme.primary,
                 ),
               ),
             ),
