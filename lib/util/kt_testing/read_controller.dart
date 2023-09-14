@@ -6,6 +6,7 @@ import 'package:get/get.dart';
 class ReadController extends GetxController {
   late ReadModel document;
   final allReadTasks = <ReadModel>[];
+  RxInt selectedIndex = RxInt(0); // Initialize with a default index of 0
 
   @override
   void onReady() {
@@ -19,9 +20,9 @@ class ReadController extends GetxController {
       final readList = data.docs.map((document) {
         // Convert each document to a ReadModel
         return ReadModel(
-          id: document.id, // The doc ID.
-          title: document['title'], // The field name
-          content: document['content'], // Join paragraphs back with line breaks
+          id: document.id,
+          title: document['title'],
+          content: document['content'],
         );
       }).toList();
 
@@ -30,5 +31,9 @@ class ReadController extends GetxController {
     } catch (e) {
       print(e);
     }
+  }
+
+  void setSelectedIndex(int index) {
+    selectedIndex.value = index;
   }
 }
