@@ -40,7 +40,6 @@ class QuestionController extends GetxController {
       final QuerySnapshot<Map<String, dynamic>> questionQuery =
           await quizref.doc(quizQuestion.id).collection("questions").get();
 
-/*
       final questions = questionQuery.docs
           .map((snapshot) => Question.fromSnapshot(snapshot))
           .toList();
@@ -75,7 +74,7 @@ class QuestionController extends GetxController {
         } else {
           loadingStatus.value = LoadingStatus.error;
         }
-      } */
+      }
     } catch (e) {
       if (kDebugMode) {
         print(e.toString());
@@ -127,6 +126,11 @@ class QuestionController extends GetxController {
   }
 
   void navigateToHome() {
-    Get.offNamedUntil(HomeScreen.routeName, (route) => false);
+    if (quizModel.expGained = false) {
+      // add link to adding exp here
+      Get.offNamedUntil(HomeScreen.routeName, (route) => false);
+    } else {
+      Get.offNamedUntil(HomeScreen.routeName, (route) => false);
+    }
   }
 }

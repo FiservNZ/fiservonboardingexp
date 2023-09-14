@@ -51,7 +51,9 @@ class DataUploader extends GetxController {
         "image_url": quiz.imageUrl,
         "description": quiz.description,
         "quiz_duration": quiz.quizDuration,
-        "question_count": quiz.questions == null ? 0 : quiz.questions!.length
+        "question_count": quiz.questions == null ? 0 : quiz.questions!.length,
+        "exp": quiz.exp,
+        "exp_gained": quiz.expGained
       });
       for (var questions in quiz.questions!) {
         final questionCollection =
