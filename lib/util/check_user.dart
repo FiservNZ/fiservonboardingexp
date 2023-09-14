@@ -20,20 +20,23 @@ class _CheckUserState extends State<CheckUser> {
   @override
   void initState() {
     super.initState();
+    // Call the function to check the user and navigate accordingly.
     checkUserAndNavigate();
   }
 
   Future<void> checkUserAndNavigate() async {
+    // Wait for user data to be fetched.
     await fetchUser();
     print(position);
 
+    // Listen for changes in the user's authentication state.
     fireAuth.authStateChanges().listen((User? user) {
       if (user == null) {
         // User is not logged in, navigate to the LoginPage.
         Navigator.pushReplacement(
             context, MaterialPageRoute(builder: (context) => LoginPage()));
       } else {
-        // User is logged in, navigate to the appropriate screen.
+        // User is logged in, navigate to the appropriate screen based on their position.
         Navigator.pushReplacement(
             context,
             MaterialPageRoute(
@@ -59,11 +62,11 @@ class _CheckUserState extends State<CheckUser> {
   Future<void> fetchUser() async {
     try {
       String uid = fireAuth.currentUser!.uid;
-      //final userCollection = FirebaseFirestore.instance.collection('User');
-
+      // Fetch user data from Firestore using the user's UID.
       DocumentSnapshot snapshot = await userColRef.doc(uid).get();
 
       if (snapshot.exists) {
+        // Update the 'position' variable based on the user's data.
         setState(() {
           position = snapshot['position'];
         });
@@ -72,7 +75,7 @@ class _CheckUserState extends State<CheckUser> {
         print('Error, user not found!');
       }
     } catch (e) {
-      // Handle the error appropriately.
+      // Handle any errors that may occur during data fetching.
       print('Error fetching user data: $e');
     }
   }

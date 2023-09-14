@@ -6,22 +6,22 @@ import 'package:flutter/material.dart';
 class ThemeProvider extends ChangeNotifier {
   ThemeData _currentTheme = lightTheme;
 
-  // Initializes the theme
+  // Initializes the theme.
   ThemeProvider() {
-    _currentTheme = lightTheme; // Set a default theme
+    _currentTheme = lightTheme; // Set a default theme.
     getTheme().then((themeData) {
       _currentTheme = themeData ??
-          lightTheme; // Use the fetched theme or default to lightTheme
+          lightTheme; // Use the fetched theme or default to lightTheme.
       notifyListeners();
     });
   }
 
   ThemeData get currentTheme => _currentTheme;
 
-  // Method to obtain the User's theme from Firebase
+  // Method to obtain the User's theme from Firebase.
   Future<ThemeData> getTheme() async {
     if (currentUser != null) {
-      // Saves the theme into a variable after gettting it from Firebase
+      // Saves the theme into a variable after gettting it from Firebase.
       final stringThemeData =
           await ThemeDatabase().getThemePreference(currentUser.uid);
       if (stringThemeData != null) {
@@ -31,14 +31,14 @@ class ThemeProvider extends ChangeNotifier {
       }
     }
 
-    // If no theme preference is found or there is no authenticated user, return light theme
+    // If no theme preference is found or there is no authenticated user, return light theme.
     return lightTheme;
   }
 
   // Method to change theme
   Future<void> setTheme(ThemeData theme) async {
     _currentTheme = theme;
-    // Notify listeners about the theme change
+    // Notify listeners about the theme change.
     notifyListeners();
   }
 }

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-//light mode
+//light mode.
 final ThemeData rainforestTheme = ThemeData(
   brightness: Brightness.light,
 
-  //Other colours
+  //Other colours.
   colorScheme: const ColorScheme.light(
     background: Color.fromARGB(255, 80, 129, 95), // Background
     onBackground: Color.fromARGB(255, 99, 156, 98), // Tiles
