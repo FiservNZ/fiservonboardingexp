@@ -58,6 +58,8 @@ dependencies:
   cached_network_image:
   shimmer: ^3.0.0
   easy_separator:
+  table_calendar: ^3.0.9
+  http: ^0.13.3
 
 dev_dependencies:
   flutter_test:
@@ -102,14 +104,27 @@ flutter:
       - assets/icon/worldwide.png
       - assets/icon/vest.png
       - assets/icon/book.png
-      #Task Tile Page
+      # Task Tile Page
       - assets/animations/reading_book.json
       - assets/icon/start-button.png
-
       - assets/json/quizzes/
-      #Read task
+      # Read task
       - assets/images/Read.jpg
-      
+      #Achievement
+      - assets/icon/achievement/
+      # Teaser
+      - assets/images/teaser1.png
+      - assets/images/beach.png
+      - assets/images/forest.png
+      - assets/images/pastel.png
+      - assets/images/confetti.png
+      - assets/images/starbackground.png
+      - assets/images/teaser3.png    
+      - assets/images/welcomehandshake.png     
+      - assets/images/happyppl.png
+      # HomePage
+      - assets/images/bkgnd.png
+      - assets/images/randShapes.png
 
 
 
