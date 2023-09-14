@@ -4,7 +4,6 @@ import 'package:fiservonboardingexp/themes/beach_theme.dart';
 import 'package:fiservonboardingexp/themes/pastel_theme.dart';
 import 'package:fiservonboardingexp/themes/rainforest_theme.dart';
 import 'package:fiservonboardingexp/themes/theme_provider.dart';
-
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -18,8 +17,10 @@ class ThemesPage extends StatefulWidget {
 }
 
 class _ThemesPageState extends State<ThemesPage> {
+  // Create an instance of ThemeDatabase for managing theme-related data.
   final ThemeDatabase _firebaseTheme = ThemeDatabase();
 
+  // Function to handle theme change and update the theme provider.
   void _handleThemeChange(ThemeData theme, ThemeProvider themeProvider) {
     themeProvider.setTheme(theme);
 
@@ -57,7 +58,7 @@ class _ThemesPageState extends State<ThemesPage> {
                   fontSize: 27,
                   fontWeight: FontWeight.bold,
                 ).merge(
-                  GoogleFonts.quicksand(), // Merge styles with GoogleFonts
+                  GoogleFonts.quicksand(),
                 ),
               ),
             ),
@@ -67,11 +68,10 @@ class _ThemesPageState extends State<ThemesPage> {
             // Rainforest theme
             Container(
               margin: const EdgeInsets.symmetric(
-                  horizontal: 50), // Adjust the vertical margin as needed
+                  horizontal: 50), // Adjust the vertical margin
               child: Theme(
                 data: Theme.of(context).copyWith(
-                  unselectedWidgetColor: selectedTheme
-                      .colorScheme.primary, // Set the unselected icon color
+                  unselectedWidgetColor: selectedTheme.colorScheme.primary,
                 ),
                 child: RadioListTile<ThemeData>(
                   title: Text(
@@ -80,16 +80,14 @@ class _ThemesPageState extends State<ThemesPage> {
                       color: selectedTheme.colorScheme.primary,
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
-                    ).merge(GoogleFonts
-                        .quicksand()), // Merge styles with GoogleFonts
+                    ).merge(GoogleFonts.quicksand()),
                   ),
                   value: rainforestTheme,
                   groupValue: selectedTheme,
                   onChanged: (value) {
                     _handleThemeChange(rainforestTheme, themeProvider);
                   },
-                  activeColor: selectedTheme
-                      .colorScheme.primary, // Set the selected icon color
+                  activeColor: selectedTheme.colorScheme.primary,
                 ),
               ),
             ),
@@ -97,11 +95,10 @@ class _ThemesPageState extends State<ThemesPage> {
             // Pastel theme
             Container(
               margin: const EdgeInsets.symmetric(
-                  horizontal: 50), // Adjust the vertical margin as needed
+                  horizontal: 50), // Adjust the vertical margin
               child: Theme(
                 data: Theme.of(context).copyWith(
-                  unselectedWidgetColor: selectedTheme
-                      .colorScheme.primary, // Set the unselected icon color
+                  unselectedWidgetColor: selectedTheme.colorScheme.primary,
                 ),
                 child: RadioListTile<ThemeData>(
                   title: Text(
@@ -110,16 +107,16 @@ class _ThemesPageState extends State<ThemesPage> {
                       color: selectedTheme.colorScheme.primary,
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
-                    ).merge(GoogleFonts
-                        .quicksand()), // Merge styles with GoogleFonts
+                    ).merge(GoogleFonts.quicksand()),
                   ),
+                  // Radio widget for selecting the "Pastel" theme.
                   value: pastelTheme,
                   groupValue: selectedTheme,
                   onChanged: (value) {
                     _handleThemeChange(pastelTheme, themeProvider);
                   },
-                  activeColor: selectedTheme
-                      .colorScheme.primary, // Set the selected icon color
+                  // The color to use when the radio button is selected.
+                  activeColor: selectedTheme.colorScheme.primary,
                 ),
               ),
             ),
@@ -127,11 +124,10 @@ class _ThemesPageState extends State<ThemesPage> {
             // Beach theme
             Container(
               margin: const EdgeInsets.symmetric(
-                  horizontal: 50), // Adjust the vertical margin as needed
+                  horizontal: 50), // Adjust the vertical margin
               child: Theme(
                 data: Theme.of(context).copyWith(
-                  unselectedWidgetColor: selectedTheme
-                      .colorScheme.primary, // Set the unselected icon color
+                  unselectedWidgetColor: selectedTheme.colorScheme.primary,
                 ),
                 child: RadioListTile<ThemeData>(
                   title: Text(
@@ -140,16 +136,14 @@ class _ThemesPageState extends State<ThemesPage> {
                       color: selectedTheme.colorScheme.primary,
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
-                    ).merge(GoogleFonts
-                        .quicksand()), // Merge styles with GoogleFonts
+                    ).merge(GoogleFonts.quicksand()),
                   ),
                   value: beachTheme,
                   groupValue: selectedTheme,
                   onChanged: (value) {
                     _handleThemeChange(beachTheme, themeProvider);
                   },
-                  activeColor: selectedTheme
-                      .colorScheme.primary, // Set the selected icon color
+                  activeColor: selectedTheme.colorScheme.primary,
                 ),
               ),
             ),
@@ -172,8 +166,7 @@ class _ThemesPageState extends State<ThemesPage> {
                     color: selectedTheme.colorScheme.secondary,
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
-                  ).merge(
-                      GoogleFonts.quicksand()), // Merge styles with GoogleFonts
+                  ).merge(GoogleFonts.quicksand()),
                 ),
               ),
             ),

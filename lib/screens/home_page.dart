@@ -317,18 +317,15 @@ Widget getUserIcon(Map<String, dynamic> userData, ThemeData selectedTheme) {
 //                 padding: const EdgeInsets.symmetric(horizontal: 120),
 //                 child: ElevatedButton(
 //                   onPressed: () {
-//                     if (readController.allReadTasks.isNotEmpty) {
-//                       Navigator.of(context).push(
-//                         MaterialPageRoute(
-//                           builder: (context) =>
-//                               ReadPage(model: readController.allReadTasks[0]),
-//                         ),
-//                       );
-//                     } else {
-//                       // Where allReadTasks is empty or data is not available.
-//                       print("Sorry, no data available");
-//                     }
-//                   },
+//                    readController
+//                        .setSelectedIndex(0); // Set the desired index here
+//                    Navigator.push(
+//                      context,
+//                      MaterialPageRoute(
+//                       builder: (context) => ReadPage(),
+//                      ),
+//s                    );
+//                  },
 //                   style: ElevatedButton.styleFrom(
 //                     backgroundColor: selectedTheme.colorScheme.onBackground,
 //                     fixedSize: Size(120, 35),

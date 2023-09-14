@@ -23,7 +23,7 @@ const fiservColor = Color.fromARGB(255, 255, 102, 0);
 
 // Light Mode Colors
 var lightBackgroundColor = const Color(0xFFe9e9e9);
-var lightBars = const Color(0xFFfafafc);
+var lightBars = Color.fromARGB(255, 217, 217, 219);
 var lightTileColor = const Color(0xFFfefefe);
 var lightTextColor = Colors.black;
 

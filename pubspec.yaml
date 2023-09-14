@@ -107,10 +107,9 @@ flutter:
       # Task Tile Page
       - assets/animations/reading_book.json
       - assets/icon/start-button.png
-
       - assets/json/quizzes/
       # Read task
-      - assets/images/platypus.webp
+      - assets/images/Read.jpg
       #Achievement
       - assets/icon/achievement/
       # Teaser
@@ -126,7 +125,6 @@ flutter:
       # HomePage
       - assets/images/bkgnd.png
       - assets/images/randShapes.png
-
 
 
 
