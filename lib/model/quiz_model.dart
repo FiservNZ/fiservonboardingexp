@@ -13,15 +13,20 @@ class QuizModel {
   // the collection 'questions' in a quiz document
   List<Question>? questions;
   int questionCount;
+  int exp;
+  bool expGained;
 
-  QuizModel(
-      {required this.id,
-      required this.title,
-      this.imageUrl,
-      required this.description,
-      required this.quizDuration,
-      this.questions,
-      required this.questionCount});
+  QuizModel({
+    required this.id,
+    required this.title,
+    this.imageUrl,
+    required this.description,
+    required this.quizDuration,
+    this.questions,
+    required this.questionCount,
+    required this.exp,
+    required this.expGained,
+  });
 
   // Converts JSON data into a QuizModel object
   QuizModel.fromJSON(Map<String, dynamic> json)
@@ -33,7 +38,9 @@ class QuizModel {
         questionCount = 0,
         questions = (json['questions'] as List)
             .map((dynamic e) => Question.fromJSON(e as Map<String, dynamic>))
-            .toList();
+            .toList(),
+        exp = 0,
+        expGained = json['exp_gained'] as bool;
 
   // Converts data from Firebase into Map
   QuizModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> snapshot)
@@ -43,7 +50,9 @@ class QuizModel {
         description = snapshot['description'],
         quizDuration = snapshot['quiz_duration'],
         questionCount = snapshot['question_count'] as int,
-        questions = [];
+        questions = [],
+        exp = snapshot['exp'] as int,
+        expGained = snapshot['exp_gained'] as bool;
 
   String timeConverter() => "${(quizDuration / 60).ceil()} mins";
   // Converts the properties of the QuizModel object into JSON
@@ -54,6 +63,8 @@ class QuizModel {
     quizModelData['image_url'] = imageUrl;
     quizModelData['description'] = description;
     quizModelData['quiz_duration'] = quizDuration;
+    quizModelData['exp'] = exp;
+    quizModelData['exp_gained'] = expGained;
 
     return quizModelData;
   }

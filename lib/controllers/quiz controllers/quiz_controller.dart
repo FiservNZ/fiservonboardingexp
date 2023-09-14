@@ -107,10 +107,11 @@ class QuizController extends GetxController {
                     child: QuizInfoSquare(
                         icon: Icons.question_mark_rounded,
                         text: '${quizModel.questionCount} questions')),
-                const Padding(
-                    padding: EdgeInsets.all(5.0),
-                    child:
-                        QuizInfoSquare(icon: Icons.book_rounded, text: "exp")),
+                Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: QuizInfoSquare(
+                        icon: Icons.book_rounded,
+                        text: '${quizModel.exp} exp')),
                 Padding(
                   padding: const EdgeInsets.all(5.0),
                   child: QuizInfoSquare(
