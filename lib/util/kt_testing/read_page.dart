@@ -5,7 +5,6 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../widgets/app_bar_overlay.dart';
 import '../../widgets/nav_bar.dart';
-import '../constants.dart';
 import 'package:fiservonboardingexp/widgets/progress_bar.dart';
 import 'package:fiservonboardingexp/util/kt_testing/read_controller.dart';
 import 'package:fiservonboardingexp/util/kt_testing/read_model.dart';
@@ -14,7 +13,7 @@ class ReadPage extends GetView<ReadController> {
   final ProgressBar _progressBar = const ProgressBar();
   final ReadModel model;
 
-  const ReadPage({super.key, required this.model});
+  const ReadPage({required this.model});
 
   @override
   Widget build(BuildContext context) {
@@ -51,8 +50,7 @@ class ReadPage extends GetView<ReadController> {
                   // Image (from local assets folder not firebase). Needs to be changed as its hard coded.
                   const Padding(
                     padding: EdgeInsets.all(40.0),
-                    child:
-                        Image(image: AssetImage('assets/images/platypus.webp')),
+                    child: Image(image: AssetImage('assets/images/Read.jpg')),
                   ),
 
                   // Content
@@ -65,9 +63,6 @@ class ReadPage extends GetView<ReadController> {
                         fontWeight: FontWeight.bold,
                         color: selectedTheme.colorScheme.primary,
                       ),
-                      maxLines: 4,
-                      overflow: TextOverflow.ellipsis,
-                      textAlign: TextAlign.left,
                     ),
                   ),
 

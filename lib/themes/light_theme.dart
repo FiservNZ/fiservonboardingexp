@@ -8,7 +8,7 @@ final ThemeData lightTheme = ThemeData(
   //Other colours
   colorScheme: ColorScheme.light(
     background: lightBackgroundColor, // Background
-    onBackground: darkTileColor, // Tiles
+    onBackground: lightTileColor, // Tiles
     tertiary: lightBars, // App/nav bars
     primary: lightTextColor, // Main text colour
     secondary: fiservColor, // Headings
