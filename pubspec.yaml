@@ -58,6 +58,8 @@ dependencies:
   cached_network_image:
   shimmer: ^3.0.0
   easy_separator:
+  table_calendar: ^3.0.9
+  http: ^0.13.3
 
 dev_dependencies:
   flutter_test:

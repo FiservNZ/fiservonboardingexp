@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
@@ -7,9 +8,25 @@ import '../util/achievement_components/incompleted_achievement.dart';
 import '../widgets/app_bar_overlay.dart';
 import '../widgets/exp_bar.dart';
 import '../widgets/nav_bar.dart';
+import 'package:table_calendar/table_calendar.dart';
+import 'package:http/http.dart' as http;
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class HomePage extends StatelessWidget {
   const HomePage({Key? key}) : super(key: key);
+
+  Future<String> fetchRandomQuote() async {
+    final response =
+        await http.get(Uri.parse('https://api.quotable.io/random'));
+    if (response.statusCode == 200) {
+      final Map<String, dynamic> data = json.decode(response.body);
+      final quoteText = data['content'];
+      final quoteAuthor = data['author'];
+      return '$quoteText - $quoteAuthor';
+    } else {
+      return 'Failed to fetch quote';
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,42 +67,54 @@ class HomePage extends StatelessWidget {
                       final firstName = userData['firstName'] ?? 'First Name';
                       final lastName = userData['lastName'] ?? 'Last Name';
 
-                      return Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
+                      return Stack(
                         children: [
-                          // Welcome message + name
-                          Padding(
-                            padding: const EdgeInsets.symmetric(
-                              horizontal: 16,
-                            ),
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  'Welcome back,',
-                                  style: TextStyle(
-                                    color: selectedTheme.colorScheme.secondary,
-                                    fontSize: 24,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Text(
-                                  '$firstName $lastName',
-                                  style: TextStyle(
-                                    color: selectedTheme.colorScheme.secondary,
-                                    fontSize: 21,
-                                  ),
-                                ),
-                              ],
-                            ),
+                          Positioned(
+                            top: 20, // Icon UP AND DOWN ADJUSTMENT
+                            right: 30, // Icon LEFT AND RIGHT ADJUSTMENT
+                            child: getUserIcon(userData, selectedTheme),
                           ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              // Welcome message + name
+                              Padding(
+                                padding: const EdgeInsets.symmetric(
+                                  horizontal: 20,
+                                ),
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Welcome back,',
+                                      style: TextStyle(
+                                        color:
+                                            selectedTheme.colorScheme.secondary,
+                                        fontSize: 24,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                    Text(
+                                      '$firstName $lastName',
+                                      style: TextStyle(
+                                        color:
+                                            selectedTheme.colorScheme.secondary,
+                                        fontSize: 21,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
 
-                          const SizedBox(height: 20),
+                              const SizedBox(height: 20),
 
-                          // Display exp bar
-                          Padding(
-                            padding: const EdgeInsets.fromLTRB(20, 30, 0, 0),
-                            child: const ExpBar(barwidth: 300),
+                              // Display exp bar
+                              Padding(
+                                padding:
+                                    const EdgeInsets.fromLTRB(20, 20, 0, 0),
+                                child: const ExpBar(barwidth: 225),
+                              ),
+                            ],
                           ),
                         ],
                       );
@@ -136,6 +165,81 @@ class HomePage extends StatelessWidget {
         ),
       ),
     );
+  }
+}
+
+// Getting the user icon widget
+Widget getUserIcon(Map<String, dynamic> userData, ThemeData selectedTheme) {
+  final selectedIcon = userData['selectedIcon'];
+  final iconColor =
+      Color(int.parse(userData['iconColor'].replaceFirst('#', '0xFF')));
+  // Change the icon size here
+  double iconSize = 100.0;
+
+  switch (selectedIcon) {
+    case 'ghost':
+      return Container(
+        width: iconSize,
+        height: iconSize,
+        child: Icon(FontAwesomeIcons.ghost, color: iconColor, size: iconSize),
+      );
+    case 'seedling':
+      return Container(
+        width: iconSize,
+        height: iconSize,
+        child:
+            Icon(FontAwesomeIcons.seedling, color: iconColor, size: iconSize),
+      );
+    case 'poo':
+      return Container(
+        width: iconSize,
+        height: iconSize,
+        child: Icon(FontAwesomeIcons.poo, color: iconColor, size: iconSize),
+      );
+    case 'fish':
+      return Container(
+        width: iconSize,
+        height: iconSize,
+        child: Icon(FontAwesomeIcons.fish, color: iconColor, size: iconSize),
+      );
+    case 'userNinja':
+      return Container(
+        width: iconSize,
+        height: iconSize,
+        child:
+            Icon(FontAwesomeIcons.userNinja, color: iconColor, size: iconSize),
+      );
+    case 'dog':
+      return Container(
+        width: iconSize,
+        height: iconSize,
+        child: Icon(FontAwesomeIcons.dog, color: iconColor, size: iconSize),
+      );
+    case 'cat':
+      return Container(
+        width: iconSize,
+        height: iconSize,
+        child: Icon(FontAwesomeIcons.cat, color: iconColor, size: iconSize),
+      );
+    case 'frog':
+      return Container(
+        width: iconSize,
+        height: iconSize,
+        child: Icon(FontAwesomeIcons.frog, color: iconColor, size: iconSize),
+      );
+    case 'robot':
+      return Container(
+        width: iconSize,
+        height: iconSize,
+        child: Icon(FontAwesomeIcons.robot, color: iconColor, size: iconSize),
+      );
+    default:
+      return Container(
+        width: iconSize,
+        height: iconSize,
+        child: Icon(Icons.person,
+            color: selectedTheme.colorScheme.secondary, size: iconSize),
+      );
   }
 }
 
