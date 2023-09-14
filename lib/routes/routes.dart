@@ -5,7 +5,8 @@ import 'package:fiservonboardingexp/screens/main_screen.dart';
 import 'package:fiservonboardingexp/screens/manager/manager_view.dart';
 import 'package:fiservonboardingexp/screens/profile_page.dart';
 import 'package:fiservonboardingexp/screens/settings_page.dart';
-import 'package:fiservonboardingexp/widgets/check_user.dart';
+import 'package:fiservonboardingexp/util/kt_testing/read_page.dart';
+import 'package:fiservonboardingexp/util/check_user.dart';
 import 'package:get/get.dart';
 
 import '../screens/help_page.dart';

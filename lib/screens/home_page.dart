@@ -9,7 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../themes/theme_provider.dart';
 import '../util/achievement_components/incompleted_achievement.dart';
-import '../util/constants.dart';
+
 import '../widgets/app_bar_overlay.dart';
 import 'package:flutter/material.dart';
 
@@ -85,17 +85,11 @@ class HomePage extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 120),
                 child: ElevatedButton(
                   onPressed: () {
-                    if (readController.allReadTasks.isNotEmpty) {
-                      Navigator.of(context).push(
-                        MaterialPageRoute(
-                          builder: (context) =>
-                              ReadPage(model: readController.allReadTasks[0]),
-                        ),
-                      );
-                    } else {
-                      // Where allReadTasks is empty or data is not available.
-                      print("Sorry, no data available");
-                    }
+                    Get.to(
+                      () => ReadPage(model: readController.allReadTasks[0]),
+                      arguments: readController.allReadTasks[
+                          0], //Passes a specific read task/document
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: selectedTheme.colorScheme.onBackground,
