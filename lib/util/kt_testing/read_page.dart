@@ -56,27 +56,40 @@ class ReadPage extends GetView<ReadController> {
                   // Content
                   Padding(
                     padding: const EdgeInsets.all(22.0),
-                    child: Text(
-                      model.content,
-                      style: GoogleFonts.quicksand(
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                        color: selectedTheme.colorScheme.primary,
-                      ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: model.content.split(r'\n').map((paragraph) {
+                        // Replace '\n' with two new lines '\n\n', and trim leading/trailing spaces.
+                        final trimmedParagraph =
+                            paragraph.replaceAll(r'\n', '\n' '\n').trim();
+                        return Column(
+                          children: [
+                            // Display the trimmed paragraph as text.
+                            Text(
+                              trimmedParagraph,
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: selectedTheme.colorScheme.primary,
+                              ),
+                            ),
+                            // Add space (SizedBox) between paragraphs.
+                            const SizedBox(height: 16.0),
+                          ],
+                        );
+                      }).toList(),
                     ),
                   ),
-
-                  //String textFromDatabase = "lorem ipsum \n another line \n\n another line";
 
                   const SizedBox(height: 30),
 
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 20),
+                    // Puts the two buttons in a row so it is positioned side by side
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         //Back button
-
                         ElevatedButton(
                           onPressed: () {
                             Navigator.of(context).pop();
@@ -96,7 +109,6 @@ class ReadPage extends GetView<ReadController> {
                         ),
 
                         // Task finished button
-
                         ElevatedButton(
                           onPressed: () {
                             int points = 1;
