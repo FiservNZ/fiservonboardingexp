@@ -80,20 +80,23 @@ class HomePage extends StatelessWidget {
               ),
               const SizedBox(height: 200),
 
-              //Read task for platypus article
+              //Read task
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 120),
                 child: ElevatedButton(
                   onPressed: () {
-                    Get.to(
-                      () => ReadPage(model: readController.allReadTasks[0]),
-                      arguments: readController.allReadTasks[
-                          0], //Passes a specific read task/document
+                    readController
+                        .setSelectedIndex(0); // Set the desired index here
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ReadPage(),
+                      ),
                     );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: selectedTheme.colorScheme.onBackground,
-                    fixedSize: Size(120, 35),
+                    fixedSize: const Size(120, 35),
                   ),
                   child: Text(
                     'Read Task',
@@ -101,8 +104,7 @@ class HomePage extends StatelessWidget {
                       color: selectedTheme.colorScheme.secondary,
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
-                    ).merge(GoogleFonts
-                        .quicksand()), // Merge styles with GoogleFonts
+                    ).merge(GoogleFonts.quicksand()),
                   ),
                 ),
               ),
