@@ -1,4 +1,5 @@
 import 'package:fiservonboardingexp/firebase_references/firebase_refs.dart';
+import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -56,6 +57,8 @@ class ExpBar extends StatelessWidget {
   Widget build(BuildContext context) {
     //final currentUser = FirebaseAuth.instance.currentUser!;
     //final userCollection = FirebaseFirestore.instance.collection('User');
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    ThemeData selectedTheme = themeProvider.currentTheme;
 
     return SizedBox(
       child: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(

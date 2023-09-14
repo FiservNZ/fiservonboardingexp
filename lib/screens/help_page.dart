@@ -51,30 +51,34 @@ class HelpPage extends StatelessWidget {
 
             //const SizedBox(height: 0),
 
-      //Close button
-      Expanded(
-        child: Align(
-          alignment: Alignment.center,
-          child: ElevatedButton(
-            onPressed: () {
-              //change to pop function
-              Navigator.push(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => const MainScreen(),
+            //Close button
+            Expanded(
+              child: Align(
+                alignment: Alignment.center,
+                child: ElevatedButton(
+                  onPressed: () {
+                    //change to pop function
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => const MainScreen(),
+                      ),
+                    );
+                  },
+                  style:
+                      ElevatedButton.styleFrom(backgroundColor: Colors.black),
+                  child: const Text(
+                    'Close',
+                    style: TextStyle(
+                      color: Color(0xFFFF6600),
+                    ),
+                  ),
                 ),
-              );
-            },
-            style: ElevatedButton.styleFrom(backgroundColor: Colors.black),
-            child: const Text(
-              'Close',
-              style: TextStyle(
-                color: Color(0xFFFF6600),
               ),
             ),
-          ),
+          ],
         ),
       ),
-    ]));
+    );
   }
 }

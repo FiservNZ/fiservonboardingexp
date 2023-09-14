@@ -1,5 +1,6 @@
 import 'package:fiservonboardingexp/firebase_references/firebase_options.dart';
 import 'package:fiservonboardingexp/routes/routes.dart';
+import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:fiservonboardingexp/util/elle_testing/controllers/initial_bindings.dart';
 import 'package:fiservonboardingexp/util/elle_testing/routes/app_routes.dart';
 import 'package:fiservonboardingexp/util/kt_testing/read_controller.dart';

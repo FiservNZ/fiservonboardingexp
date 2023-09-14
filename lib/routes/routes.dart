@@ -5,11 +5,11 @@ import 'package:fiservonboardingexp/screens/main_screen.dart';
 import 'package:fiservonboardingexp/screens/manager/manager_view.dart';
 import 'package:fiservonboardingexp/screens/profile_page.dart';
 import 'package:fiservonboardingexp/screens/settings_page.dart';
+import 'package:fiservonboardingexp/util/check_user.dart';
 import 'package:fiservonboardingexp/util/mc_testing/category%20screens/cc_screen.dart';
 import 'package:fiservonboardingexp/util/mc_testing/category%20screens/compliance_screen.dart';
 import 'package:fiservonboardingexp/util/mc_testing/category%20screens/hs_screen.dart';
 import 'package:fiservonboardingexp/util/mc_testing/category%20screens/orientation_screen.dart';
-import 'package:fiservonboardingexp/widgets/check_user.dart';
 import 'package:get/get.dart';
 
 import '../screens/help_page.dart';

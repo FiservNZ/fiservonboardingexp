@@ -3,6 +3,10 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fiservonboardingexp/firebase_references/firebase_refs.dart';
 import 'package:fiservonboardingexp/screens/feedback_page.dart';
 import 'package:get/get.dart';
+import 'package:fiservonboardingexp/themes/theme_provider.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+
 import 'package:flutter/material.dart';
 
 import '../screens/feedback_page.dart';
@@ -12,8 +16,8 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    //final currentUser = FirebaseAuth.instance.currentUser!; No need
-    //final userCollection = FirebaseFirestore.instance.collection('User'); No need for this
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    ThemeData selectedTheme = themeProvider.currentTheme;
 
     final rankTitleMap = {
       1: 'Novice 1',
@@ -27,8 +31,9 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
       9: 'Novice 9'
     };
 
-    return AppBar(
-        backgroundColor: Colors.black,
+    return SafeArea(
+      child: AppBar(
+        backgroundColor: selectedTheme.colorScheme.tertiary,
         elevation: 0.0,
 
         // Profile picture icon
@@ -85,7 +90,7 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                 builder: (BuildContext context) {
                   return Container(
                     height: 350,
-                    color: Colors.black,
+                    color: selectedTheme.colorScheme.tertiary,
                     child: Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -105,6 +110,7 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                                 fontWeight: FontWeight.bold,
                               ).merge(GoogleFonts
                                   .quicksand()), // Merge styles with GoogleFonts
+                            ),
                             onTap: () {
                               Get.toNamed("/teaser");
                             },
@@ -124,6 +130,7 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                                 fontWeight: FontWeight.bold,
                               ).merge(GoogleFonts
                                   .quicksand()), // Merge styles with GoogleFonts
+                            ),
                             onTap: () {
                               Get.toNamed("/help");
                             },
@@ -143,6 +150,7 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                                 fontWeight: FontWeight.bold,
                               ).merge(GoogleFonts
                                   .quicksand()), // Merge styles with GoogleFonts
+                            ),
                             onTap: () {
                               Get.toNamed("/faq");
                             },
@@ -156,7 +164,12 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                             ),
                             title: Text(
                               'Settings',
-                              style: TextStyle(color: Color(0xFFFF6600)),
+                              style: TextStyle(
+                                color: selectedTheme.colorScheme.secondary,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ).merge(GoogleFonts
+                                  .quicksand()), // Merge styles with GoogleFonts
                             ),
                             onTap: () {
                               Get.toNamed("/settings");
