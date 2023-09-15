@@ -74,9 +74,9 @@ class AchievenmentState extends State<Achievement> {
               ),
               const SizedBox(height: 10),
               Text(
-                widget.isCompleted ? "Completed" : "InCompleted",
+                widget.isCompleted ? "Complete" : "Incomplete",
                 style: const TextStyle(
-                  fontSize: 12,
+                  fontSize: 15,
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                 ),
