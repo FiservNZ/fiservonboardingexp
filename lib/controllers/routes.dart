@@ -1,5 +1,4 @@
-
-import 'package:fiservonboardingexp/util/kt_testing/read_page.dart';
+import 'package:fiservonboardingexp/screens/read_page.dart';
 import 'package:get/get.dart';
 
 // class Routes {

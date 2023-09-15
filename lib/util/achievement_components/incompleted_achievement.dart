@@ -1,4 +1,8 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+
+import '../../firebase references/firebase_refs.dart';
 import '../../screens/achievements_page.dart';
 import 'incomplete_util.dart';
 
@@ -6,32 +10,27 @@ class IncompletedAchievement extends StatelessWidget {
   final Achievementpage _achievementpage = Achievementpage();
 
   IncompletedAchievement({super.key});
+  // Update the current user account
 
   @override
   Widget build(BuildContext context) {
-    final List SubiconList = [
-      'assets/icon/achievement/First time login!.png',
-      'assets/icon/achievement/Unlocked all themes!.png',
-      'assets/icon/achievement/Submitted feedback!.png',
-      'assets/icon/achievement/Changed Icon!.png',
-      'assets/icon/achievement/Completing checklist!.png',
-      'assets/icon/achievement/Completed orientation!.png',
-      'assets/icon/achievement/Completed Compliance!.png',
-      'assets/icon/achievement/Completed Health & Safety!.png',
-      'assets/icon/achievement/Completed Technical Training!.png',
-      'assets/icon/achievement/Completed Customs & Culture!.png',
-      'assets/icon/achievement/Completed all the modules!.png',
-      'assets/icon/achievement/Unlocked all icons!.png',
-    ];
-    return FutureBuilder<List<Map<String, dynamic>>>(
-      future: detectIncompletedAchi(),
+    // Update the current user account
+    final currentUser = FirebaseAuth.instance.currentUser;
+    final achievementColRef =
+        userColRef.doc(currentUser?.uid).collection("Achievement");
+
+    return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+      stream: achievementColRef.snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const CircularProgressIndicator();
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         } else if (snapshot.hasData) {
-          List<Map<String, dynamic>> contentInAchv = snapshot.data!;
+          //fetch the achievement list
+          final List<Map<String, dynamic>> contentInAchv =
+              _achievementpage.fetchAndStoreAchievement(snapshot.data!.docs);
+          // List<Map<String, dynamic>> contentInAchv = snapshot.data!;
 
           // Filter out achievements with the 'IsComplete' value set to false.
           List<Map<String, dynamic>> incompletedAchievements = contentInAchv
@@ -50,7 +49,7 @@ class IncompletedAchievement extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return IncompleteAchv(
                       title: incompletedAchievements[index]['name'],
-                      iconName: SubiconList[index],
+                      iconName: incompletedAchievements[index]['subiconData'],
                       award: '',
                       isCompleted: incompletedAchievements[index]['IsComplete'],
                     );
@@ -65,14 +64,5 @@ class IncompletedAchievement extends StatelessWidget {
         }
       },
     );
-  }
-
-  Future<List<Map<String, dynamic>>> detectIncompletedAchi() async {
-    List<Map<String, dynamic>> contentInAchv = [];
-
-    // Invoke fetchAndStoreAchievement method to retrieve the latest achievement data.
-    await _achievementpage.fetchAndStoreAchievement(contentInAchv);
-
-    return contentInAchv;
   }
 }
