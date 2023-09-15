@@ -6,23 +6,22 @@ class IncompletedAchievement extends StatelessWidget {
   final Achievementpage _achievementpage = Achievementpage();
 
   IncompletedAchievement({super.key});
-
+  final List SubiconList = [
+    'assets/icon/achievement/First time login!.png',
+    'assets/icon/achievement/Unlocked all themes!.png',
+    'assets/icon/achievement/Submitted feedback!.png',
+    'assets/icon/achievement/Changed Icon!.png',
+    'assets/icon/achievement/Completing checklist!.png',
+    'assets/icon/achievement/Completed orientation!.png',
+    'assets/icon/achievement/Completed Compliance!.png',
+    'assets/icon/achievement/Completed Health & Safety!.png',
+    'assets/icon/achievement/Completed Technical Training!.png',
+    'assets/icon/achievement/Completed Customs & Culture!.png',
+    'assets/icon/achievement/Completed all the modules!.png',
+    'assets/icon/achievement/Unlocked all icons!.png',
+  ];
   @override
   Widget build(BuildContext context) {
-    final List SubiconList = [
-      'assets/icon/achievement/First time login!.png',
-      'assets/icon/achievement/Unlocked all themes!.png',
-      'assets/icon/achievement/Submitted feedback!.png',
-      'assets/icon/achievement/Changed Icon!.png',
-      'assets/icon/achievement/Completing checklist!.png',
-      'assets/icon/achievement/Completed orientation!.png',
-      'assets/icon/achievement/Completed Compliance!.png',
-      'assets/icon/achievement/Completed Health & Safety!.png',
-      'assets/icon/achievement/Completed Technical Training!.png',
-      'assets/icon/achievement/Completed Customs & Culture!.png',
-      'assets/icon/achievement/Completed all the modules!.png',
-      'assets/icon/achievement/Unlocked all icons!.png',
-    ];
     return FutureBuilder<List<Map<String, dynamic>>>(
       future: detectIncompletedAchi(),
       builder: (context, snapshot) {
