@@ -1,6 +1,7 @@
 import 'package:achievement_view/achievement_view.dart';
 import 'package:achievement_view/achievement_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -17,9 +18,6 @@ class AchievementsPage extends StatefulWidget {
 
 class Achievementpage extends State<AchievementsPage> {
   AchievementTracker achievementTracker = const AchievementTracker();
-  //Extract the data from achievement collection
-  final achievementColRef =
-      userColRef.doc(currentUser.uid).collection("Achievement");
 
   List<Map<String, dynamic>> contentInAchv = [];
 
@@ -66,6 +64,13 @@ class Achievementpage extends State<AchievementsPage> {
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
     ThemeData selectedTheme = themeProvider.currentTheme;
+
+    // Update the current user account
+    final currentUser = FirebaseAuth.instance.currentUser;
+    //Extract the data from achievement collection
+    final achievementColRef =
+        userColRef.doc(currentUser?.uid).collection("Achievement");
+
     return Scaffold(
       appBar: myAppBar,
       bottomNavigationBar: navBar,
@@ -129,7 +134,7 @@ class Achievementpage extends State<AchievementsPage> {
                 SliverGrid(
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                     crossAxisCount: 2,
-                    childAspectRatio: 1 / 1.5,
+                    childAspectRatio: 1 / 1.3,
                   ),
                   delegate: SliverChildBuilderDelegate(
                     (BuildContext context, int index) {
@@ -150,7 +155,8 @@ class Achievementpage extends State<AchievementsPage> {
                 SliverToBoxAdapter(
                   child: ElevatedButton(
                     child: const Text("Show"),
-                    onPressed: () => show(context, "First time login!"),
+                    onPressed: () =>
+                        updateAchievement(context, "First time login!"),
                   ),
                 ),
               ],
@@ -182,19 +188,38 @@ class Achievementpage extends State<AchievementsPage> {
             typeAnimationContent: AnimationTypeAchievement.fade,
             duration: const Duration(seconds: 2))
         .show(context);
-    updateAchievement(targetName);
   }
 
-  Future<void> updateAchievement(String targetName) async {
-    // Seach the name where is equal to the traget name
-    QuerySnapshot querySnapshot =
-        await achievementColRef.where('name', isEqualTo: targetName).get();
+  Future<void> updateAchievement(
+      BuildContext context, String targetName) async {
+    try {
+      final currentUser = FirebaseAuth.instance.currentUser;
+      // Extract the data from achievement collection
+      final achievementColRef =
+          userColRef.doc(currentUser?.uid).collection("Achievement");
+      print(currentUser?.uid);
+      // Search for the name that is equal to the target name
+      QuerySnapshot querySnapshot =
+          await achievementColRef.where('name', isEqualTo: targetName).get();
 
-    // Update isCompleted field
-    for (QueryDocumentSnapshot docSnapshot in querySnapshot.docs) {
-      DocumentReference docRef = achievementColRef.doc(docSnapshot.id);
-
-      await docRef.update({'IsComplete': true});
+      // Check if any documents match the query
+      if (querySnapshot.size > 0) {
+        // Update isCompleted field
+        for (QueryDocumentSnapshot docSnapshot in querySnapshot.docs) {
+          DocumentReference docRef = achievementColRef.doc(docSnapshot.id);
+          await docRef.update({'IsComplete': true});
+        }
+        // ignore: use_build_context_synchronously
+        show(context, targetName);
+      } else {
+        // Handle the case where no matching documents were found
+        // For example, you can show an error message or perform other actions.
+        print("No documents matching '$targetName' found.");
+      }
+    } catch (e) {
+      // Handle other exceptions
+      // ignore: avoid_print
+      print("An error occurred: $e");
     }
   }
 
