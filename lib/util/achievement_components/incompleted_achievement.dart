@@ -1,4 +1,6 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import '../../firebase_references/firebase_refs.dart';
 import '../../screens/achievements_page.dart';
 import 'incomplete_util.dart';
 
@@ -20,17 +22,23 @@ class IncompletedAchievement extends StatelessWidget {
     'assets/icon/achievement/Completed all the modules!.png',
     'assets/icon/achievement/Unlocked all icons!.png',
   ];
+  final achievementColRef =
+      userColRef.doc(currentUser.uid).collection("Achievement");
+
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder<List<Map<String, dynamic>>>(
-      future: detectIncompletedAchi(),
+    return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
+      stream: achievementColRef.snapshots(),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const CircularProgressIndicator();
         } else if (snapshot.hasError) {
           return Text('Error: ${snapshot.error}');
         } else if (snapshot.hasData) {
-          List<Map<String, dynamic>> contentInAchv = snapshot.data!;
+          //fetch the achievement list
+          final List<Map<String, dynamic>> contentInAchv =
+              _achievementpage.fetchAndStoreAchievement(snapshot.data!.docs);
+          // List<Map<String, dynamic>> contentInAchv = snapshot.data!;
 
           // Filter out achievements with the 'IsComplete' value set to false.
           List<Map<String, dynamic>> incompletedAchievements = contentInAchv
@@ -49,7 +57,7 @@ class IncompletedAchievement extends StatelessWidget {
                   itemBuilder: (context, index) {
                     return IncompleteAchv(
                       title: incompletedAchievements[index]['name'],
-                      iconName: SubiconList[index],
+                      iconName: incompletedAchievements[index]['subiconData'],
                       award: '',
                       isCompleted: incompletedAchievements[index]['IsComplete'],
                     );
@@ -64,14 +72,5 @@ class IncompletedAchievement extends StatelessWidget {
         }
       },
     );
-  }
-
-  Future<List<Map<String, dynamic>>> detectIncompletedAchi() async {
-    List<Map<String, dynamic>> contentInAchv = [];
-
-    // Invoke fetchAndStoreAchievement method to retrieve the latest achievement data.
-    await _achievementpage.fetchAndStoreAchievement(contentInAchv);
-
-    return contentInAchv;
   }
 }
