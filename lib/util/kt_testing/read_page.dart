@@ -4,11 +4,10 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-import '../../widgets/app_bar_overlay.dart';
-import '../../widgets/nav_bar.dart';
+import '../../controllers/read_controller.dart';
 import 'package:fiservonboardingexp/widgets/progress_bar.dart';
-import 'package:fiservonboardingexp/util/kt_testing/read_controller.dart';
-import 'package:fiservonboardingexp/util/kt_testing/read_model.dart';
+
+import '../../model/read_model.dart';
 
 class ReadPage extends GetView<ReadController> {
   final ProgressBar _progressBar = const ProgressBar();
