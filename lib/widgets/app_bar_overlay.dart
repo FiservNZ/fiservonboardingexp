@@ -1,21 +1,22 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fiservonboardingexp/widgets/exp_bar.dart';
-
-import '../screens/profile_page.dart';
-import '../screens/faq_page.dart';
-import '../screens/help_page.dart';
-import '../screens/teaser.dart';
-import '../screens/settings_page.dart';
+import 'package:get/get.dart';
+import 'package:fiservonboardingexp/themes/theme_provider.dart';
+import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
+import '../firebase references/firebase_refs.dart';
+import '../screens/menu drawer/feedback_page.dart';
 
 class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
-  const AppBarOverlay({super.key});
+  const AppBarOverlay({super.key, User? currentUser});
+
   @override
   Widget build(BuildContext context) {
-    final currentUser = FirebaseAuth.instance.currentUser!;
-    final userCollection = FirebaseFirestore.instance.collection('User');
-
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    ThemeData selectedTheme = themeProvider.currentTheme;
+    // Update the current user account
+    final currentUser = FirebaseAuth.instance.currentUser;
     final rankTitleMap = {
       1: 'Novice 1',
       2: 'Novice 2',
@@ -28,23 +29,37 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
       9: 'Novice 9'
     };
 
-    return AppBar(
-        backgroundColor: Colors.black,
+    // Check if currentUser is null and handle accordingly
+    if (currentUser == null) {
+      // You can return a loading indicator or an empty AppBar here
+      return AppBar(
+        backgroundColor: selectedTheme.colorScheme.tertiary,
+        elevation: 0.0,
+        title: const Center(
+          child: CircularProgressIndicator(), // Display a loading indicator
+        ),
+      );
+    }
+
+    return SafeArea(
+      child: AppBar(
+        backgroundColor: selectedTheme.colorScheme.tertiary,
+        elevation: 0.0,
 
         // Profile picture icon
         leading: IconButton(
           icon: const Image(image: AssetImage('assets/images/profile.png')),
           onPressed: () {
-            Navigator.of(context).push(
-              MaterialPageRoute(builder: (context) => const ProfilePage()),
-            );
+            // Get.offAndToNamed deletes home page off the stack
+            Get.toNamed("/profile");
           },
         ),
 
         // Rank Title
         title: Center(
           child: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
-            stream: userCollection.doc(currentUser.uid).snapshots(),
+            // reference from file
+            stream: userColRef.doc(currentUser.uid).snapshots(),
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const CircularProgressIndicator();
@@ -58,7 +73,12 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
 
                 return Text(
                   rankTitle,
-                  style: TextStyle(color: Color(0xFFFF6600)),
+                  style: TextStyle(
+                    color: selectedTheme.colorScheme.secondary,
+                    fontSize: 27,
+                    fontWeight: FontWeight.bold,
+                  ).merge(
+                      GoogleFonts.quicksand()), // Merge styles with GoogleFonts
                 );
               } else {
                 return const Text('No data available');
@@ -70,17 +90,17 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
         // Nav draw
         actions: <Widget>[
           IconButton(
-            icon: const Icon(
+            icon: Icon(
               Icons.menu,
-              color: Color(0xFFFF6600),
+              color: selectedTheme.colorScheme.secondary,
             ),
             onPressed: () {
               showModalBottomSheet(
                 context: context,
                 builder: (BuildContext context) {
                   return Container(
-                    height: 320,
-                    color: Colors.black,
+                    height: 350,
+                    color: selectedTheme.colorScheme.tertiary,
                     child: Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
@@ -88,79 +108,110 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                         children: <Widget>[
                           //Intro teaser
                           ListTile(
-                            leading: const Icon(
+                            leading: Icon(
                               Icons.list,
-                              color: Color(0xFFFF6600),
+                              color: selectedTheme.colorScheme.secondary,
                             ),
-                            title: const Text(
+                            title: Text(
                               'Intro Teaser',
-                              style: TextStyle(color: Color(0xFFFF6600)),
+                              style: TextStyle(
+                                color: selectedTheme.colorScheme.secondary,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ).merge(GoogleFonts
+                                  .quicksand()), // Merge styles with GoogleFonts
                             ),
                             onTap: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                    builder: (context) => const TeaserScreen()),
-                              );
+                              Get.toNamed("/teaser");
                             },
                           ),
 
                           // Help pop up
                           ListTile(
-                            leading: const Icon(
+                            leading: Icon(
                               Icons.question_mark,
-                              color: Color(0xFFFF6600),
+                              color: selectedTheme.colorScheme.secondary,
                             ),
-                            title: const Text(
+                            title: Text(
                               'Help',
-                              style: TextStyle(color: Color(0xFFFF6600)),
+                              style: TextStyle(
+                                color: selectedTheme.colorScheme.secondary,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ).merge(GoogleFonts
+                                  .quicksand()), // Merge styles with GoogleFonts
                             ),
                             onTap: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                    builder: (context) => const HelpPage()),
-                              );
+                              Get.toNamed("/help");
                             },
                           ),
 
                           // FAQ
                           ListTile(
-                            leading: const Icon(
+                            leading: Icon(
                               Icons.question_answer,
-                              color: Color(0xFFFF6600),
+                              color: selectedTheme.colorScheme.secondary,
                             ),
-                            title: const Text(
+                            title: Text(
                               'FAQ',
-                              style: TextStyle(color: Color(0xFFFF6600)),
+                              style: TextStyle(
+                                color: selectedTheme.colorScheme.secondary,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ).merge(GoogleFonts
+                                  .quicksand()), // Merge styles with GoogleFonts
                             ),
                             onTap: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                    builder: (context) => FaqPage()),
-                              );
+                              Get.toNamed("/faq");
                             },
                           ),
 
                           // Settings
                           ListTile(
-                            leading: const Icon(
+                            leading: Icon(
                               Icons.settings,
-                              color: Color(0xFFFF6600),
+                              color: selectedTheme.colorScheme.secondary,
                             ),
-                            title: const Text(
+                            title: Text(
                               'Settings',
-                              style: TextStyle(color: Color(0xFFFF6600)),
+                              style: TextStyle(
+                                color: selectedTheme.colorScheme.secondary,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ).merge(GoogleFonts
+                                  .quicksand()), // Merge styles with GoogleFonts
+                            ),
+                            onTap: () {
+                              Get.toNamed("/settings");
+                            },
+                          ),
+
+                          // Feedback
+                          ListTile(
+                            leading: Icon(
+                              Icons.feedback_outlined,
+                              color: selectedTheme.colorScheme.secondary,
+                            ),
+                            title: Text(
+                              'Feedback',
+                              style: TextStyle(
+                                color: selectedTheme.colorScheme.secondary,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ).merge(GoogleFonts
+                                  .quicksand()), // Merge styles with GoogleFonts
                             ),
                             onTap: () {
                               Navigator.of(context).push(
                                 MaterialPageRoute(
-                                    builder: (context) => SettingsPage()),
+                                    builder: (context) => const FeedBack()),
                               );
                             },
                           ),
 
                           const SizedBox(
                             width: double.infinity,
-                            height: 30,
+                            height: 65,
                           ),
                         ],
                       ),
@@ -170,7 +221,9 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
               );
             },
           ),
-        ]);
+        ],
+      ),
+    );
   }
 
   @override

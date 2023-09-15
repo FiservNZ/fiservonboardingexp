@@ -1,10 +1,14 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fiservonboardingexp/screens/achievements_page.dart';
 import 'package:fiservonboardingexp/screens/colleagues_page.dart';
 import 'package:fiservonboardingexp/screens/home_page.dart';
 import 'package:fiservonboardingexp/screens/training_page.dart';
 import 'package:fiservonboardingexp/screens/checklist_page.dart';
+import 'package:fiservonboardingexp/themes/theme_provider.dart';
+import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../firebase references/firebase_refs.dart';
 
 class CustomNavBar extends StatelessWidget {
   const CustomNavBar({
@@ -13,69 +17,78 @@ class CustomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    ThemeData selectedTheme = themeProvider.currentTheme;
+
     return BottomNavigationBar(
       currentIndex: 0,
       showUnselectedLabels: true,
       type: BottomNavigationBarType.fixed,
       onTap: (int newIndex) {
         switch (newIndex) {
+          // Directs user to Home Page
           case 0:
-            Navigator.of(context).push(_instantPageRoute(const HomePage()));
+            Navigator.of(context).push(_instantPageRoute(HomePage()));
             break;
+          // Directs user to Training Page
           case 1:
             Navigator.push(context, _instantPageRoute(const TrainingPage()));
             break;
+          // Directs user to the General Checklist Page
           case 2:
             Navigator.push(
                 context,
                 _instantPageRoute(
-                  ChecklistPage(firestore: FirebaseFirestore.instance),
+                  ChecklistPage(firestore: firestore),
                 ));
             break;
+          // Directs user to the Achievements Page
           case 3:
-            Navigator.push(
-                context, _instantPageRoute(const AchievementsPage()));
+            Navigator.push(context, _instantPageRoute(AchievementsPage()));
             break;
+          // Directs user to the Colleagues Page
           case 4:
             Navigator.push(context, _instantPageRoute(const ColleaguesPage()));
             break;
         }
       },
-      items: const [
+      items: [
+        // Implementation for the icons, icon colours and icon label names
         BottomNavigationBarItem(
-          icon: Icon(Icons.home),
+          icon: const Icon(Icons.home),
           label: 'Home',
-          backgroundColor: Colors.black,
+          backgroundColor: darkBars,
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.my_library_books),
+          icon: const Icon(Icons.my_library_books),
           label: 'Modules',
-          backgroundColor: Colors.black,
+          backgroundColor: darkBars,
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.format_list_bulleted_sharp),
+          icon: const Icon(Icons.format_list_bulleted_sharp),
           label: 'Checklist',
-          backgroundColor: Colors.black,
+          backgroundColor: darkBars,
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.task_alt),
+          icon: const Icon(Icons.task_alt),
           label: 'Achievements',
-          backgroundColor: Colors.black,
+          backgroundColor: darkBars,
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.person_search_outlined),
+          icon: const Icon(Icons.person_search_outlined),
           label: 'Colleagues',
-          backgroundColor: Colors.black,
+          backgroundColor: darkBars,
         ),
       ],
-      selectedItemColor: FiservColor,
-      unselectedItemColor: FiservColor,
-      backgroundColor: Colors.black,
+      selectedItemColor: selectedTheme.colorScheme.secondary,
+      unselectedItemColor: selectedTheme.colorScheme.secondary,
+      backgroundColor: selectedTheme.colorScheme.tertiary,
       selectedFontSize: 12.0,
       unselectedFontSize: 12.0,
     );
   }
 
+  // Implementation for page transitions (purposely made it so that it has no animation and transition effect)
   PageRouteBuilder _instantPageRoute(Widget page) {
     return PageRouteBuilder(
       pageBuilder: (context, animation, secondaryAnimation) => page,
@@ -85,5 +98,3 @@ class CustomNavBar extends StatelessWidget {
     );
   }
 }
-
-const FiservColor = Color(0xFFFF6600);
