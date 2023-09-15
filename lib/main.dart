@@ -11,38 +11,37 @@ import 'routes/routes.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 
-/*
-//final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-int? initScreen;
+// //final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+// int? initScreen;
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp();
-  //InitialBindings().dependencies();
+// void main() async {
+//   WidgetsFlutterBinding.ensureInitialized();
+//   await Firebase.initializeApp();
+//   //InitialBindings().dependencies();
 
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-  Get.put(ReadController());
+//   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+//   Get.put(ReadController());
 
-  runApp(
-    ChangeNotifierProvider(
-      create: (_) => ThemeProvider(), // Initialize ThemeProvider here
-      child: const MyApp(),
-    ),
-  );
-}
+//   runApp(
+//     ChangeNotifierProvider(
+//       create: (_) => ThemeProvider(), // Initialize ThemeProvider here
+//       child: const MyApp(),
+//     ),
+//   );
+// }
 
-class MyApp extends StatelessWidget {
-  const MyApp({super.key});
+// class MyApp extends StatelessWidget {
+//   const MyApp({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      initialRoute: '/',
-      getPages: FiservAppRoutes.routes(),
-    );
-  }
-}*/
+//   @override
+//   Widget build(BuildContext context) {
+//     return GetMaterialApp(
+//       debugShowCheckedModeBanner: false,
+//       initialRoute: '/',
+//       getPages: FiservAppRoutes.routes(),
+//     );
+//   }
+// }
 
 // Routes to the read task page
 void main() async {
@@ -52,6 +51,7 @@ void main() async {
 
   // Create and register the ReadController instance using GetX
   ReadController readController = Get.put(ReadController());
+  await readController.getAllReadTasks(); // Await data retrieval
   readController.setSelectedIndex(0); // Set the desired index here
 
   // Run the app with ChangeNotifierProvider for theme management

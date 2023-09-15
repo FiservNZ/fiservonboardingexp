@@ -1,4 +1,5 @@
 import 'package:fiservonboardingexp/themes/theme_provider.dart';
+import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -19,8 +20,8 @@ class ReadPage extends GetView<ReadController> {
 
     return Scaffold(
       backgroundColor: selectedTheme.colorScheme.background,
-      appBar: const AppBarOverlay(),
-      bottomNavigationBar: const CustomNavBar(),
+      appBar: myAppBar,
+      bottomNavigationBar: navBar,
       body: SafeArea(
         child: GetBuilder<ReadController>(
           builder: (controller) {

@@ -15,10 +15,18 @@ class ReadController extends GetxController {
     super.onReady();
   }
 
+  // Defines the setSelectedIndex method
+  void setSelectedIndex(int index) {
+    selectedIndex.value = index;
+  }
+
   Future<void> getAllReadTasks() async {
     try {
       // Fetch the read documents from the read collection as a map.
       QuerySnapshot<Map<String, dynamic>> data = await readref.get();
+
+      print("Number of documents fetched: ${data.docs.length}");
+
       final readList = data.docs.map((document) {
         // Convert each document to a ReadModel.
         return ReadModel(
@@ -34,12 +42,7 @@ class ReadController extends GetxController {
       // After data is loaded, the selected index an be set.
       setSelectedIndex(0);
     } catch (e) {
-      print(e);
+      print("Error fetching data: $e");
     }
-  }
-
-  // Defines the setSelectedIndex method
-  void setSelectedIndex(int index) {
-    selectedIndex.value = index;
   }
 }
