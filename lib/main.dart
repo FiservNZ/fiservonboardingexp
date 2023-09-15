@@ -30,7 +30,6 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      initialRoute: '/test',
       getPages: FiservAppRoutes.routes(),
     );
   }
