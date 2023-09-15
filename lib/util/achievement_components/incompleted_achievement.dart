@@ -50,7 +50,7 @@ class IncompletedAchievement extends StatelessWidget {
                     return IncompleteAchv(
                       title: incompletedAchievements[index]['name'],
                       iconName: incompletedAchievements[index]['subiconData'],
-                      award: '',
+                      hour: incompletedAchievements[index]['hour'],
                       isCompleted: incompletedAchievements[index]['IsComplete'],
                     );
                   },
