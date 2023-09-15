@@ -24,11 +24,11 @@ class Achievementpage extends State<AchievementsPage> {
   List<Map<String, dynamic>> contentInAchv = [];
 
   // fetch the achievement list in initialization
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   fetchAndStoreAchievement(contentInAchv);
-  // }
+  @override
+  void initState() {
+    super.initState();
+    // fetchAndStoreAchievement();
+  }
 
   // List for storing the icon
   // ignore: non_constant_identifier_names
@@ -48,7 +48,10 @@ class Achievementpage extends State<AchievementsPage> {
   ];
 
   final List SubiconList = [
-    'assets/icon/achievement/First Time login!.png',
+    'assets/icon/achievement/Unlocked all themes!.png',
+    'assets/icon/achievement/First time login!.png',
+    'assets/icon/achievement/Submitted feedback!.png',
+    'assets/icon/achievement/Changed Icon!.png',
     'assets/icon/achievement/Completing checklist!.png',
     'assets/icon/achievement/Completed orientation!.png',
     'assets/icon/achievement/Completed Compliance!.png',
@@ -57,9 +60,6 @@ class Achievementpage extends State<AchievementsPage> {
     'assets/icon/achievement/Completed Customs & Culture!.png',
     'assets/icon/achievement/Completed all the modules!.png',
     'assets/icon/achievement/Unlocked all icons!.png',
-    'assets/icon/achievement/Unlocked all themes!.png',
-    'assets/icon/achievement/Submitted feedback!.png',
-    'assets/icon/achievement/Changed Icon!.png',
   ];
 
   @override
@@ -193,37 +193,32 @@ class Achievementpage extends State<AchievementsPage> {
     }
   }
 
-  Future<void> fetchAndStoreAchievement(
-      List<Map<String, dynamic>> newAchievementContent) async {
-    // Get doc in achievement collection
-    QuerySnapshot querySnapshot = await achievementColRef.get();
+  List<Map<String, dynamic>> fetchAndStoreAchievement(
+      List<QueryDocumentSnapshot<Map<String, dynamic>>> docs) {
+    List<Map<String, dynamic>> newAchievementContent = [];
 
-    // List<Map<String, dynamic>> newAchievementContent = [];
-
-    querySnapshot.docs.forEach((doc) {
-      //Get value from firestone
-      Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+    for (QueryDocumentSnapshot<Map<String, dynamic>> doc in docs) {
+      Map<String, dynamic> data = doc.data();
       String name = data['name'] ?? "";
       bool isComplete = data['IsComplete'] ?? false;
 
       // Find the corresponding icon data based on the name
-      // List iconData = IconList.firstWhere(
-      //   (iconData) => iconData[0] == 'assets/icon/$name.png',
-      //   orElse: () => [],
-      // );
-
+      String subiconData = SubiconList.firstWhere(
+        (subiconPath) => subiconPath.contains(name),
+        orElse: () => '',
+      );
       newAchievementContent.add({
         'name': name,
         'IsComplete': isComplete,
         'iconData':
             IconList.isNotEmpty ? IconList[newAchievementContent.length] : '',
+        // 'subiconData': SubiconList.isNotEmpty
+        //     ? SubiconList[newAchievementContent.length]
+        //     : '',
+        'subiconData': subiconData,
       });
-    });
+    }
     print(newAchievementContent);
-    // return newAchievementContent;
-    // Update AchievementContent
-    // setState(() {
-    //   contentInAchv = newAchievementContent;
-    // });
+    return newAchievementContent;
   }
 }
