@@ -60,6 +60,7 @@ dependencies:
   easy_separator:
   table_calendar: ^3.0.9
   http: ^0.13.3
+  video_player: ^2.7.1
 
 dev_dependencies:
   flutter_test:
@@ -110,7 +111,7 @@ flutter:
 
       - assets/json/quizzes/
       # Read task
-      - assets/images/platypus.webp
+      # - assets/images/platypus.webp
       # Teaser
       - assets/images/teaser1.png
       - assets/images/beach.png
@@ -124,6 +125,10 @@ flutter:
       # HomePage
       - assets/images/bkgnd.png
       - assets/images/randShapes.png
+      # Watch Task
+      - assets/video/video.mp4
+      - assets/icon/video_thumbnail_icon.png
+      
 
 
 

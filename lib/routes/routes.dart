@@ -10,6 +10,9 @@ import 'package:fiservonboardingexp/util/mc_testing/category%20screens/cc_screen
 import 'package:fiservonboardingexp/util/mc_testing/category%20screens/compliance_screen.dart';
 import 'package:fiservonboardingexp/util/mc_testing/category%20screens/hs_screen.dart';
 import 'package:fiservonboardingexp/util/mc_testing/category%20screens/orientation_screen.dart';
+import 'package:fiservonboardingexp/util/mc_testing/watch/video_player.dart';
+import 'package:fiservonboardingexp/util/mc_testing/watch/video_thumbnail.dart';
+import 'package:fiservonboardingexp/util/mc_testing/watch/watch_tasks_container.dart';
 import 'package:get/get.dart';
 
 import '../screens/help_page.dart';

@@ -1,18 +1,25 @@
+import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
+import 'package:fiservonboardingexp/util/mc_testing/watch/watch_tasks_container.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+
+late String currentCategory;
 
 class ModuleScreen extends StatelessWidget {
   const ModuleScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    ThemeData selectedTheme = themeProvider.currentTheme;
     return Scaffold(
       appBar: myAppBar,
       bottomNavigationBar: navBar,
       //Change later to match theme selected.
-      backgroundColor: darkBackgroundColor,
+      backgroundColor: selectedTheme.colorScheme.background,
       body: Center(
         child: Column(
           children: [
@@ -20,8 +27,8 @@ class ModuleScreen extends StatelessWidget {
             Text(
               'Missions',
               style: GoogleFonts.quicksand(
-                textStyle: const TextStyle(
-                    color: Colors.white,
+                textStyle: TextStyle(
+                    color: selectedTheme.colorScheme.primary,
                     fontWeight: FontWeight.bold,
                     fontSize: 21,
                     fontStyle: FontStyle.italic),
@@ -31,10 +38,10 @@ class ModuleScreen extends StatelessWidget {
             Expanded(
               child: ListView(
                 children: [
-                  _customMissionTile('Orientation'),
-                  _customMissionTile('Customs & Culture'),
-                  _customMissionTile('Health & Safety'),
-                  _customMissionTile('Compliance'),
+                  _customMissionTile('Orientation', selectedTheme),
+                  _customMissionTile('Customs & Culture', selectedTheme),
+                  _customMissionTile('Health & Safety', selectedTheme),
+                  _customMissionTile('Compliance', selectedTheme),
                 ],
               ),
             ),
@@ -44,19 +51,20 @@ class ModuleScreen extends StatelessWidget {
     );
   }
 
-  Widget _customMissionTile(String title) {
+  Widget _customMissionTile(String title, ThemeData selectedTheme) {
     return GestureDetector(
       onTap: () {
-        String route = title.replaceAll(" ", "");
-        debugPrint('Route: $route');
+        // String route = title.replaceAll(" ", "");
+        currentCategory = title;
+        debugPrint('Route: $currentCategory');
 
-        Get.toNamed("/$route");
+        Get.to(WatchTasksContainer(watchCategory: currentCategory));
       },
       child: Container(
         padding: const EdgeInsets.all(16),
         margin: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
         decoration: BoxDecoration(
-          color: darkTileColor,
+          color: selectedTheme.colorScheme.onBackground,
           borderRadius: BorderRadius.circular(10),
           boxShadow: [
             BoxShadow(
@@ -87,8 +95,8 @@ class ModuleScreen extends StatelessWidget {
                 Text(
                   title,
                   style: GoogleFonts.quicksand(
-                    textStyle: const TextStyle(
-                      color: Colors.white,
+                    textStyle: TextStyle(
+                      color: selectedTheme.colorScheme.primary,
                       fontWeight: FontWeight.bold,
                       fontSize: 18,
                     ),
