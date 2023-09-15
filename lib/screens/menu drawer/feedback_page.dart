@@ -1,12 +1,10 @@
+import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../util/constants.dart';
-import '../../widgets/app_bar_overlay.dart';
-import '../../widgets/faq_list.dart';
 import '../../widgets/star_rating.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../main_screen.dart';
 
 class FeedBack extends StatefulWidget {
@@ -25,6 +23,8 @@ class _FeedBackState extends State<FeedBack> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    ThemeData selectedTheme = themeProvider.currentTheme;
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
@@ -34,12 +34,12 @@ class _FeedBackState extends State<FeedBack> {
           style: GoogleFonts.quicksand(
             fontWeight: FontWeight.bold,
             fontSize: 21,
-            color: Colors.white,
+            color: selectedTheme.colorScheme.primary,
           ),
         ),
-        backgroundColor: fiservColor,
+        backgroundColor: selectedTheme.colorScheme.secondary,
       ),
-      backgroundColor: Color.fromARGB(255, 27, 27, 27),
+      backgroundColor: selectedTheme.colorScheme.background,
       // SingleChildScrollView was used to get rid of pixel overflow
       body: SingleChildScrollView(
         child: Padding(
@@ -53,7 +53,7 @@ class _FeedBackState extends State<FeedBack> {
                 style: GoogleFonts.quicksand(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                  color: selectedTheme.colorScheme.primary,
                 ),
               ),
               const SizedBox(height: 30),
@@ -62,7 +62,7 @@ class _FeedBackState extends State<FeedBack> {
                 style: GoogleFonts.quicksand(
                   fontSize: 17,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                  color: selectedTheme.colorScheme.primary,
                 ),
               ),
               // Star Rating Class to get the star rating system (5 stars)
@@ -82,7 +82,7 @@ class _FeedBackState extends State<FeedBack> {
                 style: GoogleFonts.quicksand(
                   fontSize: 17,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                  color: selectedTheme.colorScheme.primary,
                 ),
               ),
               // Text field for user feedback written input
@@ -109,8 +109,10 @@ class _FeedBackState extends State<FeedBack> {
                   maxLines:
                       10, // You can make the feedback text field bigger here
                   style: TextStyle(
-                      color:
-                          Colors.white), // User typing font colour CHANGE HERE
+                      // color: selectedTheme.colorScheme
+                      //     .primary
+                      ),
+                  // User typing font colour CHANGE HERE
                 ),
               ),
               Padding(
@@ -157,7 +159,7 @@ class _FeedBackState extends State<FeedBack> {
                   ),
                   style: ElevatedButton.styleFrom(
                     padding: EdgeInsets.symmetric(horizontal: 20),
-                    backgroundColor: fiservColor,
+                    backgroundColor: selectedTheme.colorScheme.secondary,
                   ),
                 ),
               ),

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -43,9 +44,6 @@ class ExpBar extends StatelessWidget {
 
   // Get the Level
   Future<int> get level async {
-    //final currentUser = FirebaseAuth.instance.currentUser!;
-    //final userCollection = FirebaseFirestore.instance.collection('User');
-
     final userDocRef = userColRef.doc(currentUser.uid);
     final userDoc = await userDocRef.get();
     final userMap = userDoc.data() as Map<String, dynamic>;
@@ -56,10 +54,13 @@ class ExpBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
     ThemeData selectedTheme = themeProvider.currentTheme;
-
+    final currentUser = FirebaseAuth.instance.currentUser;
     return SizedBox(
-      child: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
-        stream: userColRef.doc(currentUser.uid).snapshots(),
+      child: StreamBuilder<DocumentSnapshot>(
+        stream: FirebaseFirestore.instance
+            .collection("User")
+            .doc(currentUser?.uid)
+            .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const CircularProgressIndicator();
@@ -67,7 +68,7 @@ class ExpBar extends StatelessWidget {
             return Text('Error: ${snapshot.error}');
           } else if (snapshot.hasData) {
             final userDocument = snapshot.data!.data() as Map<String, dynamic>;
-            final level = userDocument['Level'] ?? 0;
+            final level = userDocument['Level'] ?? 1;
             final currentEXP = userDocument['EXP'] ?? 0;
             final maxEXP = (userDocument['MaxEXP'] ?? 100).toInt();
 

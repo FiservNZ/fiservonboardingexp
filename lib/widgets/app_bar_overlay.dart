@@ -15,7 +15,8 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
     ThemeData selectedTheme = themeProvider.currentTheme;
-
+    // Update the current user account
+    final currentUser = FirebaseAuth.instance.currentUser;
     final rankTitleMap = {
       1: 'Novice 1',
       2: 'Novice 2',
@@ -27,6 +28,18 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
       8: 'Novice 8',
       9: 'Novice 9'
     };
+
+    // Check if currentUser is null and handle accordingly
+    if (currentUser == null) {
+      // You can return a loading indicator or an empty AppBar here
+      return AppBar(
+        backgroundColor: selectedTheme.colorScheme.tertiary,
+        elevation: 0.0,
+        title: const Center(
+          child: CircularProgressIndicator(), // Display a loading indicator
+        ),
+      );
+    }
 
     return SafeArea(
       child: AppBar(
