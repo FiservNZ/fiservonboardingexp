@@ -1,11 +1,12 @@
 import 'package:fiservonboardingexp/themes/theme_provider.dart';
-import 'package:fiservonboardingexp/util/kt_testing/read_controller.dart';
 import 'package:fiservonboardingexp/util/kt_testing/read_page.dart';
 import 'package:fiservonboardingexp/widgets/progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+
+import 'read_controller.dart';
 
 class ReadHomePage extends StatelessWidget {
   final ProgressBar _progressBar = const ProgressBar();
