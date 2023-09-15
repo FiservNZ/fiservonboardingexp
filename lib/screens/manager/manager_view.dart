@@ -1,8 +1,7 @@
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fiservonboardingexp/firebase_references/firebase_refs.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
 
+import '../../firebase references/firebase_refs.dart';
 import '../Login_page.dart';
 import '../../controllers/manager_functions.dart';
 
