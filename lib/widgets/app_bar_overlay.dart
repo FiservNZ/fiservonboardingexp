@@ -6,10 +6,7 @@ import 'package:get/get.dart';
 import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-
 import 'package:flutter/material.dart';
-
-import '../screens/feedback_page.dart';
 
 class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
   const AppBarOverlay({super.key, User? currentUser});
@@ -30,6 +27,18 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
       8: 'Novice 8',
       9: 'Novice 9'
     };
+
+    // Check if currentUser is null and handle accordingly
+    if (currentUser == null) {
+      // You can return a loading indicator or an empty AppBar here
+      return AppBar(
+        backgroundColor: selectedTheme.colorScheme.tertiary,
+        elevation: 0.0,
+        title: const Center(
+          child: CircularProgressIndicator(), // Display a loading indicator
+        ),
+      );
+    }
 
     return SafeArea(
       child: AppBar(

@@ -15,13 +15,13 @@ Future<void> main() async {
   //InitialBindings().dependencies();
   Get.put(ReadController());
 
-  runApp(
-    ChangeNotifierProvider(
-      create: (_) => ThemeProvider(), // Initialize ThemeProvider here
-      child: const MyApp(),
-    ),
-  );
-}
+//   runApp(
+//     ChangeNotifierProvider(
+//       create: (_) => ThemeProvider(), // Initialize ThemeProvider here
+//       child: const MyApp(),
+//     ),
+//   );
+// }
 
 class QuizApp extends StatelessWidget {
   const QuizApp({super.key});
