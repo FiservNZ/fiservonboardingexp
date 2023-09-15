@@ -16,8 +16,6 @@ import 'routes/quiz_test_routes.dart';
 
 //import 'screens/main_page.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:fiservonboardingexp/firebase_references/firebase_options.dart';
-import 'package:fiservonboardingexp/util/kt_testing/read_controller.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'routes/routes.dart';
