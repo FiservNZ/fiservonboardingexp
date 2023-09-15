@@ -1,11 +1,14 @@
-import 'package:fiservonboardingexp/firebase_references/firebase_refs.dart';
 import 'package:fiservonboardingexp/screens/achievements_page.dart';
 import 'package:fiservonboardingexp/screens/colleagues_page.dart';
 import 'package:fiservonboardingexp/screens/home_page.dart';
 import 'package:fiservonboardingexp/screens/training_page.dart';
 import 'package:fiservonboardingexp/screens/checklist_page.dart';
+import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../firebase references/firebase_refs.dart';
 
 class CustomNavBar extends StatelessWidget {
   const CustomNavBar({
@@ -14,6 +17,9 @@ class CustomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    ThemeData selectedTheme = themeProvider.currentTheme;
+
     return BottomNavigationBar(
       currentIndex: 0,
       showUnselectedLabels: true,
@@ -46,9 +52,8 @@ class CustomNavBar extends StatelessWidget {
             break;
         }
       },
-
       items: [
-      // Implementation for the icons, icon colours and icon label names
+        // Implementation for the icons, icon colours and icon label names
         BottomNavigationBarItem(
           icon: const Icon(Icons.home),
           label: 'Home',
@@ -75,10 +80,9 @@ class CustomNavBar extends StatelessWidget {
           backgroundColor: darkBars,
         ),
       ],
-
-      selectedItemColor: fiservColor,
-      unselectedItemColor: fiservColor,
-      backgroundColor: Color(0xFF111211),
+      selectedItemColor: selectedTheme.colorScheme.secondary,
+      unselectedItemColor: selectedTheme.colorScheme.secondary,
+      backgroundColor: selectedTheme.colorScheme.tertiary,
       selectedFontSize: 12.0,
       unselectedFontSize: 12.0,
     );

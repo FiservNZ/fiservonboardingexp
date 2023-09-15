@@ -1,4 +1,6 @@
+import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../util/constants.dart';
 import '../model/colleagues.dart';
 import 'package:flutter/gestures.dart';
@@ -49,10 +51,13 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
   // UI implementation of the colleagues page
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    ThemeData selectedTheme = themeProvider.currentTheme;
+
     return Scaffold(
       appBar: myAppBar,
       bottomNavigationBar: const CustomNavBar(),
-      backgroundColor: Color.fromARGB(255, 27, 27, 27),
+      backgroundColor: selectedTheme.colorScheme.background,
       body: Padding(
         padding: EdgeInsets.all(16),
         child: Column(
@@ -67,7 +72,7 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
                   style: GoogleFonts.quicksand(
                     fontSize: 27,
                     fontWeight: FontWeight.bold,
-                    color: fiservColor,
+                    color: selectedTheme.colorScheme.secondary,
                   ),
                 ),
               ),
@@ -80,20 +85,20 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
                 itemBuilder: (context, index) {
                   return ListTile(
                     // Colleagues icon set to the person icon by default
-                    leading: const CircleAvatar(
+                    leading: CircleAvatar(
                       radius: 22,
                       child: Icon(
                         Icons.person,
-                        color: Colors.white,
+                        color: selectedTheme.colorScheme.primary,
                       ),
-                      backgroundColor: Color(0xFFFF6600),
+                      backgroundColor: selectedTheme.colorScheme.secondary,
                     ),
                     // UI for Colleague Name here
                     title: Text(
                       colleagues[index].name,
                       style: GoogleFonts.quicksand(
                         textStyle: TextStyle(
-                          color: Colors.white,
+                          color: selectedTheme.colorScheme.primary,
                           fontWeight: FontWeight.bold,
                           fontSize: 18,
                         ),
@@ -104,7 +109,7 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
                       colleagues[index].position,
                       style: GoogleFonts.quicksand(
                         textStyle: TextStyle(
-                          color: Colors.white,
+                          color: selectedTheme.colorScheme.primary,
                           fontWeight: FontWeight.bold,
                         ),
                       ),
@@ -128,14 +133,16 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
     showDialog(
       context: context,
       builder: (BuildContext context) {
+        final themeProvider = Provider.of<ThemeProvider>(context);
+        ThemeData selectedTheme = themeProvider.currentTheme;
         return AlertDialog(
-          backgroundColor: Color.fromARGB(255, 27, 27, 27),
+          backgroundColor: selectedTheme.colorScheme.background,
           // Colleague details title
           title: Text(
             'COLLEAGUE DETAILS',
             style: GoogleFonts.quicksand(
               textStyle: TextStyle(
-                color: fiservColor,
+                color: selectedTheme.colorScheme.secondary,
                 fontWeight: FontWeight.bold,
                 fontSize: 22,
               ),
@@ -151,24 +158,26 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
                 Text(
                   'Name: ${colleague.name}',
                   style: TextStyle(
-                    color: Colors.white, // Colleague Name Font Colour
+                    color: selectedTheme
+                        .colorScheme.primary, // Colleague Name Font Colour
                   ),
                 ),
                 // Colleague Position UI here
                 Text(
                   'Position: ${colleague.position}',
                   style: TextStyle(
-                    color: Colors.white, // Colleague Position Font Colour
+                    color: selectedTheme
+                        .colorScheme.primary, // Colleague Position Font Colour
                   ),
                 ),
                 Row(
                   // Colleague Phone Number UI here
                   children: [
-                    const Text(
+                    Text(
                       'Phone Number: ',
                       style: TextStyle(
-                          color: Colors
-                              .white), // Colleague Phone Number Font Colour
+                          color: selectedTheme.colorScheme
+                              .primary), // Colleague Phone Number Font Colour
                     ),
                     // Implementation when the user presses the phone number, the phone dial app opens with the phone number in it
                     RichText(
@@ -176,7 +185,8 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
                         children: [
                           TextSpan(
                             text: colleague.phoneNumber,
-                            style: TextStyle(color: fiservColor),
+                            style: TextStyle(
+                                color: selectedTheme.colorScheme.secondary),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
                                 _launchPhoneNumber(colleague
@@ -191,16 +201,17 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
                 // Colleague Email UI
                 Row(
                   children: [
-                    const Text('Email: ',
+                    Text('Email: ',
                         style: TextStyle(
-                            color:
-                                Colors.white)), // Colleague Email Font Colour
+                            color: selectedTheme.colorScheme
+                                .primary)), // Colleague Email Font Colour
                     RichText(
                       text: TextSpan(
                         children: [
                           TextSpan(
                             text: colleague.email,
-                            style: const TextStyle(color: fiservColor),
+                            style: TextStyle(
+                                color: selectedTheme.colorScheme.secondary),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
                                 _launchEmail(colleague
@@ -215,7 +226,8 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
                 // Colleague Hobbies UI
                 Text('Hobbies: ${colleague.hobbies}',
                     style: TextStyle(
-                        color: Colors.white)), // Colleague Hobbies Font Colour
+                        color: selectedTheme.colorScheme
+                            .primary)), // Colleague Hobbies Font Colour
               ],
             ),
           ),
@@ -223,12 +235,13 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
           actions: [
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFFFF6600),
+                backgroundColor: selectedTheme.colorScheme.secondary,
               ),
               onPressed: () {
                 Navigator.of(context).pop();
               },
-              child: const Text('Close'),
+              child: Text('Close',
+                  style: TextStyle(color: selectedTheme.colorScheme.primary)),
             ),
           ],
         );

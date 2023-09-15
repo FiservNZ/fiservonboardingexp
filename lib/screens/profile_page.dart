@@ -1,14 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fiservonboardingexp/api/pdf_api.dart';
-import 'package:fiservonboardingexp/firebase_references/firebase_refs.dart';
 import 'package:fiservonboardingexp/idk/nav_app_overlay.dart';
+import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:fiservonboardingexp/widgets/custom_text_box.dart';
 import 'package:fiservonboardingexp/widgets/user_icons.dart';
 import 'package:fiservonboardingexp/widgets/exp_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:provider/provider.dart';
+import '../firebase references/firebase_refs.dart';
 
 class ProfilePage extends StatefulWidget {
   static const String routeName = '/Profile';
@@ -98,19 +99,23 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    ThemeData selectedTheme = themeProvider.currentTheme;
+
     // userIcon variable to change user icon.
     Icon userIcon = Icon(Icons.person);
     ExpBar expBar = ExpBar(barwidth: 200);
 
     return Scaffold(
+      backgroundColor: selectedTheme.colorScheme.background,
       appBar: AppBar(
-        title: const Text(
+        title: Text(
           'Profile Page',
           style: TextStyle(
-            color: Color(0xFFFF6600),
+            color: selectedTheme.colorScheme.secondary,
           ),
         ),
-        backgroundColor: Colors.black,
+        backgroundColor: selectedTheme.colorScheme.tertiary,
       ),
       body: StreamBuilder<DocumentSnapshot>(
         stream: FirebaseFirestore.instance
@@ -179,9 +184,9 @@ class _ProfilePageState extends State<ProfilePage> {
                 color: Color(int.parse(iconColor.replaceFirst('#', '0xFF'))),
               );
             } else {
-              userIcon = const Icon(
+              userIcon = Icon(
                 Icons.person,
-                color: fiservColor,
+                color: selectedTheme.colorScheme.secondary,
               );
               iconOnPressed = null;
             }
@@ -215,7 +220,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   '${userData['firstName']} ${userData['lastName']}',
                   textAlign: TextAlign.center,
                   style: TextStyle(
-                    color: Colors.grey.shade700,
+                    color: selectedTheme.colorScheme.primary,
                     fontWeight: FontWeight.bold,
                     fontSize: 16,
                   ),
@@ -236,7 +241,7 @@ class _ProfilePageState extends State<ProfilePage> {
                   child: Text(
                     'About Me:',
                     style: TextStyle(
-                      color: Colors.grey.shade700,
+                      color: selectedTheme.colorScheme.primary,
                       fontStyle: FontStyle.italic,
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
@@ -289,7 +294,7 @@ class _ProfilePageState extends State<ProfilePage> {
                         child: ElevatedButton(
                           style: ButtonStyle(
                             backgroundColor: MaterialStateProperty.all<Color>(
-                              const Color(0xFFFF6600),
+                              selectedTheme.colorScheme.secondary,
                             ),
                           ),
                           onPressed: () async {

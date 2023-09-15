@@ -1,15 +1,15 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fiservonboardingexp/firebase_references/firebase_refs.dart';
-import 'package:fiservonboardingexp/screens/feedback_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:get/get.dart';
 import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-
 import 'package:flutter/material.dart';
+import '../firebase references/firebase_refs.dart';
+import '../screens/menu drawer/feedback_page.dart';
 
 class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
-  const AppBarOverlay({super.key});
+  const AppBarOverlay({super.key, User? currentUser});
 
   @override
   Widget build(BuildContext context) {
@@ -27,6 +27,18 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
       8: 'Novice 8',
       9: 'Novice 9'
     };
+
+    // Check if currentUser is null and handle accordingly
+    if (currentUser == null) {
+      // You can return a loading indicator or an empty AppBar here
+      return AppBar(
+        backgroundColor: selectedTheme.colorScheme.tertiary,
+        elevation: 0.0,
+        title: const Center(
+          child: CircularProgressIndicator(), // Display a loading indicator
+        ),
+      );
+    }
 
     return SafeArea(
       child: AppBar(
@@ -173,14 +185,20 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                             },
                           ),
 
+                          // Feedback
                           ListTile(
-                            leading: const Icon(
+                            leading: Icon(
                               Icons.feedback_outlined,
-                              color: Color(0xFFFF6600),
+                              color: selectedTheme.colorScheme.secondary,
                             ),
-                            title: const Text(
+                            title: Text(
                               'Feedback',
-                              style: TextStyle(color: Color(0xFFFF6600)),
+                              style: TextStyle(
+                                color: selectedTheme.colorScheme.secondary,
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                              ).merge(GoogleFonts
+                                  .quicksand()), // Merge styles with GoogleFonts
                             ),
                             onTap: () {
                               Navigator.of(context).push(

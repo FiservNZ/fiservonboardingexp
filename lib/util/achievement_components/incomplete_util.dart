@@ -78,7 +78,7 @@ class IncompleteAchvState extends State<IncompleteAchv> {
               children: [
                 SizedBox(width: 30),
                 Icon(
-                  Icons.lock_clock,
+                  Icons.access_time,
                   color: Colors.white,
                 ),
                 Text(
