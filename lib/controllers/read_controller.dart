@@ -7,7 +7,7 @@ import '../firebase references/firebase_refs.dart';
 class ReadController extends GetxController {
   late ReadModel document;
   final allReadTasks =
-      <ReadModel>[]; //Initalizes a collection of read tasks as an array.
+      <ReadModel>[]; // Initializes a collection of read tasks as an array.
   RxInt selectedIndex = RxInt(0); // Initialize with a default index of 0.
 
   @override
@@ -18,7 +18,7 @@ class ReadController extends GetxController {
 
   Future<void> getAllReadTasks() async {
     try {
-      // Saves the read documents from the read collection as a map.
+      // Fetch the read documents from the read collection as a map.
       QuerySnapshot<Map<String, dynamic>> data = await readref.get();
       final readList = data.docs.map((document) {
         // Convert each document to a ReadModel.
@@ -31,12 +31,15 @@ class ReadController extends GetxController {
 
       // Assign the list of ReadModel objects to allReadTasks.
       allReadTasks.assignAll(readList);
+
+      // After data is loaded, the selected index an be set.
+      setSelectedIndex(0);
     } catch (e) {
       print(e);
     }
   }
 
-  // This method sets the selected index in the ReadController.
+  // Defines the setSelectedIndex method
   void setSelectedIndex(int index) {
     selectedIndex.value = index;
   }
