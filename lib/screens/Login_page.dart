@@ -1,8 +1,10 @@
 import 'package:fiservonboardingexp/screens/main_screen.dart';
+import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 import '../firebase references/firebase_refs.dart';
 import 'menu drawer/help_page.dart';
 import 'teaser pages/teaser.dart';
@@ -126,9 +128,12 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    ThemeData selectedTheme = themeProvider.currentTheme;
     return Scaffold(
+      backgroundColor: selectedTheme.colorScheme.background,
       appBar: AppBar(
-        backgroundColor: fiservColor,
+        backgroundColor: selectedTheme.colorScheme.tertiary,
         centerTitle: true,
         elevation: 0,
       ),
@@ -147,11 +152,12 @@ class LoginPage extends StatelessWidget {
                     height: 100,
                   ),
                   const SizedBox(height: 30),
-                  const Text(
+                  Text(
                     'Welcome to Firserv',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
+                      color: selectedTheme.colorScheme.secondary,
                     ),
                   ),
                 ],
@@ -186,9 +192,12 @@ class LoginPage extends StatelessWidget {
                       handleLogin(context);
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: Colors.black,
+                      backgroundColor: selectedTheme.colorScheme.onBackground,
                     ),
-                    child: const Text('Login'),
+                    child: Text('Login',
+                        style: TextStyle(
+                          color: selectedTheme.colorScheme.primary,
+                        )),
                   ),
                 ],
               ),
