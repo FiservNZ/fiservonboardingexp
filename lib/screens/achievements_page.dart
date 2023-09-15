@@ -27,7 +27,7 @@ class Achievementpage extends State<AchievementsPage> {
   // @override
   // void initState() {
   //   super.initState();
-  //   fetchAndStoreAchievement();
+  //   fetchAndStoreAchievement(contentInAchv);
   // }
 
   // List for storing the icon
@@ -73,8 +73,13 @@ class Achievementpage extends State<AchievementsPage> {
       body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
         stream: achievementColRef.snapshots(),
         builder: (context, snapshot) {
-          // Store all the achievement information in list
-          fetchAndStoreAchievement(contentInAchv);
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const CircularProgressIndicator();
+          } else if (snapshot.hasError) {
+            return Text('Error: ${snapshot.error}');
+          } else if (snapshot.hasData) {
+            // Store all the achievement information in list
+            fetchAndStoreAchievement(contentInAchv);
 
           return CustomScrollView(
             slivers: <Widget>[
@@ -218,7 +223,7 @@ class Achievementpage extends State<AchievementsPage> {
     // return newAchievementContent;
     // Update AchievementContent
     // setState(() {
-    //   _achievementContent = newAchievementContent;
+    //   contentInAchv = newAchievementContent;
     // });
   }
 }
