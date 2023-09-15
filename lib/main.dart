@@ -1,4 +1,6 @@
 import 'package:fiservonboardingexp/themes/theme_provider.dart';
+import 'package:fiservonboardingexp/util/kt_testing/read_home_page.dart';
+import 'package:fiservonboardingexp/util/kt_testing/routes.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:fiservonboardingexp/firebase_references/firebase_options.dart';
@@ -6,7 +8,10 @@ import 'package:fiservonboardingexp/util/kt_testing/read_controller.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'routes/routes.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
 
+/*
 //final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 int? initScreen;
 
@@ -37,10 +42,44 @@ class MyApp extends StatelessWidget {
       getPages: FiservAppRoutes.routes(),
     );
   }
+}*/
+
+// Routes to the read task page
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+
+  // Create and register the ReadController instance using GetX
+  ReadController readController = Get.put(ReadController());
+  readController.setSelectedIndex(0); // Set the desired index here
+
+  // Run the app with ChangeNotifierProvider for theme management
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => ThemeProvider(),
+      child: const MyApp(),
+    ),
+  );
+}
+
+class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return GetMaterialApp(
+      debugShowCheckedModeBanner: false,
+      // Initial route is set to the readtask page
+      initialRoute: '/read',
+      getPages: Routes.routes(),
+    );
+  }
 }
 
 
 
+// Old Code
 // import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:fiservonboardingexp/theme/theme_provider.dart';
 // import 'package:fiservonboardingexp/widgets/check_user.dart';
