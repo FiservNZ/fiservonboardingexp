@@ -7,6 +7,8 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
+import 'read_controller.dart';
+
 class ReadHomePage extends StatelessWidget {
   final ProgressBar _progressBar = const ProgressBar();
 
