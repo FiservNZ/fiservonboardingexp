@@ -1,9 +1,9 @@
+import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:percent_indicator/percent_indicator.dart';
-import '../firebase_references/firebase_refs.dart';
-import '../util/constants.dart';
+import 'package:google_fonts/google_fonts.dart';
+import '../firebase references/firebase_refs.dart';
+import 'package:provider/provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 
 class ProgressBar extends StatelessWidget {
   const ProgressBar({super.key});
@@ -37,8 +37,8 @@ class ProgressBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //final currentUser = FirebaseAuth.instance.currentUser!;
-    //final userCollection = FirebaseFirestore.instance.collection('User');
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    ThemeData selectedTheme = themeProvider.currentTheme;
 
     return SizedBox(
       child: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
@@ -61,18 +61,19 @@ class ProgressBar extends StatelessWidget {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text(
+                      Text(
                         'Progress Bar',
                         style: TextStyle(
-                          color: fiservColor,
-                          fontSize: 15,
+                          color: selectedTheme.colorScheme.primary,
+                          fontSize: 18,
                           fontWeight: FontWeight.bold,
-                        ),
+                        ).merge(GoogleFonts
+                            .quicksand()), // Merge styles with GoogleFonts
                       ),
                       Text(
                         pointsText,
-                        style: const TextStyle(
-                          color: fiservColor,
+                        style: TextStyle(
+                          color: selectedTheme.colorScheme.primary,
                           fontSize: 15,
                           fontWeight: FontWeight.bold,
                         ),
@@ -88,10 +89,10 @@ class ProgressBar extends StatelessWidget {
                     borderRadius: BorderRadius.circular(5),
                     child: LinearProgressIndicator(
                       value: curPoints / maxPoints,
-                      valueColor: const AlwaysStoppedAnimation<Color>(
-                        fiservColor,
+                      valueColor: AlwaysStoppedAnimation<Color>(
+                        selectedTheme.colorScheme.secondary,
                       ),
-                      backgroundColor: Colors.grey,
+                      backgroundColor: const Color.fromARGB(255, 190, 188, 184),
                     ),
                   ),
                 ),
