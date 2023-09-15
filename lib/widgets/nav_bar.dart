@@ -1,4 +1,3 @@
-import 'package:fiservonboardingexp/firebase_references/firebase_refs.dart';
 import 'package:fiservonboardingexp/screens/achievements_page.dart';
 import 'package:fiservonboardingexp/screens/colleagues_page.dart';
 import 'package:fiservonboardingexp/screens/home_page.dart';
@@ -8,6 +7,8 @@ import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+
+import '../firebase references/firebase_refs.dart';
 
 class CustomNavBar extends StatelessWidget {
   const CustomNavBar({

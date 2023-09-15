@@ -1,15 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
+import '../task_components/task_tile.dart';
 import '../../util/constants.dart';
-import '../../idk/task_components/task.dart';
 import '../../widgets/nav_bar.dart';
 
-class TaskPage extends StatelessWidget {
-  final Task task;
+class TechnicalTasks extends StatefulWidget {
+  const TechnicalTasks({super.key});
 
-  TaskPage({super.key, required this.task});
+  @override
+  State<TechnicalTasks> createState() => _TechnicalTasksPage();
+}
 
+class _TechnicalTasksPage extends State<TechnicalTasks> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -24,13 +26,17 @@ class TaskPage extends StatelessWidget {
             child: Column(
               children: [
                 const SizedBox(height: 20),
-                //title of page pulled from the name field in firestore
+                //heading
                 Text(
-                  task.name,
+                  "Technical Training Tasks",
                   style:
                       GoogleFonts.bebasNeue(fontSize: 30, color: fiservColor),
                 ),
                 const SizedBox(height: 10),
+                //list of tasks
+                const Expanded(
+                  child: TaskTile(),
+                )
               ],
             ),
           ),

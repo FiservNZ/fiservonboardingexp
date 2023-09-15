@@ -1,10 +1,10 @@
-import 'package:fiservonboardingexp/firebase_references/firebase_refs.dart';
 import 'package:fiservonboardingexp/themes/beach_theme.dart';
 import 'package:fiservonboardingexp/themes/dark_theme.dart';
 import 'package:fiservonboardingexp/themes/light_theme.dart';
 import 'package:fiservonboardingexp/themes/pastel_theme.dart';
 import 'package:fiservonboardingexp/themes/rainforest_theme.dart';
 import 'package:flutter/material.dart';
+import '../firebase references/firebase_refs.dart';
 
 // Converts the the themeData to a String so it can be saved into Firebase.
 String themeDataToString(ThemeData theme) {
