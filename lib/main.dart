@@ -27,7 +27,12 @@ Future<void> main() async {
   await Firebase.initializeApp();
   InitialBindings().dependencies();
 
-  runApp(const QuizApp());
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => ThemeProvider(),
+      child: const QuizApp(),
+    ),
+  ); // Initialize ThemeProvider here
 }
 
 class QuizApp extends StatelessWidget {
