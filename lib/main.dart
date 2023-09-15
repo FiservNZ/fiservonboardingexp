@@ -63,20 +63,14 @@ void main() async {
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+  InitialBindings().dependencies();
 
-  // Create and register the ReadController instance using GetX
-  ReadController readController = Get.put(ReadController());
-  await readController.getAllReadTasks(); // Await data retrieval
-  readController.setSelectedIndex(0); // Set the desired index here
-
-  // Run the app with ChangeNotifierProvider for theme management
   runApp(
     ChangeNotifierProvider(
       create: (_) => ThemeProvider(),
-      child: const MyApp(),
+      child: const QuizApp(),
     ),
-  );
+  ); // Initialize ThemeProvider here
 }
 
 class QuizApp extends StatelessWidget {
