@@ -72,6 +72,8 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       // Initial route is set to the readtask page
       initialRoute: '/read',
+      //sets the initial route to homepage with read task button and progess bar
+      //initialRoute: '/',
       getPages: Routes.routes(),
     );
   }
