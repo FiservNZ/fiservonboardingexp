@@ -15,7 +15,8 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
     ThemeData selectedTheme = themeProvider.currentTheme;
-
+    // Update the current user account
+    final currentUser = FirebaseAuth.instance.currentUser;
     final rankTitleMap = {
       1: 'Novice 1',
       2: 'Novice 2',

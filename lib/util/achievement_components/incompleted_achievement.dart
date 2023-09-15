@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 import '../../firebase references/firebase_refs.dart';
@@ -9,25 +10,15 @@ class IncompletedAchievement extends StatelessWidget {
   final Achievementpage _achievementpage = Achievementpage();
 
   IncompletedAchievement({super.key});
-  final List SubiconList = [
-    'assets/icon/achievement/First time login!.png',
-    'assets/icon/achievement/Unlocked all themes!.png',
-    'assets/icon/achievement/Submitted feedback!.png',
-    'assets/icon/achievement/Changed Icon!.png',
-    'assets/icon/achievement/Completing checklist!.png',
-    'assets/icon/achievement/Completed orientation!.png',
-    'assets/icon/achievement/Completed Compliance!.png',
-    'assets/icon/achievement/Completed Health & Safety!.png',
-    'assets/icon/achievement/Completed Technical Training!.png',
-    'assets/icon/achievement/Completed Customs & Culture!.png',
-    'assets/icon/achievement/Completed all the modules!.png',
-    'assets/icon/achievement/Unlocked all icons!.png',
-  ];
-  final achievementColRef =
-      userColRef.doc(currentUser.uid).collection("Achievement");
+  // Update the current user account
 
   @override
   Widget build(BuildContext context) {
+    // Update the current user account
+    final currentUser = FirebaseAuth.instance.currentUser;
+    final achievementColRef =
+        userColRef.doc(currentUser?.uid).collection("Achievement");
+
     return StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
       stream: achievementColRef.snapshots(),
       builder: (context, snapshot) {
