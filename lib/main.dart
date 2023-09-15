@@ -20,7 +20,6 @@ import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'routes/routes.dart';
 
-final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 int? initScreen;
 
 Future<void> main() async {
@@ -38,7 +37,7 @@ class QuizApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      getPages: AppRoutes.routes(),
+      getPages: FiservAppRoutes.routes(),
     );
   }
 }
