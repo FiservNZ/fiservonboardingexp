@@ -1,4 +1,6 @@
+import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import '../../util/constants.dart';
 import '../../widgets/star_rating.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -21,6 +23,8 @@ class _FeedBackState extends State<FeedBack> {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    ThemeData selectedTheme = themeProvider.currentTheme;
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
