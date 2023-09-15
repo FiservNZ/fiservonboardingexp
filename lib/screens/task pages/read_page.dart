@@ -3,19 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
+import '../../controllers/read_controller.dart';
+import '../../model/read_model.dart';
 import '../../widgets/app_bar_overlay.dart';
 import '../../widgets/nav_bar.dart';
-import '../../util/constants.dart';
-import 'package:fiservonboardingexp/widgets/progress_bar.dart';
-import 'package:fiservonboardingexp/controllers/read_controller.dart';
-import 'package:fiservonboardingexp/model/read_model.dart';
+import '../../widgets/progress_bar.dart';
 
 class ReadPage extends GetView<ReadController> {
   final ProgressBar _progressBar = const ProgressBar();
   final ReadModel model;
 
   const ReadPage({super.key, required this.model});
-  static const String routeName = '/readTaskPage';
 
   @override
   Widget build(BuildContext context) {
@@ -23,11 +21,10 @@ class ReadPage extends GetView<ReadController> {
     ThemeData selectedTheme = themeProvider.currentTheme;
     return Scaffold(
       backgroundColor: selectedTheme.colorScheme.background,
-      //appBar: const AppBarOverlay(),
-      //bottomNavigationBar: const CustomNavBar(),
+      appBar: const AppBarOverlay(),
+      bottomNavigationBar: const CustomNavBar(),
       body: SafeArea(
         child: FutureBuilder<ReadModel>(
-          future: Future.value(model),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
               // While data is still loading
@@ -56,7 +53,6 @@ class ReadPage extends GetView<ReadController> {
                     ),
                   ),
 
-                  // This needs to be changed.
                   // Image (from local assets folder not firebase). Needs to be changed as its hard coded.
                   const Padding(
                     padding: EdgeInsets.all(40.0),
@@ -108,6 +104,7 @@ class ReadPage extends GetView<ReadController> {
                                 .quicksand()), // Merge styles with GoogleFonts
                           ),
                         ),
+
                         // Task finished button
 
                         ElevatedButton(
