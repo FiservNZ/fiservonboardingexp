@@ -1,4 +1,4 @@
-import 'package:fiservonboardingexp/util/kt_testing/read_controller.dart';
+import 'package:fiservonboardingexp/controllers/read_controller.dart';
 import 'package:fiservonboardingexp/util/kt_testing/read_home_page.dart';
 import 'package:fiservonboardingexp/util/kt_testing/read_page.dart';
 import 'package:get/get.dart';
