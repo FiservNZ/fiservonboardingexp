@@ -109,8 +109,8 @@ class _FeedBackState extends State<FeedBack> {
                   maxLines:
                       10, // You can make the feedback text field bigger here
                   style: TextStyle(
-                      color:
-                          Colors.white), // User typing font colour CHANGE HERE
+                      color: selectedTheme.colorScheme
+                          .primary), // User typing font colour CHANGE HERE
                 ),
               ),
               Padding(

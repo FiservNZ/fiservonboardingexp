@@ -28,6 +28,18 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
       9: 'Novice 9'
     };
 
+    // Check if currentUser is null and handle accordingly
+    if (currentUser == null) {
+      // You can return a loading indicator or an empty AppBar here
+      return AppBar(
+        backgroundColor: selectedTheme.colorScheme.tertiary,
+        elevation: 0.0,
+        title: const Center(
+          child: CircularProgressIndicator(), // Display a loading indicator
+        ),
+      );
+    }
+
     return SafeArea(
       child: AppBar(
         backgroundColor: selectedTheme.colorScheme.tertiary,

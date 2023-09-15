@@ -4,6 +4,8 @@ import 'package:fiservonboardingexp/screens/home_page.dart';
 import 'package:fiservonboardingexp/screens/login_page.dart';
 import 'package:fiservonboardingexp/screens/main_screen.dart';
 import 'package:fiservonboardingexp/themes/theme_provider.dart';
+import 'package:fiservonboardingexp/util/kt_testing/read_home_page.dart';
+import 'package:fiservonboardingexp/util/kt_testing/routes.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter/services.dart';
@@ -19,9 +21,45 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 import 'routes/routes.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:flutter/material.dart';
+
+// //final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+// int? initScreen;
 
 int? initScreen;
 
+// void main() async {
+//   WidgetsFlutterBinding.ensureInitialized();
+//   await Firebase.initializeApp();
+//   //InitialBindings().dependencies();
+
+//   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+//   Get.put(ReadController());
+
+//   runApp(
+//     ChangeNotifierProvider(
+//       create: (_) => ThemeProvider(), // Initialize ThemeProvider here
+//       child: const MyApp(),
+//     ),
+//   );
+// }
+
+// class MyApp extends StatelessWidget {
+//   const MyApp({super.key});
+
+//   @override
+//   Widget build(BuildContext context) {
+//     return GetMaterialApp(
+//       debugShowCheckedModeBanner: false,
+//       initialRoute: '/',
+//       getPages: FiservAppRoutes.routes(),
+//     );
+//   }
+// }
+
+// Routes to the read task page
+void main() async {
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
@@ -42,6 +80,7 @@ class QuizApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
+      initialRoute: '/',
       getPages: FiservAppRoutes.routes(),
     );
   }
@@ -99,6 +138,7 @@ class QuizApp extends StatelessWidget {
 
 
 
+// Old Code
 // import 'package:cloud_firestore/cloud_firestore.dart';
 // import 'package:fiservonboardingexp/theme/theme_provider.dart';
 // import 'package:fiservonboardingexp/widgets/check_user.dart';
