@@ -1,4 +1,4 @@
-import 'package:fiservonboardingexp/screens/help_page.dart';
+import 'package:fiservonboardingexp/screens/menu%20drawer/help_page.dart';
 import 'package:fiservonboardingexp/screens/main_screen.dart';
 import 'package:flutter/services.dart';
 import 'teaser_page_1.dart';

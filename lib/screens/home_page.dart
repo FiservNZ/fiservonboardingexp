@@ -1,7 +1,16 @@
 import 'dart:convert';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fiservonboardingexp/controllers/read_controller.dart';
+import 'package:fiservonboardingexp/screens/task%20pages/read_page.dart';
+import 'package:fiservonboardingexp/widgets/progress_bar.dart';
+import 'package:fiservonboardingexp/widgets/exp_bar.dart';
+import 'package:fiservonboardingexp/widgets/nav_bar.dart';
 import 'package:flutter/material.dart';
+
+import 'package:get/get.dart';
+import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../themes/theme_provider.dart';
 import '../util/achievement_components/incompleted_achievement.dart';

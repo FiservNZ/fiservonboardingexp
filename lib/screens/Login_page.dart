@@ -1,18 +1,15 @@
 import 'package:fiservonboardingexp/screens/main_screen.dart';
-import 'package:fiservonboardingexp/screens/manager/manager_view.dart';
 import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-
-import '../firebase_references/firebase_refs.dart';
-import 'help_page.dart';
+import '../firebase references/firebase_refs.dart';
+import 'menu drawer/help_page.dart';
 import 'teaser pages/teaser.dart';
 
-// class Global {
-//   static UserCredential? userCredential;
+// class Global {'menu drawer/help_page.dart'rCredential? userCredential;
 // }
 
 class LoginPage extends StatelessWidget {
