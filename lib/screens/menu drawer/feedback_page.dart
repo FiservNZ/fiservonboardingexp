@@ -34,12 +34,12 @@ class _FeedBackState extends State<FeedBack> {
           style: GoogleFonts.quicksand(
             fontWeight: FontWeight.bold,
             fontSize: 21,
-            color: Colors.white,
+            color: selectedTheme.colorScheme.primary,
           ),
         ),
-        backgroundColor: fiservColor,
+        backgroundColor: selectedTheme.colorScheme.secondary,
       ),
-      backgroundColor: Color.fromARGB(255, 27, 27, 27),
+      backgroundColor: selectedTheme.colorScheme.background,
       // SingleChildScrollView was used to get rid of pixel overflow
       body: SingleChildScrollView(
         child: Padding(
@@ -53,7 +53,7 @@ class _FeedBackState extends State<FeedBack> {
                 style: GoogleFonts.quicksand(
                   fontSize: 20,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                  color: selectedTheme.colorScheme.primary,
                 ),
               ),
               const SizedBox(height: 30),
@@ -62,7 +62,7 @@ class _FeedBackState extends State<FeedBack> {
                 style: GoogleFonts.quicksand(
                   fontSize: 17,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                  color: selectedTheme.colorScheme.primary,
                 ),
               ),
               // Star Rating Class to get the star rating system (5 stars)
@@ -82,7 +82,7 @@ class _FeedBackState extends State<FeedBack> {
                 style: GoogleFonts.quicksand(
                   fontSize: 17,
                   fontWeight: FontWeight.bold,
-                  color: Colors.white,
+                  color: selectedTheme.colorScheme.primary,
                 ),
               ),
               // Text field for user feedback written input
@@ -157,7 +157,7 @@ class _FeedBackState extends State<FeedBack> {
                   ),
                   style: ElevatedButton.styleFrom(
                     padding: EdgeInsets.symmetric(horizontal: 20),
-                    backgroundColor: fiservColor,
+                    backgroundColor: selectedTheme.colorScheme.secondary,
                   ),
                 ),
               ),
