@@ -1,6 +1,6 @@
 import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:fiservonboardingexp/controllers/read_controller.dart';
-import 'package:fiservonboardingexp/util/kt_testing/read_page.dart';
+import 'package:fiservonboardingexp/screens/read_page.dart';
 import 'package:fiservonboardingexp/widgets/progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
