@@ -38,7 +38,8 @@ class FirebaseStorageService extends GetxService {
     //final storageRef = FirebaseStorage.instance.ref();
 
     // Create a reference with an initial file path and name
-    // final pathReference = storageRef.child("quiz_images/Harry Potter.png");
+    final pathReference = storageRef.child("quiz_images/Harry Potter.png");
+    ;
 
     final folderReference = storageRef.child("quiz_images");
 

@@ -2,7 +2,7 @@ import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
 
 import '../../firebase references/firebase_refs.dart';
-import '../login_page.dart';
+import '../Login_page.dart';
 import '../../controllers/manager_functions.dart';
 
 class ManagerView extends StatefulWidget {

@@ -45,7 +45,7 @@ class HomePage extends StatelessWidget {
         body: Container(
           decoration: BoxDecoration(
               image: DecorationImage(
-                  image: const AssetImage("assets/images/randShapes.png"),
+                  image: AssetImage("assets/images/randShapes.png"),
                   colorFilter: ColorFilter.mode(
                       Colors.white.withOpacity(0.15), BlendMode.modulate),
                   fit: BoxFit.cover)),
@@ -109,9 +109,10 @@ class HomePage extends StatelessWidget {
                               const SizedBox(height: 20),
 
                               // Display exp bar
-                              const Padding(
-                                padding: EdgeInsets.fromLTRB(20, 20, 0, 0),
-                                child: ExpBar(barwidth: 225),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.fromLTRB(20, 20, 0, 0),
+                                child: const ExpBar(barwidth: 225),
                               ),
                             ],
                           ),
@@ -120,7 +121,7 @@ class HomePage extends StatelessWidget {
                     } else if (snapshot.hasError) {
                       return Text('Error: ${snapshot.error}');
                     }
-                    return const CircularProgressIndicator();
+                    return CircularProgressIndicator();
                   },
                 ),
 
@@ -177,20 +178,20 @@ Widget getUserIcon(Map<String, dynamic> userData, ThemeData selectedTheme) {
 
   switch (selectedIcon) {
     case 'ghost':
-      return SizedBox(
+      return Container(
         width: iconSize,
         height: iconSize,
         child: Icon(FontAwesomeIcons.ghost, color: iconColor, size: iconSize),
       );
     case 'seedling':
-      return SizedBox(
+      return Container(
         width: iconSize,
         height: iconSize,
         child:
             Icon(FontAwesomeIcons.seedling, color: iconColor, size: iconSize),
       );
     case 'poo':
-      return SizedBox(
+      return Container(
         width: iconSize,
         height: iconSize,
         child: Icon(FontAwesomeIcons.poo, color: iconColor, size: iconSize),

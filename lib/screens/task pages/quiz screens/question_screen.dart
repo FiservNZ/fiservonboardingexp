@@ -1,3 +1,4 @@
+import 'package:fiservonboardingexp/controllers/quiz%20controllers/animation_controller.dart';
 import 'package:fiservonboardingexp/widgets/quiz%20widgets/loading_status.dart';
 import 'package:fiservonboardingexp/screens/task%20pages/quiz%20screens/quiz_outcome_screen.dart';
 import 'package:fiservonboardingexp/themes/quiz%20themes/ui_parameters.dart';

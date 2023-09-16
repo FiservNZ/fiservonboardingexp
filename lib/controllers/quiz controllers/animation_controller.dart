@@ -1,6 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fiservonboardingexp/model/quiz_model.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
+import '../../firebase references/services/firebase_storage_service.dart';
 
 // Using GetX for progress bar animation state.
 class QuizAnimationController extends GetxController

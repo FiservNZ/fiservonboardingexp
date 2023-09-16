@@ -1,3 +1,4 @@
+import 'package:fiservonboardingexp/controllers/quiz%20controllers/animation_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -62,8 +63,8 @@ class QuizQuestionScreen extends GetView<QuestionController> {
                     const SizedBox(height: 10),
                     Container(
                       alignment: Alignment.center,
-                      margin: const EdgeInsets.symmetric(horizontal: 20),
-                      padding: const EdgeInsets.all(8.0),
+                      margin: EdgeInsets.symmetric(horizontal: 20),
+                      padding: EdgeInsets.all(8.0),
                       decoration: BoxDecoration(
                         color: Colors.transparent,
                         borderRadius: BorderRadius.circular(25),

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
+import 'package:fiservonboardingexp/controllers/quiz%20controllers/auth_controller.dart';
 import 'package:fiservonboardingexp/widgets/quiz%20widgets/quiz_info_square.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -34,17 +35,17 @@ class QuizController extends GetxController {
           final imgUrl = await Get.find<FirebaseStorageService>()
               .getStorageRef(quiz.title);
           quiz.imageUrl = imgUrl;
-          debugPrint(imgUrl);
+          print(imgUrl);
         }
       }
       allQuizzes.assignAll(quizList);
     } catch (e) {
-      debugPrint(e as String?);
+      print(e);
     }
   }
 
   void navigateToQuestions({required QuizModel quiz, bool tryAgain = false}) {
-    // AuthController authController = Get.find();
+    AuthController authController = Get.find();
     if (tryAgain) {
       Get.back();
       Get.toNamed(QuestionScreen.routeName,
