@@ -2,11 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:percent_indicator/percent_indicator.dart';
 import 'package:provider/provider.dart';
-import '../firebase_references/firebase_refs.dart';
-import '../util/constants.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
+import '../firebase references/firebase_refs.dart';
 
 class ProgressBar extends StatelessWidget {
   const ProgressBar({super.key});

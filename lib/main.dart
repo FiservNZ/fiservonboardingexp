@@ -1,11 +1,12 @@
-import 'package:fiservonboardingexp/firebase_references/firebase_options.dart';
+import 'package:fiservonboardingexp/firebase%20references/firebase_options.dart';
 import 'package:fiservonboardingexp/routes/routes.dart';
 import 'package:fiservonboardingexp/themes/theme_provider.dart';
-import 'package:fiservonboardingexp/util/kt_testing/read_controller.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
+
+import 'controllers/quiz controllers/initial_bindings.dart';
 
 int? initScreen;
 
@@ -16,13 +17,13 @@ Future<void> main() async {
 
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-//   runApp(
-//     ChangeNotifierProvider(
-//       create: (_) => ThemeProvider(), // Initialize ThemeProvider here
-//       child: const MyApp(),
-//     ),
-//   );
-// }
+  runApp(
+    ChangeNotifierProvider(
+      create: (_) => ThemeProvider(), // Initialize ThemeProvider here
+      child: const MyApp(),
+    ),
+  );
+}
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});

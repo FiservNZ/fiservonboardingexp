@@ -1,12 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fiservonboardingexp/screens/manager/manager_view.dart';
 import 'package:fiservonboardingexp/themes/Theme_database.dart';
 import 'package:fiservonboardingexp/themes/theme_provider.dart';
+
 import 'package:flutter/material.dart';
 import 'package:fiservonboardingexp/screens/login_page.dart';
 import 'package:fiservonboardingexp/screens/main_screen.dart';
+import 'package:get/get.dart';
 import 'package:provider/provider.dart';
 
 import '../firebase references/firebase_refs.dart';
@@ -26,7 +27,6 @@ class _CheckUserState extends State<CheckUser> {
     super.initState();
     // Call the function to check the user and navigate accordingly.
     checkUserAndNavigate();
-    retrieveAndApplyTheme();
   }
 
   @override
@@ -79,20 +79,6 @@ class _CheckUserState extends State<CheckUser> {
     } catch (e) {
       // Handle any errors that may occur during data fetching.
       print('Error fetching user data: $e');
-    }
-  }
-
-  // Method to retrieve and apply the theme from Firebase
-  Future<void> retrieveAndApplyTheme() async {
-    final currentUser = FirebaseAuth.instance.currentUser;
-    if (currentUser != null) {
-      final stringThemeData =
-          await ThemeDatabase().getThemePreference(currentUser.uid);
-      if (stringThemeData != null) {
-        final themeData = stringToThemeData(stringThemeData);
-        // Apply the retrieved theme using the stored context
-        themeProvider.setTheme(themeData);
-      }
     }
   }
 }

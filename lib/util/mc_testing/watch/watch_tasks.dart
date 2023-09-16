@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fiservonboardingexp/util/elle_testing/firebase_ref/firebase_ref.dart';
 import 'package:fiservonboardingexp/util/mc_testing/watch/video_thumbnail.dart';
 import 'package:flutter/material.dart';
+
+import '../../../firebase references/firebase_refs.dart';
 
 //This is the function we are going to use to obtain a list of WatchTasks depending on
 //the category selected. This will also generate the thumbnail for our module screen.

@@ -1,12 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fiservonboardingexp/firebase_references/firebase_refs.dart';
-import 'package:fiservonboardingexp/screens/feedback_page.dart';
 import 'package:get/get.dart';
 import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
+
+import '../firebase references/firebase_refs.dart';
+import '../screens/menu drawer/feedback_page.dart';
 
 class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
   const AppBarOverlay({super.key, User? currentUser});
@@ -118,8 +119,8 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                                 color: selectedTheme.colorScheme.secondary,
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
-                              ).merge(GoogleFonts
-                                  .quicksand()), // Merge styles with GoogleFonts
+                              ).merge(GoogleFonts.quicksand()),
+                            ), // Merge styles with GoogleFonts
                             onTap: () {
                               Get.toNamed("/teaser");
                             },
@@ -137,8 +138,8 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                                 color: selectedTheme.colorScheme.secondary,
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
-                              ).merge(GoogleFonts
-                                  .quicksand()), // Merge styles with GoogleFonts
+                              ).merge(GoogleFonts.quicksand()),
+                            ), // Merge styles with GoogleFonts
                             onTap: () {
                               Get.toNamed("/help");
                             },
@@ -156,8 +157,8 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                                 color: selectedTheme.colorScheme.secondary,
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
-                              ).merge(GoogleFonts
-                                  .quicksand()), // Merge styles with GoogleFonts
+                              ).merge(GoogleFonts.quicksand()),
+                            ), // Merge styles with GoogleFonts
                             onTap: () {
                               Get.toNamed("/faq");
                             },
@@ -174,8 +175,8 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                                 color: selectedTheme.colorScheme.secondary,
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
-                              ).merge(GoogleFonts
-                                  .quicksand()), // Merge styles with GoogleFonts
+                              ).merge(GoogleFonts.quicksand()),
+                            ), // Merge styles with GoogleFonts
                             onTap: () {
                               Get.toNamed("/settings");
                             },
@@ -193,8 +194,8 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                                 color: selectedTheme.colorScheme.secondary,
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold,
-                              ).merge(GoogleFonts
-                                  .quicksand()), // Merge styles with GoogleFonts
+                              ).merge(GoogleFonts.quicksand()),
+                            ), // Merge styles with GoogleFonts
                             onTap: () {
                               Navigator.of(context).push(
                                 MaterialPageRoute(

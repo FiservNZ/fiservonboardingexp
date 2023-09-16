@@ -85,7 +85,7 @@ class Achievementpage extends State<AchievementsPage> {
           } else if (snapshot.hasData) {
             // Store all the achievement information in list
             fetchAndStoreAchievement(contentInAchv);
-
+          }
           return CustomScrollView(
             slivers: <Widget>[
               SliverToBoxAdapter(

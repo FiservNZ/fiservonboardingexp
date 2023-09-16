@@ -1,8 +1,10 @@
 import 'package:fiservonboardingexp/screens/main_screen.dart';
+import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
+import 'package:provider/provider.dart';
 import '../firebase references/firebase_refs.dart';
 import 'menu drawer/help_page.dart';
 import 'teaser pages/teaser.dart';
