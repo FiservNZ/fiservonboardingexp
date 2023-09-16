@@ -24,11 +24,11 @@ class ExpBar extends StatelessWidget {
     int level = userMap['Level'] ?? 0;
 
     if (level < 9) {
-      currentEXP += expToAdd;
+      currentEXP += expToAdd; //149  30
       if (currentEXP >= maxEXP) {
         level++;
+        currentEXP -= maxEXP;
         maxEXP += 150;
-        currentEXP = 0;
       }
     } else if (level == 9 && currentEXP <= maxEXP) {
       currentEXP += expToAdd;
