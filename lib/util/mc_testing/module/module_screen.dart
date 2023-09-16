@@ -1,3 +1,5 @@
+import 'package:fiservonboardingexp/screens/task%20pages/watch_card_screen.dart';
+import 'package:fiservonboardingexp/screens/task%20pages/watch_card.dart';
 import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:fiservonboardingexp/util/mc_testing/watch/watch_tasks_container.dart';
@@ -10,6 +12,7 @@ late String currentCategory;
 
 class ModuleScreen extends StatelessWidget {
   const ModuleScreen({super.key});
+  static const routeName = "/moduleScreen";
 
   @override
   Widget build(BuildContext context) {
@@ -57,8 +60,8 @@ class ModuleScreen extends StatelessWidget {
         // String route = title.replaceAll(" ", "");
         currentCategory = title;
         debugPrint('Route: $currentCategory');
-
-        Get.to(WatchTasksContainer(watchCategory: currentCategory));
+        Get.toNamed(WatchHomeScreen.routeName, arguments: currentCategory);
+        //Get.to(WatchTasksContainer(watchCategory: currentCategory));
       },
       child: Container(
         padding: const EdgeInsets.all(16),

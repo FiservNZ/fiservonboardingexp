@@ -1,5 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fiservonboardingexp/controllers/check_user.dart';
+import 'package:fiservonboardingexp/model/task_category_model.dart';
 //import 'package:firebase_core/firebase_core.dart';
 
 // create firebase instance
@@ -10,6 +12,15 @@ final currentUser = fireAuth.currentUser!;
 
 // reference to the User collection in the Firestore database
 final userColRef = firestore.collection('User');
+
+String uid = fireAuth.currentUser!.uid;
+
+final userDocRef = userColRef.doc(uid);
+
+final tasksCollectionRef = userDocRef.collection('Tasks');
+
+final achievementsCollectionRef = userDocRef.collection('Achievements');
+final checklistCollectionRef = userDocRef.collection('General Checklist');
 
 // references user document
 DocumentReference userRef({
