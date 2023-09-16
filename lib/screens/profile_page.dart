@@ -133,9 +133,9 @@ class _ProfilePageState extends State<ProfilePage> {
               });
             }
 
-            String selectedIcon = userData['selectedIcon'] ?? 'person';
             String iconColor = userData['iconColor'] ?? '#000000';
-            VoidCallback? iconOnPressed;
+            VoidCallback?
+                iconOnPressed; // Its being used idk why it says its not being used
 
             // Code for user's selected icon display here
             if (userData['selectedIcon'] == 'ghost' && level >= 1) {
