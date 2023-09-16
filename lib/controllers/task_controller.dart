@@ -1,28 +1,27 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import '../firebase references/firebase_refs.dart';
-import '../model/task_model.dart';
 
-class QuizController extends GetxController {
-  late final CategoryModel quiz;
-  final allCategories = <CategoryModel>[].obs;
+// class QuizController extends GetxController {
+//   late final CategoryModel quiz;
+//   final allCategories = <CategoryModel>[].obs;
 
-  @override
-  void onReady() {
-    getAllCategories();
-    super.onReady();
-  }
+//   @override
+//   void onReady() {
+//     getAllCategories();
+//     super.onReady();
+//   }
 
-  Future<void> getAllCategories() async {
-    try {
-      QuerySnapshot<Map<String, dynamic>> data = await quizref.get();
-      final categoryList =
-          data.docs.map((quiz) => CategoryModel.fromSnapshot(quiz)).toList();
-      allCategories.assignAll(categoryList);
-    } catch (e) {
-      print(e);
-    }
-  }
+//   Future<void> getAllCategories() async {
+//     try {
+//       QuerySnapshot<Map<String, dynamic>> data = await quizref.get();
+//       final categoryList =
+//           data.docs.map((quiz) => CategoryModel.fromSnapshot(quiz)).toList();
+//       allCategories.assignAll(categoryList);
+//     } catch (e) {
+//       print(e);
+//     }
+//   }
 
   // void navigateToQuestions(
   //     {required CategoryModel cat, bool tryAgain = false}) {
@@ -150,5 +149,5 @@ class QuizController extends GetxController {
 //         )
 //       ],
 //     );
-//   }
-}
+// //   }
+// }

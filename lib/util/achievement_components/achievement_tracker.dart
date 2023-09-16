@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../firebase references/firebase_refs.dart';
@@ -9,8 +10,10 @@ class AchievementTracker extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // Update the current user account
+    final currentUser = FirebaseAuth.instance.currentUser;
     final achievementColRef =
-        userColRef.doc(currentUser.uid).collection("Achievement");
+        userColRef.doc(currentUser?.uid).collection("Achievement");
 
     return SizedBox(
       child: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
