@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 class TeaserPage1 extends StatelessWidget {
+  const TeaserPage1({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color.fromARGB(255, 255, 232, 232),
+      color: const Color.fromARGB(255, 255, 232, 232),
       child: Center(
         child: Padding(
-          padding: EdgeInsets.only(
+          padding: const EdgeInsets.only(
               top:
                   20.0), // Adjustment of the Text title and subtext (vertically)
           child: Column(
@@ -20,7 +21,7 @@ class TeaserPage1 extends StatelessWidget {
                 height: 350,
                 fit: BoxFit.contain,
               ),
-              Text(
+              const Text(
                 'Welcome to Fiserv',
                 style: TextStyle(
                   fontSize: 24,
@@ -28,10 +29,10 @@ class TeaserPage1 extends StatelessWidget {
                   color: Color.fromARGB(255, 255, 81, 0),
                 ),
               ),
-              SizedBox(
+              const SizedBox(
                   height:
                       10), // Adjust the spacing between the title and subtext
-              Padding(
+              const Padding(
                 padding: EdgeInsets.fromLTRB(30, 10, 20, 20),
                 child: Text(
                   'There was something in the tree. It was difficult to tell from the ground, but Rachael could see movement. What she had spied.',

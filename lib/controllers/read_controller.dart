@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fiservonboardingexp/model/read_model.dart';
 import 'package:get/get.dart';
-
 import '../firebase references/firebase_refs.dart';
 
 class ReadController extends GetxController {

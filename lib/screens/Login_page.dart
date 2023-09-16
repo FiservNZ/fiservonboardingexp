@@ -128,12 +128,10 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-    ThemeData selectedTheme = themeProvider.currentTheme;
     return Scaffold(
-      backgroundColor: selectedTheme.colorScheme.background,
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: selectedTheme.colorScheme.tertiary,
+        backgroundColor: fiservColor,
         centerTitle: true,
         elevation: 0,
       ),
@@ -152,12 +150,12 @@ class LoginPage extends StatelessWidget {
                     height: 100,
                   ),
                   const SizedBox(height: 30),
-                  Text(
+                  const Text(
                     'Welcome to Firserv',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: selectedTheme.colorScheme.secondary,
+                      color: fiservColor,
                     ),
                   ),
                 ],
@@ -192,11 +190,11 @@ class LoginPage extends StatelessWidget {
                       handleLogin(context);
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: selectedTheme.colorScheme.onBackground,
+                      backgroundColor: fiservColor,
                     ),
-                    child: Text('Login',
+                    child: const Text('Login',
                         style: TextStyle(
-                          color: selectedTheme.colorScheme.primary,
+                          color: Colors.white,
                         )),
                   ),
                 ],

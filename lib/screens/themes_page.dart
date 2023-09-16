@@ -13,10 +13,10 @@ class ThemesPage extends StatefulWidget {
   const ThemesPage({Key? key}) : super(key: key);
 
   @override
-  _ThemesPageState createState() => _ThemesPageState();
+  ThemesPageState createState() => ThemesPageState();
 }
 
-class _ThemesPageState extends State<ThemesPage> {
+class ThemesPageState extends State<ThemesPage> {
   // Create an instance of ThemeDatabase for managing theme-related data.
   final ThemeDatabase _firebaseTheme = ThemeDatabase();
 

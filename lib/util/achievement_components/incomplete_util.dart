@@ -5,11 +5,11 @@ class IncompleteAchv extends StatefulWidget {
   final String title;
   final String iconName;
   final bool isCompleted;
-  final String award;
+  final String hour;
 
   IncompleteAchv({
     super.key,
-    required this.award,
+    required this.hour,
     required this.title,
     required this.iconName,
     required this.isCompleted,
@@ -74,22 +74,34 @@ class IncompleteAchvState extends State<IncompleteAchv> {
               textAlign: TextAlign.center,
             ),
             const SizedBox(height: 15),
-            const Row(
-              children: [
-                SizedBox(width: 30),
-                Icon(
-                  Icons.access_time,
-                  color: Colors.white,
-                ),
-                Text(
-                  "",
-                  style: TextStyle(
-                    fontSize: 16,
+            Visibility(
+              visible: widget.hour.isNotEmpty,
+              child: Row(
+                children: [
+                  SizedBox(width: 30),
+                  Icon(
+                    Icons.access_time,
                     color: Colors.white,
-                    fontWeight: FontWeight.bold,
                   ),
-                ),
-              ],
+                  SizedBox(width: 30),
+                  Text(
+                    widget.hour,
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                  Text(
+                    " hours",
+                    style: TextStyle(
+                      fontSize: 16,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                  ),
+                ],
+              ),
             ),
             const SizedBox(height: 30),
             Text(
