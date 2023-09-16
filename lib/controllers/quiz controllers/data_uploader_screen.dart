@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 
 class DataUploaderScreen extends StatelessWidget {
   DataUploaderScreen({super.key});
-  DataUploader controller = Get.put(DataUploader());
+  final DataUploader controller = Get.put(DataUploader());
 
   @override
   Widget build(BuildContext context) {

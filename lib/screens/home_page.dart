@@ -109,10 +109,9 @@ class HomePage extends StatelessWidget {
                               const SizedBox(height: 20),
 
                               // Display exp bar
-                              Padding(
-                                padding:
-                                    const EdgeInsets.fromLTRB(20, 20, 0, 0),
-                                child: const ExpBar(barwidth: 225),
+                              const Padding(
+                                padding: EdgeInsets.fromLTRB(20, 20, 0, 0),
+                                child: ExpBar(barwidth: 225),
                               ),
                             ],
                           ),
@@ -121,7 +120,7 @@ class HomePage extends StatelessWidget {
                     } else if (snapshot.hasError) {
                       return Text('Error: ${snapshot.error}');
                     }
-                    return CircularProgressIndicator();
+                    return const CircularProgressIndicator();
                   },
                 ),
 
@@ -178,20 +177,20 @@ Widget getUserIcon(Map<String, dynamic> userData, ThemeData selectedTheme) {
 
   switch (selectedIcon) {
     case 'ghost':
-      return Container(
+      return SizedBox(
         width: iconSize,
         height: iconSize,
         child: Icon(FontAwesomeIcons.ghost, color: iconColor, size: iconSize),
       );
     case 'seedling':
-      return Container(
+      return SizedBox(
         width: iconSize,
         height: iconSize,
         child:
             Icon(FontAwesomeIcons.seedling, color: iconColor, size: iconSize),
       );
     case 'poo':
-      return Container(
+      return SizedBox(
         width: iconSize,
         height: iconSize,
         child: Icon(FontAwesomeIcons.poo, color: iconColor, size: iconSize),
