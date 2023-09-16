@@ -84,80 +84,86 @@ class Achievementpage extends State<AchievementsPage> {
             return Text('Error: ${snapshot.error}');
           } else if (snapshot.hasData) {
             // Store all the achievement information in list
-            fetchAndStoreAchievement(contentInAchv);
-          }
-          return CustomScrollView(
-            slivers: <Widget>[
-              SliverToBoxAdapter(
-                child: Container(
-                  height: 170.0,
-                  decoration: BoxDecoration(
-                    //
-                    color: selectedTheme.colorScheme.onBackground,
-                  ),
-                  child: Stack(
-                    children: [
-                      // Image config
-                      Positioned(
-                        top: 35.0,
-                        right: 30.0,
-                        child: Image.asset(
-                          'assets/icon/welcome.png',
-                          width: 100.0,
-                          height: 100.0,
-                        ),
-                      ),
-                      const Padding(
-                        padding: EdgeInsets.only(left: 18.0, top: 50),
-                        child: Text(
-                          "ACHIEVEMENTS",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 27,
-                            fontWeight: FontWeight.bold,
+            final List<Map<String, dynamic>> contentInAchv =
+                fetchAndStoreAchievement(snapshot.data!.docs);
+            print(contentInAchv);
+            return CustomScrollView(
+              slivers: <Widget>[
+                SliverToBoxAdapter(
+                  child: Container(
+                    height: 170.0,
+                    decoration: const BoxDecoration(
+                      //
+                      color: Color.fromARGB(255, 112, 107, 243),
+                    ),
+                    child: Stack(
+                      children: [
+                        // Image config
+                        Positioned(
+                          top: 10.0,
+                          right: 30.0,
+                          // bottom: 30,
+                          child: Image.asset(
+                            'assets/icon/achievement/achievement.png',
+                            width: 120,
+                            height: 150,
                           ),
                         ),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.only(left: 16.0, top: 85),
-                        child: achievementTracker,
-                      )
-                    ],
+                        const Padding(
+                          padding: EdgeInsets.only(left: 18.0, top: 20),
+                          child: Text(
+                            "ACHIEVEMENTS",
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontSize: 27,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.only(left: 16.0, top: 55),
+                          child: achievementTracker,
+                        )
+                      ],
+                    ),
                   ),
                 ),
-              ),
-              const SliverToBoxAdapter(
-                child: SizedBox(height: 20),
-              ),
-              SliverGrid(
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 1 / 1.5,
+                const SliverToBoxAdapter(
+                  child: SizedBox(height: 20),
                 ),
-                delegate: SliverChildBuilderDelegate(
-                  (BuildContext context, int index) {
-                    return Achievement(
-                      size: 3,
-                      title: contentInAchv[index]['name'],
-                      iconName: contentInAchv[index]['iconData'] ?? "",
-                      award: '',
-                      isCompleted: contentInAchv[index]['IsComplete'],
-                    );
-                  },
-                  childCount: contentInAchv.length,
+                SliverGrid(
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    childAspectRatio: 1 / 1.3,
+                  ),
+                  delegate: SliverChildBuilderDelegate(
+                    (BuildContext context, int index) {
+                      return Achievement(
+                        size: 3,
+                        title: contentInAchv[index]['name'],
+                        iconName: contentInAchv[index]['iconData'] ?? "",
+                        award: '',
+                        isCompleted: contentInAchv[index]['IsComplete'],
+                      );
+                    },
+                    childCount: contentInAchv.length,
+                  ),
                 ),
-              ),
-              const SliverToBoxAdapter(
-                child: SizedBox(height: 100),
-              ),
-              SliverToBoxAdapter(
-                child: ElevatedButton(
-                  child: const Text("Show"),
-                  onPressed: () => show(context, "Level 9"),
+                const SliverToBoxAdapter(
+                  child: SizedBox(height: 100),
                 ),
-              ),
-            ],
-          );
+                SliverToBoxAdapter(
+                  child: ElevatedButton(
+                    child: const Text("Show"),
+                    onPressed: () =>
+                        updateAchievement(context, "First time login!"),
+                  ),
+                ),
+              ],
+            );
+          } else {
+            return const Text('No data available');
+          }
         },
       ),
     );

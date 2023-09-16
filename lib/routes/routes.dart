@@ -1,4 +1,5 @@
 import 'package:fiservonboardingexp/controllers/check_user.dart';
+import 'package:fiservonboardingexp/controllers/read_controller.dart';
 import 'package:fiservonboardingexp/screens/faq_page.dart';
 import 'package:fiservonboardingexp/screens/home_page.dart';
 import 'package:fiservonboardingexp/screens/login_page.dart';
@@ -12,6 +13,7 @@ import 'package:fiservonboardingexp/util/mc_testing/category%20screens/hs_screen
 import 'package:fiservonboardingexp/util/mc_testing/category%20screens/orientation_screen.dart';
 import 'package:get/get.dart';
 import '../screens/menu drawer/help_page.dart';
+import '../screens/task pages/read_page.dart';
 import '../screens/teaser pages/teaser.dart';
 
 class FiservAppRoutes {
@@ -57,22 +59,11 @@ class FiservAppRoutes {
           page: () => const ProfilePage(),
         ),
         GetPage(
-          name: OrientationScreen.routeName,
-          page: () => const OrientationScreen(),
-        ),
-        GetPage(
-          name: CustomsCultureScreen.routeName,
-          page: () => const CustomsCultureScreen(),
-        ),
-        GetPage(
-          name: HealthSafetyScreen.routeName,
-          page: () => const HealthSafetyScreen(),
-        ),
-
-        GetPage(
-          name: ComplianceScreen.routeName,
-          page: () => const ComplianceScreen(),
-        ),
+            name: ReadPage.routeName,
+            page: () => ReadPage(),
+            binding: BindingsBuilder(() {
+              Get.put(ReadController());
+            })),
 
         // GetPage(
         //     name: QuizQuestionScreen.routeName,

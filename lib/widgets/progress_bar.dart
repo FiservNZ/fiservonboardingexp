@@ -2,8 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import '../firebase references/firebase_refs.dart';
+import 'package:provider/provider.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 
 class ProgressBar extends StatelessWidget {
   const ProgressBar({super.key});
@@ -37,8 +38,6 @@ class ProgressBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //final currentUser = FirebaseAuth.instance.currentUser!;
-    //final userCollection = FirebaseFirestore.instance.collection('User');
     final themeProvider = Provider.of<ThemeProvider>(context);
     ThemeData selectedTheme = themeProvider.currentTheme;
 

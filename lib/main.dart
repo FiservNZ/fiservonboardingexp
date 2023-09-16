@@ -1,16 +1,17 @@
-import 'package:fiservonboardingexp/firebase%20references/firebase_options.dart';
-import 'package:fiservonboardingexp/routes/routes.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
+import 'package:get/get_navigation/get_navigation.dart';
+import 'controllers/quiz controllers/initial_bindings.dart';
+//import 'screens/main_page.dart';
 import 'package:get/get.dart';
 import 'package:provider/provider.dart';
-
-import 'controllers/quiz controllers/initial_bindings.dart';
+import 'firebase references/firebase_options.dart';
+import 'routes/routes.dart';
 
 int? initScreen;
 
-Future<void> main() async {
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   InitialBindings().dependencies();

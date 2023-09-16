@@ -1,14 +1,14 @@
 import 'dart:convert';
-import 'package:firebase_auth/firebase_auth.dart';
+
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fiservonboardingexp/widgets/exp_bar.dart';
+import 'package:fiservonboardingexp/widgets/nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../themes/theme_provider.dart';
 import '../util/achievement_components/incompleted_achievement.dart';
 import '../widgets/app_bar_overlay.dart';
-import '../widgets/exp_bar.dart';
-import '../widgets/nav_bar.dart';
-import 'package:table_calendar/table_calendar.dart';
 import 'package:http/http.dart' as http;
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -317,18 +317,15 @@ Widget getUserIcon(Map<String, dynamic> userData, ThemeData selectedTheme) {
 //                 padding: const EdgeInsets.symmetric(horizontal: 120),
 //                 child: ElevatedButton(
 //                   onPressed: () {
-//                     if (readController.allReadTasks.isNotEmpty) {
-//                       Navigator.of(context).push(
-//                         MaterialPageRoute(
-//                           builder: (context) =>
-//                               ReadPage(model: readController.allReadTasks[0]),
-//                         ),
-//                       );
-//                     } else {
-//                       // Where allReadTasks is empty or data is not available.
-//                       print("Sorry, no data available");
-//                     }
-//                   },
+//                    readController
+//                        .setSelectedIndex(0); // Set the desired index here
+//                    Navigator.push(
+//                      context,
+//                      MaterialPageRoute(
+//                       builder: (context) => ReadPage(),
+//                      ),
+//s                    );
+//                  },
 //                   style: ElevatedButton.styleFrom(
 //                     backgroundColor: selectedTheme.colorScheme.onBackground,
 //                     fixedSize: Size(120, 35),

@@ -19,7 +19,7 @@ class _MainScreenState extends State<MainScreen> {
 
   final List<Widget> pages = [
     HomePage(),
-    const SecurityTasks(),
+    // const SecurityTasks(),
     ChecklistPage(firestore: FirebaseFirestore.instance),
     AchievementsPage(),
     const ColleaguesPage(),

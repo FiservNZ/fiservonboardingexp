@@ -52,8 +52,6 @@ class ExpBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    //final currentUser = FirebaseAuth.instance.currentUser!;
-    //final userCollection = FirebaseFirestore.instance.collection('User');
     final themeProvider = Provider.of<ThemeProvider>(context);
     ThemeData selectedTheme = themeProvider.currentTheme;
     final currentUser = FirebaseAuth.instance.currentUser;

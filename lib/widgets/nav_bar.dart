@@ -1,7 +1,7 @@
 import 'package:fiservonboardingexp/screens/achievements_page.dart';
 import 'package:fiservonboardingexp/screens/colleagues_page.dart';
 import 'package:fiservonboardingexp/screens/home_page.dart';
-import 'package:fiservonboardingexp/screens/training_page.dart';
+import 'package:fiservonboardingexp/idk/training_page.dart';
 import 'package:fiservonboardingexp/screens/checklist_page.dart';
 import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
@@ -80,9 +80,9 @@ class CustomNavBar extends StatelessWidget {
           backgroundColor: darkBars,
         ),
       ],
-      selectedItemColor: fiservColor,
-      unselectedItemColor: fiservColor,
-      backgroundColor: Color(0xFF111211),
+      selectedItemColor: selectedTheme.colorScheme.secondary,
+      unselectedItemColor: selectedTheme.colorScheme.secondary,
+      backgroundColor: selectedTheme.colorScheme.tertiary,
       selectedFontSize: 12.0,
       unselectedFontSize: 12.0,
     );
