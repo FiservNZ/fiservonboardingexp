@@ -60,6 +60,7 @@ dependencies:
   easy_separator:
   table_calendar: ^3.0.9
   http: ^0.13.3
+  video_player: ^2.7.1
 
 dev_dependencies:
   flutter_test:
