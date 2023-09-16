@@ -1,8 +1,6 @@
-import 'package:fiservonboardingexp/controllers/quiz%20controllers/animation_controller.dart';
 import 'package:fiservonboardingexp/controllers/quiz%20controllers/quiz_controller.dart';
 import 'package:fiservonboardingexp/screens/task%20pages/quiz%20screens/home_screen.dart';
 import 'package:fiservonboardingexp/screens/task%20pages/quiz%20screens/question_screen.dart';
-import 'package:fiservonboardingexp/screens/task%20pages/quiz%20screens/quiz_question_screen.dart';
 import 'package:fiservonboardingexp/screens/task%20pages/quiz%20screens/splash/spash_screen.dart';
 import 'package:get/get.dart';
 

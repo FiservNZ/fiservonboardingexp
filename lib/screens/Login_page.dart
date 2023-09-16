@@ -1,10 +1,10 @@
 import 'package:fiservonboardingexp/screens/main_screen.dart';
-import 'package:fiservonboardingexp/themes/theme_provider.dart';
+
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
+
 import '../firebase references/firebase_refs.dart';
 import 'menu drawer/help_page.dart';
 import 'teaser pages/teaser.dart';
@@ -24,14 +24,6 @@ class LoginPage extends StatelessWidget {
     String password = passwordController.text;
 
     try {
-      //detect the user account.
-      UserCredential userCredential =
-          //instance is pulled from references now
-          await fireAuth.signInWithEmailAndPassword(
-        email: username,
-        password: password,
-      );
-
       // //save userCredential in global varible
       // Global.userCredential = userCredential;
 
@@ -44,7 +36,7 @@ class LoginPage extends StatelessWidget {
 
       checkUserPosition(context);
 
-      print('Username: $username, Password: $password');
+      debugPrint('Username: $username, Password: $password');
       // If the authentication is successful, the user is logged in.
     } catch (e) {
       // If there's an error, show an error message.
@@ -62,7 +54,7 @@ class LoginPage extends StatelessWidget {
             duration: Duration(seconds: 1),
           ),
         );
-        print('Error during login');
+        debugPrint('Error during login');
       }
     }
     //
