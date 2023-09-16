@@ -45,7 +45,7 @@ class HomePage extends StatelessWidget {
         body: Container(
           decoration: BoxDecoration(
               image: DecorationImage(
-                  image: AssetImage("assets/images/randShapes.png"),
+                  image: const AssetImage("assets/images/randShapes.png"),
                   colorFilter: ColorFilter.mode(
                       Colors.white.withOpacity(0.15), BlendMode.modulate),
                   fit: BoxFit.cover)),
