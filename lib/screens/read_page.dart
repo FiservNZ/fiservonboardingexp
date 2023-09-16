@@ -13,6 +13,8 @@ class ReadPage extends GetView<ReadController> {
   final ProgressBar _progressBar = const ProgressBar();
   static const routeName = "/readPage";
 
+  const ReadPage({super.key});
+
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
