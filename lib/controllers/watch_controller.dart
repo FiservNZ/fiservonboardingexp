@@ -1,91 +1,74 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fiservonboardingexp/util/constants.dart';
-import 'package:fiservonboardingexp/widgets/quiz%20widgets/quiz_info_square.dart';
+import 'package:fiservonboardingexp/firebase%20references/firebase_refs.dart';
+import 'package:fiservonboardingexp/model/task_category_model.dart';
+import 'package:fiservonboardingexp/model/video_model.dart';
+import 'package:fiservonboardingexp/model/watch_model.dart';
+import 'package:fiservonboardingexp/util/mc_testing/watch/video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import '../../firebase references/firebase_refs.dart';
-import '../../model/quiz_model.dart';
-import '../../model/task_category_model.dart';
-import '../../screens/task pages/quiz screens/question_screen.dart';
-import '../../firebase references/services/firebase_storage_service.dart';
 
-class QuizController extends GetxController {
+import '../model/quiz_model.dart';
+import '../util/constants.dart';
+import '../widgets/quiz widgets/quiz_info_square.dart';
+
+class WatchController extends GetxController {
   late final String categoryName;
-  late final QuizModel quiz;
+  late final WatchModel model;
   late final TaskCategoryModel cat;
-  final allQuizImages = <String>[].obs;
-  final allQuizzes = <QuizModel>[].obs;
+  final allWatchTasks = <WatchModel>[].obs;
 
   @override
   void onReady() {
     categoryName = Get.arguments as String;
-    getAllQuizzes();
+    getAllWatchTasks();
     super.onReady();
   }
 
-  Future<void> getAllQuizzes() async {
-    List<String> imgName = ["Harry Potter", "Programming"];
+  Future<void> getAllWatchTasks() async {
+    //List<String> imgName = ["Harry Potter", "Programming"];
     try {
-      //QuerySnapshot<Map<String, dynamic>> data = await quizref.get();
-
       QuerySnapshot<Map<String, dynamic>> data = await FirebaseFirestore
           .instance
           .collection('User')
           .doc(currentUser.uid)
           .collection('Tasks')
           .doc(categoryName)
-          .collection('Quiz')
+          .collection('Watch')
           .get();
 
-      final quizList =
-          data.docs.map((quiz) => QuizModel.fromSnapshot(quiz)).toList();
-      allQuizzes.assignAll(quizList);
-
-      for (var quiz in quizList) {
-        if (imgName.contains(quiz.title)) {
-          final imgUrl = await Get.find<FirebaseStorageService>()
-              .getStorageRef(quiz.title);
-          quiz.imageUrl = imgUrl;
-          debugPrint(imgUrl);
-        }
-      }
-      allQuizzes.assignAll(quizList);
+      final watchList =
+          data.docs.map((watch) => WatchModel.fromSnapshot(watch)).toList();
+      allWatchTasks.assignAll(watchList);
     } catch (e) {
-      debugPrint(e as String?);
+      print(e);
     }
   }
 
-  void navigateToQuestions({required QuizModel quiz, bool tryAgain = false}) {
-    // AuthController authController = Get.find();
-    if (tryAgain) {
-      Get.back();
-      Get.toNamed(QuestionScreen.routeName,
-          arguments: quiz, preventDuplicates: false);
-    } else {
-      showPopupAlertDialog(quizModel: quiz);
-      //Get.toNamed(QuizQuestionScreen.routeName, arguments: quiz);
-    }
-  }
+  // void navigateToQuestions({required WatchModel watch}) {
+  //   //AuthController authController = Get.find();
 
-  void showPopupAlertDialog({required QuizModel quizModel}) {
+  //   showPopupAlertDialog(watchModel: watch);
+  //   //Get.toNamed(QuizQuestionScreen.routeName, arguments: quiz);
+  // }
+
+  void showPopupAlertDialog({required WatchModel watchModel}) {
     Get.dialog(
         showPopup(
             onTapStart: () {
-              Get.toNamed(QuestionScreen.routeName, arguments: quizModel);
-              //Naviagte to Quiz Page
+              // Get.toNamed(VideoPlayer.routeName, arguments: watchModel);
             },
             onTapCancel: () {
               Get.back();
             },
-            quizModel: quizModel),
+            watchModel: watchModel),
         barrierDismissible: false);
   }
 
   Widget showPopup(
       {required VoidCallback onTapStart,
       required VoidCallback onTapCancel,
-      required QuizModel quizModel}) {
+      required WatchModel watchModel}) {
     double buttonHeight = 35;
     double buttonWidth = 80;
     return AlertDialog(
@@ -104,7 +87,7 @@ class QuizController extends GetxController {
           children: [
             const SizedBox(height: 10),
             Text(
-              quizModel.title,
+              watchModel.videoTitle,
               style: GoogleFonts.quicksand(
                   fontSize: 25,
                   fontWeight: FontWeight.bold,
@@ -117,23 +100,17 @@ class QuizController extends GetxController {
                 Padding(
                     padding: const EdgeInsets.all(5.0),
                     child: QuizInfoSquare(
-                        icon: Icons.question_mark_rounded,
-                        text: '${quizModel.questionCount} questions')),
-                Padding(
-                    padding: const EdgeInsets.all(5.0),
-                    child: QuizInfoSquare(
                         icon: Icons.book_rounded,
-                        text: '${quizModel.exp} exp')),
-                Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: QuizInfoSquare(
-                      icon: Icons.timer, text: quizModel.timeConverter()),
+                        text: '${watchModel.exp} exp')),
+                const Padding(
+                  padding: EdgeInsets.all(5.0),
+                  child: QuizInfoSquare(icon: Icons.timer, text: 'time'),
                 )
               ],
             ),
             const SizedBox(height: 15),
             Text(
-              quizModel.description,
+              watchModel.popUpDescription,
               style: GoogleFonts.quicksand(color: darkTextColor),
             )
           ],
