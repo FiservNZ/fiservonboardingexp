@@ -3,7 +3,6 @@ import 'package:fiservonboardingexp/model/read_model.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../firebase references/firebase_refs.dart';
 import '../util/constants.dart';
 import '../widgets/quiz widgets/quiz_info_square.dart';

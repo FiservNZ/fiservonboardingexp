@@ -1,5 +1,4 @@
 import 'package:fiservonboardingexp/themes/theme_provider.dart';
-import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -7,13 +6,13 @@ import 'package:provider/provider.dart';
 class StarRating extends StatefulWidget {
   final Function(int) onRatingChanged;
 
-  StarRating({required this.onRatingChanged});
+  const StarRating({super.key, required this.onRatingChanged});
 
   @override
-  _StarRatingState createState() => _StarRatingState();
+  StarRatingState createState() => StarRatingState();
 }
 
-class _StarRatingState extends State<StarRating> {
+class StarRatingState extends State<StarRating> {
   int _rating = 0;
 
   @override

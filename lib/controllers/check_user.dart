@@ -4,18 +4,19 @@ import 'package:fiservonboardingexp/screens/manager/manager_view.dart';
 import 'package:flutter/material.dart';
 import 'package:fiservonboardingexp/screens/login_page.dart';
 import 'package:fiservonboardingexp/screens/main_screen.dart';
-
+import 'package:logger/logger.dart';
 import '../firebase references/firebase_refs.dart';
 
 class CheckUser extends StatefulWidget {
-  const CheckUser({super.key});
+  const CheckUser({Key? key}) : super(key: key);
 
   @override
-  _CheckUserState createState() => _CheckUserState();
+  CheckUserState createState() => CheckUserState();
 }
 
-class _CheckUserState extends State<CheckUser> {
+class CheckUserState extends State<CheckUser> {
   String position = '';
+  final logger = Logger(); // Initialize a logger instance
 
   @override
   void initState() {
@@ -26,7 +27,7 @@ class _CheckUserState extends State<CheckUser> {
 
   Future<void> checkUserAndNavigate() async {
     await fetchUser();
-    print(position);
+    logger.d('Position: $position'); // Use logger instead of print
 
     fireAuth.authStateChanges().listen((User? user) {
       if (user == null) {
@@ -67,11 +68,11 @@ class _CheckUserState extends State<CheckUser> {
         });
       } else {
         // Handle the case where the user doesn't exist.
-        print('Error, user not found!');
+        logger.e('Error, user not found!');
       }
     } catch (e) {
       // Handle the error appropriately.
-      print('Error fetching user data: $e');
+      logger.e('Error fetching user data: $e');
     }
   }
 }

@@ -1,7 +1,6 @@
 import 'package:fiservonboardingexp/themes/Theme_database.dart';
 import 'package:fiservonboardingexp/themes/light_theme.dart';
 import 'package:flutter/material.dart';
-
 import '../firebase references/firebase_refs.dart';
 
 class ThemeProvider extends ChangeNotifier {
@@ -11,8 +10,8 @@ class ThemeProvider extends ChangeNotifier {
   ThemeProvider() {
     _currentTheme = lightTheme; // Set a default theme.
     getTheme().then((themeData) {
-      _currentTheme = themeData ??
-          lightTheme; // Use the fetched theme or default to lightTheme.
+      _currentTheme =
+          themeData; // Use the fetched theme or default to lightTheme.
       notifyListeners();
     });
   }
@@ -21,17 +20,14 @@ class ThemeProvider extends ChangeNotifier {
 
   // Method to obtain the User's theme from Firebase.
   Future<ThemeData> getTheme() async {
-    if (currentUser != null) {
-      // Saves the theme into a variable after gettting it from Firebase.
-      final stringThemeData =
-          await ThemeDatabase().getThemePreference(currentUser.uid);
-      if (stringThemeData != null) {
-        // Converts the theme into a themeData so it can be used
-        final themeData = stringToThemeData(stringThemeData);
-        return themeData;
-      }
+    // Saves the theme into a variable after gettting it from Firebase.
+    final stringThemeData =
+        await ThemeDatabase().getThemePreference(currentUser.uid);
+    if (stringThemeData != null) {
+      // Converts the theme into a themeData so it can be used
+      final themeData = stringToThemeData(stringThemeData);
+      return themeData;
     }
-
     // If no theme preference is found or there is no authenticated user, return light theme.
     return lightTheme;
   }

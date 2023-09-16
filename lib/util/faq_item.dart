@@ -6,7 +6,7 @@ class FaqItem extends StatelessWidget {
   final String question;
   final String answer;
 
-  const FaqItem({required this.question, required this.answer});
+  const FaqItem({super.key, required this.question, required this.answer});
 
   @override
   Widget build(BuildContext context) {

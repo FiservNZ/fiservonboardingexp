@@ -45,7 +45,7 @@ class Achievementpage extends State<AchievementsPage> {
     'assets/icon/technical.png',
   ];
 
-  final List SubiconList = [
+  final List subIconList = [
     'assets/icon/achievement/Unlocked all themes!.png',
     'assets/icon/achievement/First time login!.png',
     'assets/icon/achievement/Submitted feedback!.png',
@@ -86,7 +86,7 @@ class Achievementpage extends State<AchievementsPage> {
             // Store all the achievement information in list
             final List<Map<String, dynamic>> contentInAchv =
                 fetchAndStoreAchievement(snapshot.data!.docs);
-            print(contentInAchv);
+            // print(contentInAchv);
             return CustomScrollView(
               slivers: <Widget>[
                 SliverToBoxAdapter(
@@ -128,25 +128,24 @@ class Achievementpage extends State<AchievementsPage> {
                     ),
                   ),
                 ),
-                const SliverToBoxAdapter(
-                  child: SizedBox(height: 20),
-                ),
-                SliverGrid(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio: 1 / 1.3,
-                  ),
-                  delegate: SliverChildBuilderDelegate(
-                    (BuildContext context, int index) {
-                      return Achievement(
-                        size: 3,
-                        title: contentInAchv[index]['name'],
-                        iconName: contentInAchv[index]['iconData'] ?? "",
-                        award: '',
-                        isCompleted: contentInAchv[index]['IsComplete'],
-                      );
-                    },
-                    childCount: contentInAchv.length,
+                SliverPadding(
+                  padding: const EdgeInsets.all(8.0),
+                  sliver: SliverGrid(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: 1 / 1.3,
+                    ),
+                    delegate: SliverChildBuilderDelegate(
+                      (BuildContext context, int index) {
+                        return Achievement(
+                          title: contentInAchv[index]['name'],
+                          iconName: contentInAchv[index]['iconData'] ?? "",
+                          isCompleted: contentInAchv[index]['IsComplete'],
+                        );
+                      },
+                      childCount: contentInAchv.length,
+                    ),
                   ),
                 ),
                 const SliverToBoxAdapter(
@@ -197,7 +196,6 @@ class Achievementpage extends State<AchievementsPage> {
       // Extract the data from achievement collection
       final achievementColRef =
           userColRef.doc(currentUser?.uid).collection("Achievement");
-      print(currentUser?.uid);
       // Search for the name that is equal to the target name
       QuerySnapshot querySnapshot =
           await achievementColRef.where('name', isEqualTo: targetName).get();
@@ -213,8 +211,7 @@ class Achievementpage extends State<AchievementsPage> {
         show(context, targetName);
       } else {
         // Handle the case where no matching documents were found
-        // For example, you can show an error message or perform other actions.
-        print("No documents matching '$targetName' found.");
+        debugPrint("No documents matching '$targetName' found.");
       }
     } catch (e) {
       // Handle other exceptions
@@ -231,9 +228,10 @@ class Achievementpage extends State<AchievementsPage> {
       Map<String, dynamic> data = doc.data();
       String name = data['name'] ?? "";
       bool isComplete = data['IsComplete'] ?? false;
+      String hour = data['hour'] ?? "";
 
       // Find the corresponding icon data based on the name
-      String subiconData = SubiconList.firstWhere(
+      String subiconData = subIconList.firstWhere(
         (subiconPath) => subiconPath.contains(name),
         orElse: () => '',
       );
@@ -242,13 +240,15 @@ class Achievementpage extends State<AchievementsPage> {
         'IsComplete': isComplete,
         'iconData':
             IconList.isNotEmpty ? IconList[newAchievementContent.length] : '',
+        'subiconData': subiconData,
+        'hour': hour,
+
         // 'subiconData': SubiconList.isNotEmpty
         //     ? SubiconList[newAchievementContent.length]
         //     : '',
-        'subiconData': subiconData,
       });
     }
-    print(newAchievementContent);
+    // print(newAchievementContent);
     return newAchievementContent;
   }
 }
