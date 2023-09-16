@@ -1,16 +1,15 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:fiservonboardingexp/controllers/read_controller.dart';
+import 'package:fiservonboardingexp/model/read_model.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:fiservonboardingexp/themes/quiz%20themes/ui_parameters.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../widgets/app_icon_text.dart';
-import '../../../controllers/quiz controllers/quiz_controller.dart';
-import '../../../model/quiz_model.dart';
 
-class QuestionCard extends GetView<QuizController> {
-  final QuizModel model;
+class ReadCard extends GetView<ReadController> {
+  final ReadModel model;
 
-  const QuestionCard({super.key, required this.model});
+  const ReadCard({super.key, required this.model});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +21,7 @@ class QuestionCard extends GetView<QuizController> {
       child: InkWell(
         onTap: () {
           //print('${model.title}');
-          controller.navigateToQuestions(quiz: model);
+          controller.showPopupAlertDialog(readModel: model);
         },
         child: Padding(
           padding: const EdgeInsets.all(padding),
@@ -39,15 +38,15 @@ class QuestionCard extends GetView<QuizController> {
                       child: SizedBox(
                         height: Get.width * 0.15,
                         width: Get.width * 0.15,
-                        child: CachedNetworkImage(
-                          imageUrl: model.imageUrl!,
-                          placeholder: (context, url) => Container(
-                            alignment: Alignment.center,
-                            child: const CircularProgressIndicator(),
-                          ),
-                          errorWidget: (context, url, error) =>
-                              Image.asset("assets/images/Fiserv_logo.png"),
-                        ),
+                        // child: CachedNetworkImage(
+                        //   imageUrl: model.imageUrl!,
+                        //   placeholder: (context, url) => Container(
+                        //     alignment: Alignment.center,
+                        //     child: const CircularProgressIndicator(),
+                        //   ),
+                        //   errorWidget: (context, url, error) =>
+                        //       Image.asset("assets/images/Fiserv_logo.png"),
+                        // ),
                       ),
                     ),
                   ),
@@ -70,31 +69,13 @@ class QuestionCard extends GetView<QuizController> {
                         Padding(
                           padding: const EdgeInsets.only(top: 10.0, bottom: 15),
                           child: Text(
-                            //model.description,
-                            model.id,
+                            //model.popUpDescription,
+                            //you need to put this in variable in read model
+                            'pop up description',
                             style: TextStyle(color: darkTextColor),
                           ),
                         ),
                         Row(children: [
-                          AppIconText(
-                            icon: Icon(
-                              Icons.help_outline_sharp,
-                              color: Get.isDarkMode
-                                  ? Colors.white
-                                  : Theme.of(context)
-                                      .primaryColor
-                                      .withOpacity(0.3),
-                            ),
-                            text: Text(
-                              '${model.questionCount} questions',
-                              style: TextStyle(
-                                  color: Get.isDarkMode
-                                      ? Colors.white
-                                      : Theme.of(context).primaryColor,
-                                  fontSize: 12),
-                            ),
-                          ),
-                          const SizedBox(width: 15),
                           AppIconText(
                             icon: Icon(
                               Icons.timer,
@@ -105,7 +86,8 @@ class QuestionCard extends GetView<QuizController> {
                                       .withOpacity(0.3),
                             ),
                             text: Text(
-                              model.timeConverter(),
+                              //model.timeConverter(),
+                              'time',
                               style: TextStyle(
                                   color: Get.isDarkMode
                                       ? Colors.white
