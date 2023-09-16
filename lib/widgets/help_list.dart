@@ -22,12 +22,12 @@ class HelpList extends StatelessWidget {
           return const CircularProgressIndicator();
         }
 
-        final HelpList = snapshot.data!.docs;
+        final helpList = snapshot.data!.docs;
 
         return ListView.builder(
-          itemCount: HelpList.length,
+          itemCount: helpList.length,
           itemBuilder: (context, index) {
-            final data = HelpList[index].data() as Map<String, dynamic>;
+            final data = helpList[index].data() as Map<String, dynamic>;
 
             // Gets the question and answers from firestore data
             final topic = data['topic'] as String? ?? 'No questions';

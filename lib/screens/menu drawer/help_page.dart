@@ -34,7 +34,7 @@ class HelpPage extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
 
-              const SizedBox(height: 16),
+              const SizedBox(height: 10),
 
               // Content
               Container(
@@ -51,6 +51,8 @@ class HelpPage extends StatelessWidget {
                   textAlign: TextAlign.center,
                 ),
               ),
+
+              const SizedBox(height: 30),
 
               const Expanded(child: HelpList()),
 
