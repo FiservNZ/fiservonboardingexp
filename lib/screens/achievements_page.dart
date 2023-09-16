@@ -128,25 +128,24 @@ class Achievementpage extends State<AchievementsPage> {
                     ),
                   ),
                 ),
-                const SliverToBoxAdapter(
-                  child: SizedBox(height: 20),
-                ),
-                SliverGrid(
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    childAspectRatio: 1 / 1.3,
-                  ),
-                  delegate: SliverChildBuilderDelegate(
-                    (BuildContext context, int index) {
-                      return Achievement(
-                        size: 3,
-                        title: contentInAchv[index]['name'],
-                        iconName: contentInAchv[index]['iconData'] ?? "",
-                        award: '',
-                        isCompleted: contentInAchv[index]['IsComplete'],
-                      );
-                    },
-                    childCount: contentInAchv.length,
+                SliverPadding(
+                  padding: const EdgeInsets.all(8.0),
+                  sliver: SliverGrid(
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      childAspectRatio: 1 / 1.3,
+                    ),
+                    delegate: SliverChildBuilderDelegate(
+                      (BuildContext context, int index) {
+                        return Achievement(
+                          title: contentInAchv[index]['name'],
+                          iconName: contentInAchv[index]['iconData'] ?? "",
+                          isCompleted: contentInAchv[index]['IsComplete'],
+                        );
+                      },
+                      childCount: contentInAchv.length,
+                    ),
                   ),
                 ),
                 const SliverToBoxAdapter(
@@ -212,7 +211,6 @@ class Achievementpage extends State<AchievementsPage> {
         show(context, targetName);
       } else {
         // Handle the case where no matching documents were found
-        // For example, you can show an error message or perform other actions.
         debugPrint("No documents matching '$targetName' found.");
       }
     } catch (e) {

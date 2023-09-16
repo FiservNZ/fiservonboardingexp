@@ -24,6 +24,11 @@ class LoginPage extends StatelessWidget {
     String password = passwordController.text;
 
     try {
+      //instance is pulled from references now
+      await fireAuth.signInWithEmailAndPassword(
+        email: username,
+        password: password,
+      );
       // //save userCredential in global varible
       // Global.userCredential = userCredential;
 

@@ -5,16 +5,12 @@ class Achievement extends StatefulWidget {
   final String title;
   final String iconName;
   final bool isCompleted;
-  final String award;
-  final int size;
 
   const Achievement({
     super.key,
-    required this.award,
     required this.title,
     required this.iconName,
     required this.isCompleted,
-    required this.size,
   });
 
   @override
