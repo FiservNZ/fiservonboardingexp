@@ -177,20 +177,20 @@ Widget getUserIcon(Map<String, dynamic> userData, ThemeData selectedTheme) {
 
   switch (selectedIcon) {
     case 'ghost':
-      return Container(
+      return SizedBox(
         width: iconSize,
         height: iconSize,
         child: Icon(FontAwesomeIcons.ghost, color: iconColor, size: iconSize),
       );
     case 'seedling':
-      return Container(
+      return SizedBox(
         width: iconSize,
         height: iconSize,
         child:
             Icon(FontAwesomeIcons.seedling, color: iconColor, size: iconSize),
       );
     case 'poo':
-      return Container(
+      return SizedBox(
         width: iconSize,
         height: iconSize,
         child: Icon(FontAwesomeIcons.poo, color: iconColor, size: iconSize),

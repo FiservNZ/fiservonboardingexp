@@ -4,7 +4,6 @@ import 'package:fiservonboardingexp/themes/quiz%20themes/ui_parameters.dart';
 import 'package:fiservonboardingexp/widgets/quiz%20widgets/content_area.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../../../controllers/quiz controllers/quiz_controller.dart';
 
 class HomeScreen extends StatelessWidget {
