@@ -60,6 +60,7 @@ dependencies:
   easy_separator:
   table_calendar: ^3.0.9
   http: ^0.13.3
+  logger: ^2.0.0
 
 dev_dependencies:
   flutter_test:

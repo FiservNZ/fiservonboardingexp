@@ -86,7 +86,7 @@ class Achievementpage extends State<AchievementsPage> {
             // Store all the achievement information in list
             final List<Map<String, dynamic>> contentInAchv =
                 fetchAndStoreAchievement(snapshot.data!.docs);
-            print(contentInAchv);
+            // print(contentInAchv);
             return CustomScrollView(
               slivers: <Widget>[
                 SliverToBoxAdapter(
@@ -231,6 +231,8 @@ class Achievementpage extends State<AchievementsPage> {
       Map<String, dynamic> data = doc.data();
       String name = data['name'] ?? "";
       bool isComplete = data['IsComplete'] ?? false;
+      String hour = data['hour'] ?? "";
+      print("hour: $hour");
 
       // Find the corresponding icon data based on the name
       String subiconData = SubiconList.firstWhere(
@@ -242,10 +244,12 @@ class Achievementpage extends State<AchievementsPage> {
         'IsComplete': isComplete,
         'iconData':
             IconList.isNotEmpty ? IconList[newAchievementContent.length] : '',
+        'subiconData': subiconData,
+        'hour': hour,
+
         // 'subiconData': SubiconList.isNotEmpty
         //     ? SubiconList[newAchievementContent.length]
         //     : '',
-        'subiconData': subiconData,
       });
     }
     print(newAchievementContent);

@@ -1,17 +1,15 @@
 // import 'package:flutter/material.dart';
 // import 'package:google_fonts/google_fonts.dart';
-// import '../task_components/task_tile.dart';
-// import '../../util/constants.dart';
-// import '../../widgets/nav_bar.dart';
 
-// class TechnicalTasks extends StatefulWidget {
-//   const TechnicalTasks({super.key});
+// import '../util/constants.dart';
+// import 'task_components/task.dart';
+// import '../widgets/nav_bar.dart';
 
-//   @override
-//   State<TechnicalTasks> createState() => _TechnicalTasksPage();
-// }
+// class TaskPage extends StatelessWidget {
+//   final Task task;
 
-// class _TechnicalTasksPage extends State<TechnicalTasks> {
+//   TaskPage({super.key, required this.task});
+
 //   @override
 //   Widget build(BuildContext context) {
 //     return MaterialApp(
@@ -26,17 +24,13 @@
 //             child: Column(
 //               children: [
 //                 const SizedBox(height: 20),
-//                 //heading
+//                 //title of page pulled from the name field in firestore
 //                 Text(
-//                   "Technical Training Tasks",
+//                   task.name,
 //                   style:
 //                       GoogleFonts.bebasNeue(fontSize: 30, color: fiservColor),
 //                 ),
 //                 const SizedBox(height: 10),
-//                 //list of tasks
-//                 const Expanded(
-//                   child: TaskTile(),
-//                 )
 //               ],
 //             ),
 //           ),

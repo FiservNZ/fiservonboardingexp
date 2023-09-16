@@ -65,7 +65,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
           children: [
             // Text
             Padding(
-              padding: EdgeInsets.symmetric(horizontal: 25.0),
+              padding: const EdgeInsets.symmetric(horizontal: 25.0),
               child: Text(
                 'Please enter your email and a password reset link will be emailed to you',
                 textAlign: TextAlign.center,

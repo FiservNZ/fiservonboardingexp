@@ -1,13 +1,13 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/material.dart';
+// import 'package:cloud_firestore/cloud_firestore.dart';
+// import 'package:flutter/material.dart';
 
-class TaskModel {
-  String? id;
+// class TaskModel {
+//   String? id;
 
-  TaskModel({
-    this.id,
-  });
+//   TaskModel({
+//     this.id,
+//   });
 
-  TaskModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> snapshot)
-      : id = snapshot.id;
-}
+//   TaskModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> snapshot)
+//       : id = snapshot.id;
+// }
