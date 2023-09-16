@@ -21,6 +21,7 @@ class _CheckUserState extends State<CheckUser> {
   void initState() {
     super.initState();
     checkUserAndNavigate();
+    fetchUser();
   }
 
   Future<void> checkUserAndNavigate() async {

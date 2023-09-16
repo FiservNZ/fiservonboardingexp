@@ -5,19 +5,22 @@ import 'package:fiservonboardingexp/widgets/quiz%20widgets/quiz_info_square.dart
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../../firebase references/firebase_refs.dart';
 import '../../model/quiz_model.dart';
+import '../../model/task_category_model.dart';
 import '../../screens/task pages/quiz screens/question_screen.dart';
 import '../../firebase references/services/firebase_storage_service.dart';
 
 class QuizController extends GetxController {
+  late final String categoryName;
   late final QuizModel quiz;
+  late final TaskCategoryModel cat;
   final allQuizImages = <String>[].obs;
   final allQuizzes = <QuizModel>[].obs;
 
   @override
   void onReady() {
+    categoryName = Get.arguments as String;
     getAllQuizzes();
     super.onReady();
   }
@@ -25,7 +28,17 @@ class QuizController extends GetxController {
   Future<void> getAllQuizzes() async {
     List<String> imgName = ["Harry Potter", "Programming"];
     try {
-      QuerySnapshot<Map<String, dynamic>> data = await quizref.get();
+      //QuerySnapshot<Map<String, dynamic>> data = await quizref.get();
+
+      QuerySnapshot<Map<String, dynamic>> data = await FirebaseFirestore
+          .instance
+          .collection('User')
+          .doc(currentUser.uid)
+          .collection('Tasks')
+          .doc(categoryName)
+          .collection('Quiz')
+          .get();
+
       final quizList =
           data.docs.map((quiz) => QuizModel.fromSnapshot(quiz)).toList();
       allQuizzes.assignAll(quizList);

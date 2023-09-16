@@ -1,64 +1,57 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fiservonboardingexp/model/read_model.dart';
+import 'package:fiservonboardingexp/firebase%20references/firebase_refs.dart';
+import 'package:fiservonboardingexp/model/task_category_model.dart';
+import 'package:fiservonboardingexp/model/video_model.dart';
+import 'package:fiservonboardingexp/model/watch_model.dart';
+import 'package:fiservonboardingexp/util/mc_testing/watch/video_player.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-import '../firebase references/firebase_refs.dart';
+import '../model/quiz_model.dart';
+import '../model/read_model.dart';
 import '../util/constants.dart';
 import '../widgets/quiz widgets/quiz_info_square.dart';
 
-class ReadController extends GetxController {
+class WatchController extends GetxController {
   late final String categoryName;
-  late ReadModel document;
-  final allReadTasks =
-      <ReadModel>[]; // Initializes a collection of read tasks as an array.
-  RxInt selectedIndex = RxInt(0); // Initialize with a default index of 0.
+  late final WatchModel model;
+  late final TaskCategoryModel cat;
+  final allWatchTasks = <WatchModel>[].obs;
 
   @override
   void onReady() {
     categoryName = Get.arguments as String;
-    getAllReadTasks();
+    getAllWatchTasks();
     super.onReady();
   }
 
-  // Defines the setSelectedIndex method
-  void setSelectedIndex(int index) {
-    selectedIndex.value = index;
-  }
-
-  Future<void> getAllReadTasks() async {
+  Future<void> getAllWatchTasks() async {
+    //List<String> imgName = ["Harry Potter", "Programming"];
     try {
-      // Fetch the read documents from the read collection as a map.
       QuerySnapshot<Map<String, dynamic>> data = await FirebaseFirestore
           .instance
           .collection('User')
           .doc(currentUser.uid)
           .collection('Tasks')
           .doc(categoryName)
-          .collection('Read')
+          .collection('Watch')
           .get();
 
-      //print("Number of documents fetched: ${data.docs.length}");
-
-      final readList = data.docs.map((document) {
-        // Convert each document to a ReadModel.
-        return ReadModel(
-          id: document.id,
-          title: document['title'],
-          content: document['content'],
-        );
-      }).toList();
-
-      // Assign the list of ReadModel objects to allReadTasks.
-      allReadTasks.assignAll(readList);
-
-      // After data is loaded, the selected index an be set.
-      setSelectedIndex(0);
+      final watchList =
+          data.docs.map((watch) => WatchModel.fromSnapshot(watch)).toList();
+      allWatchTasks.assignAll(watchList);
     } catch (e) {
-      print("Error fetching data: $e");
+      print(e);
     }
   }
+
+  // void navigateToQuestions({required WatchModel watch}) {
+  //   //AuthController authController = Get.find();
+
+  //   showPopupAlertDialog(watchModel: watch);
+  //   //Get.toNamed(QuizQuestionScreen.routeName, arguments: quiz);
+  // }
 
   void showPopupAlertDialog({required ReadModel readModel}) {
     Get.dialog(
