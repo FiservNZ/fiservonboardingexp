@@ -9,7 +9,7 @@ import 'package:fiservonboardingexp/screens/menu%20drawer/settings_page.dart';
 import 'package:fiservonboardingexp/controllers/check_user.dart';
 import 'package:get/get.dart';
 import '../screens/menu drawer/help_page.dart';
-import '../screens/read_page.dart';
+import '../screens/task pages/read_page.dart';
 import '../screens/teaser pages/teaser.dart';
 
 class FiservAppRoutes {
