@@ -15,6 +15,7 @@ class ModuleScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
     ThemeData selectedTheme = themeProvider.currentTheme;
+
     return Scaffold(
       appBar: myAppBar,
       bottomNavigationBar: navBar,
@@ -104,18 +105,6 @@ class ModuleScreen extends StatelessWidget {
                 ),
               ],
             ),
-            //Try to implement later if time allows.
-            // Positioned(
-            //   right: 5,
-            //   top: 1,
-            //   bottom: 1,
-            //   child: CircularProgressIndicator(
-            //     //Will need to implement tracking on firebase and grabbing the value from there.
-            //     value: 0.3,
-            //     backgroundColor: Colors.grey[600],
-            //     valueColor: const AlwaysStoppedAnimation<Color>(fiservColor),
-            //   ),
-            // ),
           ],
         ),
       ),

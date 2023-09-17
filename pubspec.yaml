@@ -111,6 +111,10 @@ flutter:
       - assets/json/quizzes/
       # Read task
       - assets/images/Read.jpg
+      # Watch Task
+      - assets/icon/video_thumbnail_icon.png
+      - assets/video/video.mp4
+
       #Achievement
       - assets/icon/achievement/
       # Teaser

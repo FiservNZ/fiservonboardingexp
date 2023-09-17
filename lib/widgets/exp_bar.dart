@@ -27,8 +27,10 @@ class ExpBar extends StatelessWidget {
       currentEXP += expToAdd;
       if (currentEXP >= maxEXP) {
         level++;
+        //Current EXP - Max EXP = Current EXP
+        currentEXP -= maxEXP;
         maxEXP += 150;
-        currentEXP = 0;
+        // currentEXP = 0;
       }
     } else if (level == 9 && currentEXP <= maxEXP) {
       currentEXP += expToAdd;
