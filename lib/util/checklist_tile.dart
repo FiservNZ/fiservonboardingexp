@@ -30,7 +30,7 @@ class ChecklistTile extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(15),
         decoration: BoxDecoration(
-          color: selectedTheme.colorScheme.background,
+          color: selectedTheme.colorScheme.onBackground,
           borderRadius: BorderRadius.circular(12),
         ),
         child: Row(
