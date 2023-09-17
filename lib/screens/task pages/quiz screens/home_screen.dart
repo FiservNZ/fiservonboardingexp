@@ -14,6 +14,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     QuizController quizController = Get.find();
+    categoryName = Get.arguments as String;
     return Scaffold(
       backgroundColor: darkBackgroundColor,
       body: Column(
