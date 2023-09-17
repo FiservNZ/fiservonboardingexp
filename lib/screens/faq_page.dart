@@ -40,7 +40,7 @@ class FaqPageState extends State<FaqPage> {
             ),
             const SizedBox(height: 16),
             // Gets the Questions and Answers here (Dropdown widget thing)
-            Expanded(
+            const Expanded(
               child: FaqList(),
             ),
           ],

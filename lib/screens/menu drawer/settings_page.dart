@@ -188,7 +188,7 @@ class SettingsPageState extends State<SettingsPage> {
                       width: iconTxtSpacing,
                     ),
                     Text(
-                      'Logout',
+                      'Log Out',
                       style: TextStyle(
                         color: selectedTheme.colorScheme.primary,
                         fontSize: 18,

@@ -1,4 +1,6 @@
 import 'package:firebase_core/firebase_core.dart';
+import 'package:fiservonboardingexp/controllers/read_controller.dart';
+import 'package:fiservonboardingexp/idk/read_routes.dart';
 import 'package:fiservonboardingexp/routes/quiz_test_routes.dart';
 import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:flutter/material.dart';
@@ -35,11 +37,10 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
-      getPages: AppRoutes.routes(),
+      getPages: FiservAppRoutes.routes(),
     );
   }
 }
-
 
 // // Routes to the read task page
 // void main() async {
@@ -69,7 +70,7 @@ class MyApp extends StatelessWidget {
 //       initialRoute: '/read',
 //       //sets the initial route to homepage with read task button and progess bar
 //       //initialRoute: '/',
-//       getPages: Routes.routes(),
+//       getPages: ReadRoutes.routes(),
 //     );
 //   }
 // }

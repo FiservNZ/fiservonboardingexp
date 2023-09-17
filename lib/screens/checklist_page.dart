@@ -56,7 +56,7 @@ class _ChecklistPageState extends State<ChecklistPage> {
     ThemeData selectedTheme = themeProvider.currentTheme;
 
     return Scaffold(
-      backgroundColor: selectedTheme.colorScheme.onBackground,
+      backgroundColor: selectedTheme.colorScheme.background,
       appBar: const AppBarOverlay(),
       bottomNavigationBar: const CustomNavBar(),
       body: SingleChildScrollView(
