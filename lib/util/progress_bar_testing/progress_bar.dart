@@ -1,21 +1,13 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fiservonboardingexp/firebase%20references/firebase_refs.dart';
+import 'package:fiservonboardingexp/model/task_category_model.dart';
 import 'package:fiservonboardingexp/themes/theme_provider.dart';
-import 'package:fiservonboardingexp/util/progress_bar_testing/progress_model.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
-import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import 'package:fiservonboardingexp/themes/theme_provider.dart';
-import 'package:fiservonboardingexp/util/progress_bar_testing/progress_model.dart';
-
 class ProgressBar extends StatelessWidget {
-  final ProgressModel task;
+  final TaskCategoryModel category;
 
-  ProgressBar({required this.task});
+  const ProgressBar({super.key, required this.category});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +15,7 @@ class ProgressBar extends StatelessWidget {
     ThemeData selectedTheme = themeProvider.currentTheme;
 
     // Calculate progress percentage
-    final double progressPercentage = task.currProgress / task.maxProgress;
+    final double progressPercentage = category.curPoints / category.maxPoints;
 
     return Column(
       children: [
@@ -48,7 +40,7 @@ class ProgressBar extends StatelessWidget {
               ).merge(GoogleFonts.quicksand()),
             ),
             Text(
-              '${task.currProgress} / ${task.maxProgress}',
+              '${category.curPoints} / ${category.maxPoints}',
               style: TextStyle(
                 color: selectedTheme.colorScheme.primary,
                 fontSize: 15,

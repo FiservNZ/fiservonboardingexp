@@ -1,16 +1,14 @@
 import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:fiservonboardingexp/controllers/read_controller.dart';
 import 'package:fiservonboardingexp/screens/task pages/read_page.dart';
-import 'package:fiservonboardingexp/widgets/progress_bar.dart';
+import 'package:fiservonboardingexp/util/progress_bar_testing/progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 class ReadHomePage extends StatelessWidget {
-  final ProgressBar _progressBar = const ProgressBar();
-
-  const ReadHomePage({Key? key}) : super(key: key);
+  ReadHomePage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +32,6 @@ class ReadHomePage extends StatelessWidget {
                 padding: const EdgeInsets.only(left: 10),
                 child: Container(
                   alignment: Alignment.centerLeft,
-                  child: _progressBar,
                 ),
               ),
               const SizedBox(

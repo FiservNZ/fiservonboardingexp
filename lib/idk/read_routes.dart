@@ -8,7 +8,7 @@ class ReadRoutes {
     return [
       GetPage(
         name: "/",
-        page: () => const ReadHomePage(),
+        page: () => ReadHomePage(),
       ),
       // Add the 'read' route
       GetPage(

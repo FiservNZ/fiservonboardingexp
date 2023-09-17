@@ -1,39 +1,41 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fiservonboardingexp/firebase%20references/firebase_refs.dart';
+import 'package:logger/logger.dart';
 
-final FirebaseFirestore _firestore = FirebaseFirestore.instance;
+final Logger logger = Logger();
 
-Future<void> addPointsToTask(String taskId, int points) async {
+// Define a function to update points for a specific task category
+Future<void> addPointsToProgress(String categoryName, int points) async {
   try {
-    final FirebaseAuth auth = FirebaseAuth.instance;
-    final User? currentUser = auth.currentUser;
+    // Get a reference to the task category document using categoryName
+    final DocumentReference categoryDocRef = FirebaseFirestore.instance
+        .collection('User')
+        .doc(currentUser.uid)
+        .collection('Tasks')
+        .doc(categoryName);
 
-    if (currentUser != null) {
-      final String userId = currentUser.uid;
-      final DocumentReference<Map<String, dynamic>> userDocRef =
-          FirebaseFirestore.instance.collection('User').doc(userId);
-      final DocumentReference<Map<String, dynamic>> taskDocRef =
-          userDocRef.collection('Tasks').doc(taskId);
+    // Get the current task category document data
+    final DocumentSnapshot<Object?> snapshot = await categoryDocRef.get();
 
-      final DocumentSnapshot<Map<String, dynamic>> taskDoc =
-          await taskDocRef.get();
+    if (snapshot.exists) {
+      final int curPoints = snapshot['curPoints'] as int;
+      final int maxPoints = snapshot['maxPoints'] as int;
 
-      if (taskDoc.exists) {
-        final int currProgress = taskDoc['currProgress'] as int;
-        final int maxProgress = taskDoc['maxProgress'] as int;
+      // Calculate new progress
+      final int newPoints = curPoints + points;
 
-        // Calculate new progress and update the task document
-        final int newProgress = currProgress + points;
-        if (newProgress < maxProgress) {
-          await taskDocRef.update({'currProgress': newProgress});
-        }
+      // Check if newPoints doesn't exceed maxPoints
+      if (newPoints <= maxPoints) {
+        // Update the "curPoints" field in Firestore
+        await categoryDocRef.update({'curPoints': newPoints});
+        logger.d('Points updated successfully.');
       } else {
-        throw Exception('Task document not found.');
+        logger.w('Points cannot exceed maxPoints.');
       }
     } else {
-      throw Exception('User not authenticated.');
+      logger.w('Task category does not exist.');
     }
-  } catch (e) {
-    throw Exception('Error: $e');
+  } catch (e, stackTrace) {
+    logger.e('Error updating points: $e', error: e, stackTrace: stackTrace);
   }
 }

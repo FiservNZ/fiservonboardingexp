@@ -20,6 +20,7 @@ class ReadCard extends GetView<ReadController> {
           color: darkTileColor /*Theme.of(context).cardColor*/),
       child: InkWell(
         onTap: () {
+          // Open a popup dialog when the card is tapped
           //print('${model.title}');
           controller.showPopupAlertDialog(readModel: model);
         },
@@ -31,6 +32,7 @@ class ReadCard extends GetView<ReadController> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // Left side of the card containing an icon or image
                   ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: ColoredBox(
@@ -55,6 +57,7 @@ class ReadCard extends GetView<ReadController> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        // Title of the read task
                         Text(model.title,
                             style: TextStyle(
                                 color: darkTextColor,
@@ -68,14 +71,15 @@ class ReadCard extends GetView<ReadController> {
                                 fontWeight: FontWeight.bold)),
                         Padding(
                           padding: const EdgeInsets.only(top: 10.0, bottom: 15),
+
+                          // Description of the read task
                           child: Text(
-                            //model.popUpDescription,
-                            //you need to put this in variable in read model
-                            'pop up description',
+                            model.description,
                             style: TextStyle(color: darkTextColor),
                           ),
                         ),
                         Row(children: [
+                          // Icon representing time, followed by text
                           AppIconText(
                             icon: Icon(
                               Icons.timer,
@@ -101,6 +105,8 @@ class ReadCard extends GetView<ReadController> {
                   )
                 ],
               ),
+
+              // Play button icon positioned at the bottom right corner
               Positioned(
                   bottom: -padding,
                   right: -padding,
@@ -108,12 +114,13 @@ class ReadCard extends GetView<ReadController> {
                     child: Container(
                       padding: const EdgeInsets.symmetric(
                           vertical: 12, horizontal: 20),
-                      child: Icon(Icons.play_arrow_rounded, color: fiservColor),
                       decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 43, 42, 42),
+                          color: const Color.fromARGB(255, 43, 42, 42),
                           borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(cardBorderPadding),
                               bottomRight: Radius.circular(cardBorderPadding))),
+                      child: const Icon(Icons.play_arrow_rounded,
+                          color: fiservColor),
                     ),
                   ))
             ],

@@ -41,11 +41,14 @@ class ReadController extends GetxController {
       //print("Number of documents fetched: ${data.docs.length}");
 
       final readList = data.docs.map((document) {
-        // Convert each document to a ReadModel.
+        // Convert each document to a ReadModel.i
         return ReadModel(
           id: document.id,
           title: document['title'],
+          description: document['description'],
           content: document['content'],
+          time: document['time'],
+          isDone: document['isDone'],
         );
       }).toList();
 
@@ -93,6 +96,8 @@ class ReadController extends GetxController {
           //mainAxisSize: MainAxisSize.values,
           children: [
             const SizedBox(height: 10),
+
+            // Displays the read task title
             Text(
               readModel.title,
               style: GoogleFonts.quicksand(
@@ -101,27 +106,30 @@ class ReadController extends GetxController {
                   color: fiservColor),
             ),
             const SizedBox(height: 10),
-            const Row(
+            Row(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 // add exp to the read model
-                Padding(
+                const Padding(
                     padding: EdgeInsets.all(5.0),
                     child: QuizInfoSquare(
                         icon: Icons.book_rounded,
                         //'${readModel.exp} exp'
                         text: 'read model exp count for the specific task')),
                 Padding(
-                  padding: EdgeInsets.all(5.0),
-                  // add a time variable to read model of how long you think the specific task would take
-                  child: QuizInfoSquare(icon: Icons.timer, text: 'time'),
-                )
+                    padding: const EdgeInsets.all(5.0),
+                    // Time for how long the specific task would take
+                    child: QuizInfoSquare(
+                      icon: Icons.timer,
+                      text: readModel.time.toString(),
+                    ))
               ],
             ),
             const SizedBox(height: 15),
+
+            // Short description about the read task
             Text(
-              // add a property in read model for a short desc
-              'read model pop up & card info here',
+              readModel.description,
               style: GoogleFonts.quicksand(color: darkTextColor),
             )
           ],
@@ -133,6 +141,7 @@ class ReadController extends GetxController {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
+              // Cancel button
               SizedBox(
                 height: buttonHeight,
                 width: buttonWidth,
@@ -151,6 +160,8 @@ class ReadController extends GetxController {
                           fontSize: 14),
                     )),
               ),
+
+              // Start button
               SizedBox(
                 height: buttonHeight,
                 width: buttonWidth,

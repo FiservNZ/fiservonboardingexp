@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../controllers/read_controller.dart';
-import 'package:fiservonboardingexp/widgets/progress_bar.dart';
+import 'package:fiservonboardingexp/util/progress_bar_testing/progress_bar.dart';
 
 import '../../model/read_model.dart';
 
@@ -142,8 +142,7 @@ class ReadPage extends GetView<ReadController> {
                             color: selectedTheme.colorScheme.secondary,
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
-                          ).merge(GoogleFonts
-                              .quicksand()), // Merge styles with GoogleFonts
+                          ).merge(GoogleFonts.quicksand()),
                         ),
                       ),
                     ],
