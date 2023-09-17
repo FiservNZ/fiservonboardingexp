@@ -1,7 +1,6 @@
 import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import '../../util/constants.dart';
 import '../../widgets/star_rating.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -72,7 +71,6 @@ class _FeedBackState extends State<FeedBack> {
                   setState(() {
                     userRating = rating;
                     isRatingSelected = true;
-                    print("Selected rating: $rating");
                   });
                 },
               ),
@@ -102,13 +100,13 @@ class _FeedBackState extends State<FeedBack> {
                       color: Colors.grey,
                     ),
                     // Feedback textfield outline border
-                    focusedBorder: OutlineInputBorder(
+                    focusedBorder: const OutlineInputBorder(
                       borderSide: BorderSide(color: Colors.black54),
                     ),
                   ),
                   maxLines:
                       10, // You can make the feedback text field bigger here
-                  style: TextStyle(
+                  style: const TextStyle(
                       // color: selectedTheme.colorScheme
                       //     .primary
                       ),

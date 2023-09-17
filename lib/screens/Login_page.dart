@@ -1,10 +1,10 @@
 import 'package:fiservonboardingexp/screens/main_screen.dart';
-import 'package:fiservonboardingexp/themes/theme_provider.dart';
+
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-import 'package:provider/provider.dart';
+
 import '../firebase references/firebase_refs.dart';
 import 'menu drawer/help_page.dart';
 import 'teaser pages/teaser.dart';
@@ -24,14 +24,11 @@ class LoginPage extends StatelessWidget {
     String password = passwordController.text;
 
     try {
-      //detect the user account.
-      UserCredential userCredential =
-          //instance is pulled from references now
-          await fireAuth.signInWithEmailAndPassword(
+      //instance is pulled from references now
+      await fireAuth.signInWithEmailAndPassword(
         email: username,
         password: password,
       );
-
       // //save userCredential in global varible
       // Global.userCredential = userCredential;
 
@@ -44,7 +41,7 @@ class LoginPage extends StatelessWidget {
 
       checkUserPosition(context);
 
-      print('Username: $username, Password: $password');
+      debugPrint('Username: $username, Password: $password');
       // If the authentication is successful, the user is logged in.
     } catch (e) {
       // If there's an error, show an error message.
@@ -62,7 +59,7 @@ class LoginPage extends StatelessWidget {
             duration: Duration(seconds: 1),
           ),
         );
-        print('Error during login');
+        debugPrint('Error during login');
       }
     }
     //
@@ -128,12 +125,10 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-    ThemeData selectedTheme = themeProvider.currentTheme;
     return Scaffold(
-      backgroundColor: selectedTheme.colorScheme.background,
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        backgroundColor: selectedTheme.colorScheme.tertiary,
+        backgroundColor: fiservColor,
         centerTitle: true,
         elevation: 0,
       ),
@@ -152,12 +147,12 @@ class LoginPage extends StatelessWidget {
                     height: 100,
                   ),
                   const SizedBox(height: 30),
-                  Text(
+                  const Text(
                     'Welcome to Firserv',
                     style: TextStyle(
                       fontSize: 20,
                       fontWeight: FontWeight.bold,
-                      color: selectedTheme.colorScheme.secondary,
+                      color: fiservColor,
                     ),
                   ),
                 ],
@@ -192,11 +187,11 @@ class LoginPage extends StatelessWidget {
                       handleLogin(context);
                     },
                     style: ElevatedButton.styleFrom(
-                      backgroundColor: selectedTheme.colorScheme.onBackground,
+                      backgroundColor: fiservColor,
                     ),
-                    child: Text('Login',
+                    child: const Text('Login',
                         style: TextStyle(
-                          color: selectedTheme.colorScheme.primary,
+                          color: Colors.white,
                         )),
                   ),
                 ],

@@ -56,7 +56,7 @@ class FiservAppRoutes {
         ),
         GetPage(
             name: ReadPage.routeName,
-            page: () => ReadPage(),
+            page: () => const ReadPage(),
             binding: BindingsBuilder(() {
               Get.put(ReadController());
             })),
