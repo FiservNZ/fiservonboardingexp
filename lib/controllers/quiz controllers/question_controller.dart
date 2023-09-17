@@ -1,4 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fiservonboardingexp/controllers/quiz%20controllers/auth_controller.dart';
+import 'package:fiservonboardingexp/controllers/quiz%20controllers/extension_question_controller.dart';
 import 'package:fiservonboardingexp/controllers/quiz%20controllers/quiz_controller.dart';
 import 'package:fiservonboardingexp/widgets/quiz%20widgets/loading_status.dart';
 import 'package:fiservonboardingexp/model/quiz_model.dart';
@@ -132,8 +135,7 @@ class QuestionController extends GetxController {
   }
 
   void tryAgain() {
-    Get.find<QuizController>()
-        .navigateToQuestions(quiz: quizModel, tryAgain: true);
+    Get.find<QuizController>().navigateToQuestions(quiz: quizModel);
   }
 
   void navigateToHome() {
