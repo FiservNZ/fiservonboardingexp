@@ -39,15 +39,15 @@ class QuestionCard extends GetView<QuizController> {
                       child: SizedBox(
                         height: Get.width * 0.15,
                         width: Get.width * 0.15,
-                        child: CachedNetworkImage(
-                          imageUrl: model.imageUrl!,
-                          placeholder: (context, url) => Container(
-                            alignment: Alignment.center,
-                            child: const CircularProgressIndicator(),
-                          ),
-                          errorWidget: (context, url, error) =>
-                              Image.asset("assets/images/Fiserv_logo.png"),
-                        ),
+                        // child: CachedNetworkImage(
+                        //   imageUrl: model.imageUrl!,
+                        //   placeholder: (context, url) => Container(
+                        //     alignment: Alignment.center,
+                        //     child: const CircularProgressIndicator(),
+                        //   ),
+                        //   errorWidget: (context, url, error) =>
+                        //       Image.asset("assets/images/Fiserv_logo.png"),
+                        // ),
                       ),
                     ),
                   ),
