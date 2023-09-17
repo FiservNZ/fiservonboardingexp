@@ -15,7 +15,9 @@ class ExpBar extends StatelessWidget {
 
   //Method to add exp and handle level up
   Future<void> addExperience(int expToAdd) async {
-    final userDocRef = userColRef.doc(currentUser.uid);
+    final currentUser = FirebaseAuth.instance.currentUser;
+
+    final userDocRef = userColRef.doc(currentUser?.uid);
     final userDoc = await userDocRef.get();
     final userMap = userDoc.data() as Map<String, dynamic>;
 
@@ -24,7 +26,7 @@ class ExpBar extends StatelessWidget {
     int level = userMap['Level'] ?? 0;
 
     if (level < 9) {
-      currentEXP += expToAdd; //149  30
+      currentEXP += expToAdd; //
       if (currentEXP >= maxEXP) {
         level++;
         currentEXP -= maxEXP;
