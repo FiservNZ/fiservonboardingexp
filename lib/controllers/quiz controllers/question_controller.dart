@@ -13,6 +13,7 @@ import 'package:get/get.dart';
 import '../../firebase references/firebase_refs.dart';
 
 class QuestionController extends GetxController {
+  late final String categoryName;
   final loadingStatus = LoadingStatus.loading.obs;
   late QuizModel quizModel;
   final allQuizQuestions = <Question>[];
@@ -23,6 +24,7 @@ class QuestionController extends GetxController {
 
   @override
   void onReady() {
+    categoryName = Get.arguments as String;
     final quizQuestion = Get.arguments as QuizModel;
     // test to see if it can pull the question document id from the collection
     // print(quizQuestion.id);
@@ -37,8 +39,15 @@ class QuestionController extends GetxController {
 
     try {
       // Query the 'questions' collection for documents
-      final QuerySnapshot<Map<String, dynamic>> questionQuery =
-          await quizref.doc(quizQuestion.id).collection("questions").get();
+      final QuerySnapshot<Map<String, dynamic>> questionQuery = await firestore
+          .collection('User')
+          .doc(currentUser.uid)
+          .collection('Tasks')
+          .doc(categoryName)
+          .collection('Quiz')
+          .doc(quizQuestion.id)
+          .collection("questions")
+          .get();
 
       final questions = questionQuery.docs
           .map((snapshot) => Question.fromSnapshot(snapshot))
@@ -49,7 +58,12 @@ class QuestionController extends GetxController {
       //  iterates through each 'Question' object within the 'quizQuestion' object
       for (Question question in quizQuestion.questions!) {
         // queries Firestore for a collection of options associated with the current 'Question'
-        final QuerySnapshot<Map<String, dynamic>> optionQuery = await quizref
+        final QuerySnapshot<Map<String, dynamic>> optionQuery = await firestore
+            .collection('User')
+            .doc(currentUser.uid)
+            .collection('Tasks')
+            .doc(categoryName)
+            .collection('Quiz')
             .doc(quizQuestion.id)
             .collection("questions")
             .doc(question.id)
