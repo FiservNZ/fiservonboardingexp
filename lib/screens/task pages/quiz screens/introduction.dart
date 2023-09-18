@@ -1,6 +1,4 @@
 import 'package:fiservonboardingexp/util/constants.dart';
-import 'package:fiservonboardingexp/screens/task%20pages/quiz%20screens/question_screen.dart';
-import 'package:fiservonboardingexp/util/mc_testing/module/module_screen.dart';
 import 'package:fiservonboardingexp/widgets/quiz%20widgets/app_circle_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -27,7 +25,8 @@ class IntroductionScreen extends StatelessWidget {
               ),
               const SizedBox(height: 40),
               AppCircleButton(
-                onTap: () => Get.offAndToNamed("/readHome"),
+                onTap: () => Get.offAndToNamed("/moduleScreen"),
+                //    onTap: () => Get.offAndToNamed("/readHome"),
                 child: const Icon(
                   Icons.arrow_forward,
                   size: 35,

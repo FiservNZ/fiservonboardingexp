@@ -60,7 +60,9 @@ class ModuleScreen extends StatelessWidget {
         // String route = title.replaceAll(" ", "");
         currentCategory = title;
         debugPrint('Route: $currentCategory');
-        Get.toNamed(WatchHomeScreen.routeName, arguments: currentCategory);
+        // Get.toNamed(WatchHomeScreen.routeName, arguments: currentCategory);
+        Get.toNamed("/home", arguments: currentCategory);
+
         //Get.to(WatchTasksContainer(watchCategory: currentCategory));
       },
       child: Container(

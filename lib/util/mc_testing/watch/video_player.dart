@@ -2,6 +2,7 @@ import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:fiservonboardingexp/util/mc_testing/module/module_screen.dart';
 import 'package:fiservonboardingexp/util/mc_testing/watch/video_player_widget.dart';
 import 'package:fiservonboardingexp/util/mc_testing/watch/watch_tasks_container.dart';
+import 'package:fiservonboardingexp/widgets/exp_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -171,6 +172,8 @@ class _VideoPlayerState extends State<VideoPlayer> {
                       },
                     );
                     if (confirm == true) {
+                      ExpBar expBar = ExpBar(barwidth: 12);
+                      expBar.addExperience(151);
                       int currentEXP = await userColRef
                           .doc(currentUser.uid)
                           .get()
@@ -181,9 +184,7 @@ class _VideoPlayerState extends State<VideoPlayer> {
                           return 0;
                         }
                       });
-                      await userColRef
-                          .doc(currentUser.uid)
-                          .update({'EXP': currentEXP + 25});
+
                       final querySnapshot = await userColRef
                           .doc(currentUser.uid)
                           .collection('Tasks')
