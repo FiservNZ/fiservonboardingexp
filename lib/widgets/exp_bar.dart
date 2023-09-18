@@ -56,7 +56,8 @@ class ExpBar extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
     ThemeData selectedTheme = themeProvider.currentTheme;
-    final currentUser = FirebaseAuth.instance.currentUser;
+    // Refactor this code in enhancement phase, cant not pull the instance from Ref
+    final currentUser = fireAuth.currentUser!;
     return SizedBox(
       child: StreamBuilder<DocumentSnapshot>(
         stream: FirebaseFirestore.instance
@@ -130,6 +131,3 @@ class ExpBar extends StatelessWidget {
     );
   }
 }
-
-// ignore: constant_identifier_names
-const FiservColor = Color(0xFFFF6600);
