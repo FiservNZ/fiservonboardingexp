@@ -20,10 +20,10 @@ class ModuleScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
     ThemeData selectedTheme = themeProvider.currentTheme;
+
     return Scaffold(
       appBar: myAppBar,
       bottomNavigationBar: navBar,
-      //Change later to match theme selected.
       backgroundColor: selectedTheme.colorScheme.background,
       body: Center(
         child: Column(
@@ -62,8 +62,11 @@ class ModuleScreen extends StatelessWidget {
         // String route = title.replaceAll(" ", "");
         currentCategory = title;
         debugPrint('Route: $currentCategory');
-        Get.toNamed(HomeScreen.routeName, arguments: currentCategory);
-        //Get.to(WatchTasksContainer(watchCategory: currentCategory));
+        // Get.toNamed(WatchHomeScreen.routeName, arguments: currentCategory);
+        Get.toNamed("/home", arguments: currentCategory);
+
+        //Modify this to take into consideration other task types
+        Get.to(WatchTasksContainer(watchCategory: currentCategory));
       },
       child: Container(
         padding: const EdgeInsets.all(16),
@@ -109,18 +112,6 @@ class ModuleScreen extends StatelessWidget {
                 ),
               ],
             ),
-            //Try to implement later if time allows.
-            // Positioned(
-            //   right: 5,
-            //   top: 1,
-            //   bottom: 1,
-            //   child: CircularProgressIndicator(
-            //     //Will need to implement tracking on firebase and grabbing the value from there.
-            //     value: 0.3,
-            //     backgroundColor: Colors.grey[600],
-            //     valueColor: const AlwaysStoppedAnimation<Color>(fiservColor),
-            //   ),
-            // ),
           ],
         ),
       ),

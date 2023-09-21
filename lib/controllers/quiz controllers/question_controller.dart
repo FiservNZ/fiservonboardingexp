@@ -11,6 +11,7 @@ import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 import '../../firebase references/firebase_refs.dart';
+import '../../widgets/exp_bar.dart';
 
 class QuestionController extends GetxController {
   late final String categoryName;
@@ -141,6 +142,8 @@ class QuestionController extends GetxController {
   void navigateToHome() {
     if (quizModel.expGained = false) {
       // add link to adding exp here
+      ExpBar expBar = ExpBar(barwidth: 12);
+      expBar.addExperience(151);
       Get.offNamedUntil(HomeScreen.routeName, (route) => false);
     } else {
       Get.offNamedUntil(HomeScreen.routeName, (route) => false);

@@ -2,6 +2,7 @@ import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:fiservonboardingexp/util/mc_testing/module/module_screen.dart';
 import 'package:fiservonboardingexp/util/mc_testing/watch/video_player_widget.dart';
 import 'package:fiservonboardingexp/util/mc_testing/watch/watch_tasks_container.dart';
+import 'package:fiservonboardingexp/widgets/exp_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -171,19 +172,21 @@ class _VideoPlayerState extends State<VideoPlayer> {
                       },
                     );
                     if (confirm == true) {
-                      int currentEXP = await userColRef
-                          .doc(currentUser.uid)
-                          .get()
-                          .then((doc) {
-                        if (doc.exists) {
-                          return doc.data()!['EXP'] ?? 0;
-                        } else {
-                          return 0;
-                        }
-                      });
-                      await userColRef
-                          .doc(currentUser.uid)
-                          .update({'EXP': currentEXP + 25});
+                      ExpBar expBar = const ExpBar(barwidth: 1);
+                      expBar.addExperience(25);
+                      // int currentEXP = await userColRef
+                      //     .doc(currentUser.uid)
+                      //     .get()
+                      //     .then((doc) {
+                      //   if (doc.exists) {
+                      //     return doc.data()!['EXP'] ?? 0;
+                      //   } else {
+                      //     return 0;
+                      //   }
+                      // });
+                      // await userColRef
+                      //     .doc(currentUser.uid)
+                      //     .update({'EXP': currentEXP + 25});
                       final querySnapshot = await userColRef
                           .doc(currentUser.uid)
                           .collection('Tasks')
