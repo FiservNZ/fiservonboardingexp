@@ -1,0 +1,95 @@
+{
+    "id": "compliance_quiz_2",
+    "title": "Compliance 2",
+    "image_url": "",
+    "description": "This is a quiz on general compliance",
+    "quiz_duration": 60,
+    "questions":[
+        {
+            "id": "1",
+            "question": "",
+            "options": [
+                {
+                    "identifier": "1",
+                    "answer": ""
+                },
+                {
+                    "identifier": "2",
+                    "answer": ""
+                },
+                {
+                    "identifier": "3",
+                    "answer": ""
+                },
+                {
+                    "identifier": "4",
+                    "answer": ""
+                }
+            ],
+            "correct_answer": ""
+        },
+        {
+            "id": "2",
+            "question": "TRUE or FALSE: ",
+            "options": [
+                {
+                    "identifier": "TRUE",
+                    "answer": ""
+                },
+                {
+                    "identifier": "FALSE",
+                    "answer": ""
+                }
+                
+            ],
+            "correct_answer": ""
+        },
+        {
+            "id": "3",
+            "question": "",
+            "options": [
+                {
+                    "identifier": "1",
+                    "answer": ""
+                },
+                {
+                    "identifier": "2",
+                    "answer": ""
+                },
+                {
+                    "identifier": "3",
+                    "answer": ""
+                },
+                {
+                    "identifier": "4",
+                    "answer": ""
+                }    
+            ],
+            "correct_answer": ""
+        },
+        {
+            "id": "4",
+            "question": "",
+            "options": [
+                {
+                    "identifier": "1",
+                    "answer": ""
+                },
+                {
+                    "identifier": "2",
+                    "answer": ""
+                },
+                {
+                    "identifier": "3",
+                    "answer": ""
+                },
+                {
+                    "identifier": "4",
+                    "answer": ""
+                }    
+            ],
+            "correct_answer": ""
+        }
+        
+    ]
+}
