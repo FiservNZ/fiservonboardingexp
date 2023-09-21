@@ -27,7 +27,7 @@ class IntroductionScreen extends StatelessWidget {
               ),
               const SizedBox(height: 40),
               AppCircleButton(
-                onTap: () => Get.offAndToNamed("/readHome"),
+                onTap: () => Get.offAndToNamed(ModuleScreen.routeName),
                 child: const Icon(
                   Icons.arrow_forward,
                   size: 35,

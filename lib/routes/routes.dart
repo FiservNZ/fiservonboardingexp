@@ -54,12 +54,12 @@ class FiservAppRoutes {
           name: "/profile",
           page: () => const ProfilePage(),
         ),
-        GetPage(
-            name: ReadPage.routeName,
-            page: () => const ReadPage(),
-            binding: BindingsBuilder(() {
-              Get.put(ReadController());
-            })),
+        // GetPage(
+        //     name: ReadPage.routeName,
+        //     page: () => const ReadPage(),
+        //     binding: BindingsBuilder(() {
+        //       Get.put(ReadController());
+        //     })),
 
         // GetPage(
         //     name: QuizQuestionScreen.routeName,

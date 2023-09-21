@@ -1,3 +1,5 @@
+import 'package:fiservonboardingexp/screens/task%20pages/quiz%20screens/home_screen.dart';
+import 'package:fiservonboardingexp/screens/task%20pages/read_card_screen.dart';
 import 'package:fiservonboardingexp/screens/task%20pages/watch_card_screen.dart';
 import 'package:fiservonboardingexp/screens/task%20pages/watch_card.dart';
 import 'package:fiservonboardingexp/themes/theme_provider.dart';
@@ -60,7 +62,7 @@ class ModuleScreen extends StatelessWidget {
         // String route = title.replaceAll(" ", "");
         currentCategory = title;
         debugPrint('Route: $currentCategory');
-        Get.toNamed(WatchHomeScreen.routeName, arguments: currentCategory);
+        Get.toNamed(ReadHomeScreen.routeName, arguments: currentCategory);
         //Get.to(WatchTasksContainer(watchCategory: currentCategory));
       },
       child: Container(
