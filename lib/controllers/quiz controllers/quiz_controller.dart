@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
+import 'package:fiservonboardingexp/util/mc_testing/module/module_screen.dart';
 import 'package:fiservonboardingexp/widgets/quiz%20widgets/quiz_info_square.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -70,15 +71,19 @@ class QuizController extends GetxController {
   void navigateToQuestions({required QuizModel quiz}) {
     // AuthController authController = Get.find();
 
-    showPopupAlertDialog(quizModel: quiz);
+    showPopupAlertDialog(quizModel: quiz, categoryName: categoryName);
     //Get.toNamed(QuizQuestionScreen.routeName, arguments: quiz);
   }
 }
 
-void showPopupAlertDialog({required QuizModel quizModel}) {
+void showPopupAlertDialog({
+  required QuizModel quizModel,
+  required String categoryName,
+}) {
   Get.dialog(
       showPopup(
           onTapStart: () {
+            debugPrint('Current Category: $categoryName');
             Get.toNamed(QuestionScreen.routeName, arguments: quizModel);
             //Naviagte to Quiz Page
           },
@@ -113,7 +118,7 @@ Widget showPopup(
           Text(
             quizModel.title,
             style: GoogleFonts.quicksand(
-                fontSize: 25, fontWeight: FontWeight.bold, color: fiservColor),
+                fontSize: 21, fontWeight: FontWeight.bold, color: fiservColor),
           ),
           const SizedBox(height: 10),
           Row(
@@ -123,7 +128,9 @@ Widget showPopup(
                   padding: const EdgeInsets.all(5.0),
                   child: QuizInfoSquare(
                       icon: Icons.question_mark_rounded,
-                      text: '${quizModel.questionCount} questions')),
+                      text: quizModel.questionCount == 1
+                          ? '${quizModel.questionCount} Question'
+                          : '${quizModel.questionCount} Questions')),
               Padding(
                   padding: const EdgeInsets.all(5.0),
                   child: QuizInfoSquare(
