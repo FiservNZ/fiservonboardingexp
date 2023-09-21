@@ -1,19 +1,18 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fiservonboardingexp/themes/theme_provider.dart';
-import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-
 import '../firebase references/firebase_refs.dart';
 import 'package:provider/provider.dart';
 
+// yellow squig Class Name
 class ChecklistTile extends StatelessWidget {
   final Map<String, dynamic> task;
   Function(bool?)? onChanged;
   final FirebaseFirestore firestore;
 
   ChecklistTile({
+    super.key,
     required this.task,
     required this.onChanged,
     required this.firestore,
@@ -31,7 +30,7 @@ class ChecklistTile extends StatelessWidget {
       child: Container(
         padding: const EdgeInsets.all(15),
         decoration: BoxDecoration(
-          color: selectedTheme.colorScheme.background,
+          color: selectedTheme.colorScheme.onBackground,
           borderRadius: BorderRadius.circular(12),
         ),
         child: Row(
@@ -51,10 +50,7 @@ class ChecklistTile extends StatelessWidget {
                       .doc('List')
                       .update({task['taskName']: value}).then((_) {
                     onChanged?.call(value);
-                  }).catchError((error) {
-                    print(
-                        "Error updating Firestore: $error"); // Error Handling but idk too much about it tbh
-                  });
+                  }).catchError((error) {});
                 },
                 activeColor: selectedTheme
                     .colorScheme.secondary, // Checkbox checked colour HERE

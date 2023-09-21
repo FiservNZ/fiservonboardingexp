@@ -34,7 +34,7 @@ class AchievementTracker extends StatelessWidget {
                 Container(
                   width: 175,
                   decoration: BoxDecoration(
-                    color: Color.fromARGB(255, 66, 54, 133),
+                    color: const Color.fromARGB(255, 66, 54, 133),
                     borderRadius: BorderRadius.circular(10),
                   ),
                   child: Row(

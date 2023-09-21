@@ -2,14 +2,11 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:fiservonboardingexp/widgets/app_bar_overlay.dart';
-import 'package:fiservonboardingexp/idk/nav_app_overlay.dart';
 import 'package:fiservonboardingexp/util/checklist_tile.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../widgets/nav_bar.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:firebase_core/firebase_core.dart';
-import '../main.dart';
 
 class ChecklistPage extends StatefulWidget {
   final FirebaseFirestore firestore;
@@ -59,9 +56,9 @@ class _ChecklistPageState extends State<ChecklistPage> {
     ThemeData selectedTheme = themeProvider.currentTheme;
 
     return Scaffold(
-      backgroundColor: selectedTheme.colorScheme.onBackground,
-      appBar: AppBarOverlay(),
-      bottomNavigationBar: CustomNavBar(),
+      backgroundColor: selectedTheme.colorScheme.background,
+      appBar: const AppBarOverlay(),
+      bottomNavigationBar: const CustomNavBar(),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,

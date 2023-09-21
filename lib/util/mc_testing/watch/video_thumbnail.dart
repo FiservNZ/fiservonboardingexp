@@ -40,11 +40,11 @@ class VideoThumbnail extends StatelessWidget {
           if (querySnapshot.docs.isNotEmpty) {
             final snapshot = querySnapshot.docs[0].data();
 
-            Get.to(VideoPlayer(
-              videoSource: snapshot['videoUrl'],
-              videoTitle: snapshot['videoTitle'],
-              videoDescription: snapshot['videoDescription'],
-            ));
+            // Get.to(VideoPlayer(
+            //   videoSource: snapshot['videoUrl'],
+            //   videoTitle: snapshot['videoTitle'],
+            //   videoDescription: snapshot['videoDescription'],
+            // ));
           }
         }).catchError((error) {
           debugPrint('ERROR: $error');

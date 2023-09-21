@@ -1,16 +1,15 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:fiservonboardingexp/model/watch_model.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:fiservonboardingexp/themes/quiz%20themes/ui_parameters.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import '../../../widgets/app_icon_text.dart';
-import '../../../controllers/quiz controllers/quiz_controller.dart';
-import '../../../model/quiz_model.dart';
+import '../../controllers/watch_controller.dart';
+import '../../widgets/app_icon_text.dart';
 
-class QuestionCard extends GetView<QuizController> {
-  final QuizModel model;
+class WatchCard extends GetView<WatchController> {
+  final WatchModel model;
 
-  const QuestionCard({super.key, required this.model});
+  const WatchCard({super.key, required this.model});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +21,7 @@ class QuestionCard extends GetView<QuizController> {
       child: InkWell(
         onTap: () {
           //print('${model.title}');
-          controller.navigateToQuestions(quiz: model);
+          controller.showPopupAlertDialog(watchModel: model);
         },
         child: Padding(
           padding: const EdgeInsets.all(padding),
@@ -56,7 +55,7 @@ class QuestionCard extends GetView<QuizController> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text(model.title,
+                        Text(model.videoTitle,
                             style: TextStyle(
                                 color: darkTextColor,
                                 // color: UIParameters.isDarkMode()
@@ -71,30 +70,11 @@ class QuestionCard extends GetView<QuizController> {
                           padding: const EdgeInsets.only(top: 10.0, bottom: 15),
                           child: Text(
                             //model.description,
-                            model.id,
+                            model.popUpDescription,
                             style: TextStyle(color: darkTextColor),
                           ),
                         ),
                         Row(children: [
-                          AppIconText(
-                            icon: Icon(
-                              Icons.help_outline_sharp,
-                              color: Get.isDarkMode
-                                  ? Colors.white
-                                  : Theme.of(context)
-                                      .primaryColor
-                                      .withOpacity(0.3),
-                            ),
-                            text: Text(
-                              '${model.questionCount} questions',
-                              style: TextStyle(
-                                  color: Get.isDarkMode
-                                      ? Colors.white
-                                      : Theme.of(context).primaryColor,
-                                  fontSize: 12),
-                            ),
-                          ),
-                          const SizedBox(width: 15),
                           AppIconText(
                             icon: Icon(
                               Icons.timer,
@@ -105,7 +85,8 @@ class QuestionCard extends GetView<QuizController> {
                                       .withOpacity(0.3),
                             ),
                             text: Text(
-                              model.timeConverter(),
+                              //model.timeConverter(),
+                              'time',
                               style: TextStyle(
                                   color: Get.isDarkMode
                                       ? Colors.white

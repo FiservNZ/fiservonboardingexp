@@ -1,16 +1,15 @@
-import 'package:cached_network_image/cached_network_image.dart';
+import 'package:fiservonboardingexp/controllers/read_controller.dart';
+import 'package:fiservonboardingexp/model/read_model.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:fiservonboardingexp/themes/quiz%20themes/ui_parameters.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import '../../../widgets/app_icon_text.dart';
-import '../../../controllers/quiz controllers/quiz_controller.dart';
-import '../../../model/quiz_model.dart';
 
-class QuestionCard extends GetView<QuizController> {
-  final QuizModel model;
+class ReadCard extends GetView<ReadController> {
+  final ReadModel model;
 
-  const QuestionCard({super.key, required this.model});
+  const ReadCard({super.key, required this.model});
 
   @override
   Widget build(BuildContext context) {
@@ -21,8 +20,9 @@ class QuestionCard extends GetView<QuizController> {
           color: darkTileColor /*Theme.of(context).cardColor*/),
       child: InkWell(
         onTap: () {
+          // Open a popup dialog when the card is tapped
           //print('${model.title}');
-          controller.navigateToQuestions(quiz: model);
+          controller.showPopupAlertDialog(readModel: model);
         },
         child: Padding(
           padding: const EdgeInsets.all(padding),
@@ -32,6 +32,7 @@ class QuestionCard extends GetView<QuizController> {
               Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  // Left side of the card containing an icon or image
                   ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: ColoredBox(
@@ -56,6 +57,7 @@ class QuestionCard extends GetView<QuizController> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
+                        // Title of the read task
                         Text(model.title,
                             style: TextStyle(
                                 color: darkTextColor,
@@ -69,32 +71,15 @@ class QuestionCard extends GetView<QuizController> {
                                 fontWeight: FontWeight.bold)),
                         Padding(
                           padding: const EdgeInsets.only(top: 10.0, bottom: 15),
+
+                          // Description of the read task
                           child: Text(
-                            //model.description,
-                            model.id,
+                            model.description,
                             style: TextStyle(color: darkTextColor),
                           ),
                         ),
                         Row(children: [
-                          AppIconText(
-                            icon: Icon(
-                              Icons.help_outline_sharp,
-                              color: Get.isDarkMode
-                                  ? Colors.white
-                                  : Theme.of(context)
-                                      .primaryColor
-                                      .withOpacity(0.3),
-                            ),
-                            text: Text(
-                              '${model.questionCount} questions',
-                              style: TextStyle(
-                                  color: Get.isDarkMode
-                                      ? Colors.white
-                                      : Theme.of(context).primaryColor,
-                                  fontSize: 12),
-                            ),
-                          ),
-                          const SizedBox(width: 15),
+                          // Icon representing time, followed by text
                           AppIconText(
                             icon: Icon(
                               Icons.timer,
@@ -105,7 +90,8 @@ class QuestionCard extends GetView<QuizController> {
                                       .withOpacity(0.3),
                             ),
                             text: Text(
-                              model.timeConverter(),
+                              //model.timeConverter(),
+                              'time',
                               style: TextStyle(
                                   color: Get.isDarkMode
                                       ? Colors.white
@@ -119,6 +105,8 @@ class QuestionCard extends GetView<QuizController> {
                   )
                 ],
               ),
+
+              // Play button icon positioned at the bottom right corner
               Positioned(
                   bottom: -padding,
                   right: -padding,
@@ -126,12 +114,13 @@ class QuestionCard extends GetView<QuizController> {
                     child: Container(
                       padding: const EdgeInsets.symmetric(
                           vertical: 12, horizontal: 20),
-                      child: Icon(Icons.play_arrow_rounded, color: fiservColor),
                       decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 43, 42, 42),
+                          color: const Color.fromARGB(255, 43, 42, 42),
                           borderRadius: BorderRadius.only(
                               topLeft: Radius.circular(cardBorderPadding),
                               bottomRight: Radius.circular(cardBorderPadding))),
+                      child: const Icon(Icons.play_arrow_rounded,
+                          color: fiservColor),
                     ),
                   ))
             ],

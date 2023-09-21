@@ -5,8 +5,8 @@ import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 // Interacts with Firebase
-class FaqList extends StatelessWidget {
-  const FaqList({super.key});
+class HelpList extends StatelessWidget {
+  const HelpList({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -15,30 +15,30 @@ class FaqList extends StatelessWidget {
 
     // Changes in the FAQ collection in firestore
     return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance.collection('FAQ').snapshots(),
+      stream: FirebaseFirestore.instance.collection('Help').snapshots(),
       builder: (context, snapshot) {
         if (!snapshot.hasData) {
           // Loading animation while getting the FAQ questions and answers
           return const CircularProgressIndicator();
         }
 
-        final faqlist = snapshot.data!.docs;
+        final helpList = snapshot.data!.docs;
 
         return ListView.builder(
-          itemCount: faqlist.length,
+          itemCount: helpList.length,
           itemBuilder: (context, index) {
-            final data = faqlist[index].data() as Map<String, dynamic>;
+            final data = helpList[index].data() as Map<String, dynamic>;
 
             // Gets the question and answers from firestore data
-            final question = data['question'] as String? ?? 'No questions';
-            final answer = data['answer'] as String? ?? 'No answers';
+            final topic = data['topic'] as String? ?? 'No questions';
+            final description = data['description'] as String? ?? 'No answers';
 
             // The UI part of the FAQ List (Font, text size, text colour, alignment)
             return Padding(
               padding: const EdgeInsets.fromLTRB(0, 7, 0, 7),
               child: ExpansionTile(
                 title: Text(
-                  question,
+                  topic,
                   style: GoogleFonts.quicksand(
                     textStyle: TextStyle(
                       color:
@@ -52,7 +52,7 @@ class FaqList extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.all(14.0),
                     child: Text(
-                      answer,
+                      description,
                       style: GoogleFonts.quicksand(
                         textStyle: TextStyle(
                           color: selectedTheme
