@@ -41,19 +41,19 @@ class AppRoutes {
             Get.put(WatchController());
           }),
         ),
-        GetPage(
-            name: ReadPage.routeName,
-            page: () => ReadPage(),
-            binding: BindingsBuilder(() {
-              Get.put(ReadController());
-            })),
-        GetPage(
-          name: "/readHome",
-          page: () => ReadHomeScreen(),
-          binding: BindingsBuilder(() {
-            Get.put(ReadController());
-          }),
-        ),
+        // GetPage(
+        //     name: ReadPage.routeName,
+        //     page: () => ReadPage(),
+        //     binding: BindingsBuilder(() {
+        //       Get.put(ReadController());
+        //     })),
+        // GetPage(
+        //   name: "/readHome",
+        //   page: () => ReadHomeScreen(),
+        //   binding: BindingsBuilder(() {
+        //     Get.put(ReadController());
+        //   }),
+        // ),
 
         //idk how to link the screen in the routes
         // GetPage(
