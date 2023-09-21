@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fiservonboardingexp/controllers/quiz%20controllers/auth_controller.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:fiservonboardingexp/widgets/quiz%20widgets/quiz_info_square.dart';
 import 'package:flutter/material.dart';
@@ -51,7 +52,7 @@ class QuizController extends GetxController {
       // }
       allQuizzes.assignAll(quizList);
     } catch (e) {
-      debugPrint(e as String?);
+      debugPrint(e.toString());
     }
   }
 
@@ -68,7 +69,7 @@ class QuizController extends GetxController {
   // }
 
   void navigateToQuestions({required QuizModel quiz}) {
-    // AuthController authController = Get.find();
+    AuthController authController = Get.find();
 
     showPopupAlertDialog(quizModel: quiz);
     //Get.toNamed(QuizQuestionScreen.routeName, arguments: quiz);
