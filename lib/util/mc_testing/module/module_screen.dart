@@ -19,7 +19,6 @@ class ModuleScreen extends StatelessWidget {
     return Scaffold(
       appBar: myAppBar,
       bottomNavigationBar: navBar,
-      //Change later to match theme selected.
       backgroundColor: selectedTheme.colorScheme.background,
       body: Center(
         child: Column(
@@ -59,6 +58,7 @@ class ModuleScreen extends StatelessWidget {
         currentCategory = title;
         debugPrint('Route: $currentCategory');
 
+        //Modify this to take into consideration other task types
         Get.to(WatchTasksContainer(watchCategory: currentCategory));
       },
       child: Container(
