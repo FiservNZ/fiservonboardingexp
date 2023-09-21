@@ -39,30 +39,7 @@ class MyApp extends StatelessWidget {
   }
 }
 
-
-
-// import 'package:cloud_firestore/cloud_firestore.dart';
-// import 'package:fiservonboardingexp/screens/menu%20drawer/feedback_page.dart';
-// import 'package:fiservonboardingexp/screens/home_page.dart';
-// import 'package:fiservonboardingexp/screens/login_page.dart';
-// import 'package:fiservonboardingexp/screens/main_screen.dart';
-// import 'package:fiservonboardingexp/themes/theme_provider.dart';
-// import 'package:fiservonboardingexp/controllers/check_user.dart';
-// import 'package:flutter/material.dart';
-// import 'package:firebase_core/firebase_core.dart';
-// import 'package:fiservonboardingexp/firebase%20references/firebase_options.dart';
-// import 'package:fiservonboardingexp/controllers/read_controller.dart';
-// import 'package:flutter/services.dart';
-// import 'package:get/get.dart';
-// import 'package:provider/provider.dart';
-
-// import 'controllers/quiz controllers/initial_bindings.dart';
-// import 'routes/quiz_test_routes.dart';
-// import 'routes/routes.dart';
-
-// //final FirebaseFirestore _firestore = FirebaseFirestore.instance;
-// int? initScreen;
-
+// // Routes to the read task page
 // void main() async {
 //   WidgetsFlutterBinding.ensureInitialized();
 //   await Firebase.initializeApp();
@@ -86,8 +63,11 @@ class MyApp extends StatelessWidget {
 //   Widget build(BuildContext context) {
 //     return GetMaterialApp(
 //       debugShowCheckedModeBanner: false,
+//       // Initial route is set to the readtask page
+//       initialRoute: '/read',
+//       //sets the initial route to homepage with read task button and progess bar
 //       //initialRoute: '/',
-//       getPages: AppRoutes.routes(),
+//       getPages: ReadRoutes.routes(),
 //     );
 //   }
 // }

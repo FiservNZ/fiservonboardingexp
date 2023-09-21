@@ -1,6 +1,3 @@
-import 'package:fiservonboardingexp/screens/menu%20drawer/help_page.dart';
-import 'package:fiservonboardingexp/screens/main_screen.dart';
-import 'package:flutter/services.dart';
 import 'teaser_page_1.dart';
 import 'teaser_page_2.dart';
 import 'teaser_page_3.dart';
@@ -11,11 +8,11 @@ class TeaserScreen extends StatefulWidget {
   const TeaserScreen({Key? key}) : super(key: key);
 
   @override
-  _TeaserScreenState createState() => _TeaserScreenState();
+  TeaserScreenState createState() => TeaserScreenState();
 }
 
-class _TeaserScreenState extends State<TeaserScreen> {
-  PageController _controller = PageController();
+class TeaserScreenState extends State<TeaserScreen> {
+  final PageController _controller = PageController();
   bool onLastPage = false;
 
   @override
@@ -31,7 +28,7 @@ class _TeaserScreenState extends State<TeaserScreen> {
             });
           },
           // Loads three teaser pages
-          children: [
+          children: const [
             TeaserPage1(),
             TeaserPage2(),
             TeaserPage3(),
@@ -39,7 +36,7 @@ class _TeaserScreenState extends State<TeaserScreen> {
         ),
         // Skip, done and next button implementation here
         Container(
-          alignment: Alignment(0, 0.75),
+          alignment: const Alignment(0, 0.75),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             // When the user presses skip, it directs the user to the last teaser page which is on page 2.

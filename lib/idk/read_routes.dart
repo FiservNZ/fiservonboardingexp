@@ -1,12 +1,14 @@
-import 'package:fiservonboardingexp/util/kt_testing/read_page.dart';
-import 'package:get/get.dart';
+// import 'package:fiservonboardingexp/controllers/read_controller.dart';
+// import 'package:fiservonboardingexp/screens/task pages/read_page.dart';
+// import 'package:fiservonboardingexp/idk/read_home_page.dart';
+// import 'package:get/get.dart';
 
-// class Routes {
+// class ReadRoutes {
 //   static List<GetPage> routes() {
 //     return [
 //       GetPage(
 //         name: "/",
-//         page: () => const ReadHomePage(),
+//         page: () => ReadHomePage(),
 //       ),
 //       // Add the 'read' route
 //       GetPage(

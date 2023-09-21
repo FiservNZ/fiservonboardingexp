@@ -21,8 +21,8 @@ class QuizInfoSquare extends StatelessWidget {
             border: Border.all(color: fiservColor),
             color: Colors.transparent),
         child: SizedBox(
-          width: 80,
-          height: 70,
+          width: 70,
+          height: 60,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [

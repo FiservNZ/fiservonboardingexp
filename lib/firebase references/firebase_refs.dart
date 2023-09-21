@@ -1,19 +1,40 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fiservonboardingexp/controllers/check_user.dart';
+import 'package:fiservonboardingexp/model/task_category_model.dart';
 //import 'package:firebase_core/firebase_core.dart';
 
 // create firebase instance
 final firestore = FirebaseFirestore.instance;
 
 final fireAuth = FirebaseAuth.instance;
+// file is not able to correctly pull the user state with this
 final currentUser = fireAuth.currentUser!;
-
+// final currentUpdatedUser = FirebaseAuth.instance.currentUser;
 // reference to the User collection in the Firestore database
 final userColRef = firestore.collection('User');
 
+String uid = fireAuth.currentUser!.uid;
+
+final userDocRef = userColRef.doc(uid);
+
+final tasksCollectionRef = userDocRef.collection('Tasks');
+final complianceRef = tasksCollectionRef.doc('Compliance');
+final complianceQuiz = complianceRef.collection('Quiz');
+final orientationRef = tasksCollectionRef.doc('Orientation');
+final orientationQuiz = orientationRef.collection('Quiz');
+final healthSafetyRef = tasksCollectionRef.doc('Health & Safety');
+final healthSafetyQuiz = healthSafetyRef.collection('Quiz');
+final customsCultureRef = tasksCollectionRef.doc('Customs & Culture');
+final customsCultureQuiz = customsCultureRef.collection('Quiz');
+
+
+final achievementsCollectionRef = userDocRef.collection('Achievements');
+final checklistCollectionRef = userDocRef.collection('General Checklist');
+
 // references user document
 DocumentReference userRef({
-  // userId is the unique identifier of the "document"
+// userId is the unique identifier of the "document"
   required String userId,
 }) =>
     userColRef.doc(userId);
@@ -44,14 +65,13 @@ DocumentReference taskTypeRef({
 
 // Used for the current fuctionality of the tasks
 final readref = firestore.collection('Read');
-
 DocumentReference readRef({
   required String readId,
 }) =>
     readref.doc(readId);
+
 // reference to the Quizzes collection in the Firestore database
 final quizref = firestore.collection('Quizzes');
-
 DocumentReference questionRef({
   required String quizId,
   required String questionId,

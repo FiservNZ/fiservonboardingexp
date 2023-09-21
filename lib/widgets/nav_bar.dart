@@ -1,10 +1,11 @@
 import 'package:fiservonboardingexp/screens/achievements_page.dart';
 import 'package:fiservonboardingexp/screens/colleagues_page.dart';
 import 'package:fiservonboardingexp/screens/home_page.dart';
-import 'package:fiservonboardingexp/screens/training_page.dart';
+import 'package:fiservonboardingexp/idk/training_page.dart';
 import 'package:fiservonboardingexp/screens/checklist_page.dart';
 import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
+import 'package:fiservonboardingexp/util/mc_testing/module/module_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -32,7 +33,7 @@ class CustomNavBar extends StatelessWidget {
             break;
           // Directs user to Training Page
           case 1:
-            Navigator.push(context, _instantPageRoute(const TrainingPage()));
+            Navigator.push(context, _instantPageRoute(const ModuleScreen()));
             break;
           // Directs user to the General Checklist Page
           case 2:

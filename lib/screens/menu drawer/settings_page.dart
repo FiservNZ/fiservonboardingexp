@@ -1,4 +1,3 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fiservonboardingexp/screens/menu%20drawer/change_password_page.dart';
 import 'package:fiservonboardingexp/screens/login_page.dart';
@@ -14,13 +13,13 @@ import 'package:fiservonboardingexp/themes/light_theme.dart';
 import 'package:fiservonboardingexp/widgets/nav_bar.dart';
 
 class SettingsPage extends StatefulWidget {
-  SettingsPage({Key? key}) : super(key: key);
+  const SettingsPage({Key? key}) : super(key: key);
 
   @override
-  _SettingsPageState createState() => _SettingsPageState();
+  SettingsPageState createState() => SettingsPageState();
 }
 
-class _SettingsPageState extends State<SettingsPage> {
+class SettingsPageState extends State<SettingsPage> {
   final ThemeDatabase _firebaseTheme = ThemeDatabase();
 
   void _handleThemeChange(ThemeData theme, ThemeProvider themeProvider) {
@@ -37,12 +36,15 @@ class _SettingsPageState extends State<SettingsPage> {
   double iconTxtSpacing = 30;
   double listSpacing = 30;
 
+  final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
     ThemeData selectedTheme = themeProvider.currentTheme;
 
     return Scaffold(
+      key: _scaffoldKey, // Set the GlobalKey<ScaffoldState>
       backgroundColor: selectedTheme.colorScheme.background,
       appBar: const AppBarOverlay(),
       bottomNavigationBar: const CustomNavBar(),
@@ -105,7 +107,7 @@ class _SettingsPageState extends State<SettingsPage> {
               child: GestureDetector(
                 onTap: () {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return ThemesPage();
+                    return const ThemesPage();
                   }));
                 },
                 child: Row(
@@ -167,7 +169,9 @@ class _SettingsPageState extends State<SettingsPage> {
               child: GestureDetector(
                 onTap: () async {
                   await FirebaseAuth.instance.signOut();
-                  Navigator.of(context, rootNavigator: true).pushAndRemoveUntil(
+                  Navigator.of(_scaffoldKey.currentContext!,
+                          rootNavigator: true)
+                      .pushAndRemoveUntil(
                     MaterialPageRoute(
                       builder: (BuildContext context) {
                         return LoginPage();
@@ -181,10 +185,10 @@ class _SettingsPageState extends State<SettingsPage> {
                     Icon(Icons.logout,
                         color: selectedTheme.colorScheme.primary),
                     SizedBox(
-                        width:
-                            iconTxtSpacing), // Add some spacing between icon and text
+                      width: iconTxtSpacing,
+                    ),
                     Text(
-                      'Logout',
+                      'Log Out',
                       style: TextStyle(
                         color: selectedTheme.colorScheme.primary,
                         fontSize: 18,

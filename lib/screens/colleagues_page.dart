@@ -12,11 +12,11 @@ class ColleaguesPage extends StatefulWidget {
   const ColleaguesPage({Key? key}) : super(key: key);
 
   @override
-  _ColleaguesPageState createState() => _ColleaguesPageState();
+  ColleaguesPageState createState() => ColleaguesPageState();
 }
 
 // List of colleagues and details written in here
-class _ColleaguesPageState extends State<ColleaguesPage> {
+class ColleaguesPageState extends State<ColleaguesPage> {
   List<Colleagues> colleagues = [
     Colleagues(
       name: 'IT Support',
@@ -59,7 +59,7 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
       bottomNavigationBar: const CustomNavBar(),
       backgroundColor: selectedTheme.colorScheme.background,
       body: Padding(
-        padding: EdgeInsets.all(16),
+        padding: const EdgeInsets.all(16),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -87,11 +87,11 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
                     // Colleagues icon set to the person icon by default
                     leading: CircleAvatar(
                       radius: 22,
+                      backgroundColor: selectedTheme.colorScheme.secondary,
                       child: Icon(
                         Icons.person,
                         color: selectedTheme.colorScheme.primary,
                       ),
-                      backgroundColor: selectedTheme.colorScheme.secondary,
                     ),
                     // UI for Colleague Name here
                     title: Text(
@@ -264,7 +264,6 @@ class _ColleaguesPageState extends State<ColleaguesPage> {
 // Implementation to launch default gmail/mail application on device
   void _launchEmail(String email) async {
     String subject = Uri.encodeComponent("Query");
-    print(subject);
     Uri mail = Uri.parse("mailto:$email?subject=$subject");
     if (await launchUrl(mail)) {
       //email app opened

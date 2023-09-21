@@ -39,7 +39,7 @@ class IncompletedAchievement extends StatelessWidget {
 
           return Column(
             children: [
-              Container(
+              SizedBox(
                 width: 400,
                 height: 350,
                 // color: Colors.red,

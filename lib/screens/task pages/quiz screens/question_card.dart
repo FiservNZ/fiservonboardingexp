@@ -1,11 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:fiservonboardingexp/themes/quiz%20themes/ui_parameters.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
-
 import '../../../widgets/app_icon_text.dart';
 import '../../../controllers/quiz controllers/quiz_controller.dart';
 import '../../../model/quiz_model.dart';
@@ -42,15 +39,15 @@ class QuestionCard extends GetView<QuizController> {
                       child: SizedBox(
                         height: Get.width * 0.15,
                         width: Get.width * 0.15,
-                        child: CachedNetworkImage(
-                          imageUrl: model.imageUrl!,
-                          placeholder: (context, url) => Container(
-                            alignment: Alignment.center,
-                            child: const CircularProgressIndicator(),
-                          ),
-                          errorWidget: (context, url, error) =>
-                              Image.asset("assets/images/Fiserv_logo.png"),
-                        ),
+                        // child: CachedNetworkImage(
+                        //   imageUrl: model.imageUrl!,
+                        //   placeholder: (context, url) => Container(
+                        //     alignment: Alignment.center,
+                        //     child: const CircularProgressIndicator(),
+                        //   ),
+                        //   errorWidget: (context, url, error) =>
+                        //       Image.asset("assets/images/Fiserv_logo.png"),
+                        // ),
                       ),
                     ),
                   ),
@@ -73,7 +70,8 @@ class QuestionCard extends GetView<QuizController> {
                         Padding(
                           padding: const EdgeInsets.only(top: 10.0, bottom: 15),
                           child: Text(
-                            model.description,
+                            //model.description,
+                            model.id,
                             style: TextStyle(color: darkTextColor),
                           ),
                         ),

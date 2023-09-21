@@ -1,13 +1,13 @@
 import 'package:fiservonboardingexp/themes/theme_provider.dart';
-import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:provider/provider.dart';
-import '../util/faq_item.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 // Interacts with Firebase
 class FaqList extends StatelessWidget {
+  const FaqList({super.key});
+
   @override
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);

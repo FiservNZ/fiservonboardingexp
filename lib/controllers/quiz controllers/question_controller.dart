@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fiservonboardingexp/controllers/quiz%20controllers/auth_controller.dart';
 import 'package:fiservonboardingexp/controllers/quiz%20controllers/extension_question_controller.dart';
 import 'package:fiservonboardingexp/controllers/quiz%20controllers/quiz_controller.dart';
+import 'package:fiservonboardingexp/util/mc_testing/module/module_screen.dart';
 import 'package:fiservonboardingexp/widgets/quiz%20widgets/loading_status.dart';
 import 'package:fiservonboardingexp/model/quiz_model.dart';
 import 'package:fiservonboardingexp/screens/task%20pages/quiz%20screens/home_screen.dart';
@@ -11,8 +12,10 @@ import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 import '../../firebase references/firebase_refs.dart';
+import '../../widgets/exp_bar.dart';
 
 class QuestionController extends GetxController {
+  late final String categoryName;
   final loadingStatus = LoadingStatus.loading.obs;
   late QuizModel quizModel;
   final allQuizQuestions = <Question>[];
@@ -23,10 +26,15 @@ class QuestionController extends GetxController {
 
   @override
   void onReady() {
+    categoryName = currentCategory;
+    debugPrint('QUESTION CONTROLLER BINDED');
+
     final quizQuestion = Get.arguments as QuizModel;
     // test to see if it can pull the question document id from the collection
     // print(quizQuestion.id);
+
     loadData(quizQuestion);
+
     super.onReady();
   }
 
@@ -37,8 +45,15 @@ class QuestionController extends GetxController {
 
     try {
       // Query the 'questions' collection for documents
-      final QuerySnapshot<Map<String, dynamic>> questionQuery =
-          await quizref.doc(quizQuestion.id).collection("questions").get();
+      final QuerySnapshot<Map<String, dynamic>> questionQuery = await firestore
+          .collection('User')
+          .doc(currentUser.uid)
+          .collection('Tasks')
+          .doc(categoryName)
+          .collection('Quiz')
+          .doc(quizQuestion.id)
+          .collection("questions")
+          .get();
 
       final questions = questionQuery.docs
           .map((snapshot) => Question.fromSnapshot(snapshot))
@@ -49,7 +64,12 @@ class QuestionController extends GetxController {
       //  iterates through each 'Question' object within the 'quizQuestion' object
       for (Question question in quizQuestion.questions!) {
         // queries Firestore for a collection of options associated with the current 'Question'
-        final QuerySnapshot<Map<String, dynamic>> optionQuery = await quizref
+        final QuerySnapshot<Map<String, dynamic>> optionQuery = await firestore
+            .collection('User')
+            .doc(currentUser.uid)
+            .collection('Tasks')
+            .doc(categoryName)
+            .collection('Quiz')
             .doc(quizQuestion.id)
             .collection("questions")
             .doc(question.id)
@@ -63,7 +83,8 @@ class QuestionController extends GetxController {
 
         // Assigns 'options' list to the question.options property
         question.options = options;
-
+        debugPrint('Got the questions and options!!!');
+        debugPrint('Number of Questions: ${questions.length}');
         // checks if quizQuestion.questions is not null and not empty before assigning them to 'allQuizQuestions' list
         if (quizQuestion.questions != null &&
             quizQuestion.questions!.isNotEmpty) {
@@ -71,6 +92,8 @@ class QuestionController extends GetxController {
           currentQuestion.value = quizQuestion.questions![0];
           //print(quizQuestion.questions![0]);
           loadingStatus.value = LoadingStatus.completed;
+          debugPrint(
+              'QUIZ QUESTION NOT NULL AND LOADING STATUS SET TO COMPLETED');
         } else {
           loadingStatus.value = LoadingStatus.error;
         }
@@ -121,13 +144,14 @@ class QuestionController extends GetxController {
   }
 
   void tryAgain() {
-    Get.find<QuizController>()
-        .navigateToQuestions(quiz: quizModel, tryAgain: true);
+    Get.find<QuizController>().navigateToQuestions(quiz: quizModel);
   }
 
   void navigateToHome() {
     if (quizModel.expGained = false) {
       // add link to adding exp here
+      ExpBar expBar = ExpBar(barwidth: 12);
+      expBar.addExperience(151);
       Get.offNamedUntil(HomeScreen.routeName, (route) => false);
     } else {
       Get.offNamedUntil(HomeScreen.routeName, (route) => false);
