@@ -1,12 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fiservonboardingexp/screens/task%20pages/read_page.dart';
 import 'package:fiservonboardingexp/themes/theme_provider.dart';
+import 'package:fiservonboardingexp/util/mc_testing/module/module_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-
+import 'package:fiservonboardingexp/controllers/read_controller.dart';
 import '../../../firebase references/firebase_refs.dart';
+import '../../../model/read_model.dart';
 
 class ReadThumbnail extends StatelessWidget {
   final String readTitle;
@@ -33,17 +35,28 @@ class ReadThumbnail extends StatelessWidget {
             .collection('Tasks')
             .doc(taskCategory)
             .collection('Read')
-            .where('title', isEqualTo: readTitle)
+            .where('title',
+                isEqualTo:
+                    readTitle) // Add this filter to fetch the specific quiz
             .get()
             .then((querySnapshot) {
           if (querySnapshot.docs.isNotEmpty) {
-            final snapshot = querySnapshot.docs[0].data();
-            //Implement later as I do not know where the task page is for read.
-            // Get.to(VideoPlayer(
-            //   videoSource: snapshot['videoUrl'],
-            //   videoTitle: snapshot['videoTitle'],
-            //   videoDescription: snapshot['videoDescription'],
-            // ));
+            QueryDocumentSnapshot doc = querySnapshot.docs.first;
+            String documentId = doc.id;
+            Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+
+            // Create a QuizModel instance using the retrieved data
+            ReadModel readModel = ReadModel(
+              id: documentId,
+              title: data['title'],
+              description: data['description'],
+              time: data['time'],
+              isDone: data['isDone'],
+              content: data['content'],
+              imageUrl: data['image_url'],
+            );
+            debugPrint("Document ID: $documentId");
+            Get.to(ReadPage(readModel: readModel));
           }
         }).catchError((error) {
           debugPrint('ERROR: $error');
