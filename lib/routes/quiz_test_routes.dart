@@ -7,7 +7,9 @@ import 'package:fiservonboardingexp/screens/task%20pages/quiz%20screens/splash/s
 import 'package:fiservonboardingexp/util/mc_testing/module/module_screen.dart';
 import 'package:get/get.dart';
 import '../controllers/quiz controllers/question_controller.dart';
+import '../controllers/quiz controllers/quiz_controller.dart';
 import '../controllers/read_controller.dart';
+import '../screens/task pages/quiz screens/home_screen.dart';
 import '../screens/task pages/quiz screens/introduction.dart';
 import '../screens/task pages/quiz screens/quiz_outcome_screen.dart';
 import '../screens/task pages/quiz screens/quiz_question_screen.dart';
@@ -23,6 +25,13 @@ class AppRoutes {
         GetPage(
           name: "/introduction",
           page: () => const IntroductionScreen(),
+        ),
+        GetPage(
+          name: "/home",
+          page: () => HomeScreen(),
+          binding: BindingsBuilder(() {
+            Get.put(QuizController());
+          }),
         ),
         GetPage(
           name: "/moduleScreen",

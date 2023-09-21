@@ -8,8 +8,9 @@ import 'package:fiservonboardingexp/model/task_category_model.dart';
 final firestore = FirebaseFirestore.instance;
 
 final fireAuth = FirebaseAuth.instance;
+// file is not able to correctly pull the user state with this
 final currentUser = fireAuth.currentUser!;
-
+// final currentUpdatedUser = FirebaseAuth.instance.currentUser;
 // reference to the User collection in the Firestore database
 final userColRef = firestore.collection('User');
 
@@ -33,7 +34,7 @@ final checklistCollectionRef = userDocRef.collection('General Checklist');
 
 // references user document
 DocumentReference userRef({
-  // userId is the unique identifier of the "document"
+// userId is the unique identifier of the "document"
   required String userId,
 }) =>
     userColRef.doc(userId);

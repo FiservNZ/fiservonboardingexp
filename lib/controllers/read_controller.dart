@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fiservonboardingexp/model/read_model.dart';
+import 'package:fiservonboardingexp/screens/task%20pages/read_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -41,7 +42,7 @@ class ReadController extends GetxController {
       //print("Number of documents fetched: ${data.docs.length}");
 
       final readList = data.docs.map((document) {
-        // Convert each document to a ReadModel.i
+        // Convert each document to a ReadModel
         return ReadModel(
           id: document.id,
           title: document['title'],
@@ -63,10 +64,11 @@ class ReadController extends GetxController {
   }
 
   void showPopupAlertDialog({required ReadModel readModel}) {
+    setSelectedIndex(allReadTasks.indexOf(readModel));
     Get.dialog(
         showPopup(
             onTapStart: () {
-              // Get.toNamed(VideoPlayer.routeName, arguments: watchModel);
+              Get.toNamed(ReadPage.routeName);
             },
             onTapCancel: () {
               Get.back();

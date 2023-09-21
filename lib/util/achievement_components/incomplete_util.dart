@@ -48,7 +48,7 @@ class IncompleteAchvState extends State<IncompleteAchv> {
             // ),
             ConstrainedBox(
               constraints: const BoxConstraints(
-                maxHeight: 150,
+                maxHeight: 160,
               ),
               child: ClipRRect(
                 borderRadius: const BorderRadius.only(
