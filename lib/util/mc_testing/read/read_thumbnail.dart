@@ -1,23 +1,25 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fiservonboardingexp/screens/task%20pages/read_page.dart';
 import 'package:fiservonboardingexp/themes/theme_provider.dart';
-import 'package:fiservonboardingexp/util/mc_testing/watch/video_player.dart';
+import 'package:fiservonboardingexp/util/mc_testing/module/module_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
-
+import 'package:fiservonboardingexp/controllers/read_controller.dart';
 import '../../../firebase references/firebase_refs.dart';
+import '../../../model/read_model.dart';
 
-class VideoThumbnail extends StatelessWidget {
-  final String videoUrl;
-  final String videoTitle;
+class ReadThumbnail extends StatelessWidget {
+  final String readTitle;
+  final String readDescription;
   final String taskCategory;
 
-  const VideoThumbnail({
+  const ReadThumbnail({
     super.key,
-    required this.videoTitle,
+    required this.readTitle,
     required this.taskCategory,
-    required this.videoUrl,
+    required this.readDescription,
   });
 
   @override
@@ -26,25 +28,35 @@ class VideoThumbnail extends StatelessWidget {
     ThemeData selectedTheme = themeProvider.currentTheme;
     return GestureDetector(
       onTap: () {
-        debugPrint('Video Tapped');
+        debugPrint('Read Tapped!\nTitle: $readTitle');
         FirebaseFirestore.instance
             .collection('User')
             .doc(currentUser.uid)
             .collection('Tasks')
             .doc(taskCategory)
-            .collection('Watch')
-            .where('videoUrl',
-                isEqualTo: videoUrl) // Match based on the local variable
+            .collection('Read')
+            .where('title',
+                isEqualTo:
+                    readTitle) // Add this filter to fetch the specific quiz
             .get()
             .then((querySnapshot) {
           if (querySnapshot.docs.isNotEmpty) {
-            final snapshot = querySnapshot.docs[0].data();
+            QueryDocumentSnapshot doc = querySnapshot.docs.first;
+            String documentId = doc.id;
+            Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
 
-            Get.to(VideoPlayer(
-              videoSource: snapshot['videoUrl'],
-              videoTitle: snapshot['videoTitle'],
-              videoDescription: snapshot['videoDescription'],
-            ));
+            // Create a QuizModel instance using the retrieved data
+            ReadModel readModel = ReadModel(
+              id: documentId,
+              title: data['title'],
+              description: data['description'],
+              time: data['time'],
+              isDone: data['isDone'],
+              content: data['content'],
+              imageUrl: data['image_url'],
+            );
+            debugPrint("Document ID: $documentId");
+            Get.to(ReadPage(readModel: readModel));
           }
         }).catchError((error) {
           debugPrint('ERROR: $error');
@@ -66,7 +78,7 @@ class VideoThumbnail extends StatelessWidget {
                 borderRadius: BorderRadius.circular(5),
                 image: const DecorationImage(
                   image: AssetImage(
-                    'assets/icon/video_thumbnail_icon.png',
+                    'assets/icon/read_thumbnail_icon.png',
                   ),
                 ),
               ),
@@ -75,7 +87,7 @@ class VideoThumbnail extends StatelessWidget {
             Column(
               children: [
                 Text(
-                  videoTitle,
+                  readTitle,
                   style: TextStyle(
                     color: selectedTheme.colorScheme.secondary,
                     fontSize: 16,
@@ -84,10 +96,10 @@ class VideoThumbnail extends StatelessWidget {
                 ),
                 const SizedBox(height: 10),
                 Text(
-                  'Category: $taskCategory',
+                  'Description: $readDescription',
                   style: TextStyle(
                     color: selectedTheme.colorScheme.primary,
-                    fontSize: 14,
+                    fontSize: 12,
                     fontWeight: FontWeight.bold,
                   ).merge(GoogleFonts.quicksand()),
                 ),

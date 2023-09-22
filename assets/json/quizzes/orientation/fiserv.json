@@ -1,0 +1,95 @@
+{
+    "id": "orientation_quiz_1",
+    "title": "Our Company",
+    "image_url": "",
+    "description": "This is a quick quiz on the company",
+    "quiz_duration": 60,
+    "questions":[
+        {
+            "id": "1",
+            "question": "What of the following is NOT a primary focus of Fiserv",
+            "options": [
+                {
+                    "identifier": "1",
+                    "answer": "Payment Processing"
+                },
+                {
+                    "identifier": "2",
+                    "answer": "Digital Banking solutions"
+                },
+                {
+                    "identifier": "3",
+                    "answer": "Renewable Energy"
+                },
+                {
+                    "identifier": "4",
+                    "answer": "Wealth Management"
+                }
+            ],
+            "correct_answer": "3"
+        },
+        {
+            "id": "2",
+            "question": "TRUE or FALSE: Fiserv is one of the largest providers of financial technology in the world",
+            "options": [
+                {
+                    "identifier": "TRUE",
+                    "answer": ""
+                },
+                {
+                    "identifier": "FALSE",
+                    "answer": ""
+                }
+                
+            ],
+            "correct_answer": "TRUE"
+        },
+        {
+            "id": "3",
+            "question": "In 2020 Fiserv acquired which major financial company?",
+            "options": [
+                {
+                    "identifier": "1",
+                    "answer": "Paypal"
+                },
+                {
+                    "identifier": "2",
+                    "answer": "First Data"
+                },
+                {
+                    "identifier": "3",
+                    "answer": "Square"
+                },
+                {
+                    "identifier": "4",
+                    "answer": "Stripe"
+                }    
+            ],
+            "correct_answer": "2"
+        },
+        {
+            "id": "4",
+            "question": "What are the company principles?",
+            "options": [
+                {
+                    "identifier": "1",
+                    "answer": "Honesty, Integrity, Intelligence"
+                },
+                {
+                    "identifier": "2",
+                    "answer": "Earn client trust every day, Create with purpose, Inspire and achieve excellence, Do the right thing, Deliver on the promise of one Fiserv"
+                },
+                {
+                    "identifier": "3",
+                    "answer": ""
+                },
+                {
+                    "identifier": "4",
+                    "answer": ""
+                }    
+            ],
+            "correct_answer": "2"
+        }
+        
+    ]
+}

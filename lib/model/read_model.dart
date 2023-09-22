@@ -3,7 +3,8 @@ class ReadModel {
   final String title;
   final String description;
   final String content;
-  final int time;
+  final String time;
+  String? imageUrl;
   bool isDone;
 
   ReadModel({
@@ -13,5 +14,6 @@ class ReadModel {
     required this.content,
     required this.time,
     required this.isDone,
+    required this.imageUrl,
   });
 }

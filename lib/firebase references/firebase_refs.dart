@@ -19,6 +19,15 @@ String uid = fireAuth.currentUser!.uid;
 final userDocRef = userColRef.doc(uid);
 
 final tasksCollectionRef = userDocRef.collection('Tasks');
+final complianceRef = tasksCollectionRef.doc('Compliance');
+final complianceQuiz = complianceRef.collection('Quiz');
+final orientationRef = tasksCollectionRef.doc('Orientation');
+final orientationQuiz = orientationRef.collection('Quiz');
+final healthSafetyRef = tasksCollectionRef.doc('Health & Safety');
+final healthSafetyQuiz = healthSafetyRef.collection('Quiz');
+final customsCultureRef = tasksCollectionRef.doc('Customs & Culture');
+final customsCultureQuiz = customsCultureRef.collection('Quiz');
+
 
 final achievementsCollectionRef = userDocRef.collection('Achievements');
 final checklistCollectionRef = userDocRef.collection('General Checklist');

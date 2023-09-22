@@ -1,23 +1,26 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fiservonboardingexp/controllers/quiz%20controllers/quiz_controller.dart';
+import 'package:fiservonboardingexp/model/quiz_model.dart';
 import 'package:fiservonboardingexp/themes/theme_provider.dart';
-import 'package:fiservonboardingexp/util/mc_testing/watch/video_player.dart';
+import 'package:fiservonboardingexp/util/mc_testing/module/module_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 
 import '../../../firebase references/firebase_refs.dart';
+import '../../../screens/task pages/quiz screens/question_screen.dart';
 
-class VideoThumbnail extends StatelessWidget {
-  final String videoUrl;
-  final String videoTitle;
+class QuizThumbnail extends StatelessWidget {
+  final String quizTitle;
+  final String quizDescription;
   final String taskCategory;
 
-  const VideoThumbnail({
+  const QuizThumbnail({
     super.key,
-    required this.videoTitle,
+    required this.quizTitle,
     required this.taskCategory,
-    required this.videoUrl,
+    required this.quizDescription,
   });
 
   @override
@@ -26,25 +29,36 @@ class VideoThumbnail extends StatelessWidget {
     ThemeData selectedTheme = themeProvider.currentTheme;
     return GestureDetector(
       onTap: () {
-        debugPrint('Video Tapped');
+        debugPrint('Quiz Tapped!\nTitle: $quizTitle');
         FirebaseFirestore.instance
             .collection('User')
             .doc(currentUser.uid)
             .collection('Tasks')
             .doc(taskCategory)
-            .collection('Watch')
-            .where('videoUrl',
-                isEqualTo: videoUrl) // Match based on the local variable
+            .collection('Quiz')
+            .where('title',
+                isEqualTo:
+                    quizTitle) // Add this filter to fetch the specific quiz
             .get()
             .then((querySnapshot) {
           if (querySnapshot.docs.isNotEmpty) {
-            final snapshot = querySnapshot.docs[0].data();
+            QueryDocumentSnapshot doc = querySnapshot.docs.first;
+            String documentId = doc.id;
+            Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
 
-            Get.to(VideoPlayer(
-              videoSource: snapshot['videoUrl'],
-              videoTitle: snapshot['videoTitle'],
-              videoDescription: snapshot['videoDescription'],
-            ));
+            // Create a QuizModel instance using the retrieved data
+            QuizModel quizModel = QuizModel(
+              id: documentId,
+              title: data['title'],
+              description: data['description'],
+              quizDuration: data['quiz_duration'],
+              questionCount: data['question_count'],
+              exp: data['exp'],
+              expGained: data['expGained'],
+            );
+            debugPrint("Document ID: $documentId");
+            showPopupAlertDialog(
+                quizModel: quizModel, categoryName: currentCategory);
           }
         }).catchError((error) {
           debugPrint('ERROR: $error');
@@ -66,7 +80,7 @@ class VideoThumbnail extends StatelessWidget {
                 borderRadius: BorderRadius.circular(5),
                 image: const DecorationImage(
                   image: AssetImage(
-                    'assets/icon/video_thumbnail_icon.png',
+                    'assets/icon/quiz_thumbnail_icon.png',
                   ),
                 ),
               ),
@@ -75,7 +89,7 @@ class VideoThumbnail extends StatelessWidget {
             Column(
               children: [
                 Text(
-                  videoTitle,
+                  quizTitle,
                   style: TextStyle(
                     color: selectedTheme.colorScheme.secondary,
                     fontSize: 16,
@@ -84,10 +98,10 @@ class VideoThumbnail extends StatelessWidget {
                 ),
                 const SizedBox(height: 10),
                 Text(
-                  'Category: $taskCategory',
+                  'Description: $quizDescription',
                   style: TextStyle(
                     color: selectedTheme.colorScheme.primary,
-                    fontSize: 14,
+                    fontSize: 12,
                     fontWeight: FontWeight.bold,
                   ).merge(GoogleFonts.quicksand()),
                 ),
