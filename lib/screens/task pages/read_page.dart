@@ -1,4 +1,3 @@
-import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:fiservonboardingexp/util/mc_testing/module/module_screen.dart';
 import 'package:fiservonboardingexp/util/mc_testing/watch/watch_tasks_container.dart';
@@ -6,10 +5,6 @@ import 'package:fiservonboardingexp/widgets/exp_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
-import '../../controllers/read_controller.dart';
-import 'package:fiservonboardingexp/util/progress_bar_testing/progress_bar.dart';
-
 import '../../firebase references/firebase_refs.dart';
 import '../../model/read_model.dart';
 
@@ -53,7 +48,7 @@ class ReadPage extends StatelessWidget {
 
           // Image (from local assets folder not firebase). Needs to be changed as its hard coded.
           Padding(
-            padding: EdgeInsets.all(40.0),
+            padding: const EdgeInsets.all(40.0),
             // child: Image(image: AssetImage('assets/images/Read.jpg')),
             child: readModel.imageUrl != ""
                 ? Image.network(readModel.imageUrl!)

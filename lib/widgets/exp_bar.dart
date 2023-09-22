@@ -114,7 +114,7 @@ class ExpBar extends StatelessWidget {
                     child: LinearProgressIndicator(
                       value: currentEXP / maxEXP,
                       valueColor: AlwaysStoppedAnimation<Color>(
-                        selectedTheme.colorScheme.secondary,
+                        selectedTheme.colorScheme.primary,
                       ),
                       backgroundColor: const Color.fromARGB(255, 190, 188, 184),
                     ),

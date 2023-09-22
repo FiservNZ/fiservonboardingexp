@@ -13,7 +13,9 @@ final ThemeData darkTheme = ThemeData(
     onBackground: darkTileColor, // Tiles.
     tertiary: darkBars, // App/nav bars.
     primary: darkTextColor, // Main text colour.
-    secondary: fiservColor,
-    onTertiary: Colors.white, // Headings.
+    secondary: fiservColor, // Headings.
+    onTertiary: Colors.white,
+    surface: const Color.fromARGB(
+        255, 167, 166, 166), // Progress indicator background
   ),
 );

@@ -12,5 +12,7 @@ final ThemeData rainforestTheme = ThemeData(
     primary: Color.fromARGB(255, 9, 70, 34), // Main text colour
     secondary: Color(0xFF241a16), // Headings
     onTertiary: Colors.white,
+    surface:
+        Color.fromARGB(255, 167, 166, 166), // Progress indicator background
   ),
 );
