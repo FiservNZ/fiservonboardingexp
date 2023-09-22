@@ -24,9 +24,7 @@ class ReadPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-    ThemeData selectedTheme = themeProvider.currentTheme;
-
+    ThemeData selectedTheme = getSelectedTheme(context);
     return Scaffold(
       backgroundColor: selectedTheme.colorScheme.background,
       appBar: myAppBar,

@@ -35,7 +35,6 @@ class ThemesPageState extends State<ThemesPage> {
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
     ThemeData selectedTheme = themeProvider.currentTheme;
-
     return Scaffold(
       backgroundColor: selectedTheme.colorScheme.background,
       appBar: myAppBar,

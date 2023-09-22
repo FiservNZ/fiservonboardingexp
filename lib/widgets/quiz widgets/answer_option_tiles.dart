@@ -30,8 +30,8 @@ class AnswerOptionTiles extends StatelessWidget {
         decoration: BoxDecoration(
             borderRadius: UIParameters.cardBorderRadius,
             color: isSelected
-                ? selectedTheme.colorScheme.onBackground
-                : selectedTheme.colorScheme.background,
+                ? selectedTheme.colorScheme.tertiary
+                : selectedTheme.colorScheme.onBackground,
             border: Border.all(
                 color: isSelected
                     ? selectedTheme.colorScheme.secondary
@@ -45,7 +45,7 @@ class AnswerOptionTiles extends StatelessWidget {
                 style: GoogleFonts.quicksand(
                   color: isSelected
                       ? selectedTheme.colorScheme.primary
-                      : selectedTheme.colorScheme.tertiary,
+                      : selectedTheme.colorScheme.secondary,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -57,7 +57,7 @@ class AnswerOptionTiles extends StatelessWidget {
                 style: GoogleFonts.quicksand(
                   color: isSelected
                       ? selectedTheme.colorScheme.primary
-                      : selectedTheme.colorScheme.tertiary,
+                      : selectedTheme.colorScheme.secondary,
                   fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
                 ),
               ),

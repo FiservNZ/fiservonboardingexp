@@ -1,3 +1,4 @@
+import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
 
 // This class is used to create the
@@ -22,6 +23,7 @@ class IncompleteAchv extends StatefulWidget {
 class IncompleteAchvState extends State<IncompleteAchv> {
   @override
   Widget build(BuildContext context) {
+    ThemeData selectedTheme = getSelectedTheme(context);
     // TODO: implement build
     return Padding(
       padding: const EdgeInsets.all(5.0),
@@ -29,7 +31,7 @@ class IncompleteAchvState extends State<IncompleteAchv> {
         width: 300,
         height: 150,
         decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 30, 32, 67),
+          color: selectedTheme.colorScheme.onBackground,
           borderRadius: BorderRadius.circular(10.0),
         ),
         child: Column(
@@ -66,9 +68,9 @@ class IncompleteAchvState extends State<IncompleteAchv> {
             const SizedBox(height: 20),
             Text(
               widget.title,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 23,
-                color: Colors.white,
+                color: selectedTheme.colorScheme.primary,
                 fontWeight: FontWeight.bold,
               ),
               textAlign: TextAlign.center,
@@ -96,7 +98,7 @@ class IncompleteAchvState extends State<IncompleteAchv> {
                     " hours",
                     style: TextStyle(
                       fontSize: 16,
-                      color: Colors.white,
+                      color: selectedTheme.colorScheme.primary,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
@@ -106,9 +108,9 @@ class IncompleteAchvState extends State<IncompleteAchv> {
             const SizedBox(height: 30),
             Text(
               widget.isCompleted ? "Completed" : "InCompleted",
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 17,
-                color: Colors.white,
+                color: selectedTheme.colorScheme.primary,
                 fontWeight: FontWeight.bold,
               ),
             ),

@@ -13,12 +13,13 @@ class QuizInfoSquare extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThemeData selectedTheme = getSelectedTheme(context);
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: Container(
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: fiservColor),
+            border: Border.all(color: selectedTheme.colorScheme.secondary),
             color: Colors.transparent),
         child: SizedBox(
           width: 70,
@@ -26,12 +27,12 @@ class QuizInfoSquare extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Icon(icon, color: fiservColor),
+              Icon(icon, color: selectedTheme.colorScheme.secondary),
               const SizedBox(height: 5),
               Text(
                 text,
-                style:
-                    GoogleFonts.quicksand(fontSize: 12, color: darkTextColor),
+                style: GoogleFonts.quicksand(
+                    fontSize: 12, color: selectedTheme.colorScheme.secondary),
                 textAlign: TextAlign.center,
               ),
             ],

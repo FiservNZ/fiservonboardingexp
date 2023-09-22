@@ -1,7 +1,6 @@
-import 'package:fiservonboardingexp/themes/theme_provider.dart';
+import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import '../../firebase references/firebase_refs.dart';
 import '../../widgets/app_bar_overlay.dart';
 import '../../widgets/nav_bar.dart';
@@ -52,8 +51,7 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-    ThemeData selectedTheme = themeProvider.currentTheme;
+    ThemeData selectedTheme = getSelectedTheme(context);
 
     return Scaffold(
       backgroundColor: selectedTheme.colorScheme.background,

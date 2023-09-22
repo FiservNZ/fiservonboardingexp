@@ -1,6 +1,5 @@
-import 'package:fiservonboardingexp/themes/theme_provider.dart';
+import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 // This class creates a row of star icons for the user rating
 class StarRating extends StatefulWidget {
@@ -17,8 +16,7 @@ class StarRatingState extends State<StarRating> {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-    ThemeData selectedTheme = themeProvider.currentTheme;
+    ThemeData selectedTheme = getSelectedTheme(context);
 
     // Star rating system implementation here
     return Row(

@@ -51,9 +51,7 @@ class ColleaguesPageState extends State<ColleaguesPage> {
   // UI implementation of the colleagues page
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-    ThemeData selectedTheme = themeProvider.currentTheme;
-
+    ThemeData selectedTheme = getSelectedTheme(context);
     return Scaffold(
       appBar: myAppBar,
       bottomNavigationBar: const CustomNavBar(),
