@@ -50,7 +50,7 @@ class SettingsPageState extends State<SettingsPage> {
       bottomNavigationBar: const CustomNavBar(),
       body: SafeArea(
         child: Column(
-          children: <Widget>[
+          children: [
             // Heading
             Text(
               '\n Settings',
@@ -65,41 +65,42 @@ class SettingsPageState extends State<SettingsPage> {
             const SizedBox(
               height: 100,
             ),
-
-            // Light/Dark Mode Toggle
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: edgePadding),
-              child: Row(
-                children: <Widget>[
-                  Icon(Icons.lightbulb,
-                      color: selectedTheme.colorScheme.primary),
-                  SizedBox(
-                      width:
-                          iconTxtSpacing), // Add spacing between icon and text
-                  Text(
-                    'Dark/Light Mode',
-                    style: TextStyle(
-                      color: selectedTheme.colorScheme.primary,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ).merge(GoogleFonts.quicksand()),
+            Row(
+              children: [
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: edgePadding),
+                  child: Row(
+                    children: <Widget>[
+                      Icon(Icons.lightbulb,
+                          color: selectedTheme.colorScheme.primary),
+                      SizedBox(
+                          width:
+                              iconTxtSpacing), // Add spacing between icon and text
+                      Text(
+                        'Dark/Light Mode',
+                        style: TextStyle(
+                          color: selectedTheme.colorScheme.primary,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ).merge(GoogleFonts.quicksand()),
+                      ),
+                      Switch(
+                        value: selectedTheme == lightTheme,
+                        onChanged: (value) {
+                          if (value) {
+                            _handleThemeChange(lightTheme, themeProvider);
+                          } else {
+                            _handleThemeChange(darkTheme, themeProvider);
+                          }
+                        },
+                        activeColor: selectedTheme.colorScheme.primary,
+                      ),
+                    ],
                   ),
-                  Switch(
-                    value: selectedTheme == lightTheme,
-                    onChanged: (value) {
-                      if (value) {
-                        _handleThemeChange(lightTheme, themeProvider);
-                      } else {
-                        _handleThemeChange(darkTheme, themeProvider);
-                      }
-                    },
-                    activeColor: selectedTheme.colorScheme.primary,
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
-
-            SizedBox(height: listSpacing),
+            SizedBox(height: 21),
 
             //Themes
             Container(
@@ -162,43 +163,6 @@ class SettingsPageState extends State<SettingsPage> {
             ),
 
             SizedBox(height: listSpacing),
-
-            //Logout Button
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: edgePadding),
-              child: GestureDetector(
-                onTap: () async {
-                  await FirebaseAuth.instance.signOut();
-                  Navigator.of(_scaffoldKey.currentContext!,
-                          rootNavigator: true)
-                      .pushAndRemoveUntil(
-                    MaterialPageRoute(
-                      builder: (BuildContext context) {
-                        return LoginPage();
-                      },
-                    ),
-                    (_) => false,
-                  );
-                },
-                child: Row(
-                  children: <Widget>[
-                    Icon(Icons.logout,
-                        color: selectedTheme.colorScheme.primary),
-                    SizedBox(
-                      width: iconTxtSpacing,
-                    ),
-                    Text(
-                      'Log Out',
-                      style: TextStyle(
-                        color: selectedTheme.colorScheme.primary,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ).merge(GoogleFonts.quicksand()),
-                    ),
-                  ],
-                ),
-              ),
-            ),
 
             //Close button
             Expanded(

@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fiservonboardingexp/screens/Login_page.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -14,6 +15,7 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     ThemeData selectedTheme = getSelectedTheme(context);
     var iconColor = selectedTheme.colorScheme.secondary;
+    final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
     // Update the current user account
     final currentUser = FirebaseAuth.instance.currentUser;
@@ -42,6 +44,7 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
     }
 
     return SafeArea(
+      key: _scaffoldKey,
       child: AppBar(
         backgroundColor: selectedTheme.colorScheme.tertiary,
         elevation: 0.0,
@@ -88,7 +91,7 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
         ),
 
         // Nav draw
-        actions: <Widget>[
+        actions: [
           IconButton(
             icon: Icon(
               Icons.menu,
@@ -99,13 +102,13 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                 context: context,
                 builder: (BuildContext context) {
                   return Container(
-                    height: 350,
+                    height: 430,
                     color: selectedTheme.colorScheme.tertiary,
                     child: Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
+                        children: [
                           //Intro teaser
                           ListTile(
                             leading: Icon(
@@ -122,6 +125,7 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                                   .quicksand()), // Merge styles with GoogleFonts
                             ),
                             onTap: () {
+                              Navigator.of(context).pop();
                               Get.toNamed("/teaser");
                             },
                           ),
@@ -142,6 +146,7 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                                   .quicksand()), // Merge styles with GoogleFonts
                             ),
                             onTap: () {
+                              Navigator.of(context).pop();
                               Get.toNamed("/help");
                             },
                           ),
@@ -162,6 +167,7 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                                   .quicksand()), // Merge styles with GoogleFonts
                             ),
                             onTap: () {
+                              Navigator.of(context).pop();
                               Get.toNamed("/faq");
                             },
                           ),
@@ -182,6 +188,7 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                                   .quicksand()), // Merge styles with GoogleFonts
                             ),
                             onTap: () {
+                              Navigator.of(context).pop();
                               Get.toNamed("/settings");
                             },
                           ),
@@ -202,6 +209,7 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                                   .quicksand()), // Merge styles with GoogleFonts
                             ),
                             onTap: () {
+                              Navigator.of(context).pop();
                               Navigator.of(context).push(
                                 MaterialPageRoute(
                                     builder: (context) => const FeedBack()),
@@ -209,10 +217,38 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                             },
                           ),
 
-                          const SizedBox(
-                            width: double.infinity,
-                            height: 65,
+                          //const SizedBox(height: 25),
+
+                          //Logout Button
+                          ListTile(
+                            leading: Icon(
+                              Icons.logout,
+                              color: selectedTheme.colorScheme.onTertiary,
+                            ),
+                            title: Text(
+                              'Log Out',
+                              style: TextStyle(
+                                color: selectedTheme.colorScheme.onTertiary,
+                                fontSize: 18,
+                                fontWeight: FontWeight.w900,
+                              ).merge(GoogleFonts.quicksand()),
+                            ),
+                            onTap: () async {
+                              await FirebaseAuth.instance.signOut();
+                              Navigator.of(_scaffoldKey.currentContext!,
+                                      rootNavigator: true)
+                                  .pushAndRemoveUntil(
+                                MaterialPageRoute(
+                                  builder: (BuildContext context) {
+                                    return LoginPage();
+                                  },
+                                ),
+                                (_) => false,
+                              );
+                            },
                           ),
+
+                          const SizedBox(height: 60),
                         ],
                       ),
                     ),

@@ -9,6 +9,7 @@ final ThemeData lightTheme = ThemeData(
     onBackground: lightTileColor, // Tiles.
     tertiary: lightBars, // App/nav bars.
     primary: lightTextColor, // Main text colour.
-    secondary: fiservColor, // Headings.
+    secondary: fiservColor,
+    onTertiary: Colors.black, // Headings.
   ),
 );

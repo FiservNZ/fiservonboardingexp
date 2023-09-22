@@ -11,5 +11,6 @@ final ThemeData rainforestTheme = ThemeData(
     tertiary: Color.fromARGB(255, 20, 145, 72), // App/nav bars
     primary: Color.fromARGB(255, 9, 70, 34), // Main text colour
     secondary: Color(0xFF241a16), // Headings
+    onTertiary: Colors.white,
   ),
 );
