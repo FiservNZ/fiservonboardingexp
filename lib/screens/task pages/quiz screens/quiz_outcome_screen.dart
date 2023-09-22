@@ -15,8 +15,7 @@ class QuizOutcomeScreen extends GetView<QuestionController> {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-    ThemeData selectedTheme = themeProvider.currentTheme;
+    ThemeData selectedTheme = getSelectedTheme(context);
     final ButtonStyle style = ElevatedButton.styleFrom(
         textStyle: const TextStyle(fontSize: 20),
         backgroundColor: selectedTheme.colorScheme.secondary);
