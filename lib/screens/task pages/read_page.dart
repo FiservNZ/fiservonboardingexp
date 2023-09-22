@@ -1,10 +1,17 @@
+import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:fiservonboardingexp/util/mc_testing/module/module_screen.dart';
 import 'package:fiservonboardingexp/util/mc_testing/watch/watch_tasks_container.dart';
+import 'package:fiservonboardingexp/util/progress_points.dart';
 import 'package:fiservonboardingexp/widgets/exp_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:http/http.dart';
+import 'package:provider/provider.dart';
+import '../../controllers/read_controller.dart';
+import 'package:fiservonboardingexp/widgets/progress_bar.dart';
+
 import '../../firebase references/firebase_refs.dart';
 import '../../model/read_model.dart';
 
@@ -48,7 +55,7 @@ class ReadPage extends StatelessWidget {
 
           // Image (from local assets folder not firebase). Needs to be changed as its hard coded.
           Padding(
-            padding: const EdgeInsets.all(40.0),
+            padding: EdgeInsets.all(40.0),
             // child: Image(image: AssetImage('assets/images/Read.jpg')),
             child: readModel.imageUrl != ""
                 ? Image.network(readModel.imageUrl!)
@@ -183,6 +190,11 @@ class ReadPage extends StatelessWidget {
                       ExpBar expBar = const ExpBar(barwidth: 1);
                       expBar.addExperience(25);
 
+                      // Add points to progress bar is task hasn't been completed
+                      if (readModel.isDone == false) {
+                        addPointsToProgress(readModel.category);
+                      }
+
                       final querySnapshot = await userColRef
                           .doc(currentUser.uid)
                           .collection('Tasks')
@@ -193,6 +205,7 @@ class ReadPage extends StatelessWidget {
 
                       if (querySnapshot.docs.isNotEmpty) {
                         final doc = querySnapshot.docs[0];
+
                         await doc.reference.update({'isDone': true});
                       } else {
                         debugPrint('No Matching Document Found!');

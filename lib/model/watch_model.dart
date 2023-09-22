@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 
 class WatchModel {
   String id;
+  String category;
   String videoUrl;
   String videoTitle;
   String videoDescription;
@@ -13,6 +14,7 @@ class WatchModel {
       {
       //super.key,
       required this.id,
+      required this.category,
       required this.videoTitle,
       required this.videoDescription,
       required this.videoUrl,
@@ -22,6 +24,7 @@ class WatchModel {
 
   WatchModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> snapshot)
       : id = snapshot.id,
+        category = snapshot['category'],
         videoTitle = snapshot['videoTitle'],
         videoDescription = snapshot['videoDescription'],
         videoUrl = snapshot['videoUrl'],

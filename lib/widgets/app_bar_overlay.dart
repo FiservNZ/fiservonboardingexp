@@ -15,7 +15,7 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
   Widget build(BuildContext context) {
     ThemeData selectedTheme = getSelectedTheme(context);
     var iconColor = selectedTheme.colorScheme.secondary;
-    final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
+    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
 
     // Update the current user account
     final currentUser = FirebaseAuth.instance.currentUser;
@@ -44,7 +44,7 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
     }
 
     return SafeArea(
-      key: _scaffoldKey,
+      key: scaffoldKey,
       child: AppBar(
         backgroundColor: selectedTheme.colorScheme.tertiary,
         elevation: 0.0,
@@ -60,9 +60,11 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
 
         // Rank Title
         title: Center(
-          child: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+          child: FutureBuilder<DocumentSnapshot<Map<String, dynamic>>>(
             // reference from file
-            stream: userColRef.doc(currentUser.uid).snapshots(),
+            future: userColRef
+                .doc(currentUser.uid)
+                .get(), // Use get() to fetch a single snapshot
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const CircularProgressIndicator();
@@ -235,7 +237,7 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                             ),
                             onTap: () async {
                               await FirebaseAuth.instance.signOut();
-                              Navigator.of(_scaffoldKey.currentContext!,
+                              Navigator.of(scaffoldKey.currentContext!,
                                       rootNavigator: true)
                                   .pushAndRemoveUntil(
                                 MaterialPageRoute(

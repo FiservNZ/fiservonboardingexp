@@ -44,6 +44,7 @@ class ReadThumbnail extends StatelessWidget {
             // Create a QuizModel instance using the retrieved data
             ReadModel readModel = ReadModel(
               id: documentId,
+              category: data['category'],
               title: data['title'],
               description: data['description'],
               time: data['time'],

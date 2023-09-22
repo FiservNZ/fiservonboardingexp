@@ -1,4 +1,5 @@
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fiservonboardingexp/firebase%20references/firebase_refs.dart';
 import 'package:fiservonboardingexp/themes/Theme_database.dart';
 import 'package:fiservonboardingexp/themes/beach_theme.dart';
 import 'package:fiservonboardingexp/themes/pastel_theme.dart';
@@ -25,10 +26,7 @@ class ThemesPageState extends State<ThemesPage> {
     themeProvider.setTheme(theme);
 
     // Save the selected theme mode to Firebase Firestore
-    final currentUser = FirebaseAuth.instance.currentUser;
-    if (currentUser != null) {
-      _firebaseTheme.saveThemePreference(currentUser.uid, theme);
-    }
+    _firebaseTheme.saveThemePreference(uid, theme);
   }
 
   @override

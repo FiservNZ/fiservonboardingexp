@@ -1,6 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fiservonboardingexp/firebase%20references/firebase_refs.dart';
 import 'package:fiservonboardingexp/screens/menu%20drawer/change_password_page.dart';
-import 'package:fiservonboardingexp/screens/login_page.dart';
 import 'package:fiservonboardingexp/themes/Theme_database.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -22,14 +21,12 @@ class SettingsPage extends StatefulWidget {
 class SettingsPageState extends State<SettingsPage> {
   final ThemeDatabase _firebaseTheme = ThemeDatabase();
 
+  // Updates to the new theme
   void _handleThemeChange(ThemeData theme, ThemeProvider themeProvider) {
     themeProvider.setTheme(theme);
 
     // Save the selected theme mode to Firebase Firestore
-    final currentUser = FirebaseAuth.instance.currentUser;
-    if (currentUser != null) {
-      _firebaseTheme.saveThemePreference(currentUser.uid, theme);
-    }
+    _firebaseTheme.saveThemePreference(currentUser.uid, theme);
   }
 
   double edgePadding = 60;
@@ -42,7 +39,6 @@ class SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
     ThemeData selectedTheme = themeProvider.currentTheme;
-
     return Scaffold(
       key: _scaffoldKey, // Set the GlobalKey<ScaffoldState>
       backgroundColor: selectedTheme.colorScheme.background,
@@ -100,7 +96,7 @@ class SettingsPageState extends State<SettingsPage> {
                 ),
               ],
             ),
-            SizedBox(height: 21),
+            const SizedBox(height: 21),
 
             //Themes
             Container(

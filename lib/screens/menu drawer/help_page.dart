@@ -1,5 +1,4 @@
 import 'package:fiservonboardingexp/util/constants.dart';
-import 'package:fiservonboardingexp/widgets/help_list.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -51,7 +50,7 @@ class HelpPage extends StatelessWidget {
 
               const SizedBox(height: 30),
 
-              const Expanded(child: HelpList()),
+              //  const Expanded(child: HelpList()),
 
               // Close button
               ElevatedButton(

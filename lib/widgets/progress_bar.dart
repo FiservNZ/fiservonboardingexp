@@ -13,14 +13,14 @@ class ProgressBar extends StatelessWidget {
   Widget build(BuildContext context) {
     ThemeData selectedTheme = getSelectedTheme(context);
 
-    return StreamBuilder(
-      stream: FirebaseFirestore.instance
+    return FutureBuilder(
+      future: FirebaseFirestore.instance
           .collection('User')
           .doc(currentUser.uid)
           .collection('Tasks')
           .doc(taskCategory) // Use title as the document ID
-          .snapshots(),
-      builder: (context, snapshot) {
+          .get(),
+      builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const CircularProgressIndicator();
         }
