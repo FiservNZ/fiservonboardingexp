@@ -15,11 +15,10 @@ class QuizOutcomeScreen extends GetView<QuestionController> {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-    ThemeData selectedTheme = themeProvider.currentTheme;
+    ThemeData selectedTheme = getSelectedTheme(context);
     final ButtonStyle style = ElevatedButton.styleFrom(
         textStyle: const TextStyle(fontSize: 20),
-        backgroundColor: selectedTheme.colorScheme.onBackground);
+        backgroundColor: selectedTheme.colorScheme.secondary);
     return Scaffold(
       extendBodyBehindAppBar: true,
       body: BackgroundDecoration(
@@ -81,7 +80,7 @@ class QuizOutcomeScreen extends GetView<QuestionController> {
               ),
             ),
             ColoredBox(
-              color: darkBackgroundColor ?? Colors.white,
+              color: selectedTheme.colorScheme.background ?? Colors.white,
               child: Padding(
                 padding: const EdgeInsets.only(
                     bottom: 200, right: 30, left: 20, top: 10),

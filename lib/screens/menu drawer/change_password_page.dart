@@ -1,6 +1,8 @@
 import 'package:fiservonboardingexp/themes/theme_provider.dart';
+import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:logger/logger.dart';
 import 'package:provider/provider.dart';
 import '../../firebase references/firebase_refs.dart';
 import '../../widgets/app_bar_overlay.dart';
@@ -16,6 +18,7 @@ class ChangePasswordPage extends StatefulWidget {
 
 class _ChangePasswordPageState extends State<ChangePasswordPage> {
   final _emailController = TextEditingController();
+  final Logger _logger = Logger();
 
   @override
   void dispose() {
@@ -38,23 +41,13 @@ class _ChangePasswordPageState extends State<ChangePasswordPage> {
         },
       );
     } on FirebaseAuthException catch (e) {
-      //print(e);
-      showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            content: Text(e.message.toString()),
-          );
-        },
-      );
+      _logger.e("Password reset failed: ${e.message}");
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-    ThemeData selectedTheme = themeProvider.currentTheme;
-
+    ThemeData selectedTheme = getSelectedTheme(context);
     return Scaffold(
       backgroundColor: selectedTheme.colorScheme.background,
       appBar: const AppBarOverlay(),

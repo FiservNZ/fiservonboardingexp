@@ -2,9 +2,7 @@ import 'package:achievement_view/achievement_view.dart';
 import 'package:achievement_view/achievement_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../firebase references/firebase_refs.dart';
 import '../util/achievement_components/achievement_tile.dart';
 import '../util/achievement_components/achievement_tracker.dart';
@@ -62,8 +60,7 @@ class Achievementpage extends State<AchievementsPage> {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-    ThemeData selectedTheme = themeProvider.currentTheme;
+    ThemeData selectedTheme = getSelectedTheme(context);
 
     // Update the current user account
     final currentUser = FirebaseAuth.instance.currentUser;
