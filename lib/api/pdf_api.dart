@@ -1,5 +1,6 @@
 /*
 API KEY:
+
 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
 
 To test pdf generation & email: Please go to firestore, set introduced
@@ -160,7 +161,9 @@ class PdfApi {
 
     //Sending email to test recipient
     final mailer = sgm.Mailer(
+
         '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');
+
     //Change toAddress to your own email for testing.
     const toAddress = sgm.Address('michaelcalbay.uni@gmail.com');
     const fromAddress = sgm.Address('rndproject96@gmail.com');

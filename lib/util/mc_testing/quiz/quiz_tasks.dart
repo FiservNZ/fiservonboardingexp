@@ -36,7 +36,7 @@ Future<List<Widget>> getQuizTaskWidgets(String category) async {
       final task = QuizTask(
         title: data['title'] ?? '',
         description: data['description'] ?? '',
-        questionCount: data['question_count'] ?? 0,
+        questionCount: data['question_count'] ?? '0',
       );
 
       // Create a VideoThumbnail widget for each watch task

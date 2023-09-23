@@ -3,6 +3,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:fiservonboardingexp/controllers/quiz%20controllers/auth_controller.dart';
 import 'package:fiservonboardingexp/controllers/quiz%20controllers/extension_question_controller.dart';
 import 'package:fiservonboardingexp/controllers/quiz%20controllers/quiz_controller.dart';
+import 'package:fiservonboardingexp/util/mc_testing/module/module_screen.dart';
 import 'package:fiservonboardingexp/widgets/quiz%20widgets/loading_status.dart';
 import 'package:fiservonboardingexp/model/quiz_model.dart';
 import 'package:fiservonboardingexp/screens/task%20pages/quiz%20screens/home_screen.dart';
@@ -25,11 +26,15 @@ class QuestionController extends GetxController {
 
   @override
   void onReady() {
-    categoryName = Get.arguments as String;
+    categoryName = currentCategory;
+    debugPrint('QUESTION CONTROLLER BINDED');
+
     final quizQuestion = Get.arguments as QuizModel;
     // test to see if it can pull the question document id from the collection
     // print(quizQuestion.id);
+
     loadData(quizQuestion);
+
     super.onReady();
   }
 
@@ -78,7 +83,8 @@ class QuestionController extends GetxController {
 
         // Assigns 'options' list to the question.options property
         question.options = options;
-
+        debugPrint('Got the questions and options!!!');
+        debugPrint('Number of Questions: ${questions.length}');
         // checks if quizQuestion.questions is not null and not empty before assigning them to 'allQuizQuestions' list
         if (quizQuestion.questions != null &&
             quizQuestion.questions!.isNotEmpty) {
@@ -86,6 +92,8 @@ class QuestionController extends GetxController {
           currentQuestion.value = quizQuestion.questions![0];
           //print(quizQuestion.questions![0]);
           loadingStatus.value = LoadingStatus.completed;
+          debugPrint(
+              'QUIZ QUESTION NOT NULL AND LOADING STATUS SET TO COMPLETED');
         } else {
           loadingStatus.value = LoadingStatus.error;
         }
