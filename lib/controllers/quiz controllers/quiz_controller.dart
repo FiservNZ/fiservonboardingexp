@@ -9,6 +9,7 @@ import '../../firebase references/firebase_refs.dart';
 import '../../model/quiz_model.dart';
 import '../../model/task_category_model.dart';
 import '../../screens/task pages/quiz screens/question_screen.dart';
+import 'package:flutter/material.dart';
 
 class QuizController extends GetxController {
   late final String categoryName;
@@ -16,6 +17,8 @@ class QuizController extends GetxController {
   late final TaskCategoryModel cat;
   final allQuizImages = <String>[].obs;
   final allQuizzes = <QuizModel>[].obs;
+
+  ThemeData get selectedTheme => Get.theme;
 
   @override
   void onReady() {
@@ -71,7 +74,8 @@ class QuizController extends GetxController {
   void navigateToQuestions({required QuizModel quiz}) {
     // AuthController authController = Get.find();
 
-    showPopupAlertDialog(quizModel: quiz, categoryName: categoryName);
+    showPopupAlertDialog(
+        quizModel: quiz, categoryName: categoryName, theme: selectedTheme);
     //Get.toNamed(QuizQuestionScreen.routeName, arguments: quiz);
   }
 }
@@ -79,6 +83,7 @@ class QuizController extends GetxController {
 void showPopupAlertDialog({
   required QuizModel quizModel,
   required String categoryName,
+  required ThemeData theme,
 }) {
   Get.dialog(
       showPopup(
@@ -90,14 +95,17 @@ void showPopupAlertDialog({
           onTapCancel: () {
             Get.back();
           },
-          quizModel: quizModel),
+          quizModel: quizModel,
+          selectedTheme: theme),
       barrierDismissible: false);
 }
 
-Widget showPopup(
-    {required VoidCallback onTapStart,
-    required VoidCallback onTapCancel,
-    required QuizModel quizModel}) {
+Widget showPopup({
+  required VoidCallback onTapStart,
+  required VoidCallback onTapCancel,
+  required QuizModel quizModel,
+  required ThemeData selectedTheme,
+}) {
   double buttonHeight = 35;
   double buttonWidth = 80;
   return AlertDialog(
@@ -105,7 +113,7 @@ Widget showPopup(
     shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16.0),
         side: const BorderSide(color: Color.fromARGB(221, 36, 36, 36))),
-    backgroundColor: darkBackgroundColor,
+    backgroundColor: selectedTheme.colorScheme.background,
     //shadowColor: fiservColor,
     elevation: 20,
     content: SizedBox(
@@ -118,7 +126,9 @@ Widget showPopup(
           Text(
             quizModel.title,
             style: GoogleFonts.quicksand(
-                fontSize: 21, fontWeight: FontWeight.bold, color: fiservColor),
+                fontSize: 21,
+                fontWeight: FontWeight.bold,
+                color: selectedTheme.colorScheme.secondary),
           ),
           const SizedBox(height: 10),
           Row(
@@ -145,7 +155,8 @@ Widget showPopup(
           const SizedBox(height: 15),
           Text(
             quizModel.description,
-            style: GoogleFonts.quicksand(color: darkTextColor),
+            style:
+                GoogleFonts.quicksand(color: selectedTheme.colorScheme.primary),
           )
         ],
       ),
@@ -161,16 +172,16 @@ Widget showPopup(
               width: buttonWidth,
               child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    side: const BorderSide(color: fiservColor),
-                    backgroundColor:
-                        darkBackgroundColor, /*shadowColor: fiservColor*/
+                    side: BorderSide(color: selectedTheme.colorScheme.primary),
+                    backgroundColor: selectedTheme
+                        .colorScheme.onBackground, /*shadowColor: fiservColor*/
                   ),
                   onPressed: onTapCancel,
                   child: Text(
                     "Cancel",
                     style: GoogleFonts.quicksand(
                         fontWeight: FontWeight.bold,
-                        color: fiservColor,
+                        color: selectedTheme.colorScheme.primary,
                         fontSize: 14),
                   )),
             ),
@@ -179,12 +190,13 @@ Widget showPopup(
               width: buttonWidth,
               child: ElevatedButton(
                   style: TextButton.styleFrom(
-                      side: const BorderSide(color: fiservColor),
-                      backgroundColor: fiservColor),
+                      side:
+                          BorderSide(color: selectedTheme.colorScheme.primary),
+                      backgroundColor: selectedTheme.colorScheme.onBackground),
                   onPressed: onTapStart,
                   child: Text("Start",
                       style: TextStyle(
-                          color: darkTextColor,
+                          color: selectedTheme.colorScheme.primary,
                           fontWeight: FontWeight.bold,
                           fontSize: 15))),
             ),

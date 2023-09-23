@@ -54,7 +54,9 @@ class QuizThumbnail extends StatelessWidget {
             );
             debugPrint("Document ID: $documentId");
             showPopupAlertDialog(
-                quizModel: quizModel, categoryName: currentCategory);
+                quizModel: quizModel,
+                categoryName: currentCategory,
+                theme: selectedTheme);
           }
         }).catchError((error) {
           debugPrint('ERROR: $error');
