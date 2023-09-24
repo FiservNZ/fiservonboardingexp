@@ -1,17 +1,13 @@
-import 'package:fiservonboardingexp/screens/main_screen.dart';
-import 'package:fiservonboardingexp/widgets/help_list.dart';
+import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
-import 'package:fiservonboardingexp/themes/theme_provider.dart';
 
 class HelpPage extends StatelessWidget {
   const HelpPage({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-    ThemeData selectedTheme = themeProvider.currentTheme;
+    ThemeData selectedTheme = getSelectedTheme(context);
 
     return Scaffold(
       backgroundColor: selectedTheme.colorScheme.background,
@@ -54,7 +50,7 @@ class HelpPage extends StatelessWidget {
 
               const SizedBox(height: 30),
 
-              const Expanded(child: HelpList()),
+              //  const Expanded(child: HelpList()),
 
               // Close button
               ElevatedButton(

@@ -13,10 +13,11 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThemeData selectedTheme = getSelectedTheme(context);
     QuizController quizController = Get.find();
     categoryName = Get.arguments as String;
     return Scaffold(
-      backgroundColor: darkBackgroundColor,
+      backgroundColor: selectedTheme.colorScheme.background,
       body: Column(
         children: [
           // will need to change to pull the title from whatever category has been chosen.

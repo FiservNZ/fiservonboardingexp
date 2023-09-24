@@ -2,11 +2,10 @@ import 'dart:convert';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:fiservonboardingexp/widgets/exp_bar.dart';
 import 'package:fiservonboardingexp/widgets/nav_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../themes/theme_provider.dart';
 import '../util/achievement_components/incompleted_achievement.dart';
 import '../widgets/app_bar_overlay.dart';
 import 'package:http/http.dart' as http;
@@ -30,10 +29,8 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-    ThemeData selectedTheme = themeProvider.currentTheme;
+    ThemeData selectedTheme = getSelectedTheme(context);
     final currentUser = FirebaseAuth.instance.currentUser;
-
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(

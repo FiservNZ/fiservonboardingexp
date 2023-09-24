@@ -10,5 +10,8 @@ final ThemeData lightTheme = ThemeData(
     tertiary: lightBars, // App/nav bars.
     primary: lightTextColor, // Main text colour.
     secondary: fiservColor, // Headings.
+    onTertiary: Colors.black,
+    surface: const Color.fromARGB(
+        255, 230, 226, 226), // Progress indicator background
   ),
 );
