@@ -1,5 +1,3 @@
-import 'package:fiservonboardingexp/model/quiz_model.dart';
-import 'package:fiservonboardingexp/themes/quiz%20themes/ui_parameters.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -32,7 +30,9 @@ class QuizInfoSquare extends StatelessWidget {
               Text(
                 text,
                 style: GoogleFonts.quicksand(
-                    fontSize: 12, color: selectedTheme.colorScheme.secondary),
+                    fontWeight: FontWeight.w600,
+                    fontSize: 12,
+                    color: selectedTheme.colorScheme.secondary),
                 textAlign: TextAlign.center,
               ),
             ],

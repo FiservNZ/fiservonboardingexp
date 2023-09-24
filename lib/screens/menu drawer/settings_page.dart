@@ -32,6 +32,7 @@ class SettingsPageState extends State<SettingsPage> {
   double edgePadding = 60;
   double iconTxtSpacing = 30;
   double listSpacing = 30;
+  bool isdisabled = true;
 
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
 
@@ -96,7 +97,21 @@ class SettingsPageState extends State<SettingsPage> {
                 ),
               ],
             ),
-            const SizedBox(height: 21),
+
+            Padding(
+              padding: const EdgeInsets.only(
+                  left: 30.0), // Adjust the left value as needed
+              child: Text(
+                "(When a theme is applied, dark and light \n modes will be deactivated.)",
+                style: TextStyle(
+                    fontSize: 11,
+                    color: selectedTheme.colorScheme.primary,
+                    fontStyle: FontStyle.italic),
+                textAlign: TextAlign.left,
+              ),
+            ),
+
+            SizedBox(height: listSpacing),
 
             //Themes
             Container(

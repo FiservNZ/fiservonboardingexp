@@ -14,6 +14,8 @@ class QuizModel {
   int questionCount;
   int exp;
   bool expGained;
+  //For the progress bar
+  bool isDone;
 
   QuizModel({
     required this.id,
@@ -25,6 +27,7 @@ class QuizModel {
     required this.questionCount,
     required this.exp,
     required this.expGained,
+    required this.isDone,
   });
 
   // Converts JSON data into a QuizModel object
@@ -39,7 +42,8 @@ class QuizModel {
             .map((dynamic e) => Question.fromJSON(e as Map<String, dynamic>))
             .toList(),
         exp = 0,
-        expGained = json['exp_gained'] as bool;
+        expGained = json['exp_gained'] as bool,
+        isDone = json['isDone'] as bool;
 
   // Converts data from Firebase into Map
   QuizModel.fromSnapshot(DocumentSnapshot<Map<String, dynamic>> snapshot)
@@ -51,7 +55,8 @@ class QuizModel {
         questionCount = snapshot['question_count'] as int,
         questions = [],
         exp = snapshot['exp'] as int,
-        expGained = snapshot['exp_gained'] as bool;
+        expGained = snapshot['exp_gained'] as bool,
+        isDone = snapshot['isDone'] as bool;
 
   String timeConverter() => "${(quizDuration / 60).ceil()} mins";
   // Converts the properties of the QuizModel object into JSON

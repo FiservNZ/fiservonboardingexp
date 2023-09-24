@@ -116,7 +116,7 @@ class ExpBar extends StatelessWidget {
                       valueColor: AlwaysStoppedAnimation<Color>(
                         selectedTheme.colorScheme.primary,
                       ),
-                      backgroundColor: const Color.fromARGB(255, 190, 188, 184),
+                      backgroundColor: selectedTheme.colorScheme.surface,
                     ),
                   ),
                 ),

@@ -7,7 +7,7 @@ final ThemeData pastelTheme = ThemeData(
     background: Color(0xFFfdf6f6), // Background.
     onBackground: Color.fromARGB(255, 238, 190, 169), // Tiles.
     tertiary: Color(0xFFc0d8e3), // App/nav bars.
-    primary: Color.fromARGB(255, 228, 132, 116), // Main text colour.
+    primary: Color.fromARGB(255, 231, 120, 101), // Main text colour.
     secondary: Color(0xFFa78d8a), // Headings.
     onTertiary: Colors.black,
     surface:
