@@ -50,54 +50,52 @@ class ProgressBar extends StatelessWidget {
 
         // Displays the progress indicator
         return Container(
-          child: Column(
+          // child: Column(
+          //   children: [
+          //     Text(
+          //       '${category.curPoints} / ${category.maxPoints}',
+          //       style: TextStyle(
+          //         color: selectedTheme.colorScheme.primary,
+          //         fontSize: 15,
+          //         fontWeight: FontWeight.bold,
+          //       ),
+          //     ),
+          //     const SizedBox(height: 3),
+          //     SizedBox(
+          //       width: 80,
+          //       height: 10,
+          //       child: ClipRRect(
+          //         borderRadius: BorderRadius.circular(5),
+          //         child: LinearProgressIndicator(
+          //           value: progressPercentage,
+          //           valueColor: AlwaysStoppedAnimation<Color>(
+          //             selectedTheme.colorScheme.primary,
+          //           ),
+          //           backgroundColor: selectedTheme.colorScheme.surface,
+          //         ),
+          //       ),
+          //     ),
+
+          child: Stack(
+            alignment: Alignment.center,
             children: [
+              Transform.scale(
+                scale: 1.1,
+                child: CircularProgressIndicator(
+                  value: progressPercentage,
+                  strokeWidth: 6.0,
+                  color: selectedTheme.colorScheme.primary,
+                  backgroundColor: selectedTheme.colorScheme.surface,
+                ),
+              ),
               Text(
                 '${category.curPoints} / ${category.maxPoints}',
                 style: TextStyle(
                   color: selectedTheme.colorScheme.primary,
-                  fontSize: 15,
+                  fontSize: 12,
                   fontWeight: FontWeight.bold,
                 ),
               ),
-              const SizedBox(height: 3),
-              SizedBox(
-                width: 80,
-                height: 10,
-                child: ClipRRect(
-                  borderRadius: BorderRadius.circular(5),
-                  child: LinearProgressIndicator(
-                    value: progressPercentage,
-                    valueColor: AlwaysStoppedAnimation<Color>(
-                      selectedTheme.colorScheme.primary,
-                    ),
-                    backgroundColor: selectedTheme.colorScheme.surface,
-                  ),
-                ),
-              ),
-
-              // Stack(
-              //   alignment: Alignment.center,
-              //   children: [
-              //     Transform.scale(
-              //       scale: 1.1,
-              //       child: CircularProgressIndicator(
-              //         value: progressPercentage,
-              //         strokeWidth: 6.0,
-              //         color: selectedTheme.colorScheme.primary,
-              //         backgroundColor: selectedTheme.colorScheme.surface,
-              //       ),
-              //       ),
-              //     Text(
-              //       '${category.curPoints} / ${category.maxPoints}',
-              //       style: TextStyle(
-              //         color: selectedTheme.colorScheme.primary,
-              //         fontSize: 13,
-              //         fontWeight: FontWeight.bold,
-              //       ),
-              //     ),
-              //   ],
-              // ),
             ],
           ),
         );
