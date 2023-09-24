@@ -1,9 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fiservonboardingexp/themes/theme_provider.dart';
+import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import '../firebase references/firebase_refs.dart';
 
 class ExpBar extends StatelessWidget {
@@ -15,7 +14,9 @@ class ExpBar extends StatelessWidget {
 
   //Method to add exp and handle level up
   Future<void> addExperience(int expToAdd) async {
-    final userDocRef = userColRef.doc(currentUser.uid);
+    final currentUser = FirebaseAuth.instance.currentUser;
+
+    final userDocRef = userColRef.doc(currentUser?.uid);
     final userDoc = await userDocRef.get();
     final userMap = userDoc.data() as Map<String, dynamic>;
 
@@ -24,11 +25,12 @@ class ExpBar extends StatelessWidget {
     int level = userMap['Level'] ?? 0;
 
     if (level < 9) {
-      currentEXP += expToAdd;
+      currentEXP += expToAdd; //
       if (currentEXP >= maxEXP) {
         level++;
+        currentEXP -= maxEXP;
         maxEXP += 150;
-        currentEXP = 0;
+        // currentEXP = 0;
       }
     } else if (level == 9 && currentEXP <= maxEXP) {
       currentEXP += expToAdd;
@@ -52,9 +54,9 @@ class ExpBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-    ThemeData selectedTheme = themeProvider.currentTheme;
-    final currentUser = FirebaseAuth.instance.currentUser;
+    ThemeData selectedTheme = getSelectedTheme(context);
+    // Refactor this code in enhancement phase, cant not pull the instance from Ref
+    final currentUser = fireAuth.currentUser!;
     return SizedBox(
       child: StreamBuilder<DocumentSnapshot>(
         stream: FirebaseFirestore.instance
@@ -112,7 +114,7 @@ class ExpBar extends StatelessWidget {
                     child: LinearProgressIndicator(
                       value: currentEXP / maxEXP,
                       valueColor: AlwaysStoppedAnimation<Color>(
-                        selectedTheme.colorScheme.secondary,
+                        selectedTheme.colorScheme.primary,
                       ),
                       backgroundColor: const Color.fromARGB(255, 190, 188, 184),
                     ),
@@ -128,6 +130,3 @@ class ExpBar extends StatelessWidget {
     );
   }
 }
-
-// ignore: constant_identifier_names
-const FiservColor = Color(0xFFFF6600);

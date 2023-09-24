@@ -9,5 +9,8 @@ final ThemeData beachTheme = ThemeData(
     tertiary: Color(0xFF152a69), // App/nav bars.
     primary: Color(0xFF446da3), // Main text colour.
     secondary: Color(0xFF189ebb), // Headings.
+    onTertiary: Colors.white,
+    surface:
+        Color.fromARGB(255, 167, 166, 166), // Progress indicator background
   ),
 );

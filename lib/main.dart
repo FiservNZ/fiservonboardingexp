@@ -39,7 +39,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-
 // // Routes to the read task page
 // void main() async {
 //   WidgetsFlutterBinding.ensureInitialized();
@@ -68,7 +67,7 @@ class MyApp extends StatelessWidget {
 //       initialRoute: '/read',
 //       //sets the initial route to homepage with read task button and progess bar
 //       //initialRoute: '/',
-//       getPages: Routes.routes(),
+//       getPages: ReadRoutes.routes(),
 //     );
 //   }
 // }

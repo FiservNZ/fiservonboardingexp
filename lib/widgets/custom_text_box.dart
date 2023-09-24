@@ -1,6 +1,5 @@
-import 'package:fiservonboardingexp/themes/theme_provider.dart';
+import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 class CustomTextBox extends StatelessWidget {
   final String text;
@@ -15,8 +14,7 @@ class CustomTextBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-    ThemeData selectedTheme = themeProvider.currentTheme;
+    ThemeData selectedTheme = getSelectedTheme(context);
     return Container(
       decoration: BoxDecoration(
         color: selectedTheme.colorScheme.onBackground,

@@ -5,6 +5,9 @@ import 'package:fiservonboardingexp/widgets/quiz%20widgets/background_decoration
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
+
+import '../../../themes/theme_provider.dart';
 
 class QuizOutcomeScreen extends GetView<QuestionController> {
   const QuizOutcomeScreen({Key? key}) : super(key: key);
@@ -12,9 +15,10 @@ class QuizOutcomeScreen extends GetView<QuestionController> {
 
   @override
   Widget build(BuildContext context) {
+    ThemeData selectedTheme = getSelectedTheme(context);
     final ButtonStyle style = ElevatedButton.styleFrom(
         textStyle: const TextStyle(fontSize: 20),
-        backgroundColor: darkTileColor);
+        backgroundColor: selectedTheme.colorScheme.secondary);
     return Scaffold(
       extendBodyBehindAppBar: true,
       body: BackgroundDecoration(
@@ -34,30 +38,31 @@ class QuizOutcomeScreen extends GetView<QuestionController> {
                         height: 100,
                         width: 100,
                         child: Image.asset('assets/images/successful.png')),
-                    const Padding(
-                      padding: EdgeInsets.only(top: 30, bottom: 10),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 30, bottom: 10),
                       child: Text(
                         "Quiz Completed!",
                         textAlign: TextAlign.center,
                         style: TextStyle(
                             fontSize: 45,
                             fontWeight: FontWeight.bold,
-                            color: fiservColor),
+                            color: selectedTheme.colorScheme.secondary),
                       ),
                     ),
                     const SizedBox(height: 20),
                     Text(
                       controller.correctAnsweredQuestions,
                       textAlign: TextAlign.center,
-                      style: const TextStyle(
+                      style: TextStyle(
                           fontSize: bodyFontSize,
                           fontWeight: FontWeight.bold,
-                          color: fiservColor),
+                          color: selectedTheme.colorScheme.primary),
                     ),
                     const SizedBox(height: 20),
                     Text(
                       "Thank you for completing the ${controller.quizModel.title} quiz!",
-                      style: darkBodyFontStyle,
+                      style:
+                          TextStyle(color: selectedTheme.colorScheme.primary),
                       textAlign: TextAlign.center,
                     ),
                     Padding(
@@ -65,7 +70,8 @@ class QuizOutcomeScreen extends GetView<QuestionController> {
                       child: Text(
                         "If this is your first completion, you will recieve ${controller.quizModel.exp} EXP!",
                         style: GoogleFonts.quicksand(
-                            fontSize: 13, color: darkTextColor),
+                            fontSize: 13,
+                            color: selectedTheme.colorScheme.primary),
                         textAlign: TextAlign.center,
                       ),
                     ),
@@ -74,7 +80,7 @@ class QuizOutcomeScreen extends GetView<QuestionController> {
               ),
             ),
             ColoredBox(
-              color: darkBackgroundColor ?? Colors.white,
+              color: selectedTheme.colorScheme.background ?? Colors.white,
               child: Padding(
                 padding: const EdgeInsets.only(
                     bottom: 200, right: 30, left: 20, top: 10),
@@ -110,12 +116,13 @@ class QuizOutcomeScreen extends GetView<QuestionController> {
                               controller.navigateToHome();
                               //controller.saveQuizResults();
                             },
-                            child: const Padding(
-                              padding: EdgeInsets.all(10.0),
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
                               child: Text(
                                 'Done',
                                 selectionColor: Colors.black,
-                                style: TextStyle(color: fiservColor),
+                                style: TextStyle(
+                                    color: selectedTheme.colorScheme.tertiary),
                               ),
                             ),
                           )),

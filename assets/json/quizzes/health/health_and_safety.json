@@ -1,0 +1,107 @@
+{
+    "id": "health&safety_quiz_2",
+    "title": "Health & Safety",
+    "image_url": "",
+    "description": "This is a quiz on Health & Safety",
+    "quiz_duration": 60,
+    "question_count": 5,
+    "questions":[
+        {
+            "id": "1",
+            "question": "Which of the following is NOT a recommended ergonomic practice for computer workplace station?",
+            "options": [
+                {
+                    "identifier": "1",
+                    "answer": "Adjust your chair height so your feet are flat on the ground."
+                },
+                {
+                    "identifier": "2",
+                    "answer": "Maintain a 90-degree angle between your wrists and your keyboard"
+                },
+                {
+                    "identifier": "3",
+                    "answer": "Use the computer mouse with your arm fuly extended."
+                }
+            ],
+            "correct_answer": "3"
+        },
+        {
+            "id": "2",
+            "question": "TRUE or FALSE: It is only the resoponsiblity of management to assess and identify risks.",
+            "options": [
+                {
+                    "identifier": "1",
+                    "answer": "TRUE"
+                },
+                {
+                    "identifier": "2",
+                    "answer": "FALSE"
+                }
+                
+            ],
+            "correct_answer": "2"
+        },
+        {
+            "id": "3",
+            "question": "In a case of a fire emergency, what should you do first?",
+            "options": [
+                {
+                    "identifier": "1",
+                    "answer": "Call a colleague to inform them about the fire"
+                },
+                {
+                    "identifier": "2",
+                    "answer": "Evacuate the building immediately via the elevator."
+                },
+                {
+                    "identifier": "3",
+                    "answer": "Evacuate the builing immediately via the nearest exit."
+                },
+                {
+                    "identifier": "4",
+                    "answer": "Try to extinguish the fire with an office fire extinguisher."
+                }    
+            ],
+            "correct_answer": "3"
+        },
+        {
+            "id": "4",
+            "question": "When lifting heavy objects in the office, what is the correct technique to prevent back injuries?",
+            "options": [
+                {
+                    "identifier": "1",
+                    "answer": "Bend your back forward whilst keeping your legs straight. "
+                },
+                {
+                    "identifier": "2",
+                    "answer": "Keep the object close to your body and bend your knees to lift."
+                },
+                {
+                    "identifier": "3",
+                    "answer": "Twist your torso while lifting to get a better grip."
+                }  
+            ],
+            "correct_answer": "2"
+        },
+        {
+            "id": "5",
+            "question": "Why is it important to have regular breaks during the workday?",
+            "options": [
+                {
+                    "identifier": "1",
+                    "answer": "They are not important. Breaks are unecessary and reduce productivity."
+                },
+                {
+                    "identifier": "2",
+                    "answer": "To give your eyes a rest from the computer screen and reduce strain."
+                },
+                {
+                    "identifier": "3",
+                    "answer": "To catch up on personal calls and social media."
+                }
+            ],
+            "correct_answer": "2"
+        }
+        
+    ]
+}

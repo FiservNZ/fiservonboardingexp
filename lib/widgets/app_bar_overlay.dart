@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fiservonboardingexp/screens/Login_page.dart';
+import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:get/get.dart';
-import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import 'package:flutter/material.dart';
 import '../firebase references/firebase_refs.dart';
 import '../screens/menu drawer/feedback_page.dart';
@@ -13,8 +13,12 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-    ThemeData selectedTheme = themeProvider.currentTheme;
+    ThemeData selectedTheme = getSelectedTheme(context);
+    var iconTextColor = selectedTheme.colorScheme.secondary;
+    var navDrawTileColor = selectedTheme.colorScheme.onBackground;
+
+    final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
     // Update the current user account
     final currentUser = FirebaseAuth.instance.currentUser;
     final rankTitleMap = {
@@ -42,6 +46,7 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
     }
 
     return SafeArea(
+      key: scaffoldKey,
       child: AppBar(
         backgroundColor: selectedTheme.colorScheme.tertiary,
         elevation: 0.0,
@@ -57,9 +62,11 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
 
         // Rank Title
         title: Center(
-          child: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
+          child: FutureBuilder<DocumentSnapshot<Map<String, dynamic>>>(
             // reference from file
-            stream: userColRef.doc(currentUser.uid).snapshots(),
+            future: userColRef
+                .doc(currentUser.uid)
+                .get(), // Use get() to fetch a single snapshot
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.waiting) {
                 return const CircularProgressIndicator();
@@ -74,7 +81,7 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                 return Text(
                   rankTitle,
                   style: TextStyle(
-                    color: selectedTheme.colorScheme.secondary,
+                    color: iconTextColor,
                     fontSize: 27,
                     fontWeight: FontWeight.bold,
                   ).merge(
@@ -88,7 +95,7 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
         ),
 
         // Nav draw
-        actions: <Widget>[
+        actions: [
           IconButton(
             icon: Icon(
               Icons.menu,
@@ -99,120 +106,237 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
                 context: context,
                 builder: (BuildContext context) {
                   return Container(
-                    height: 350,
+                    height: 600,
                     color: selectedTheme.colorScheme.tertiary,
                     child: Center(
                       child: Column(
                         mainAxisAlignment: MainAxisAlignment.center,
                         mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
+                        children: [
+                          //const SizedBox(height: 15),
+
+                          Container(
+                            decoration: BoxDecoration(
+                              color:
+                                  navDrawTileColor, // Color of the rounded rectangle
+                              borderRadius: BorderRadius.circular(
+                                  10), // Adjust the radius for desired roundness
+                            ),
+                            height:
+                                6, // Adjust the height of the rectangle as needed
+                            width: 40, // Make it span the entire width
+                          ),
+
+                          const SizedBox(height: 15),
+
                           //Intro teaser
-                          ListTile(
-                            leading: Icon(
-                              Icons.list,
-                              color: selectedTheme.colorScheme.secondary,
+                          Container(
+                            decoration: BoxDecoration(
+                              color:
+                                  navDrawTileColor, // Background color for the entire menu
                             ),
-                            title: Text(
-                              'Intro Teaser',
-                              style: TextStyle(
-                                color: selectedTheme.colorScheme.secondary,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ).merge(GoogleFonts
-                                  .quicksand()), // Merge styles with GoogleFonts
+                            child: Column(
+                              children: [
+                                ListTile(
+                                  tileColor: Colors
+                                      .white, // Background color for this ListTile
+                                  leading: Icon(
+                                    Icons.list,
+                                    color: iconTextColor,
+                                  ),
+                                  title: Text(
+                                    'Intro Teaser',
+                                    style: TextStyle(
+                                      color: iconTextColor,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.bold,
+                                    ).merge(GoogleFonts.quicksand()),
+                                  ),
+                                  onTap: () {
+                                    Navigator.of(context).pop();
+                                    Get.toNamed("/teaser");
+                                  },
+                                  trailing: Text(
+                                    '>',
+                                    style: TextStyle(
+                                        fontSize: 18, color: iconTextColor),
+                                  ), // Add left arrow icon here
+                                ),
+                              ],
                             ),
-                            onTap: () {
-                              Get.toNamed("/teaser");
-                            },
                           ),
 
                           // Help pop up
-                          ListTile(
-                            leading: Icon(
-                              Icons.question_mark,
-                              color: selectedTheme.colorScheme.secondary,
+                          Container(
+                            decoration: BoxDecoration(
+                              color: navDrawTileColor,
                             ),
-                            title: Text(
-                              'Help',
-                              style: TextStyle(
-                                color: selectedTheme.colorScheme.secondary,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ).merge(GoogleFonts
-                                  .quicksand()), // Merge styles with GoogleFonts
+                            child: ListTile(
+                              tileColor: Colors
+                                  .white, // Background color for this ListTile
+                              leading: Icon(
+                                Icons.question_mark,
+                                color: iconTextColor,
+                              ),
+                              title: Text(
+                                'Help',
+                                style: TextStyle(
+                                  color: iconTextColor,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ).merge(GoogleFonts.quicksand()),
+                              ),
+                              onTap: () {
+                                Navigator.of(context).pop();
+                                Get.toNamed("/help");
+                              },
+                              trailing: Text('>',
+                                  style: TextStyle(
+                                      fontSize: 18, color: iconTextColor)),
                             ),
-                            onTap: () {
-                              Get.toNamed("/help");
-                            },
                           ),
 
                           // FAQ
-                          ListTile(
-                            leading: Icon(
-                              Icons.question_answer,
-                              color: selectedTheme.colorScheme.secondary,
+                          Container(
+                            decoration: BoxDecoration(
+                              color: navDrawTileColor,
                             ),
-                            title: Text(
-                              'FAQ',
-                              style: TextStyle(
-                                color: selectedTheme.colorScheme.secondary,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ).merge(GoogleFonts
-                                  .quicksand()), // Merge styles with GoogleFonts
+                            child: ListTile(
+                              leading: Icon(
+                                Icons.question_answer,
+                                color: iconTextColor,
+                              ),
+                              title: Text(
+                                'FAQ',
+                                style: TextStyle(
+                                  color: iconTextColor,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ).merge(GoogleFonts
+                                    .quicksand()), // Merge styles with GoogleFonts
+                              ),
+                              onTap: () {
+                                Navigator.of(context).pop();
+                                Get.toNamed("/faq");
+                              },
+                              trailing: Text('>',
+                                  style: TextStyle(
+                                      fontSize: 18, color: iconTextColor)),
                             ),
-                            onTap: () {
-                              Get.toNamed("/faq");
-                            },
                           ),
 
                           // Settings
-                          ListTile(
-                            leading: Icon(
-                              Icons.settings,
-                              color: selectedTheme.colorScheme.secondary,
+                          Container(
+                            decoration: BoxDecoration(
+                              color: navDrawTileColor,
                             ),
-                            title: Text(
-                              'Settings',
-                              style: TextStyle(
-                                color: selectedTheme.colorScheme.secondary,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ).merge(GoogleFonts
-                                  .quicksand()), // Merge styles with GoogleFonts
+                            child: ListTile(
+                              leading: Icon(
+                                Icons.settings,
+                                color: iconTextColor,
+                              ),
+                              title: Text(
+                                'Settings',
+                                style: TextStyle(
+                                  color: iconTextColor,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ).merge(GoogleFonts
+                                    .quicksand()), // Merge styles with GoogleFonts
+                              ),
+                              onTap: () {
+                                Navigator.of(context).pop();
+                                Get.toNamed("/settings");
+                              },
+                              trailing: Text('>',
+                                  style: TextStyle(
+                                      fontSize: 18, color: iconTextColor)),
                             ),
-                            onTap: () {
-                              Get.toNamed("/settings");
-                            },
                           ),
 
                           // Feedback
-                          ListTile(
-                            leading: Icon(
-                              Icons.feedback_outlined,
-                              color: selectedTheme.colorScheme.secondary,
+                          Container(
+                            decoration: BoxDecoration(
+                              color: navDrawTileColor,
                             ),
-                            title: Text(
-                              'Feedback',
-                              style: TextStyle(
-                                color: selectedTheme.colorScheme.secondary,
-                                fontSize: 18,
-                                fontWeight: FontWeight.bold,
-                              ).merge(GoogleFonts
-                                  .quicksand()), // Merge styles with GoogleFonts
+                            child: ListTile(
+                              leading: Icon(
+                                Icons.feedback_outlined,
+                                color: iconTextColor,
+                              ),
+                              title: Text(
+                                'Feedback',
+                                style: TextStyle(
+                                  color: iconTextColor,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.bold,
+                                ).merge(GoogleFonts
+                                    .quicksand()), // Merge styles with GoogleFonts
+                              ),
+                              onTap: () {
+                                Navigator.of(context).pop();
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                      builder: (context) => const FeedBack()),
+                                );
+                              },
+                              trailing: Text('>',
+                                  style: TextStyle(
+                                      fontSize: 18, color: iconTextColor)),
                             ),
-                            onTap: () {
-                              Navigator.of(context).push(
-                                MaterialPageRoute(
-                                    builder: (context) => const FeedBack()),
-                              );
-                            },
                           ),
 
-                          const SizedBox(
-                            width: double.infinity,
-                            height: 65,
+                          const SizedBox(height: 25),
+
+                          //Logout Button
+                          Container(
+                            decoration: BoxDecoration(
+                              color: navDrawTileColor, // Background color
+                              // border: Border.all(
+                              //   color: Color.fromARGB(
+                              //       255, 77, 76, 76), // Border color
+                              //   width: 2.0, // Border width
+                              // ),
+                              //borderRadius: BorderRadius.circular(
+                              //    20.0), // Border radius if needed
+                            ),
+                            child: ListTile(
+                              title: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Icon(
+                                    Icons.logout,
+                                    color: selectedTheme.colorScheme.secondary,
+                                  ),
+                                  const SizedBox(width: 8.0),
+                                  Text(
+                                    'Log Out',
+                                    style: TextStyle(
+                                      color:
+                                          selectedTheme.colorScheme.secondary,
+                                      fontSize: 18,
+                                      fontWeight: FontWeight.w900,
+                                    ).merge(GoogleFonts.quicksand()),
+                                  ),
+                                ],
+                              ),
+                              onTap: () async {
+                                await FirebaseAuth.instance.signOut();
+                                Navigator.of(scaffoldKey.currentContext!,
+                                        rootNavigator: true)
+                                    .pushAndRemoveUntil(
+                                  MaterialPageRoute(
+                                    builder: (BuildContext context) {
+                                      return LoginPage();
+                                    },
+                                  ),
+                                  (_) => false,
+                                );
+                              },
+                            ),
                           ),
+
+                          const SizedBox(height: 40),
                         ],
                       ),
                     ),

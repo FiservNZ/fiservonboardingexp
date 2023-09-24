@@ -1,24 +1,23 @@
-import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:fiservonboardingexp/util/mc_testing/watch/watch_tasks_container.dart';
+import 'package:fiservonboardingexp/widgets/progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 late String currentCategory;
 
 class ModuleScreen extends StatelessWidget {
   const ModuleScreen({super.key});
+  static const routeName = "/moduleScreen";
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-    ThemeData selectedTheme = themeProvider.currentTheme;
+    ThemeData selectedTheme = getSelectedTheme(context);
+
     return Scaffold(
       appBar: myAppBar,
       bottomNavigationBar: navBar,
-      //Change later to match theme selected.
       backgroundColor: selectedTheme.colorScheme.background,
       body: Center(
         child: Column(
@@ -57,7 +56,10 @@ class ModuleScreen extends StatelessWidget {
         // String route = title.replaceAll(" ", "");
         currentCategory = title;
         debugPrint('Route: $currentCategory');
+        // Get.toNamed(WatchHomeScreen.routeName, arguments: currentCategory);
+        Get.toNamed("/home", arguments: currentCategory);
 
+        //Modify this to take into consideration other task types
         Get.to(WatchTasksContainer(watchCategory: currentCategory));
       },
       child: Container(
@@ -102,20 +104,10 @@ class ModuleScreen extends StatelessWidget {
                     ),
                   ),
                 ),
+                const Spacer(),
+                ProgressBar(taskCategory: title),
               ],
             ),
-            //Try to implement later if time allows.
-            // Positioned(
-            //   right: 5,
-            //   top: 1,
-            //   bottom: 1,
-            //   child: CircularProgressIndicator(
-            //     //Will need to implement tracking on firebase and grabbing the value from there.
-            //     value: 0.3,
-            //     backgroundColor: Colors.grey[600],
-            //     valueColor: const AlwaysStoppedAnimation<Color>(fiservColor),
-            //   ),
-            // ),
           ],
         ),
       ),

@@ -1,8 +1,7 @@
-import 'package:fiservonboardingexp/themes/theme_provider.dart';
+import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:fiservonboardingexp/widgets/nav_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 import '../widgets/app_bar_overlay.dart';
 import '../widgets/faq_list.dart';
 
@@ -17,9 +16,7 @@ class FaqPage extends StatefulWidget {
 class FaqPageState extends State<FaqPage> {
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-    ThemeData selectedTheme = themeProvider.currentTheme;
-
+    ThemeData selectedTheme = getSelectedTheme(context);
     return Scaffold(
       appBar: const AppBarOverlay(),
       bottomNavigationBar: const CustomNavBar(),
@@ -40,7 +37,7 @@ class FaqPageState extends State<FaqPage> {
             ),
             const SizedBox(height: 16),
             // Gets the Questions and Answers here (Dropdown widget thing)
-            Expanded(
+            const Expanded(
               child: FaqList(),
             ),
           ],

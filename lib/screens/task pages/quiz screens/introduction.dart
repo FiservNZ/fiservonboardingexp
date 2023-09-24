@@ -1,5 +1,4 @@
 import 'package:fiservonboardingexp/util/constants.dart';
-import 'package:fiservonboardingexp/screens/task%20pages/quiz%20screens/question_screen.dart';
 import 'package:fiservonboardingexp/widgets/quiz%20widgets/app_circle_button.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -8,7 +7,7 @@ class IntroductionScreen extends StatelessWidget {
   const IntroductionScreen({super.key});
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext conteKevinxt) {
     return Scaffold(
       backgroundColor: darkBackgroundColor,
       body: Container(
@@ -26,7 +25,8 @@ class IntroductionScreen extends StatelessWidget {
               ),
               const SizedBox(height: 40),
               AppCircleButton(
-                onTap: () => Get.offAndToNamed("/home"),
+                onTap: () => Get.offAndToNamed("/moduleScreen"),
+                //    onTap: () => Get.offAndToNamed("/readHome"),
                 child: const Icon(
                   Icons.arrow_forward,
                   size: 35,
