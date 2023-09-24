@@ -29,8 +29,8 @@ class SettingsPageState extends State<SettingsPage> {
     _firebaseTheme.saveThemePreference(currentUser.uid, theme);
   }
 
-  double edgePadding = 60;
-  double iconTxtSpacing = 30;
+  double edgePadding = 30;
+  double iconTxtSpacing = 15;
   double listSpacing = 30;
   bool isdisabled = true;
 
@@ -59,50 +59,80 @@ class SettingsPageState extends State<SettingsPage> {
             ),
 
             // Spacing
-            const SizedBox(
-              height: 100,
-            ),
+            const SizedBox(height: 100),
             Row(
               children: [
-                Container(
-                  margin: EdgeInsets.symmetric(horizontal: edgePadding),
-                  child: Row(
-                    children: <Widget>[
-                      Icon(Icons.lightbulb,
-                          color: selectedTheme.colorScheme.primary),
-                      SizedBox(
-                          width:
-                              iconTxtSpacing), // Add spacing between icon and text
-                      Text(
-                        'Dark/Light Mode',
-                        style: TextStyle(
-                          color: selectedTheme.colorScheme.primary,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ).merge(GoogleFonts.quicksand()),
-                      ),
-                      Switch(
-                        value: selectedTheme == lightTheme,
-                        onChanged: (value) {
-                          if (value) {
-                            _handleThemeChange(lightTheme, themeProvider);
-                          } else {
-                            _handleThemeChange(darkTheme, themeProvider);
-                          }
-                        },
-                        activeColor: selectedTheme.colorScheme.primary,
-                      ),
-                    ],
-                  ),
+                SizedBox(width: edgePadding),
+                Row(
+                  children: <Widget>[
+                    Icon(Icons.lightbulb,
+                        color: selectedTheme.colorScheme.primary),
+                    SizedBox(
+                        width:
+                            iconTxtSpacing), // Add spacing between icon and text
+                    Text(
+                      'OS enabled dark/light mode',
+                      style: TextStyle(
+                        color: selectedTheme.colorScheme.primary,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ).merge(GoogleFonts.quicksand()),
+                    ),
+                    Switch(
+                      value: selectedTheme == lightTheme,
+                      onChanged: (value) {
+                        if (value) {
+                          _handleThemeChange(lightTheme, themeProvider);
+                        } else {
+                          _handleThemeChange(darkTheme, themeProvider);
+                        }
+                      },
+                      activeColor: selectedTheme.colorScheme.primary,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+
+            Row(
+              children: [
+                SizedBox(width: edgePadding),
+                Row(
+                  children: <Widget>[
+                    Icon(Icons.lightbulb,
+                        color: selectedTheme.colorScheme.primary),
+                    SizedBox(
+                        width:
+                            iconTxtSpacing), // Add spacing between icon and text
+                    Text(
+                      'Dark/light mode',
+                      style: TextStyle(
+                        color: selectedTheme.colorScheme.primary,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ).merge(GoogleFonts.quicksand()),
+                    ),
+                    Switch(
+                      value: selectedTheme == lightTheme,
+                      onChanged: (value) {
+                        if (value) {
+                          _handleThemeChange(lightTheme, themeProvider);
+                        } else {
+                          _handleThemeChange(darkTheme, themeProvider);
+                        }
+                      },
+                      activeColor: selectedTheme.colorScheme.primary,
+                    ),
+                  ],
                 ),
               ],
             ),
 
             Padding(
               padding: const EdgeInsets.only(
-                  left: 30.0), // Adjust the left value as needed
+                  left: 25.0), // Adjust the left value as needed
               child: Text(
-                "(When a theme is applied, dark and light \n modes will be deactivated.)",
+                "(When a theme is applied, dark and light modes \n will be deactivated.)",
                 style: TextStyle(
                     fontSize: 11,
                     color: selectedTheme.colorScheme.primary,
@@ -161,7 +191,7 @@ class SettingsPageState extends State<SettingsPage> {
                         width:
                             iconTxtSpacing), // Add some spacing between icon and text
                     Text(
-                      'Change Password',
+                      'Change password',
                       style: TextStyle(
                         color: selectedTheme.colorScheme.primary,
                         fontSize: 18,

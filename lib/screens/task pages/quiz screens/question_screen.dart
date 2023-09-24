@@ -40,7 +40,7 @@ class QuestionScreen extends GetView<QuestionController> {
         leadingWidget: QuizProgressBar(),
         //titleWidget: Text("timer bar pos"),
       ),
-      backgroundColor: Colors.green,
+      backgroundColor: lightBackgroundColor,
       body: BackgroundDecoration(
         child: Obx(() => Column(
               children: [
