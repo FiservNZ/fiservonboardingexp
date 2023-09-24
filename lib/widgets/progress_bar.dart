@@ -22,7 +22,7 @@ class ProgressBar extends StatelessWidget {
           .get(),
       builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const CircularProgressIndicator();
+          return const LinearProgressIndicator();
         }
 
         if (snapshot.hasError) {
@@ -49,42 +49,57 @@ class ProgressBar extends StatelessWidget {
             (category.curPoints / category.maxPoints);
 
         // Displays the progress indicator
-        return Column(
-          children: [
-            Stack(
-              alignment: Alignment.center,
-              children: [
-                Transform.scale(
-                  scale: 1.5,
-                  child: CircularProgressIndicator(
+        return Container(
+          child: Column(
+            children: [
+              Text(
+                '${category.curPoints} / ${category.maxPoints}',
+                style: TextStyle(
+                  color: selectedTheme.colorScheme.primary,
+                  fontSize: 15,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+              const SizedBox(height: 3),
+              SizedBox(
+                width: 80,
+                height: 10,
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(5),
+                  child: LinearProgressIndicator(
                     value: progressPercentage,
-                    strokeWidth: 6.0,
-                    color: selectedTheme.colorScheme.primary,
+                    valueColor: AlwaysStoppedAnimation<Color>(
+                      selectedTheme.colorScheme.primary,
+                    ),
                     backgroundColor: selectedTheme.colorScheme.surface,
                   ),
                 ),
-                // Written as a percentage
-                // Text(
-                //   // Percentage with no decimals and a leading 0
-                //   '${(progressPercentage * 100).toInt().toString().padLeft(2, '0')}%',
-                //   style: TextStyle(
-                //     color: selectedTheme.colorScheme.primary,
-                //     fontSize: 15,
-                //     fontWeight: FontWeight.bold,
-                //   ),
-                // ),
-                // number of points out of points
-                Text(
-                  '${category.curPoints} / ${category.maxPoints}',
-                  style: TextStyle(
-                    color: selectedTheme.colorScheme.primary,
-                    fontSize: 15,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ],
-            ),
-          ],
+              ),
+
+              // Stack(
+              //   alignment: Alignment.center,
+              //   children: [
+              //     Transform.scale(
+              //       scale: 1.1,
+              //       child: CircularProgressIndicator(
+              //         value: progressPercentage,
+              //         strokeWidth: 6.0,
+              //         color: selectedTheme.colorScheme.primary,
+              //         backgroundColor: selectedTheme.colorScheme.surface,
+              //       ),
+              //       ),
+              //     Text(
+              //       '${category.curPoints} / ${category.maxPoints}',
+              //       style: TextStyle(
+              //         color: selectedTheme.colorScheme.primary,
+              //         fontSize: 13,
+              //         fontWeight: FontWeight.bold,
+              //       ),
+              //     ),
+              //   ],
+              // ),
+            ],
+          ),
         );
       },
     );

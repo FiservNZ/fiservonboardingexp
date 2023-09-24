@@ -64,6 +64,7 @@ class QuizProgressBar extends StatelessWidget {
                               // quizDuration usage
                               "$quizDuration",
                               style: TextStyle(
+                                  fontWeight: FontWeight.bold,
                                   color: selectedTheme.colorScheme.primary),
                               //"${(controller.animation.value * quizDuration).round()} sec",
                               textAlign: TextAlign.right,

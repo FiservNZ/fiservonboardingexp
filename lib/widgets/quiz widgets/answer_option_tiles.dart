@@ -43,10 +43,10 @@ class AnswerOptionTiles extends StatelessWidget {
               child: Text(
                 answerIdentifier,
                 style: GoogleFonts.quicksand(
+                  fontWeight: FontWeight.bold,
                   color: isSelected
                       ? selectedTheme.colorScheme.primary
                       : selectedTheme.colorScheme.secondary,
-                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),
@@ -58,7 +58,8 @@ class AnswerOptionTiles extends StatelessWidget {
                   color: isSelected
                       ? selectedTheme.colorScheme.primary
                       : selectedTheme.colorScheme.secondary,
-                  fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                  //  fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                  fontWeight: isSelected ? FontWeight.bold : FontWeight.w500,
                 ),
               ),
             ),

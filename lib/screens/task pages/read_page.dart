@@ -7,11 +7,6 @@ import 'package:fiservonboardingexp/widgets/exp_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:http/http.dart';
-import 'package:provider/provider.dart';
-import '../../controllers/read_controller.dart';
-import 'package:fiservonboardingexp/widgets/progress_bar.dart';
-
 import '../../firebase references/firebase_refs.dart';
 import '../../model/read_model.dart';
 
@@ -190,9 +185,9 @@ class ReadPage extends StatelessWidget {
                       ExpBar expBar = const ExpBar(barwidth: 1);
                       expBar.addExperience(25);
 
-                      // Add points to progress bar is task hasn't been completed
+                      // Add points to progress bar when it's the users first time completing the task
                       if (readModel.isDone == false) {
-                        addPointsToProgress(readModel.category);
+                        addPointsToProgress(currentCategory);
                       }
 
                       final querySnapshot = await userColRef
