@@ -17,7 +17,8 @@ class ContentArea extends StatelessWidget {
       clipBehavior: Clip.hardEdge,
       type: MaterialType.transparency,
       child: Ink(
-        decoration: BoxDecoration(color: selectedTheme.colorScheme.background),
+        decoration:
+            BoxDecoration(color: selectedTheme.colorScheme.onBackground),
         padding: addPadding
             ? EdgeInsets.only(
                 top: mobileScreenPadding,

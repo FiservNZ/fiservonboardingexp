@@ -19,7 +19,8 @@ class BackgroundDecoration extends StatelessWidget {
         Positioned.fill(
             child: Container(
           decoration: BoxDecoration(
-              color: showGradient ? null : selectedTheme.colorScheme.tertiary,
+              color:
+                  showGradient ? null : selectedTheme.colorScheme.onBackground,
               //color: showGradient ? null : Theme.of(context).primaryColor,
               gradient: showGradient ? mainGradient() : null),
         )),

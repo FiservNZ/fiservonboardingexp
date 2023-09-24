@@ -172,9 +172,10 @@ Widget showPopup({
               width: buttonWidth,
               child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    side: BorderSide(color: selectedTheme.colorScheme.primary),
+                    side:
+                        BorderSide(color: selectedTheme.colorScheme.secondary),
                     backgroundColor: selectedTheme
-                        .colorScheme.onBackground, /*shadowColor: fiservColor*/
+                        .colorScheme.background, /*shadowColor: fiservColor*/
                   ),
                   onPressed: onTapCancel,
                   child: Text(
@@ -190,9 +191,9 @@ Widget showPopup({
               width: buttonWidth,
               child: ElevatedButton(
                   style: TextButton.styleFrom(
-                      side:
-                          BorderSide(color: selectedTheme.colorScheme.primary),
-                      backgroundColor: selectedTheme.colorScheme.onBackground),
+                      side: BorderSide(
+                          color: selectedTheme.colorScheme.secondary),
+                      backgroundColor: selectedTheme.colorScheme.background),
                   onPressed: onTapStart,
                   child: Text("Start",
                       style: TextStyle(

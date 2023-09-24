@@ -41,7 +41,7 @@ class QuizOutcomeScreen extends GetView<QuestionController> {
     ThemeData selectedTheme = getSelectedTheme(context);
     final ButtonStyle style = ElevatedButton.styleFrom(
         textStyle: const TextStyle(fontSize: 20),
-        backgroundColor: selectedTheme.colorScheme.secondary);
+        backgroundColor: selectedTheme.colorScheme.background);
     return Scaffold(
       extendBodyBehindAppBar: true,
       body: BackgroundDecoration(
@@ -103,7 +103,7 @@ class QuizOutcomeScreen extends GetView<QuestionController> {
               ),
             ),
             ColoredBox(
-              color: selectedTheme.colorScheme.background ?? Colors.white,
+              color: selectedTheme.colorScheme.onBackground ?? Colors.white,
               child: Padding(
                 padding: const EdgeInsets.only(
                     bottom: 200, right: 30, left: 20, top: 10),
@@ -145,7 +145,7 @@ class QuizOutcomeScreen extends GetView<QuestionController> {
                                 'Done',
                                 selectionColor: Colors.black,
                                 style: TextStyle(
-                                    color: selectedTheme.colorScheme.tertiary),
+                                    color: selectedTheme.colorScheme.secondary),
                               ),
                             ),
                           )),

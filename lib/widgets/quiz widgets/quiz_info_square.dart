@@ -17,8 +17,8 @@ class QuizInfoSquare extends StatelessWidget {
       child: Container(
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
-            border: Border.all(color: selectedTheme.colorScheme.primary),
-            color: selectedTheme.colorScheme.onBackground),
+            border: Border.all(color: selectedTheme.colorScheme.secondary),
+            color: selectedTheme.colorScheme.background),
         child: SizedBox(
           width: 70,
           height: 60,
