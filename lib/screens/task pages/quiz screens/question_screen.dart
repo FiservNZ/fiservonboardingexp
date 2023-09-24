@@ -40,7 +40,7 @@ class QuestionScreen extends GetView<QuestionController> {
         leadingWidget: QuizProgressBar(),
         //titleWidget: Text("timer bar pos"),
       ),
-      backgroundColor: lightBackgroundColor,
+      backgroundColor: Colors.green,
       body: BackgroundDecoration(
         child: Obx(() => Column(
               children: [
@@ -259,7 +259,8 @@ class QuestionScreen extends GetView<QuestionController> {
                                                   const EdgeInsets.all(8.0),
                                               child: Text(
                                                 'Submit Answers',
-                                                selectionColor: Colors.black,
+                                                selectionColor: selectedTheme
+                                                    .colorScheme.background,
                                                 style: GoogleFonts.quicksand(
                                                     color: selectedTheme
                                                         .colorScheme.secondary,
