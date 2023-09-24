@@ -1,6 +1,9 @@
 import 'package:fiservonboardingexp/firebase%20references/firebase_refs.dart';
 import 'package:fiservonboardingexp/screens/menu%20drawer/change_password_page.dart';
 import 'package:fiservonboardingexp/themes/Theme_database.dart';
+import 'package:fiservonboardingexp/themes/beach_theme.dart';
+import 'package:fiservonboardingexp/themes/pastel_theme.dart';
+import 'package:fiservonboardingexp/themes/rainforest_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
@@ -20,6 +23,8 @@ class SettingsPage extends StatefulWidget {
 
 class SettingsPageState extends State<SettingsPage> {
   final ThemeDatabase _firebaseTheme = ThemeDatabase();
+
+  bool isEnabledOS = true;
 
   // Updates to the new theme
   void _handleThemeChange(ThemeData theme, ThemeProvider themeProvider) {
@@ -58,8 +63,9 @@ class SettingsPageState extends State<SettingsPage> {
               ).merge(GoogleFonts.quicksand()),
             ),
 
-            // Spacing
-            const SizedBox(height: 100),
+            const SizedBox(height: 70),
+
+            // OS controlled dark/light mode
             Row(
               children: [
                 SizedBox(width: edgePadding),
@@ -71,73 +77,137 @@ class SettingsPageState extends State<SettingsPage> {
                         width:
                             iconTxtSpacing), // Add spacing between icon and text
                     Text(
-                      'OS enabled dark/light mode',
+                      'OS enabled light/\ndark mode',
                       style: TextStyle(
                         color: selectedTheme.colorScheme.primary,
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ).merge(GoogleFonts.quicksand()),
                     ),
-                    Switch(
-                      value: selectedTheme == lightTheme,
-                      onChanged: (value) {
-                        if (value) {
-                          _handleThemeChange(lightTheme, themeProvider);
-                        } else {
-                          _handleThemeChange(darkTheme, themeProvider);
-                        }
-                      },
-                      activeColor: selectedTheme.colorScheme.primary,
+                    Row(
+                      children: [
+                        const SizedBox(width: 60),
+                        Switch(
+                          value: isEnabledOS,
+                          onChanged: (value) {
+                            setState(() {
+                              isEnabledOS =
+                                  value; // Update isEnabled when the Switch is toggled
+                            });
+
+                            if (isEnabledOS) {
+                              // Switch is turned on
+                            } else {
+                              // Switch is turned off
+                            }
+                          },
+                          activeColor: selectedTheme.colorScheme.primary,
+                        ),
+                        Text(
+                          isEnabledOS ? 'on' : 'off',
+                          style: TextStyle(
+                            color: isEnabledOS
+                                ? selectedTheme.colorScheme.primary
+                                : Colors.grey,
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                          ).merge(GoogleFonts.quicksand()),
+                        ),
+                      ],
                     ),
                   ],
                 ),
               ],
             ),
 
-            Row(
-              children: [
-                SizedBox(width: edgePadding),
-                Row(
-                  children: <Widget>[
-                    Icon(Icons.lightbulb,
-                        color: selectedTheme.colorScheme.primary),
-                    SizedBox(
-                        width:
-                            iconTxtSpacing), // Add spacing between icon and text
-                    Text(
-                      'Dark/light mode',
-                      style: TextStyle(
-                        color: selectedTheme.colorScheme.primary,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ).merge(GoogleFonts.quicksand()),
-                    ),
-                    Switch(
-                      value: selectedTheme == lightTheme,
-                      onChanged: (value) {
-                        if (value) {
-                          _handleThemeChange(lightTheme, themeProvider);
-                        } else {
-                          _handleThemeChange(darkTheme, themeProvider);
-                        }
-                      },
-                      activeColor: selectedTheme.colorScheme.primary,
-                    ),
-                  ],
-                ),
-              ],
-            ),
-
+            // OS controlled light/dark mode explanation
             Padding(
               padding: const EdgeInsets.only(
-                  left: 25.0), // Adjust the left value as needed
-              child: Text(
-                "(When a theme is applied, dark and light modes \n will be deactivated.)",
-                style: TextStyle(
+                  left: 70), // Set your desired padding here
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "(Enabling this feature allows it to be controlled by \n your phone's  dark/light mode settings..)",
+                  style: TextStyle(
                     fontSize: 11,
                     color: selectedTheme.colorScheme.primary,
-                    fontStyle: FontStyle.italic),
-                textAlign: TextAlign.left,
+                    fontStyle: FontStyle.italic,
+                  ),
+                ),
+              ),
+            ),
+
+            SizedBox(height: listSpacing),
+
+            // Light and Dark mode
+            Row(
+              children: [
+                SizedBox(width: edgePadding),
+                Row(
+                  children: <Widget>[
+                    Icon(
+                      Icons.lightbulb,
+                      color: (isEnabledOS ||
+                              selectedTheme == rainforestTheme ||
+                              selectedTheme == pastelTheme ||
+                              selectedTheme == beachTheme)
+                          ? Colors.grey // Grey out the icon
+                          : selectedTheme.colorScheme.primary,
+                    ),
+                    SizedBox(
+                      width: iconTxtSpacing,
+                    ),
+                    Text(
+                      'Light/dark mode', // Display "Light/Dark Mode On"
+                      style: TextStyle(
+                        color: (isEnabledOS ||
+                                selectedTheme == rainforestTheme ||
+                                selectedTheme == pastelTheme ||
+                                selectedTheme == beachTheme)
+                            ? Colors.grey // Grey out the text
+                            : selectedTheme.colorScheme.primary,
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                      ).merge(GoogleFonts.quicksand()),
+                    ),
+                    const SizedBox(width: 63),
+                    Switch(
+                      value: selectedTheme == lightTheme,
+                      onChanged: (isEnabledOS)
+                          ? null
+                          : (value) {
+                              if (value) {
+                                _handleThemeChange(lightTheme, themeProvider);
+                              } else {
+                                _handleThemeChange(darkTheme, themeProvider);
+                              }
+                            },
+                      activeColor: selectedTheme.colorScheme.primary,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+
+            //  light/dark mode explanation
+            Padding(
+              padding: const EdgeInsets.only(
+                  left: 70), // Set your desired padding here
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "(Turn off OS enabled light/dark mode to manually\n set the mode. This mode is deactivated when \na theme is applied)",
+                  style: TextStyle(
+                    fontSize: 11,
+                    color: (isEnabledOS ||
+                            selectedTheme == rainforestTheme ||
+                            selectedTheme == pastelTheme ||
+                            selectedTheme == beachTheme)
+                        ? Colors.grey // Grey out the text
+                        : selectedTheme.colorScheme.primary,
+                    fontStyle: FontStyle.italic,
+                  ),
+                ),
               ),
             ),
 
@@ -148,26 +218,52 @@ class SettingsPageState extends State<SettingsPage> {
               margin: EdgeInsets.symmetric(horizontal: edgePadding),
               child: GestureDetector(
                 onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return const ThemesPage();
-                  }));
+                  if (!isEnabledOS) {
+                    Navigator.push(context,
+                        MaterialPageRoute(builder: (context) {
+                      return const ThemesPage();
+                    }));
+                  }
                 },
                 child: Row(
                   children: <Widget>[
                     Icon(Icons.color_lens,
-                        color: selectedTheme.colorScheme.primary),
+                        color: isEnabledOS
+                            ? Colors.grey // Grey out the icon
+                            : selectedTheme.colorScheme.primary),
                     SizedBox(
                         width:
                             iconTxtSpacing), // Add some spacing between icon and text
                     Text(
                       'Themes',
                       style: TextStyle(
-                        color: selectedTheme.colorScheme.primary,
+                        color: isEnabledOS
+                            ? Colors.grey // Grey out the text
+                            : selectedTheme.colorScheme.primary,
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
                       ).merge(GoogleFonts.quicksand()),
                     ),
                   ],
+                ),
+              ),
+            ),
+
+            // Themes explanation
+            Padding(
+              padding: const EdgeInsets.only(
+                  left: 70), // Set your desired padding here
+              child: Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  "(Turn off OS enabled light/dark mode to set a theme.)",
+                  style: TextStyle(
+                    fontSize: 11,
+                    color: isEnabledOS
+                        ? Colors.grey
+                        : selectedTheme.colorScheme.primary,
+                    fontStyle: FontStyle.italic,
+                  ),
                 ),
               ),
             ),
