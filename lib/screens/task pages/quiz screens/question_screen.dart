@@ -59,7 +59,7 @@ class QuestionScreen extends GetView<QuestionController> {
                                   style: GoogleFonts.quicksand(
                                       color:
                                           selectedTheme.colorScheme.secondary,
-                                      fontWeight: FontWeight.w400,
+                                      fontWeight: FontWeight.bold,
                                       fontSize: 16),
                                   textAlign: TextAlign.start,
                                 ),

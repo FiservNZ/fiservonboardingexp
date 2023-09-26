@@ -13,19 +13,20 @@ class NavDraw extends StatelessWidget {
   Widget build(BuildContext context) {
     ThemeData selectedTheme = getSelectedTheme(context);
     var iconTextColor = selectedTheme.colorScheme.secondary;
-    var navDrawTileColor = selectedTheme.colorScheme.onBackground;
+    var padding = const EdgeInsets.only(left: 10, right: 10);
 
     return Container(
-      height: 600,
+      height: 400,
       color: selectedTheme.colorScheme.tertiary,
       child: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
+            // Tab design at the top of the menu drawer
             Container(
               decoration: BoxDecoration(
-                color: navDrawTileColor, // Color of the rounded rectangle
+                color: iconTextColor, // Color of the rounded rectangle
                 borderRadius: BorderRadius.circular(
                     10), // Adjust the radius for desired roundness
               ),
@@ -33,29 +34,25 @@ class NavDraw extends StatelessWidget {
               width: 40, // Make it span the entire width
             ),
 
-            const SizedBox(height: 15),
+            const SizedBox(height: 10),
 
             //Intro teaser
             Container(
-              decoration: BoxDecoration(
-                color: navDrawTileColor, // Background color for the entire menu
-              ),
+              padding: padding,
               child: Column(
                 children: [
                   ListTile(
-                    tileColor:
-                        Colors.white, // Background color for this ListTile
                     leading: Icon(
                       Icons.list,
                       color: iconTextColor,
                     ),
                     title: Text(
                       'Intro Teaser',
-                      style: TextStyle(
+                      style: GoogleFonts.quicksand(
                         color: iconTextColor,
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
-                      ).merge(GoogleFonts.quicksand()),
+                      ),
                     ),
                     onTap: () {
                       Navigator.of(context).pop();
@@ -63,7 +60,10 @@ class NavDraw extends StatelessWidget {
                     },
                     trailing: Text(
                       '>',
-                      style: TextStyle(fontSize: 18, color: iconTextColor),
+                      style: TextStyle(
+                          fontSize: 18,
+                          color: iconTextColor,
+                          fontWeight: FontWeight.bold),
                     ), // Add left arrow icon here
                   ),
                 ],
@@ -72,37 +72,35 @@ class NavDraw extends StatelessWidget {
 
             // Help pop up
             Container(
-              decoration: BoxDecoration(
-                color: navDrawTileColor,
-              ),
+              padding: padding,
               child: ListTile(
-                tileColor: Colors.white, // Background color for this ListTile
                 leading: Icon(
                   Icons.question_mark,
                   color: iconTextColor,
                 ),
                 title: Text(
                   'Help',
-                  style: TextStyle(
+                  style: GoogleFonts.quicksand(
                     color: iconTextColor,
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
-                  ).merge(GoogleFonts.quicksand()),
+                  ),
                 ),
                 onTap: () {
                   Navigator.of(context).pop();
                   Get.toNamed("/help");
                 },
                 trailing: Text('>',
-                    style: TextStyle(fontSize: 18, color: iconTextColor)),
+                    style: TextStyle(
+                        fontSize: 18,
+                        color: iconTextColor,
+                        fontWeight: FontWeight.bold)),
               ),
             ),
 
             // FAQ
             Container(
-              decoration: BoxDecoration(
-                color: navDrawTileColor,
-              ),
+              padding: padding,
               child: ListTile(
                 leading: Icon(
                   Icons.question_answer,
@@ -110,27 +108,27 @@ class NavDraw extends StatelessWidget {
                 ),
                 title: Text(
                   'FAQ',
-                  style: TextStyle(
+                  style: GoogleFonts.quicksand(
                     color: iconTextColor,
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
-                  ).merge(
-                      GoogleFonts.quicksand()), // Merge styles with GoogleFonts
+                  ), // Merge styles with GoogleFonts
                 ),
                 onTap: () {
                   Navigator.of(context).pop();
                   Get.toNamed("/faq");
                 },
                 trailing: Text('>',
-                    style: TextStyle(fontSize: 18, color: iconTextColor)),
+                    style: TextStyle(
+                        fontSize: 18,
+                        color: iconTextColor,
+                        fontWeight: FontWeight.bold)),
               ),
             ),
 
             // Settings
             Container(
-              decoration: BoxDecoration(
-                color: navDrawTileColor,
-              ),
+              padding: padding,
               child: ListTile(
                 leading: Icon(
                   Icons.settings,
@@ -138,27 +136,27 @@ class NavDraw extends StatelessWidget {
                 ),
                 title: Text(
                   'Settings',
-                  style: TextStyle(
+                  style: GoogleFonts.quicksand(
                     color: iconTextColor,
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
-                  ).merge(
-                      GoogleFonts.quicksand()), // Merge styles with GoogleFonts
+                  ), // Merge styles with GoogleFonts
                 ),
                 onTap: () {
                   Navigator.of(context).pop();
                   Get.toNamed("/settings");
                 },
                 trailing: Text('>',
-                    style: TextStyle(fontSize: 18, color: iconTextColor)),
+                    style: TextStyle(
+                        fontSize: 18,
+                        color: iconTextColor,
+                        fontWeight: FontWeight.bold)),
               ),
             ),
 
             // Feedback
             Container(
-              decoration: BoxDecoration(
-                color: navDrawTileColor,
-              ),
+              padding: padding,
               child: ListTile(
                 leading: Icon(
                   Icons.feedback_outlined,
@@ -166,12 +164,11 @@ class NavDraw extends StatelessWidget {
                 ),
                 title: Text(
                   'Feedback',
-                  style: TextStyle(
+                  style: GoogleFonts.quicksand(
                     color: iconTextColor,
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
-                  ).merge(
-                      GoogleFonts.quicksand()), // Merge styles with GoogleFonts
+                  ), // Merge styles with GoogleFonts
                 ),
                 onTap: () {
                   Navigator.of(context).pop();
@@ -180,48 +177,26 @@ class NavDraw extends StatelessWidget {
                   );
                 },
                 trailing: Text('>',
-                    style: TextStyle(fontSize: 18, color: iconTextColor)),
+                    style: TextStyle(
+                        fontSize: 18,
+                        color: iconTextColor,
+                        fontWeight: FontWeight.bold)),
               ),
             ),
 
-            const SizedBox(height: 25),
+            const SizedBox(height: 10),
 
             //Logout Button
-            Container(
-              decoration: BoxDecoration(
-                color: navDrawTileColor, // Background color
-                // border: Border.all(
-                //   color: Color.fromARGB(
-                //       255, 77, 76, 76), // Border color
-                //   width: 2.0, // Border width
-                // ),
-                //borderRadius: BorderRadius.circular(
-                //    20.0), // Border radius if needed
-              ),
-              child: ListTile(
-                title: Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Icon(
-                      Icons.logout,
-                      color: selectedTheme.colorScheme.secondary,
-                    ),
-                    const SizedBox(width: 8.0),
-                    Text(
-                      'Log Out',
-                      style: TextStyle(
-                        color: selectedTheme.colorScheme.secondary,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w900,
-                      ).merge(GoogleFonts.quicksand()),
-                    ),
-                  ],
-                ),
-                onTap: () async {
+            //Padding(
+            // padding:
+            //     EdgeInsets.only(left: 0), // Adjust the left padding as needed
+            // child:
+            SizedBox(
+              width: 150, // Set the desired width for the button
+              child: ElevatedButton(
+                onPressed: () async {
                   await FirebaseAuth.instance.signOut();
-                  var scaffoldKey;
-                  Navigator.of(scaffoldKey.currentContext!, rootNavigator: true)
-                      .pushAndRemoveUntil(
+                  Navigator.of(context).pushAndRemoveUntil(
                     MaterialPageRoute(
                       builder: (BuildContext context) {
                         return LoginPage();
@@ -230,10 +205,34 @@ class NavDraw extends StatelessWidget {
                     (_) => false,
                   );
                 },
+                style: ElevatedButton.styleFrom(
+                  backgroundColor: selectedTheme
+                      .colorScheme.secondary, // Button background color
+                  foregroundColor:
+                      selectedTheme.colorScheme.tertiary, // Text color
+                ),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(
+                      Icons.logout,
+                      color: selectedTheme.colorScheme.tertiary,
+                    ),
+                    const SizedBox(width: 8.0),
+                    Text(
+                      'Log Out',
+                      style: GoogleFonts.quicksand(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w900,
+                      ),
+                    ),
+                  ],
+                ),
               ),
             ),
+            // ),
 
-            const SizedBox(height: 40),
+            const SizedBox(height: 10),
           ],
         ),
       ),

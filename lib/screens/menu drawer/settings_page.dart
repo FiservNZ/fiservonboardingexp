@@ -9,7 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import 'package:provider/provider.dart';
 import '../../themes/theme_provider.dart';
 import '../../widgets/app_bar_overlay.dart';
-import 'package:fiservonboardingexp/screens/themes_page.dart';
+import 'package:fiservonboardingexp/screens/menu%20drawer/themes_page.dart';
 import 'package:fiservonboardingexp/themes/dark_theme.dart';
 import 'package:fiservonboardingexp/themes/light_theme.dart';
 import 'package:fiservonboardingexp/widgets/nav_bar.dart';
@@ -24,7 +24,7 @@ class SettingsPage extends StatefulWidget {
 class SettingsPageState extends State<SettingsPage> {
   final ThemeDatabase _firebaseTheme = ThemeDatabase();
 
-  bool isEnabledOS = true;
+  bool isEnabledOS = false;
 
   // Updates to the new theme
   void _handleThemeChange(ThemeData theme, ThemeProvider themeProvider) {
@@ -45,6 +45,17 @@ class SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
     ThemeData selectedTheme = themeProvider.currentTheme;
+
+    String currentThemeName = 'None';
+
+    if (selectedTheme == rainforestTheme) {
+      currentThemeName = 'Rainforest';
+    } else if (selectedTheme == pastelTheme) {
+      currentThemeName = 'Pastel';
+    } else if (selectedTheme == beachTheme) {
+      currentThemeName = 'Beach';
+    }
+
     return Scaffold(
       key: _scaffoldKey, // Set the GlobalKey<ScaffoldState>
       backgroundColor: selectedTheme.colorScheme.background,
@@ -56,11 +67,11 @@ class SettingsPageState extends State<SettingsPage> {
             // Heading
             Text(
               '\n Settings',
-              style: TextStyle(
+              style: GoogleFonts.quicksand(
                 fontSize: 27,
                 fontWeight: FontWeight.bold,
                 color: selectedTheme.colorScheme.secondary,
-              ).merge(GoogleFonts.quicksand()),
+              ),
             ),
 
             const SizedBox(height: 70),
@@ -69,51 +80,45 @@ class SettingsPageState extends State<SettingsPage> {
             Row(
               children: [
                 SizedBox(width: edgePadding),
+                Icon(Icons.lightbulb, color: selectedTheme.colorScheme.primary),
+                SizedBox(
+                    width: iconTxtSpacing), // Add spacing between icon and text
+                Text(
+                  'OS enabled light/\ndark mode',
+                  style: GoogleFonts.quicksand(
+                    color: selectedTheme.colorScheme.primary,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
                 Row(
-                  children: <Widget>[
-                    Icon(Icons.lightbulb,
-                        color: selectedTheme.colorScheme.primary),
-                    SizedBox(
-                        width:
-                            iconTxtSpacing), // Add spacing between icon and text
+                  children: [
+                    const SizedBox(width: 60),
+                    Switch(
+                      value: isEnabledOS,
+                      onChanged: (value) {
+                        setState(() {
+                          isEnabledOS =
+                              value; // Update isEnabled when the Switch is toggled
+                        });
+
+                        if (isEnabledOS) {
+                          // Switch is turned on
+                        } else {
+                          // Switch is turned off
+                        }
+                      },
+                      activeColor: selectedTheme.colorScheme.primary,
+                    ),
                     Text(
-                      'OS enabled light/\ndark mode',
-                      style: TextStyle(
-                        color: selectedTheme.colorScheme.primary,
+                      isEnabledOS ? 'on' : 'off',
+                      style: GoogleFonts.quicksand(
+                        color: isEnabledOS
+                            ? selectedTheme.colorScheme.primary
+                            : Colors.grey,
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
-                      ).merge(GoogleFonts.quicksand()),
-                    ),
-                    Row(
-                      children: [
-                        const SizedBox(width: 60),
-                        Switch(
-                          value: isEnabledOS,
-                          onChanged: (value) {
-                            setState(() {
-                              isEnabledOS =
-                                  value; // Update isEnabled when the Switch is toggled
-                            });
-
-                            if (isEnabledOS) {
-                              // Switch is turned on
-                            } else {
-                              // Switch is turned off
-                            }
-                          },
-                          activeColor: selectedTheme.colorScheme.primary,
-                        ),
-                        Text(
-                          isEnabledOS ? 'on' : 'off',
-                          style: TextStyle(
-                            color: isEnabledOS
-                                ? selectedTheme.colorScheme.primary
-                                : Colors.grey,
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                          ).merge(GoogleFonts.quicksand()),
-                        ),
-                      ],
+                      ),
                     ),
                   ],
                 ),
@@ -127,12 +132,12 @@ class SettingsPageState extends State<SettingsPage> {
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "(Enabling this feature allows it to be controlled by \n your phone's  dark/light mode settings..)",
-                  style: TextStyle(
-                    fontSize: 11,
-                    color: selectedTheme.colorScheme.primary,
-                    fontStyle: FontStyle.italic,
-                  ),
+                  "(Enabling this feature allows it to be controlled\n by  your phone's  dark/light mode settings..)",
+                  style: GoogleFonts.quicksand(
+                      fontSize: 13,
+                      color: selectedTheme.colorScheme.primary,
+                      fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.w500),
                 ),
               ),
             ),
@@ -143,62 +148,56 @@ class SettingsPageState extends State<SettingsPage> {
             Row(
               children: [
                 SizedBox(width: edgePadding),
-                Row(
-                  children: <Widget>[
-                    Icon(
-                      Icons.lightbulb,
-                      color: (isEnabledOS ||
-                              selectedTheme == rainforestTheme ||
-                              selectedTheme == pastelTheme ||
-                              selectedTheme == beachTheme)
-                          ? Colors.grey // Grey out the icon
-                          : selectedTheme.colorScheme.primary,
-                    ),
-                    SizedBox(
-                      width: iconTxtSpacing,
-                    ),
-                    Text(
-                      'Light/dark mode', // Display "Light/Dark Mode On"
-                      style: TextStyle(
-                        color: (isEnabledOS ||
-                                selectedTheme == rainforestTheme ||
-                                selectedTheme == pastelTheme ||
-                                selectedTheme == beachTheme)
-                            ? Colors.grey // Grey out the text
-                            : selectedTheme.colorScheme.primary,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ).merge(GoogleFonts.quicksand()),
-                    ),
-                    const SizedBox(width: 63),
-                    Switch(
-                      value: selectedTheme == lightTheme,
-                      onChanged: (isEnabledOS)
-                          ? null
-                          : (value) {
-                              if (value) {
-                                _handleThemeChange(lightTheme, themeProvider);
-                              } else {
-                                _handleThemeChange(darkTheme, themeProvider);
-                              }
-                            },
-                      activeColor: selectedTheme.colorScheme.primary,
-                    ),
-                  ],
+                Icon(
+                  Icons.lightbulb,
+                  color: (isEnabledOS ||
+                          selectedTheme == rainforestTheme ||
+                          selectedTheme == pastelTheme ||
+                          selectedTheme == beachTheme)
+                      ? Colors.grey // Grey out the icon
+                      : selectedTheme.colorScheme.primary,
+                ),
+                SizedBox(
+                  width: iconTxtSpacing,
+                ),
+                Text(
+                  'Light/dark mode', // Display "Light/Dark Mode On"
+                  style: GoogleFonts.quicksand(
+                    color: (isEnabledOS ||
+                            selectedTheme == rainforestTheme ||
+                            selectedTheme == pastelTheme ||
+                            selectedTheme == beachTheme)
+                        ? Colors.grey // Grey out the text
+                        : selectedTheme.colorScheme.primary,
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                const SizedBox(width: 63),
+                Switch(
+                  value: selectedTheme == lightTheme,
+                  onChanged: (isEnabledOS)
+                      ? null
+                      : (value) {
+                          if (value) {
+                            _handleThemeChange(lightTheme, themeProvider);
+                          } else {
+                            _handleThemeChange(darkTheme, themeProvider);
+                          }
+                        },
+                  activeColor: selectedTheme.colorScheme.primary,
                 ),
               ],
             ),
 
             //  light/dark mode explanation
             Padding(
-              padding: const EdgeInsets.only(
-                  left: 70), // Set your desired padding here
+              padding: const EdgeInsets.only(left: 0),
               child: Align(
-                alignment: Alignment.centerLeft,
                 child: Text(
-                  "(Turn off OS enabled light/dark mode to manually\n set the mode. This mode is deactivated when \na theme is applied)",
-                  style: TextStyle(
-                    fontSize: 11,
+                  "(Turn off OS enabled light/dark mode to\n manually set the mode. This mode is\n deactivated when a theme is applied)",
+                  style: GoogleFonts.quicksand(
+                    fontSize: 13,
                     color: (isEnabledOS ||
                             selectedTheme == rainforestTheme ||
                             selectedTheme == pastelTheme ||
@@ -206,6 +205,7 @@ class SettingsPageState extends State<SettingsPage> {
                         ? Colors.grey // Grey out the text
                         : selectedTheme.colorScheme.primary,
                     fontStyle: FontStyle.italic,
+                    fontWeight: FontWeight.w500,
                   ),
                 ),
               ),
@@ -232,17 +232,27 @@ class SettingsPageState extends State<SettingsPage> {
                             ? Colors.grey // Grey out the icon
                             : selectedTheme.colorScheme.primary),
                     SizedBox(
-                        width:
-                            iconTxtSpacing), // Add some spacing between icon and text
+                      width: iconTxtSpacing,
+                    ), // Add some spacing between icon and text
                     Text(
                       'Themes',
-                      style: TextStyle(
+                      style: GoogleFonts.quicksand(
                         color: isEnabledOS
                             ? Colors.grey // Grey out the text
                             : selectedTheme.colorScheme.primary,
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
-                      ).merge(GoogleFonts.quicksand()),
+                      ),
+                    ),
+                    Spacer(), // Push the second text to the end
+                    Text(
+                      currentThemeName,
+                      //  "Current Theme: $currentThemeName",
+                      style: TextStyle(
+                        fontSize: 14,
+                        color: selectedTheme.colorScheme.primary,
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ],
                 ),
@@ -256,14 +266,14 @@ class SettingsPageState extends State<SettingsPage> {
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "(Turn off OS enabled light/dark mode to set a theme.)",
-                  style: TextStyle(
-                    fontSize: 11,
-                    color: isEnabledOS
-                        ? Colors.grey
-                        : selectedTheme.colorScheme.primary,
-                    fontStyle: FontStyle.italic,
-                  ),
+                  "(Turn off OS enabled light/dark mode to set\n a theme.)",
+                  style: GoogleFonts.quicksand(
+                      fontSize: 13,
+                      color: isEnabledOS
+                          ? Colors.grey
+                          : selectedTheme.colorScheme.primary,
+                      fontStyle: FontStyle.italic,
+                      fontWeight: FontWeight.w500),
                 ),
               ),
             ),
@@ -288,11 +298,11 @@ class SettingsPageState extends State<SettingsPage> {
                             iconTxtSpacing), // Add some spacing between icon and text
                     Text(
                       'Change password',
-                      style: TextStyle(
+                      style: GoogleFonts.quicksand(
                         color: selectedTheme.colorScheme.primary,
                         fontSize: 18,
                         fontWeight: FontWeight.bold,
-                      ).merge(GoogleFonts.quicksand()),
+                      ),
                     ),
                   ],
                 ),
@@ -314,12 +324,11 @@ class SettingsPageState extends State<SettingsPage> {
                   ),
                   child: Text(
                     'Close',
-                    style: TextStyle(
+                    style: GoogleFonts.quicksand(
                       color: selectedTheme.colorScheme.secondary,
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
-                    ).merge(GoogleFonts
-                        .quicksand()), // Merge styles with GoogleFonts
+                    ), // Merge styles with GoogleFonts
                   ),
                 ),
               ),
