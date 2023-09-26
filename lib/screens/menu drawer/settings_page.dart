@@ -56,6 +56,14 @@ class SettingsPageState extends State<SettingsPage> {
       currentThemeName = 'Beach';
     }
 
+    String currentMode = 'Off';
+
+    if (selectedTheme == lightTheme) {
+      currentMode = 'light';
+    } else if (selectedTheme == darkTheme) {
+      currentMode = 'dark';
+    }
+
     return Scaffold(
       key: _scaffoldKey, // Set the GlobalKey<ScaffoldState>
       backgroundColor: selectedTheme.colorScheme.background,
@@ -80,13 +88,20 @@ class SettingsPageState extends State<SettingsPage> {
             Row(
               children: [
                 SizedBox(width: edgePadding),
-                Icon(Icons.lightbulb, color: selectedTheme.colorScheme.primary),
+                Icon(
+                  Icons.lightbulb,
+                  color: isEnabledOS
+                      ? selectedTheme.colorScheme.primary
+                      : Colors.grey,
+                ),
                 SizedBox(
                     width: iconTxtSpacing), // Add spacing between icon and text
                 Text(
                   'OS enabled light/\ndark mode',
                   style: GoogleFonts.quicksand(
-                    color: selectedTheme.colorScheme.primary,
+                    color: isEnabledOS
+                        ? selectedTheme.colorScheme.primary
+                        : Colors.grey,
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
                   ),
@@ -101,7 +116,6 @@ class SettingsPageState extends State<SettingsPage> {
                           isEnabledOS =
                               value; // Update isEnabled when the Switch is toggled
                         });
-
                         if (isEnabledOS) {
                           // Switch is turned on
                         } else {
@@ -111,12 +125,12 @@ class SettingsPageState extends State<SettingsPage> {
                       activeColor: selectedTheme.colorScheme.primary,
                     ),
                     Text(
-                      isEnabledOS ? 'on' : 'off',
+                      isEnabledOS ? 'On' : 'Off',
                       style: GoogleFonts.quicksand(
                         color: isEnabledOS
                             ? selectedTheme.colorScheme.primary
                             : Colors.grey,
-                        fontSize: 18,
+                        fontSize: 14,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -132,10 +146,12 @@ class SettingsPageState extends State<SettingsPage> {
               child: Align(
                 alignment: Alignment.centerLeft,
                 child: Text(
-                  "(Enabling this feature allows it to be controlled\n by  your phone's  dark/light mode settings..)",
+                  "(Enabling this feature allows the app mode to\n be controlled by your phone's dark/light\n mode settings..)",
                   style: GoogleFonts.quicksand(
                       fontSize: 13,
-                      color: selectedTheme.colorScheme.primary,
+                      color: isEnabledOS
+                          ? selectedTheme.colorScheme.primary
+                          : Colors.grey,
                       fontStyle: FontStyle.italic,
                       fontWeight: FontWeight.w500),
                 ),
@@ -150,10 +166,7 @@ class SettingsPageState extends State<SettingsPage> {
                 SizedBox(width: edgePadding),
                 Icon(
                   Icons.lightbulb,
-                  color: (isEnabledOS ||
-                          selectedTheme == rainforestTheme ||
-                          selectedTheme == pastelTheme ||
-                          selectedTheme == beachTheme)
+                  color: isEnabledOS
                       ? Colors.grey // Grey out the icon
                       : selectedTheme.colorScheme.primary,
                 ),
@@ -163,10 +176,7 @@ class SettingsPageState extends State<SettingsPage> {
                 Text(
                   'Light/dark mode', // Display "Light/Dark Mode On"
                   style: GoogleFonts.quicksand(
-                    color: (isEnabledOS ||
-                            selectedTheme == rainforestTheme ||
-                            selectedTheme == pastelTheme ||
-                            selectedTheme == beachTheme)
+                    color: isEnabledOS
                         ? Colors.grey // Grey out the text
                         : selectedTheme.colorScheme.primary,
                     fontSize: 18,
@@ -187,6 +197,17 @@ class SettingsPageState extends State<SettingsPage> {
                         },
                   activeColor: selectedTheme.colorScheme.primary,
                 ),
+                Text(
+                  currentMode,
+                  //  "Current Mode: $currentMode",
+                  style: TextStyle(
+                    fontSize: 14,
+                    color: isEnabledOS
+                        ? Colors.grey
+                        : selectedTheme.colorScheme.primary,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
               ],
             ),
 
@@ -195,13 +216,10 @@ class SettingsPageState extends State<SettingsPage> {
               padding: const EdgeInsets.only(left: 0),
               child: Align(
                 child: Text(
-                  "(Turn off OS enabled light/dark mode to\n manually set the mode. This mode is\n deactivated when a theme is applied)",
+                  "(Turn off OS enabled light/dark mode to\n set the mode.)",
                   style: GoogleFonts.quicksand(
                     fontSize: 13,
-                    color: (isEnabledOS ||
-                            selectedTheme == rainforestTheme ||
-                            selectedTheme == pastelTheme ||
-                            selectedTheme == beachTheme)
+                    color: isEnabledOS
                         ? Colors.grey // Grey out the text
                         : selectedTheme.colorScheme.primary,
                     fontStyle: FontStyle.italic,
@@ -244,13 +262,15 @@ class SettingsPageState extends State<SettingsPage> {
                         fontWeight: FontWeight.bold,
                       ),
                     ),
-                    Spacer(), // Push the second text to the end
+                    SizedBox(width: 155), // Push the second text to the end
                     Text(
                       currentThemeName,
                       //  "Current Theme: $currentThemeName",
                       style: TextStyle(
                         fontSize: 14,
-                        color: selectedTheme.colorScheme.primary,
+                        color: isEnabledOS
+                            ? Colors.grey
+                            : selectedTheme.colorScheme.primary,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
