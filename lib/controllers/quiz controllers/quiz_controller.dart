@@ -113,8 +113,8 @@ Widget showPopup({
     shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16.0),
         side: const BorderSide(color: Color.fromARGB(221, 36, 36, 36))),
-    backgroundColor: selectedTheme.colorScheme.background,
-    //shadowColor: fiservColor,
+    backgroundColor: selectedTheme.colorScheme.onBackground,
+    //shadowColor: selectedTheme.colorScheme.secondary,
     elevation: 20,
     content: SizedBox(
       width: 400,
@@ -128,7 +128,7 @@ Widget showPopup({
             style: GoogleFonts.quicksand(
                 fontSize: 21,
                 fontWeight: FontWeight.bold,
-                color: selectedTheme.colorScheme.secondary),
+                color: selectedTheme.colorScheme.primary),
           ),
           const SizedBox(height: 10),
           Row(
@@ -155,8 +155,11 @@ Widget showPopup({
           const SizedBox(height: 15),
           Text(
             quizModel.description,
-            style:
-                GoogleFonts.quicksand(color: selectedTheme.colorScheme.primary),
+            style: GoogleFonts.quicksand(
+              color: selectedTheme.colorScheme.primary,
+              fontSize: 18, // Set your desired font size here
+              fontWeight: FontWeight.w600, // Set your desired font weight here
+            ),
           )
         ],
       ),
@@ -175,7 +178,7 @@ Widget showPopup({
                     side:
                         BorderSide(color: selectedTheme.colorScheme.secondary),
                     backgroundColor: selectedTheme
-                        .colorScheme.background, /*shadowColor: fiservColor*/
+                        .colorScheme.onBackground, /*shadowColor: fiservColor*/
                   ),
                   onPressed: onTapCancel,
                   child: Text(
@@ -193,11 +196,11 @@ Widget showPopup({
                   style: TextButton.styleFrom(
                       side: BorderSide(
                           color: selectedTheme.colorScheme.secondary),
-                      backgroundColor: selectedTheme.colorScheme.background),
+                      backgroundColor: selectedTheme.colorScheme.secondary),
                   onPressed: onTapStart,
                   child: Text("Start",
                       style: TextStyle(
-                          color: selectedTheme.colorScheme.primary,
+                          color: selectedTheme.colorScheme.background,
                           fontWeight: FontWeight.bold,
                           fontSize: 15))),
             ),

@@ -40,7 +40,7 @@ class QuestionScreen extends GetView<QuestionController> {
         leadingWidget: QuizProgressBar(),
         //titleWidget: Text("timer bar pos"),
       ),
-      backgroundColor: Colors.green,
+      backgroundColor: lightBackgroundColor,
       body: BackgroundDecoration(
         child: Obx(() => Column(
               children: [
@@ -59,7 +59,7 @@ class QuestionScreen extends GetView<QuestionController> {
                                   style: GoogleFonts.quicksand(
                                       color:
                                           selectedTheme.colorScheme.secondary,
-                                      fontWeight: FontWeight.w400,
+                                      fontWeight: FontWeight.bold,
                                       fontSize: 16),
                                   textAlign: TextAlign.start,
                                 ),

@@ -41,7 +41,7 @@ class QuizOutcomeScreen extends GetView<QuestionController> {
     ThemeData selectedTheme = getSelectedTheme(context);
     final ButtonStyle style = ElevatedButton.styleFrom(
         textStyle: const TextStyle(fontSize: 20),
-        backgroundColor: selectedTheme.colorScheme.background);
+        backgroundColor: selectedTheme.colorScheme.secondary);
     return Scaffold(
       extendBodyBehindAppBar: true,
       body: BackgroundDecoration(
@@ -94,6 +94,7 @@ class QuizOutcomeScreen extends GetView<QuestionController> {
                         "If this is your first completion, you will recieve ${controller.quizModel.exp} EXP!",
                         style: GoogleFonts.quicksand(
                             fontSize: 13,
+                            fontWeight: FontWeight.bold,
                             color: selectedTheme.colorScheme.primary),
                         textAlign: TextAlign.center,
                       ),
@@ -145,7 +146,9 @@ class QuizOutcomeScreen extends GetView<QuestionController> {
                                 'Done',
                                 selectionColor: Colors.black,
                                 style: TextStyle(
-                                    color: selectedTheme.colorScheme.secondary),
+                                    fontWeight: FontWeight.bold,
+                                    color:
+                                        selectedTheme.colorScheme.onBackground),
                               ),
                             ),
                           )),

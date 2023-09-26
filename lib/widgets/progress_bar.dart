@@ -80,10 +80,10 @@ class ProgressBar extends StatelessWidget {
             alignment: Alignment.center,
             children: [
               Transform.scale(
-                scale: 1.1,
+                scale: 1.15,
                 child: CircularProgressIndicator(
                   value: progressPercentage,
-                  strokeWidth: 6.0,
+                  strokeWidth: 4.0,
                   color: selectedTheme.colorScheme.primary,
                   backgroundColor: selectedTheme.colorScheme.surface,
                 ),

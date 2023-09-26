@@ -18,7 +18,7 @@ class QuizInfoSquare extends StatelessWidget {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(10),
             border: Border.all(color: selectedTheme.colorScheme.secondary),
-            color: selectedTheme.colorScheme.background),
+            color: selectedTheme.colorScheme.onBackground),
         child: SizedBox(
           width: 70,
           height: 60,
@@ -30,9 +30,9 @@ class QuizInfoSquare extends StatelessWidget {
               Text(
                 text,
                 style: GoogleFonts.quicksand(
-                    fontWeight: FontWeight.w600,
+                    fontWeight: FontWeight.bold,
                     fontSize: 12,
-                    color: selectedTheme.colorScheme.secondary),
+                    color: selectedTheme.colorScheme.primary),
                 textAlign: TextAlign.center,
               ),
             ],
