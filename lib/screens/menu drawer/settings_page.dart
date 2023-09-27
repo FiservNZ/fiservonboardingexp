@@ -1,6 +1,5 @@
-import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fiservonboardingexp/firebase%20references/firebase_refs.dart';
 import 'package:fiservonboardingexp/screens/menu%20drawer/change_password_page.dart';
-import 'package:fiservonboardingexp/screens/login_page.dart';
 import 'package:fiservonboardingexp/themes/Theme_database.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -22,14 +21,12 @@ class SettingsPage extends StatefulWidget {
 class SettingsPageState extends State<SettingsPage> {
   final ThemeDatabase _firebaseTheme = ThemeDatabase();
 
+  // Updates to the new theme
   void _handleThemeChange(ThemeData theme, ThemeProvider themeProvider) {
     themeProvider.setTheme(theme);
 
     // Save the selected theme mode to Firebase Firestore
-    final currentUser = FirebaseAuth.instance.currentUser;
-    if (currentUser != null) {
-      _firebaseTheme.saveThemePreference(currentUser.uid, theme);
-    }
+    _firebaseTheme.saveThemePreference(currentUser.uid, theme);
   }
 
   double edgePadding = 60;
@@ -42,7 +39,6 @@ class SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
     ThemeData selectedTheme = themeProvider.currentTheme;
-
     return Scaffold(
       key: _scaffoldKey, // Set the GlobalKey<ScaffoldState>
       backgroundColor: selectedTheme.colorScheme.background,
@@ -50,7 +46,7 @@ class SettingsPageState extends State<SettingsPage> {
       bottomNavigationBar: const CustomNavBar(),
       body: SafeArea(
         child: Column(
-          children: <Widget>[
+          children: [
             // Heading
             Text(
               '\n Settings',
@@ -65,41 +61,42 @@ class SettingsPageState extends State<SettingsPage> {
             const SizedBox(
               height: 100,
             ),
-
-            // Light/Dark Mode Toggle
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: edgePadding),
-              child: Row(
-                children: <Widget>[
-                  Icon(Icons.lightbulb,
-                      color: selectedTheme.colorScheme.primary),
-                  SizedBox(
-                      width:
-                          iconTxtSpacing), // Add spacing between icon and text
-                  Text(
-                    'Dark/Light Mode',
-                    style: TextStyle(
-                      color: selectedTheme.colorScheme.primary,
-                      fontSize: 18,
-                      fontWeight: FontWeight.bold,
-                    ).merge(GoogleFonts.quicksand()),
+            Row(
+              children: [
+                Container(
+                  margin: EdgeInsets.symmetric(horizontal: edgePadding),
+                  child: Row(
+                    children: <Widget>[
+                      Icon(Icons.lightbulb,
+                          color: selectedTheme.colorScheme.primary),
+                      SizedBox(
+                          width:
+                              iconTxtSpacing), // Add spacing between icon and text
+                      Text(
+                        'Dark/Light Mode',
+                        style: TextStyle(
+                          color: selectedTheme.colorScheme.primary,
+                          fontSize: 18,
+                          fontWeight: FontWeight.bold,
+                        ).merge(GoogleFonts.quicksand()),
+                      ),
+                      Switch(
+                        value: selectedTheme == lightTheme,
+                        onChanged: (value) {
+                          if (value) {
+                            _handleThemeChange(lightTheme, themeProvider);
+                          } else {
+                            _handleThemeChange(darkTheme, themeProvider);
+                          }
+                        },
+                        activeColor: selectedTheme.colorScheme.primary,
+                      ),
+                    ],
                   ),
-                  Switch(
-                    value: selectedTheme == lightTheme,
-                    onChanged: (value) {
-                      if (value) {
-                        _handleThemeChange(lightTheme, themeProvider);
-                      } else {
-                        _handleThemeChange(darkTheme, themeProvider);
-                      }
-                    },
-                    activeColor: selectedTheme.colorScheme.primary,
-                  ),
-                ],
-              ),
+                ),
+              ],
             ),
-
-            SizedBox(height: listSpacing),
+            const SizedBox(height: 21),
 
             //Themes
             Container(
@@ -162,43 +159,6 @@ class SettingsPageState extends State<SettingsPage> {
             ),
 
             SizedBox(height: listSpacing),
-
-            //Logout Button
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: edgePadding),
-              child: GestureDetector(
-                onTap: () async {
-                  await FirebaseAuth.instance.signOut();
-                  Navigator.of(_scaffoldKey.currentContext!,
-                          rootNavigator: true)
-                      .pushAndRemoveUntil(
-                    MaterialPageRoute(
-                      builder: (BuildContext context) {
-                        return LoginPage();
-                      },
-                    ),
-                    (_) => false,
-                  );
-                },
-                child: Row(
-                  children: <Widget>[
-                    Icon(Icons.logout,
-                        color: selectedTheme.colorScheme.primary),
-                    SizedBox(
-                      width: iconTxtSpacing,
-                    ),
-                    Text(
-                      'Logout',
-                      style: TextStyle(
-                        color: selectedTheme.colorScheme.primary,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
-                      ).merge(GoogleFonts.quicksand()),
-                    ),
-                  ],
-                ),
-              ),
-            ),
 
             //Close button
             Expanded(

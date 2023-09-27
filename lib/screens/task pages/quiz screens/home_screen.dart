@@ -4,18 +4,20 @@ import 'package:fiservonboardingexp/themes/quiz%20themes/ui_parameters.dart';
 import 'package:fiservonboardingexp/widgets/quiz%20widgets/content_area.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:google_fonts/google_fonts.dart';
 import '../../../controllers/quiz controllers/quiz_controller.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({Key? key}) : super(key: key);
+  late final String categoryName;
+  HomeScreen({Key? key}) : super(key: key);
   static const String routeName = "/home";
 
   @override
   Widget build(BuildContext context) {
+    ThemeData selectedTheme = getSelectedTheme(context);
     QuizController quizController = Get.find();
+    categoryName = Get.arguments as String;
     return Scaffold(
-      backgroundColor: darkBackgroundColor,
+      backgroundColor: selectedTheme.colorScheme.background,
       body: Column(
         children: [
           // will need to change to pull the title from whatever category has been chosen.
@@ -24,7 +26,7 @@ class HomeScreen extends StatelessWidget {
             padding: const EdgeInsets.only(top: 50, bottom: 20),
             child: SizedBox(
               child: Text(
-                "A Collection's Task Page",
+                '$categoryName Quiz Tasks',
                 style: headerFontStyle,
               ),
             ),

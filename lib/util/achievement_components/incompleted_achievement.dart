@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import '../../firebase references/firebase_refs.dart';
 import '../../screens/achievements_page.dart';
 import 'incomplete_util.dart';
@@ -39,7 +38,7 @@ class IncompletedAchievement extends StatelessWidget {
 
           return Column(
             children: [
-              Container(
+              SizedBox(
                 width: 400,
                 height: 350,
                 // color: Colors.red,

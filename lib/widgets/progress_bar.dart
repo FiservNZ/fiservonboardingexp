@@ -1,112 +1,92 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fiservonboardingexp/themes/theme_provider.dart';
+import 'package:fiservonboardingexp/firebase%20references/firebase_refs.dart';
+import 'package:fiservonboardingexp/model/task_category_model.dart';
+import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
-import '../firebase references/firebase_refs.dart';
-import 'package:provider/provider.dart';
 
 class ProgressBar extends StatelessWidget {
-  const ProgressBar({super.key});
+  final String taskCategory;
 
-  // Method to add points to the user's progress
-  Future<void> addPoints(int points) async {
-    // Fetch the current user's document from Firestore
-    final userDocRef = userColRef.doc(currentUser.uid);
-    final userDoc = await userDocRef.get();
-    final userMap = userDoc.data() as Map<String, dynamic>;
-
-    var curPoints = userMap['curPoints'] ?? 0;
-    var maxPoints = userMap['maxPoints'] ?? 4;
-    bool completed = userMap['categoryCompletion'] ?? false;
-
-    // Increment the current points and check for completion
-    if (curPoints < maxPoints) {
-      curPoints += points;
-      if (curPoints == maxPoints) {
-        completed = true;
-      }
-    }
-
-    // Update the user's document in Firestore with the new data
-    await userDocRef.update({
-      'curPoints': curPoints,
-      'maxPoints': maxPoints,
-      'categoryCompletion': completed
-    });
-  }
+  const ProgressBar({Key? key, required this.taskCategory}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-    ThemeData selectedTheme = themeProvider.currentTheme;
+    ThemeData selectedTheme = getSelectedTheme(context);
 
-    return SizedBox(
-      child: StreamBuilder<DocumentSnapshot<Map<String, dynamic>>>(
-        stream: userColRef.doc(currentUser.uid).snapshots(),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            // Show a loading indicator while fetching user data
-            return const CircularProgressIndicator();
-          } else if (snapshot.hasError) {
-            // Display an error message if there's an error
-            return Text('Error: ${snapshot.error}');
-          } else if (snapshot.hasData) {
-            // Extract user data from the snapshot
-            final userDocument = snapshot.data!.data() as Map<String, dynamic>;
-            final curPoints = userDocument['curPoints'] ?? 0;
-            final maxPoints = (userDocument['maxPoints'] ?? 4).toInt();
-            final pointsText = '$curPoints/$maxPoints';
+    return FutureBuilder(
+      future: FirebaseFirestore.instance
+          .collection('User')
+          .doc(currentUser.uid)
+          .collection('Tasks')
+          .doc(taskCategory) // Use title as the document ID
+          .get(),
+      builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const CircularProgressIndicator();
+        }
 
-            // Display the progress bar and points information
-            return Column(
+        if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        }
+
+        if (!snapshot.hasData || !snapshot.data!.exists) {
+          return Text('No data available for $taskCategory');
+        }
+
+        // Accesses the document data directly
+        Map<String, dynamic> data =
+            snapshot.data!.data() as Map<String, dynamic>;
+
+        // Creates a TaskCategoryModel using the retrieved data
+        TaskCategoryModel category = TaskCategoryModel(
+          id: taskCategory, // Use title as the ID
+          title: data['title'],
+          curPoints: data['curPoints'],
+          maxPoints: data['maxPoints'],
+        );
+
+        final double progressPercentage =
+            (category.curPoints / category.maxPoints);
+
+        // Displays the progress indicator
+        return Column(
+          children: [
+            Stack(
+              alignment: Alignment.center,
               children: [
-                SizedBox(
-                  width: 200,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Text(
-                        'Progress Bar',
-                        style: TextStyle(
-                          color: selectedTheme.colorScheme.primary,
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold,
-                        ).merge(GoogleFonts.quicksand()),
-                      ),
-                      Text(
-                        pointsText,
-                        style: TextStyle(
-                          color: selectedTheme.colorScheme.primary,
-                          fontSize: 15,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                    ],
+                Transform.scale(
+                  scale: 1.5,
+                  child: CircularProgressIndicator(
+                    value: progressPercentage,
+                    strokeWidth: 6.0,
+                    color: selectedTheme.colorScheme.primary,
+                    backgroundColor: selectedTheme.colorScheme.surface,
                   ),
                 ),
-                const SizedBox(height: 3),
-                SizedBox(
-                  width: 200,
-                  height: 10,
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(5),
-                    child: LinearProgressIndicator(
-                      value: curPoints / maxPoints,
-                      valueColor: AlwaysStoppedAnimation<Color>(
-                        selectedTheme.colorScheme.secondary,
-                      ),
-                      backgroundColor: const Color.fromARGB(255, 190, 188, 184),
-                    ),
+                // Written as a percentage
+                // Text(
+                //   // Percentage with no decimals and a leading 0
+                //   '${(progressPercentage * 100).toInt().toString().padLeft(2, '0')}%',
+                //   style: TextStyle(
+                //     color: selectedTheme.colorScheme.primary,
+                //     fontSize: 15,
+                //     fontWeight: FontWeight.bold,
+                //   ),
+                // ),
+                // number of points out of points
+                Text(
+                  '${category.curPoints} / ${category.maxPoints}',
+                  style: TextStyle(
+                    color: selectedTheme.colorScheme.primary,
+                    fontSize: 15,
+                    fontWeight: FontWeight.bold,
                   ),
                 ),
               ],
-            );
-          } else {
-            // Show a message when there's no data available
-            return const Text('No data available');
-          }
-        },
-      ),
+            ),
+          ],
+        );
+      },
     );
   }
 }

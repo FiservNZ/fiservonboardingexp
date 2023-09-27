@@ -1,4 +1,5 @@
 import 'package:fiservonboardingexp/controllers/quiz%20controllers/animation_controller.dart';
+import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 
@@ -10,6 +11,7 @@ class QuizProgressBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThemeData selectedTheme = getSelectedTheme(context);
     double quizDuration = 60.0;
     return Expanded(
       child: Container(
@@ -61,6 +63,8 @@ class QuizProgressBar extends StatelessWidget {
                             Text(
                               // quizDuration usage
                               "$quizDuration",
+                              style: TextStyle(
+                                  color: selectedTheme.colorScheme.primary),
                               //"${(controller.animation.value * quizDuration).round()} sec",
                               textAlign: TextAlign.right,
                             ),

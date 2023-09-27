@@ -1,7 +1,21 @@
 class ReadModel {
-  String id;
-  String title;
-  String content;
+  final String id;
+  final String category;
+  final String title;
+  final String description;
+  final String content;
+  final String time;
+  String? imageUrl;
+  bool isDone;
 
-  ReadModel({required this.id, required this.title, required this.content});
+  ReadModel({
+    required this.id,
+    required this.category,
+    required this.title,
+    required this.description,
+    required this.content,
+    required this.time,
+    required this.isDone,
+    required this.imageUrl,
+  });
 }

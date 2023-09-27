@@ -60,6 +60,7 @@ dependencies:
   easy_separator:
   table_calendar: ^3.0.9
   http: ^0.13.3
+  video_player: ^2.7.1
   logger: ^2.0.0
 
 dev_dependencies:
@@ -109,8 +110,15 @@ flutter:
       - assets/animations/reading_book.json
       - assets/icon/start-button.png
       - assets/json/quizzes/
-      # Read task
+      # Quiz Task
+      - assets/icon/quiz_thumbnail_icon.png
+      # Read Task
       - assets/images/Read.jpg
+      - assets/icon/read_thumbnail_icon.png
+      # Watch Task
+      - assets/icon/video_thumbnail_icon.png
+      - assets/video/video.mp4
+
       #Achievement
       - assets/icon/achievement/
       # Teaser

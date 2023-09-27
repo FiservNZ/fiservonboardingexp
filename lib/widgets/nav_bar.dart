@@ -1,13 +1,10 @@
 import 'package:fiservonboardingexp/screens/achievements_page.dart';
 import 'package:fiservonboardingexp/screens/colleagues_page.dart';
 import 'package:fiservonboardingexp/screens/home_page.dart';
-import 'package:fiservonboardingexp/idk/training_page.dart';
 import 'package:fiservonboardingexp/screens/checklist_page.dart';
-import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
+import 'package:fiservonboardingexp/util/mc_testing/module/module_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
 import '../firebase references/firebase_refs.dart';
 
 class CustomNavBar extends StatelessWidget {
@@ -17,9 +14,7 @@ class CustomNavBar extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-    ThemeData selectedTheme = themeProvider.currentTheme;
-
+    ThemeData selectedTheme = getSelectedTheme(context);
     return BottomNavigationBar(
       currentIndex: 0,
       showUnselectedLabels: true,
@@ -32,7 +27,7 @@ class CustomNavBar extends StatelessWidget {
             break;
           // Directs user to Training Page
           case 1:
-            //Navigator.push(context, _instantPageRoute(const TrainingPage()));
+            Navigator.push(context, _instantPageRoute(const ModuleScreen()));
             break;
           // Directs user to the General Checklist Page
           case 2:

@@ -1,3 +1,4 @@
+import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
 
 class CustomTextBox extends StatelessWidget {
@@ -13,9 +14,10 @@ class CustomTextBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThemeData selectedTheme = getSelectedTheme(context);
     return Container(
       decoration: BoxDecoration(
-        color: Colors.grey.shade300,
+        color: selectedTheme.colorScheme.onBackground,
         borderRadius: BorderRadius.circular(10.0),
       ),
       padding: const EdgeInsets.only(
@@ -35,18 +37,21 @@ class CustomTextBox extends StatelessWidget {
             children: [
               Text(
                 fieldName,
-                style: const TextStyle(
-                  color: Color(0xFFFF6600),
+                style: TextStyle(
+                  color: selectedTheme.colorScheme.secondary,
                 ),
               ),
               IconButton(
                 onPressed: onPressed,
                 icon: const Icon(Icons.edit),
-                color: const Color(0xFFFF6600),
+                color: selectedTheme.colorScheme.secondary,
               ),
             ],
           ),
-          Text(text),
+          Text(
+            text,
+            style: TextStyle(color: selectedTheme.colorScheme.primary),
+          ),
         ],
       ),
     );

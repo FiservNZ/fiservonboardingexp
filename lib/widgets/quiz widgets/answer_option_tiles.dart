@@ -1,7 +1,9 @@
+import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:fiservonboardingexp/themes/quiz%20themes/ui_parameters.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:provider/provider.dart';
 
 class AnswerOptionTiles extends StatelessWidget {
   final String answerIdentifier;
@@ -18,6 +20,8 @@ class AnswerOptionTiles extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
+    ThemeData selectedTheme = themeProvider.currentTheme;
     return InkWell(
       borderRadius: UIParameters.cardBorderRadius,
       onTap: onTap,
@@ -25,9 +29,13 @@ class AnswerOptionTiles extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
         decoration: BoxDecoration(
             borderRadius: UIParameters.cardBorderRadius,
-            color: isSelected ? Colors.black87 : darkTileColor,
-            border:
-                Border.all(color: isSelected ? fiservColor : darkTileColor)),
+            color: isSelected
+                ? selectedTheme.colorScheme.tertiary
+                : selectedTheme.colorScheme.onBackground,
+            border: Border.all(
+                color: isSelected
+                    ? selectedTheme.colorScheme.secondary
+                    : selectedTheme.colorScheme.onBackground)),
         child: Row(
           children: [
             Padding(
@@ -35,8 +43,10 @@ class AnswerOptionTiles extends StatelessWidget {
               child: Text(
                 answerIdentifier,
                 style: GoogleFonts.quicksand(
-                  color: isSelected ? fiservColor : darkTextColor,
-                  fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                  color: isSelected
+                      ? selectedTheme.colorScheme.primary
+                      : selectedTheme.colorScheme.secondary,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),
@@ -45,7 +55,9 @@ class AnswerOptionTiles extends StatelessWidget {
               child: Text(
                 answerOption,
                 style: GoogleFonts.quicksand(
-                  color: isSelected ? fiservColor : darkTextColor,
+                  color: isSelected
+                      ? selectedTheme.colorScheme.primary
+                      : selectedTheme.colorScheme.secondary,
                   fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
                 ),
               ),
