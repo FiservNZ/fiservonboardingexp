@@ -135,8 +135,7 @@ class ColleaguesPageState extends State<ColleaguesPage> {
         ThemeData selectedTheme = themeProvider.currentTheme;
         return AlertDialog(
           shape: RoundedRectangleBorder(
-            borderRadius:
-                BorderRadius.circular(10.0), // Adjust the radius as needed
+            borderRadius: BorderRadius.circular(10.0),
           ),
           backgroundColor: selectedTheme.colorScheme.background,
           // Colleague details title
