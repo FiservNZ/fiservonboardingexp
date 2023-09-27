@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       initialRoute: '/',
-      getPages: FiservAppRoutes.routes(),
+      getPages: AppRoutes.routes(),
     );
   }
 }
