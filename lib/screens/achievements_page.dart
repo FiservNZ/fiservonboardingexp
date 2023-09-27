@@ -8,6 +8,7 @@ import '../util/achievement_components/achievement_tile.dart';
 import '../util/achievement_components/achievement_tracker.dart';
 import '../util/constants.dart';
 
+// This class is used to visulaze visualize
 class AchievementsPage extends StatefulWidget {
   const AchievementsPage({super.key});
   @override
@@ -17,18 +18,15 @@ class AchievementsPage extends StatefulWidget {
 class Achievementpage extends State<AchievementsPage> {
   AchievementTracker achievementTracker = const AchievementTracker();
 
-  List<Map<String, dynamic>> contentInAchv = [];
-
   // fetch the achievement list in initialization
-  @override
-  void initState() {
-    super.initState();
-    // fetchAndStoreAchievement();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   // fetchAndStoreAchievement();
+  // }
 
-  // List for storing the icon
-  // ignore: non_constant_identifier_names
-  final List IconList = [
+  // List for the achievements' icon
+  final List iconList = [
     'assets/icon/welcome.png',
     'assets/icon/worldwide.png',
     'assets/icon/compliance.png',
@@ -42,7 +40,7 @@ class Achievementpage extends State<AchievementsPage> {
     'assets/icon/technical.png',
     'assets/icon/technical.png',
   ];
-
+  // List of the image showing in the home page
   final List subIconList = [
     'assets/icon/achievement/Unlocked all themes!.png',
     'assets/icon/achievement/First time login!.png',
@@ -75,6 +73,7 @@ class Achievementpage extends State<AchievementsPage> {
       body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
         stream: achievementColRef.snapshots(),
         builder: (context, snapshot) {
+          // Detect the exception
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const CircularProgressIndicator();
           } else if (snapshot.hasError) {
@@ -90,7 +89,6 @@ class Achievementpage extends State<AchievementsPage> {
                   child: Container(
                     height: 170.0,
                     decoration: const BoxDecoration(
-                      //
                       color: Color.fromARGB(255, 112, 107, 243),
                     ),
                     child: Stack(
@@ -135,6 +133,11 @@ class Achievementpage extends State<AchievementsPage> {
                     ),
                     delegate: SliverChildBuilderDelegate(
                       (BuildContext context, int index) {
+                        // When the achievement is uncomplete, it will show the lock icon
+                        if (contentInAchv[index]['IsComplete'] == false) {
+                          contentInAchv[index]['iconData'] =
+                              'assets/icon/Lock.png';
+                        }
                         return Achievement(
                           title: contentInAchv[index]['name'],
                           iconName: contentInAchv[index]['iconData'] ?? "",
@@ -202,10 +205,15 @@ class Achievementpage extends State<AchievementsPage> {
         // Update isCompleted field
         for (QueryDocumentSnapshot docSnapshot in querySnapshot.docs) {
           DocumentReference docRef = achievementColRef.doc(docSnapshot.id);
-          await docRef.update({'IsComplete': true});
+          //Only update the achievement when it is uncomplete.
+          bool isComplete =
+              (docSnapshot.data() as Map<String, dynamic>)['IsComplete'] ??
+                  false;
+          if (!isComplete) {
+            await docRef.update({'IsComplete': true});
+            show(context, targetName);
+          }
         }
-        // ignore: use_build_context_synchronously
-        show(context, targetName);
       } else {
         // Handle the case where no matching documents were found
         debugPrint("No documents matching '$targetName' found.");
@@ -236,15 +244,26 @@ class Achievementpage extends State<AchievementsPage> {
         'name': name,
         'IsComplete': isComplete,
         'iconData':
-            IconList.isNotEmpty ? IconList[newAchievementContent.length] : '',
+            iconList.isNotEmpty ? iconList[newAchievementContent.length] : '',
         'subiconData': subiconData,
         'hour': hour,
-
-        // 'subiconData': SubiconList.isNotEmpty
-        //     ? SubiconList[newAchievementContent.length]
-        //     : '',
       });
     }
+    //Sort the achievement based on the Iscomplete
+    //If it has been complete, It will goes to the bottom
+    // newAchievementContent.sort((a, b) {
+    //   bool isCompleteA = a['IsComplete'] ?? false;
+    //   bool isCompleteB = b['IsComplete'] ?? false;
+    //   return isCompleteA
+    //       ? 1
+    //       : isCompleteB
+    //           ? -1
+    //           : 0;
+    // });
+
+    // newAchievementContent
+    //     .sort((a, b) => b['IsComplete'].compareTo(a['IsComplete']));
+
     // print(newAchievementContent);
     return newAchievementContent;
   }

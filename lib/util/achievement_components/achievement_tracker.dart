@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import '../../firebase references/firebase_refs.dart';
 
+// This class is used to track how many achievement has been completed
 class AchievementTracker extends StatelessWidget {
   const AchievementTracker({
     super.key,
