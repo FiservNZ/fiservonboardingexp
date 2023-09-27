@@ -77,7 +77,6 @@ class QuizController extends GetxController {
 
     showPopupAlertDialog(
         quizModel: quiz, categoryName: categoryName, theme: selectedTheme);
-    //Get.toNamed(QuizQuestionScreen.routeName, arguments: quiz);
   }
 }
 

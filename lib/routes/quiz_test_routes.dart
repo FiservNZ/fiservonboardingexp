@@ -1,7 +1,6 @@
 import 'package:fiservonboardingexp/controllers/quiz%20controllers/quiz_controller.dart';
 import 'package:fiservonboardingexp/controllers/watch_controller.dart';
 import 'package:fiservonboardingexp/screens/task%20pages/quiz%20screens/home_screen.dart';
-import 'package:fiservonboardingexp/screens/task%20pages/watch_card_screen.dart';
 import 'package:fiservonboardingexp/screens/task%20pages/quiz%20screens/question_screen.dart';
 import 'package:fiservonboardingexp/screens/task%20pages/quiz%20screens/splash/spash_screen.dart';
 import 'package:fiservonboardingexp/util/mc_testing/module/module_screen.dart';
@@ -13,7 +12,6 @@ import '../screens/task pages/quiz screens/home_screen.dart';
 import '../screens/task pages/quiz screens/introduction.dart';
 import '../screens/task pages/quiz screens/quiz_outcome_screen.dart';
 import '../screens/task pages/quiz screens/quiz_question_screen.dart';
-import '../screens/task pages/read_card_screen.dart';
 import '../screens/task pages/read_page.dart';
 
 class AppRoutes {
@@ -38,13 +36,10 @@ class AppRoutes {
           page: () => const ModuleScreen(),
         ),
         GetPage(name: "/home", page: (() => HomeScreen()), binding: BindingsBuilder(() {Get.put(QuizController());})),
-        GetPage(
-          name: "/watchHome",
-          page: () => WatchHomeScreen(),
-          binding: BindingsBuilder(() {
-            Get.put(WatchController());
-          }),
-        ),
+        // GetPage(
+        //   name: "/watchHome",
+        //   page: () => WatchHomeScreen(),
+        // ),
         // GetPage(
         //     name: ReadPage.routeName,
         //     page: () => ReadPage(),
