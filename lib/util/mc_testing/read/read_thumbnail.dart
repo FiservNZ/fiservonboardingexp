@@ -53,12 +53,13 @@ class ReadThumbnail extends StatelessWidget {
               imageUrl: data['image_url'],
             );
             debugPrint("Document ID: $documentId");
-            showPopupAlertDialog(
-                readModel: readModel,
-                categoryName: taskCategory, 
-                theme: selectedTheme);
-            //Get.to(ReadPage(readModel: readModel));
+            Get.to(ReadPage(readModel: readModel));
+            // showPopupAlertDialog(
+            //     readModel: readModel,
+            //     categoryName: taskCategory, 
+            //     theme: selectedTheme);
           }
+
         }).catchError((error) {
           debugPrint('ERROR: $error');
         });
