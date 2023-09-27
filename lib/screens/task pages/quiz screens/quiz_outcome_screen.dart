@@ -3,7 +3,6 @@ import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:fiservonboardingexp/controllers/quiz%20controllers/extension_question_controller.dart';
 import 'package:fiservonboardingexp/controllers/quiz%20controllers/question_controller.dart';
 import 'package:fiservonboardingexp/util/mc_testing/module/module_screen.dart';
-import 'package:fiservonboardingexp/util/progress_points.dart';
 import 'package:fiservonboardingexp/widgets/quiz%20widgets/background_decoration.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,11 +14,6 @@ class QuizOutcomeScreen extends GetView<QuestionController> {
 
   @override
   Widget build(BuildContext context) {
-    // Add points to progress bar when it's the users first time completing the task
-    if (controller.quizModel.isDone == false) {
-      addPointsToProgress(currentCategory);
-    }
-
     // Updates isDone to show the task has been completed.
     Future<void> fetchData() async {
       final querySnapshot = await userColRef

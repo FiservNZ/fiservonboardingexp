@@ -5,9 +5,10 @@ import 'package:logger/logger.dart';
 
 final Logger logger = Logger();
 
-// Define a function to update points for a specific task category
-Future<void> addPointsToProgress(String categoryName) async {
+// This function  updates points for a specific task category
+Future<void> GetCurrentPoints(String categoryName) async {
   print(categoryName);
+  int noOfcompletedTasks = 0;
 
   try {
     // Get a reference to the task category document using categoryName
@@ -32,16 +33,22 @@ Future<void> addPointsToProgress(String categoryName) async {
         maxPoints: data['maxPoints'],
       );
 
-      final int curPoints = category.curPoints;
       final int maxPoints = category.maxPoints;
 
-      // Calculate new progress
-      final int newPoints = curPoints + 1;
+      // Iterate through subcollections: Quiz, Read, and Watch
+      for (String subcollection in ["Quiz", "Read", "Watch"]) {
+        final QuerySnapshot subcollectionSnapshot = await categoryDocRef
+            .collection(subcollection)
+            .where('isDone', isEqualTo: true)
+            .get();
+
+        noOfcompletedTasks += subcollectionSnapshot.docs.length;
+      }
 
       // Check if newPoints doesn't exceed maxPoints
-      if (newPoints <= maxPoints) {
+      if (noOfcompletedTasks <= maxPoints) {
         // Update the "curPoints" field in Firestore
-        await categoryDocRef.update({'curPoints': newPoints});
+        await categoryDocRef.update({'curPoints': noOfcompletedTasks});
         logger.d('Points updated successfully.');
       } else {
         logger.w('Points cannot exceed maxPoints.');

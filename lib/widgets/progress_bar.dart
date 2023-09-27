@@ -3,6 +3,7 @@ import 'package:fiservonboardingexp/firebase%20references/firebase_refs.dart';
 import 'package:fiservonboardingexp/model/task_category_model.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:fiservonboardingexp/util/progress_max_points.dart';
+import 'package:fiservonboardingexp/util/progress_curr_points.dart';
 import 'package:flutter/material.dart';
 
 class ProgressBar extends StatelessWidget {
@@ -34,6 +35,7 @@ class ProgressBar extends StatelessWidget {
   Future<void> _loadData() async {
     // Call getNumberOfTasks here before proceeding with other operations
     await getNumberOfTasks(taskCategory);
+    await GetCurrentPoints(taskCategory);
     // You can add additional operations here if needed
   }
 
