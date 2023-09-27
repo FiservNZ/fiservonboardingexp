@@ -6,7 +6,7 @@ import 'package:logger/logger.dart';
 final Logger logger = Logger();
 
 // This function  updates points for a specific task category
-Future<void> GetCurrentPoints(String categoryName) async {
+Future<void> getCurrentPoints(String categoryName) async {
   print(categoryName);
   int noOfcompletedTasks = 0;
 
