@@ -18,17 +18,17 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
 
     // Update the current user account
     final currentUser = FirebaseAuth.instance.currentUser;
-    final rankTitleMap = {
-      1: 'Novice 1',
-      2: 'Novice 2',
-      3: 'Novice 3',
-      4: 'Novice 4',
-      5: 'Novice 5',
-      6: 'Novice 6',
-      7: 'Novice 7',
-      8: 'Novice 8',
-      9: 'Novice 9'
-    };
+    // final rankTitleMap = {
+    //   1: 'Novice 1',
+    //   2: 'Novice 2',
+    //   3: 'Novice 3',
+    //   4: 'Novice 4',
+    //   5: 'Novice 5',
+    //   6: 'Novice 6',
+    //   7: 'Novice 7',
+    //   8: 'Novice 8',
+    //   9: 'Novice 9'
+    // };
 
     // Check if currentUser is null and handle accordingly
     if (currentUser == null) {
@@ -70,10 +70,23 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
               } else if (snapshot.hasError) {
                 return Text('Error: ${snapshot.error}');
               } else if (snapshot.hasData) {
+                //show the rank title based on the level
                 final userDocument =
                     snapshot.data!.data() as Map<String, dynamic>;
                 final level = userDocument['Level'] ?? 0;
-                var rankTitle = rankTitleMap[level] ?? 'Unknown';
+                String rankTitle;
+
+                if (level >= 1 && level <= 2) {
+                  rankTitle = 'Bronze';
+                } else if (level >= 3 && level <= 5) {
+                  rankTitle = 'Silver';
+                } else if (level >= 6 && level <= 8) {
+                  rankTitle = 'Gold';
+                } else if (level >= 9) {
+                  rankTitle = 'Platinum';
+                } else {
+                  rankTitle = 'Unknown';
+                }
 
                 return Text(
                   rankTitle,
