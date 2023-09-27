@@ -40,7 +40,6 @@ class ReadController extends GetxController {
         // Convert each document to a ReadModel
         return ReadModel(
             id: model.id,
-            category: model['category'],
             title: model['title'],
             description: model['description'],
             content: model['content'],

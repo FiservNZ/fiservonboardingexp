@@ -1,8 +1,10 @@
+import 'package:fiservonboardingexp/model/watch_model.dart';
 import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:fiservonboardingexp/util/mc_testing/module/module_screen.dart';
 import 'package:fiservonboardingexp/util/mc_testing/watch/video_player_widget.dart';
 import 'package:fiservonboardingexp/util/mc_testing/watch/watch_tasks_container.dart';
+import 'package:fiservonboardingexp/util/progress_points.dart';
 import 'package:fiservonboardingexp/widgets/exp_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -187,6 +189,7 @@ class _VideoPlayerState extends State<VideoPlayer> {
                       // await userColRef
                       //     .doc(currentUser.uid)
                       //     .update({'EXP': currentEXP + 25});
+
                       final querySnapshot = await userColRef
                           .doc(currentUser.uid)
                           .collection('Tasks')
@@ -197,6 +200,13 @@ class _VideoPlayerState extends State<VideoPlayer> {
 
                       if (querySnapshot.docs.isNotEmpty) {
                         final doc = querySnapshot.docs[0];
+
+                        // Checks if task has been completed if not add a point to the progress bar
+                        final isDone = doc['isDone'];
+                        if (!isDone) {
+                          addPointsToProgress(currentCategory);
+                        }
+
                         await doc.reference.update({'isDone': true});
                       } else {
                         debugPrint('No Matching Document Found!');

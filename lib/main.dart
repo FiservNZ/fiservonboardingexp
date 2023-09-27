@@ -39,39 +39,6 @@ class MyApp extends StatelessWidget {
   }
 }
 
-// // Routes to the read task page
-// void main() async {
-//   WidgetsFlutterBinding.ensureInitialized();
-//   await Firebase.initializeApp();
-//   InitialBindings().dependencies();
-
-//   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
-//   Get.put(ReadController());
-
-//   runApp(
-//     ChangeNotifierProvider(
-//       create: (_) => ThemeProvider(), // Initialize ThemeProvider here
-//       child: const MyApp(),
-//     ),
-//   );
-// }
-
-// class MyApp extends StatelessWidget {
-//   const MyApp({super.key});
-
-//   @override
-//   Widget build(BuildContext context) {
-//     return GetMaterialApp(
-//       debugShowCheckedModeBanner: false,
-//       // Initial route is set to the readtask page
-//       initialRoute: '/read',
-//       //sets the initial route to homepage with read task button and progess bar
-//       //initialRoute: '/',
-//       getPages: ReadRoutes.routes(),
-//     );
-//   }
-// }
-
 
 
 // Old Code
