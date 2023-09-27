@@ -176,7 +176,7 @@ class Achievementpage extends State<AchievementsPage> {
               color: Colors.white,
             ),
             textStyleSubTitle: const TextStyle(
-              color: fiservColor,
+              color: Colors.white,
             ),
             color: Colors.black,
             isCircle: true,
