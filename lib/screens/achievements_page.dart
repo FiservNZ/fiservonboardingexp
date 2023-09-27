@@ -17,18 +17,15 @@ class AchievementsPage extends StatefulWidget {
 class Achievementpage extends State<AchievementsPage> {
   AchievementTracker achievementTracker = const AchievementTracker();
 
-  List<Map<String, dynamic>> contentInAchv = [];
-
   // fetch the achievement list in initialization
-  @override
-  void initState() {
-    super.initState();
-    // fetchAndStoreAchievement();
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   // fetchAndStoreAchievement();
+  // }
 
   // List for storing the icon
-  // ignore: non_constant_identifier_names
-  final List IconList = [
+  final List iconList = [
     'assets/icon/welcome.png',
     'assets/icon/worldwide.png',
     'assets/icon/compliance.png',
@@ -75,6 +72,7 @@ class Achievementpage extends State<AchievementsPage> {
       body: StreamBuilder<QuerySnapshot<Map<String, dynamic>>>(
         stream: achievementColRef.snapshots(),
         builder: (context, snapshot) {
+          // Detect the exception
           if (snapshot.connectionState == ConnectionState.waiting) {
             return const CircularProgressIndicator();
           } else if (snapshot.hasError) {
@@ -90,7 +88,6 @@ class Achievementpage extends State<AchievementsPage> {
                   child: Container(
                     height: 170.0,
                     decoration: const BoxDecoration(
-                      //
                       color: Color.fromARGB(255, 112, 107, 243),
                     ),
                     child: Stack(
@@ -236,13 +233,9 @@ class Achievementpage extends State<AchievementsPage> {
         'name': name,
         'IsComplete': isComplete,
         'iconData':
-            IconList.isNotEmpty ? IconList[newAchievementContent.length] : '',
+            iconList.isNotEmpty ? iconList[newAchievementContent.length] : '',
         'subiconData': subiconData,
         'hour': hour,
-
-        // 'subiconData': SubiconList.isNotEmpty
-        //     ? SubiconList[newAchievementContent.length]
-        //     : '',
       });
     }
     // print(newAchievementContent);
