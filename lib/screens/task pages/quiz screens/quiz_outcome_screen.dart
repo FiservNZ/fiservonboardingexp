@@ -84,8 +84,9 @@ class QuizOutcomeScreen extends GetView<QuestionController> {
                     const SizedBox(height: 20),
                     Text(
                       "Thank you for completing the ${controller.quizModel.title} quiz!",
-                      style:
-                          TextStyle(color: selectedTheme.colorScheme.primary),
+                      style: GoogleFonts.quicksand(
+                          color: selectedTheme.colorScheme.primary,
+                          fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,
                     ),
                     Padding(

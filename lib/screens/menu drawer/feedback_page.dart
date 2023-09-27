@@ -155,7 +155,7 @@ class _FeedBackState extends State<FeedBack> {
                   ),
                   style: ElevatedButton.styleFrom(
                     padding: EdgeInsets.symmetric(horizontal: 20),
-                    backgroundColor: selectedTheme.colorScheme.secondary,
+                    backgroundColor: selectedTheme.colorScheme.onBackground,
                   ),
                 ),
               ),

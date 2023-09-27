@@ -1,4 +1,3 @@
-import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:fiservonboardingexp/util/mc_testing/module/module_screen.dart';
 import 'package:fiservonboardingexp/util/mc_testing/watch/watch_tasks_container.dart';
@@ -25,7 +24,7 @@ class ReadPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: selectedTheme.colorScheme.background,
       appBar: myAppBar,
-      bottomNavigationBar: navBar,
+      //bottomNavigationBar: navBar,
       body: SafeArea(
           child: ListView(
         children: [

@@ -85,7 +85,7 @@ class ColleaguesPageState extends State<ColleaguesPage> {
                     // Colleagues icon set to the person icon by default
                     leading: CircleAvatar(
                       radius: 22,
-                      backgroundColor: selectedTheme.colorScheme.secondary,
+                      backgroundColor: selectedTheme.colorScheme.onBackground,
                       child: Icon(
                         Icons.person,
                         color: selectedTheme.colorScheme.primary,
@@ -184,7 +184,8 @@ class ColleaguesPageState extends State<ColleaguesPage> {
                           TextSpan(
                             text: colleague.phoneNumber,
                             style: TextStyle(
-                                color: selectedTheme.colorScheme.secondary),
+                                color: selectedTheme.colorScheme.secondary,
+                                decoration: TextDecoration.underline),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
                                 _launchPhoneNumber(colleague
@@ -209,7 +210,8 @@ class ColleaguesPageState extends State<ColleaguesPage> {
                           TextSpan(
                             text: colleague.email,
                             style: TextStyle(
-                                color: selectedTheme.colorScheme.secondary),
+                                color: selectedTheme.colorScheme.secondary,
+                                decoration: TextDecoration.underline),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
                                 _launchEmail(colleague
@@ -233,7 +235,7 @@ class ColleaguesPageState extends State<ColleaguesPage> {
           actions: [
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: selectedTheme.colorScheme.secondary,
+                backgroundColor: selectedTheme.colorScheme.onBackground,
               ),
               onPressed: () {
                 Navigator.of(context).pop();

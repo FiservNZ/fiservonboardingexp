@@ -216,7 +216,7 @@ class SettingsPageState extends State<SettingsPage> {
               padding: const EdgeInsets.only(left: 0),
               child: Align(
                 child: Text(
-                  "(Turn off OS enabled light/dark mode to\n set the mode.)",
+                  "(Turn off OS enabled light/dark mode to set\n the mode.)",
                   style: GoogleFonts.quicksand(
                     fontSize: 13,
                     color: isEnabledOS
@@ -243,57 +243,66 @@ class SettingsPageState extends State<SettingsPage> {
                     }));
                   }
                 },
-                child: Row(
-                  children: <Widget>[
-                    Icon(Icons.color_lens,
-                        color: isEnabledOS
-                            ? Colors.grey // Grey out the icon
-                            : selectedTheme.colorScheme.primary),
-                    SizedBox(
-                      width: iconTxtSpacing,
-                    ), // Add some spacing between icon and text
-                    Text(
-                      'Themes',
-                      style: GoogleFonts.quicksand(
-                        color: isEnabledOS
-                            ? Colors.grey // Grey out the text
-                            : selectedTheme.colorScheme.primary,
-                        fontSize: 18,
-                        fontWeight: FontWeight.bold,
+                child: SizedBox(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Row(
+                        children: <Widget>[
+                          Icon(
+                            Icons.color_lens,
+                            color: isEnabledOS
+                                ? Colors.grey // Grey out the icon
+                                : selectedTheme.colorScheme.primary,
+                          ),
+                          SizedBox(
+                            width: iconTxtSpacing,
+                          ), // Add some spacing between icon and text
+                          Text(
+                            'Themes',
+                            style: GoogleFonts.quicksand(
+                              color: isEnabledOS
+                                  ? Colors.grey // Grey out the text
+                                  : selectedTheme.colorScheme.primary,
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                          const SizedBox(
+                              width: 155), // Push the second text to the end
+                          Text(
+                            currentThemeName,
+                            //  "Current Theme: $currentThemeName",
+                            style: TextStyle(
+                              fontSize: 14,
+                              color: isEnabledOS
+                                  ? Colors.grey
+                                  : selectedTheme.colorScheme.primary,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
-                    SizedBox(width: 155), // Push the second text to the end
-                    Text(
-                      currentThemeName,
-                      //  "Current Theme: $currentThemeName",
-                      style: TextStyle(
-                        fontSize: 14,
-                        color: isEnabledOS
-                            ? Colors.grey
-                            : selectedTheme.colorScheme.primary,
-                        fontWeight: FontWeight.bold,
+                      Padding(
+                        padding: const EdgeInsets.only(
+                            left: 40), // Set your desired padding here
+                        child: Align(
+                          alignment: Alignment.centerLeft,
+                          child: Text(
+                            "(Turn off OS enabled light/dark mode to set a\n theme.)",
+                            style: GoogleFonts.quicksand(
+                              fontSize: 13,
+                              color: isEnabledOS
+                                  ? Colors.grey
+                                  : selectedTheme.colorScheme.primary,
+                              fontStyle: FontStyle.italic,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                        ),
                       ),
-                    ),
-                  ],
-                ),
-              ),
-            ),
-
-            // Themes explanation
-            Padding(
-              padding: const EdgeInsets.only(
-                  left: 70), // Set your desired padding here
-              child: Align(
-                alignment: Alignment.centerLeft,
-                child: Text(
-                  "(Turn off OS enabled light/dark mode to set\n a theme.)",
-                  style: GoogleFonts.quicksand(
-                      fontSize: 13,
-                      color: isEnabledOS
-                          ? Colors.grey
-                          : selectedTheme.colorScheme.primary,
-                      fontStyle: FontStyle.italic,
-                      fontWeight: FontWeight.w500),
+                    ],
+                  ),
                 ),
               ),
             ),
