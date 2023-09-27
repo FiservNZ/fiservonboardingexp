@@ -91,9 +91,9 @@ class ModuleScreen extends StatelessWidget {
                                   ? 'assets/icon/compliance.png'
                                   : 'assets/icon/technical.png',
                   width: 30,
-                  height: 30,
+                  height: 60,
                 ),
-                const SizedBox(width: 5),
+                //const SizedBox(width: 5),
                 Text(
                   title,
                   style: GoogleFonts.quicksand(

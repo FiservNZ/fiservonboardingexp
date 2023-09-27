@@ -50,12 +50,10 @@ class ThemesPageState extends State<ThemesPage> {
               padding: const EdgeInsets.all(30.0),
               child: Text(
                 'Select a Theme:',
-                style: TextStyle(
+                style: GoogleFonts.quicksand(
                   color: selectedTheme.colorScheme.secondary,
                   fontSize: 27,
                   fontWeight: FontWeight.bold,
-                ).merge(
-                  GoogleFonts.quicksand(),
                 ),
               ),
             ),
@@ -73,11 +71,11 @@ class ThemesPageState extends State<ThemesPage> {
                 child: RadioListTile<ThemeData>(
                   title: Text(
                     'Rainforest Theme',
-                    style: TextStyle(
+                    style: GoogleFonts.quicksand(
                       color: selectedTheme.colorScheme.primary,
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
-                    ).merge(GoogleFonts.quicksand()),
+                    ),
                   ),
                   value: rainforestTheme,
                   groupValue: selectedTheme,
@@ -100,11 +98,11 @@ class ThemesPageState extends State<ThemesPage> {
                 child: RadioListTile<ThemeData>(
                   title: Text(
                     'Pastel Theme',
-                    style: TextStyle(
+                    style: GoogleFonts.quicksand(
                       color: selectedTheme.colorScheme.primary,
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
-                    ).merge(GoogleFonts.quicksand()),
+                    ),
                   ),
                   // Radio widget for selecting the "Pastel" theme.
                   value: pastelTheme,
@@ -129,11 +127,11 @@ class ThemesPageState extends State<ThemesPage> {
                 child: RadioListTile<ThemeData>(
                   title: Text(
                     'Beach Theme',
-                    style: TextStyle(
+                    style: GoogleFonts.quicksand(
                       color: selectedTheme.colorScheme.primary,
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
-                    ).merge(GoogleFonts.quicksand()),
+                    ),
                   ),
                   value: beachTheme,
                   groupValue: selectedTheme,
@@ -159,11 +157,11 @@ class ThemesPageState extends State<ThemesPage> {
                 ),
                 child: Text(
                   'Back',
-                  style: TextStyle(
+                  style: GoogleFonts.quicksand(
                     color: selectedTheme.colorScheme.secondary,
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
-                  ).merge(GoogleFonts.quicksand()),
+                  ),
                 ),
               ),
             ),

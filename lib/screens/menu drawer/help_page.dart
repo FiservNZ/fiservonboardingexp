@@ -20,12 +20,10 @@ class HelpPage extends StatelessWidget {
               // Title
               Text(
                 'App Tutorial',
-                style: TextStyle(
+                style: GoogleFonts.quicksand(
                   color: selectedTheme.colorScheme.secondary,
                   fontSize: 27,
                   fontWeight: FontWeight.bold,
-                ).merge(
-                  GoogleFonts.quicksand(),
                 ),
                 textAlign: TextAlign.center,
               ),
@@ -37,12 +35,10 @@ class HelpPage extends StatelessWidget {
                 margin: const EdgeInsets.symmetric(horizontal: 50),
                 child: Text(
                   'An instructional guide to help navigate the app',
-                  style: TextStyle(
+                  style: GoogleFonts.quicksand(
                     color: selectedTheme.colorScheme.secondary,
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
-                  ).merge(
-                    GoogleFonts.quicksand(),
                   ),
                   textAlign: TextAlign.center,
                 ),
@@ -63,11 +59,11 @@ class HelpPage extends StatelessWidget {
                 ),
                 child: Text(
                   'Close',
-                  style: TextStyle(
+                  style: GoogleFonts.quicksand(
                     color: selectedTheme.colorScheme.secondary,
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
-                  ).merge(GoogleFonts.quicksand()),
+                  ),
                 ),
               ),
             ],

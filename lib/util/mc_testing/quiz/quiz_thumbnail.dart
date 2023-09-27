@@ -51,6 +51,7 @@ class QuizThumbnail extends StatelessWidget {
               questionCount: data['question_count'],
               exp: data['exp'],
               expGained: data['expGained'],
+              isDone: data['isDone'],
             );
             debugPrint("Document ID: $documentId");
             showPopupAlertDialog(

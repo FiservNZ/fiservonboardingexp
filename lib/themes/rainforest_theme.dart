@@ -6,13 +6,12 @@ final ThemeData rainforestTheme = ThemeData(
 
   //Other colours.
   colorScheme: const ColorScheme.light(
-    background: Color.fromARGB(255, 80, 129, 95), // Background
-    onBackground: Color.fromARGB(255, 99, 156, 98), // Tiles
-    tertiary: Color.fromARGB(255, 20, 145, 72), // App/nav bars
-    primary: Color.fromARGB(255, 9, 70, 34), // Main text colour
-    secondary: Color(0xFF241a16), // Headings
-    onTertiary: Colors.white,
-    surface:
-        Color.fromARGB(255, 167, 166, 166), // Progress indicator background
+    background: Color(0xFF243630), // Background
+    onBackground: Color(0xFF2d3a3c), // Tiles
+    tertiary: Color(0xFF4c4839), // App/nav bars
+    primary: Color.fromARGB(255, 124, 106, 80), // Main text colour
+    secondary: Color.fromARGB(255, 156, 159, 165), // Headings
+    onTertiary: Colors.pink,
+    surface: Color.fromARGB(255, 78, 79, 82), // Progress indicator background
   ),
 );

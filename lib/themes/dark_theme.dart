@@ -15,7 +15,7 @@ final ThemeData darkTheme = ThemeData(
     primary: darkTextColor, // Main text colour.
     secondary: fiservColor, // Headings.
     onTertiary: Colors.white,
-    surface: const Color.fromARGB(
-        255, 167, 166, 166), // Progress indicator background
+    surface:
+        Color.fromARGB(255, 107, 107, 107), // Progress indicator background
   ),
 );

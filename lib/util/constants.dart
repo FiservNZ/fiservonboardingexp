@@ -13,12 +13,6 @@ ThemeData getSelectedTheme(BuildContext context) {
   return themeProvider.currentTheme;
 }
 
-// Define the background color
-Color getBackgroundColor(BuildContext context) {
-  final selectedTheme = getSelectedTheme(context);
-  return selectedTheme.colorScheme.background;
-}
-
 // Text font design style
 const fontWeight = FontWeight.bold;
 const headerFontSize = 24.0;

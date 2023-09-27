@@ -1,13 +1,13 @@
+import 'package:fiservonboardingexp/firebase%20references/firebase_refs.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:fiservonboardingexp/controllers/quiz%20controllers/extension_question_controller.dart';
 import 'package:fiservonboardingexp/controllers/quiz%20controllers/question_controller.dart';
+import 'package:fiservonboardingexp/util/mc_testing/module/module_screen.dart';
+import 'package:fiservonboardingexp/util/progress_points.dart';
 import 'package:fiservonboardingexp/widgets/quiz%20widgets/background_decoration.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
-
-import '../../../themes/theme_provider.dart';
 
 class QuizOutcomeScreen extends GetView<QuestionController> {
   const QuizOutcomeScreen({Key? key}) : super(key: key);
@@ -15,6 +15,29 @@ class QuizOutcomeScreen extends GetView<QuestionController> {
 
   @override
   Widget build(BuildContext context) {
+    // Add points to progress bar when it's the users first time completing the task
+    if (controller.quizModel.isDone == false) {
+      addPointsToProgress(currentCategory);
+    }
+
+    // Updates isDone to show the task has been completed.
+    Future<void> fetchData() async {
+      final querySnapshot = await userColRef
+          .doc(currentUser.uid)
+          .collection('Tasks')
+          .doc(currentCategory)
+          .collection('Quiz')
+          .where('title', isEqualTo: controller.quizModel.title)
+          .get();
+
+      if (querySnapshot.docs.isNotEmpty) {
+        final doc = querySnapshot.docs[0];
+        await doc.reference.update({'isDone': true});
+      }
+    }
+
+    fetchData();
+
     ThemeData selectedTheme = getSelectedTheme(context);
     final ButtonStyle style = ElevatedButton.styleFrom(
         textStyle: const TextStyle(fontSize: 20),
@@ -71,6 +94,7 @@ class QuizOutcomeScreen extends GetView<QuestionController> {
                         "If this is your first completion, you will recieve ${controller.quizModel.exp} EXP!",
                         style: GoogleFonts.quicksand(
                             fontSize: 13,
+                            fontWeight: FontWeight.bold,
                             color: selectedTheme.colorScheme.primary),
                         textAlign: TextAlign.center,
                       ),
@@ -80,7 +104,7 @@ class QuizOutcomeScreen extends GetView<QuestionController> {
               ),
             ),
             ColoredBox(
-              color: selectedTheme.colorScheme.background ?? Colors.white,
+              color: selectedTheme.colorScheme.onBackground ?? Colors.white,
               child: Padding(
                 padding: const EdgeInsets.only(
                     bottom: 200, right: 30, left: 20, top: 10),
@@ -122,11 +146,13 @@ class QuizOutcomeScreen extends GetView<QuestionController> {
                                 'Done',
                                 selectionColor: Colors.black,
                                 style: TextStyle(
-                                    color: selectedTheme.colorScheme.tertiary),
+                                    fontWeight: FontWeight.bold,
+                                    color:
+                                        selectedTheme.colorScheme.onBackground),
                               ),
                             ),
                           )),
-                    )
+                    ),
                   ],
                 ),
               ),

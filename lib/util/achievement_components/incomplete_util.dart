@@ -107,7 +107,7 @@ class IncompleteAchvState extends State<IncompleteAchv> {
             ),
             const SizedBox(height: 30),
             Text(
-              widget.isCompleted ? "Completed" : "InCompleted",
+              widget.isCompleted ? "Complete" : "Incomplete",
               style: TextStyle(
                 fontSize: 17,
                 color: selectedTheme.colorScheme.primary,
