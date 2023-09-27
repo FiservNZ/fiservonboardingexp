@@ -148,13 +148,13 @@ class Achievementpage extends State<AchievementsPage> {
                 const SliverToBoxAdapter(
                   child: SizedBox(height: 100),
                 ),
-                SliverToBoxAdapter(
-                  child: ElevatedButton(
-                    child: const Text("Show"),
-                    onPressed: () =>
-                        updateAchievement(context, "First time login!"),
-                  ),
-                ),
+                // SliverToBoxAdapter(
+                //   child: ElevatedButton(
+                //     child: const Text("Show"),
+                //     onPressed: () =>
+                //         updateAchievement(context, "First time login!"),
+                //   ),
+                // ),
               ],
             );
           } else {
@@ -165,7 +165,6 @@ class Achievementpage extends State<AchievementsPage> {
     );
   }
 
-  // When certain achievement has been completed then call this function to update the data.
   //Pop out a information when complete target achievement
   void show(BuildContext context, String targetName) {
     // The widget implement pop out
@@ -186,6 +185,7 @@ class Achievementpage extends State<AchievementsPage> {
         .show(context);
   }
 
+  // When certain achievement has been completed then call this function to update the data.
   Future<void> updateAchievement(
       BuildContext context, String targetName) async {
     try {
