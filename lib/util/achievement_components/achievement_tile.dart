@@ -1,7 +1,7 @@
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
 
-// This class is used to create the
+// This class is used to create an unit of the achievement
 class Achievement extends StatefulWidget {
   final String title;
   final String iconName;
@@ -41,6 +41,7 @@ class AchievenmentState extends State<Achievement> {
                 color: selectedTheme.colorScheme.primary,
                 fontWeight: FontWeight.bold,
               ),
+              textAlign: TextAlign.center,
             ),
             const SizedBox(height: 5),
             Padding(
@@ -50,6 +51,7 @@ class AchievenmentState extends State<Achievement> {
                 widget.iconName,
               ),
             ),
+            //reconize the achivement is complete or not
             const SizedBox(height: 10),
             Text(
               widget.isCompleted ? "Complete" : "Incomplete",

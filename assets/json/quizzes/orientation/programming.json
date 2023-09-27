@@ -3,6 +3,9 @@
     "image_url": "",
     "description": "Quiz on Harry Potter",
     "quiz_duration": 60,
+    "question_count": 2,
+    "exp": 10,
+    "exp_gained": false,
     "questions":[
         {
             "id": "q1",
