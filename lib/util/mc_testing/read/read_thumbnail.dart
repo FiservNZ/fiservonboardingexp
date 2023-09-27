@@ -4,6 +4,7 @@ import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
+import '../../../controllers/read_controller.dart';
 import '../../../firebase references/firebase_refs.dart';
 import '../../../model/read_model.dart';
 
@@ -52,7 +53,11 @@ class ReadThumbnail extends StatelessWidget {
               imageUrl: data['image_url'],
             );
             debugPrint("Document ID: $documentId");
-            Get.to(ReadPage(readModel: readModel));
+            showPopupAlertDialog(
+                readModel: readModel,
+                categoryName: taskCategory, 
+                theme: selectedTheme);
+            //Get.to(ReadPage(readModel: readModel));
           }
         }).catchError((error) {
           debugPrint('ERROR: $error');
