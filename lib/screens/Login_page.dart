@@ -1,10 +1,9 @@
+import 'package:fiservonboardingexp/screens/achievements_page.dart';
 import 'package:fiservonboardingexp/screens/main_screen.dart';
-
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-
 import '../firebase references/firebase_refs.dart';
 import 'menu drawer/help_page.dart';
 import 'teaser pages/teaser.dart';
@@ -15,6 +14,7 @@ import 'teaser pages/teaser.dart';
 class LoginPage extends StatelessWidget {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final Achievementpage achievementpage = Achievementpage();
 
   LoginPage({super.key});
 
@@ -102,6 +102,8 @@ class LoginPage extends StatelessWidget {
                   .collection('User')
                   .doc(uid)
                   .update({'firstlog': false});
+
+              achievementpage.updateAchievement(context, "First time login!");
             } else {
               Get.off("/mainScreen");
             }

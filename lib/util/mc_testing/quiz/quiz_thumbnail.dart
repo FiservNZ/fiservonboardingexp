@@ -1,15 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fiservonboardingexp/controllers/quiz%20controllers/quiz_controller.dart';
 import 'package:fiservonboardingexp/model/quiz_model.dart';
-import 'package:fiservonboardingexp/themes/theme_provider.dart';
+import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:fiservonboardingexp/util/mc_testing/module/module_screen.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 import '../../../firebase references/firebase_refs.dart';
-import '../../../screens/task pages/quiz screens/question_screen.dart';
 
 class QuizThumbnail extends StatelessWidget {
   final String quizTitle;
@@ -25,8 +22,7 @@ class QuizThumbnail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-    ThemeData selectedTheme = themeProvider.currentTheme;
+    ThemeData selectedTheme = getSelectedTheme(context);
     return GestureDetector(
       onTap: () {
         debugPrint('Quiz Tapped!\nTitle: $quizTitle');
@@ -55,10 +51,13 @@ class QuizThumbnail extends StatelessWidget {
               questionCount: data['question_count'],
               exp: data['exp'],
               expGained: data['expGained'],
+              isDone: data['isDone'],
             );
             debugPrint("Document ID: $documentId");
             showPopupAlertDialog(
-                quizModel: quizModel, categoryName: currentCategory);
+                quizModel: quizModel,
+                categoryName: currentCategory,
+                theme: selectedTheme);
           }
         }).catchError((error) {
           debugPrint('ERROR: $error');

@@ -2,9 +2,7 @@ import 'package:achievement_view/achievement_view.dart';
 import 'package:achievement_view/achievement_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../firebase references/firebase_refs.dart';
 import '../util/achievement_components/achievement_tile.dart';
 import '../util/achievement_components/achievement_tracker.dart';
@@ -62,8 +60,7 @@ class Achievementpage extends State<AchievementsPage> {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-    ThemeData selectedTheme = themeProvider.currentTheme;
+    ThemeData selectedTheme = getSelectedTheme(context);
 
     // Update the current user account
     final currentUser = FirebaseAuth.instance.currentUser;
@@ -151,13 +148,13 @@ class Achievementpage extends State<AchievementsPage> {
                 const SliverToBoxAdapter(
                   child: SizedBox(height: 100),
                 ),
-                SliverToBoxAdapter(
-                  child: ElevatedButton(
-                    child: const Text("Show"),
-                    onPressed: () =>
-                        updateAchievement(context, "First time login!"),
-                  ),
-                ),
+                // SliverToBoxAdapter(
+                //   child: ElevatedButton(
+                //     child: const Text("Show"),
+                //     onPressed: () =>
+                //         updateAchievement(context, "First time login!"),
+                //   ),
+                // ),
               ],
             );
           } else {
@@ -168,7 +165,6 @@ class Achievementpage extends State<AchievementsPage> {
     );
   }
 
-  // When certain achievement has been completed then call this function to update the data.
   //Pop out a information when complete target achievement
   void show(BuildContext context, String targetName) {
     // The widget implement pop out
@@ -180,7 +176,7 @@ class Achievementpage extends State<AchievementsPage> {
               color: Colors.white,
             ),
             textStyleSubTitle: const TextStyle(
-              color: fiservColor,
+              color: Colors.white,
             ),
             color: Colors.black,
             isCircle: true,
@@ -189,6 +185,7 @@ class Achievementpage extends State<AchievementsPage> {
         .show(context);
   }
 
+  // When certain achievement has been completed then call this function to update the data.
   Future<void> updateAchievement(
       BuildContext context, String targetName) async {
     try {

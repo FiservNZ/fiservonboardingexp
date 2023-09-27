@@ -5,9 +5,12 @@ final ThemeData beachTheme = ThemeData(
   brightness: Brightness.light,
   colorScheme: const ColorScheme.light(
     background: Color(0xFFfffced), // Background.
-    onBackground: Color(0xFF92becb), // Tiles.
+    onBackground: Color.fromARGB(255, 240, 229, 188), // Tiles.
     tertiary: Color(0xFF152a69), // App/nav bars.
     primary: Color(0xFF446da3), // Main text colour.
-    secondary: Color(0xFF189ebb), // Headings.
+    secondary: Color.fromARGB(255, 9, 153, 185), // Headings.
+    onTertiary: Colors.white,
+    surface:
+        Color.fromARGB(255, 167, 166, 166), // Progress indicator background
   ),
 );

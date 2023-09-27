@@ -1,11 +1,9 @@
-import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:fiservonboardingexp/util/mc_testing/quiz/quiz_tasks.dart';
 import 'package:fiservonboardingexp/util/mc_testing/read/read_tasks.dart';
 import 'package:fiservonboardingexp/util/mc_testing/watch/watch_tasks.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 class WatchTasksContainer extends StatelessWidget {
   final String watchCategory;
@@ -13,8 +11,7 @@ class WatchTasksContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-    ThemeData selectedTheme = themeProvider.currentTheme;
+    ThemeData selectedTheme = getSelectedTheme(context);
 
     return Scaffold(
       appBar: myAppBar,

@@ -14,7 +14,6 @@ class ReadController extends GetxController {
   late ReadModel? model;
   final allReadTasks =
       <ReadModel>[]; // Initializes a collection of read tasks as an array.
-  RxInt selectedIndex = RxInt(0); // Initialize with a default index of 0.
 
   @override
   void onReady() {
@@ -72,7 +71,7 @@ void showPopupAlertDialog(
   Get.dialog(
       showPopup(
           onTapStart: () {
-            debugPrint('${readModel.description}');
+            debugPrint(readModel.description);
             Get.toNamed(ReadPage.routeName, arguments: readModel);
           },
           onTapCancel: () {

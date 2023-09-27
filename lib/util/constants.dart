@@ -8,6 +8,11 @@ import '../widgets/app_bar_overlay.dart';
 const myAppBar = AppBarOverlay();
 const navBar = CustomNavBar();
 
+ThemeData getSelectedTheme(BuildContext context) {
+  final themeProvider = Provider.of<ThemeProvider>(context);
+  return themeProvider.currentTheme;
+}
+
 // Text font design style
 const fontWeight = FontWeight.bold;
 const headerFontSize = 24.0;
