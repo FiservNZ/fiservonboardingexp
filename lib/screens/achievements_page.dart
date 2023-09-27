@@ -25,7 +25,7 @@ class Achievementpage extends State<AchievementsPage> {
   //   // fetchAndStoreAchievement();
   // }
 
-  // List for storing the icon
+  // List for the achievements' icon
   final List iconList = [
     'assets/icon/welcome.png',
     'assets/icon/worldwide.png',
@@ -40,7 +40,7 @@ class Achievementpage extends State<AchievementsPage> {
     'assets/icon/technical.png',
     'assets/icon/technical.png',
   ];
-
+  // List of the image showing in the home page
   final List subIconList = [
     'assets/icon/achievement/Unlocked all themes!.png',
     'assets/icon/achievement/First time login!.png',
@@ -133,6 +133,7 @@ class Achievementpage extends State<AchievementsPage> {
                     ),
                     delegate: SliverChildBuilderDelegate(
                       (BuildContext context, int index) {
+                        // When the achievement is uncomplete, it will show the lock icon
                         if (contentInAchv[index]['IsComplete'] == false) {
                           contentInAchv[index]['iconData'] =
                               'assets/icon/Lock.png';
@@ -204,10 +205,15 @@ class Achievementpage extends State<AchievementsPage> {
         // Update isCompleted field
         for (QueryDocumentSnapshot docSnapshot in querySnapshot.docs) {
           DocumentReference docRef = achievementColRef.doc(docSnapshot.id);
-          await docRef.update({'IsComplete': true});
+          //Only update the achievement when it is uncomplete.
+          bool isComplete =
+              (docSnapshot.data() as Map<String, dynamic>)['IsComplete'] ??
+                  false;
+          if (!isComplete) {
+            await docRef.update({'IsComplete': true});
+            show(context, targetName);
+          }
         }
-        // ignore: use_build_context_synchronously
-        show(context, targetName);
       } else {
         // Handle the case where no matching documents were found
         debugPrint("No documents matching '$targetName' found.");
