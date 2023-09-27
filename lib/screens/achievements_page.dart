@@ -8,6 +8,7 @@ import '../util/achievement_components/achievement_tile.dart';
 import '../util/achievement_components/achievement_tracker.dart';
 import '../util/constants.dart';
 
+// This class is used to visulaze visualize
 class AchievementsPage extends StatefulWidget {
   const AchievementsPage({super.key});
   @override
@@ -132,6 +133,10 @@ class Achievementpage extends State<AchievementsPage> {
                     ),
                     delegate: SliverChildBuilderDelegate(
                       (BuildContext context, int index) {
+                        if (contentInAchv[index]['IsComplete'] == false) {
+                          contentInAchv[index]['iconData'] =
+                              'assets/icon/Lock.png';
+                        }
                         return Achievement(
                           title: contentInAchv[index]['name'],
                           iconName: contentInAchv[index]['iconData'] ?? "",
@@ -238,6 +243,21 @@ class Achievementpage extends State<AchievementsPage> {
         'hour': hour,
       });
     }
+    //Sort the achievement based on the Iscomplete
+    //If it has been complete, It will goes to the bottom
+    // newAchievementContent.sort((a, b) {
+    //   bool isCompleteA = a['IsComplete'] ?? false;
+    //   bool isCompleteB = b['IsComplete'] ?? false;
+    //   return isCompleteA
+    //       ? 1
+    //       : isCompleteB
+    //           ? -1
+    //           : 0;
+    // });
+
+    // newAchievementContent
+    //     .sort((a, b) => b['IsComplete'].compareTo(a['IsComplete']));
+
     // print(newAchievementContent);
     return newAchievementContent;
   }
