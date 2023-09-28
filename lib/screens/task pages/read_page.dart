@@ -1,8 +1,7 @@
-import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:fiservonboardingexp/util/mc_testing/module/module_screen.dart';
 import 'package:fiservonboardingexp/util/mc_testing/watch/watch_tasks_container.dart';
-import 'package:fiservonboardingexp/util/progress_points.dart';
+import 'package:fiservonboardingexp/util/progress_curr_points.dart';
 import 'package:fiservonboardingexp/widgets/exp_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -25,7 +24,7 @@ class ReadPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: selectedTheme.colorScheme.background,
       appBar: myAppBar,
-      bottomNavigationBar: navBar,
+      //bottomNavigationBar: navBar,
       body: SafeArea(
           child: ListView(
         children: [
@@ -184,11 +183,6 @@ class ReadPage extends StatelessWidget {
                     if (confirm == true) {
                       ExpBar expBar = const ExpBar(barwidth: 1);
                       expBar.addExperience(25);
-
-                      // Add points to progress bar when it's the users first time completing the task
-                      if (readModel.isDone == false) {
-                        addPointsToProgress(currentCategory);
-                      }
 
                       final querySnapshot = await userColRef
                           .doc(currentUser.uid)
