@@ -19,10 +19,8 @@ void main() async {
   await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
   runApp(
-    ChangeNotifierProvider(
-      create: (_) => ThemeProvider(), // Initialize ThemeProvider here
-      child: const MyApp(),
-    ),
+// Initialize ThemeProvider here
+    const MyApp(),
   );
 }
 
@@ -31,10 +29,13 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return GetMaterialApp(
-      debugShowCheckedModeBanner: false,
-      initialRoute: '/',
-      getPages: FiservAppRoutes.routes(),
+    return ChangeNotifierProvider(
+      create: (_) => ThemeProvider(context), // Pass the context here
+      child: GetMaterialApp(
+        debugShowCheckedModeBanner: false,
+        initialRoute: '/',
+        getPages: FiservAppRoutes.routes(),
+      ),
     );
   }
 }
