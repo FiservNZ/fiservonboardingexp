@@ -30,7 +30,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (_) => ThemeProvider(context), // Pass the context here
+      create: (_) => ThemeProvider(context), // Initialize ThemeProvider
       child: GetMaterialApp(
         debugShowCheckedModeBanner: false,
         initialRoute: '/',
