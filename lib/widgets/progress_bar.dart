@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fiservonboardingexp/firebase%20references/firebase_refs.dart';
 import 'package:fiservonboardingexp/model/task_category_model.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
+import 'package:fiservonboardingexp/util/progress_max_points.dart';
+import 'package:fiservonboardingexp/util/progress_curr_points.dart';
 import 'package:flutter/material.dart';
 
 class ProgressBar extends StatelessWidget {
@@ -13,6 +15,31 @@ class ProgressBar extends StatelessWidget {
   Widget build(BuildContext context) {
     ThemeData selectedTheme = getSelectedTheme(context);
 
+    return FutureBuilder(
+      future: _loadData(), // Call the _loadData method first
+      builder: (context, AsyncSnapshot<void> snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const LinearProgressIndicator();
+        }
+
+        if (snapshot.hasError) {
+          return Text('Error: ${snapshot.error}');
+        }
+
+        // Continue with rendering your progress bar based on the data loaded in _loadData().
+        return _buildProgressBar(selectedTheme, context);
+      },
+    );
+  }
+
+  Future<void> _loadData() async {
+    // Call getNumberOfTasks here before proceeding with other operations
+    await getNumberOfTasks(taskCategory);
+    await getCurrentPoints(taskCategory);
+    // You can add additional operations here if needed
+  }
+
+  Widget _buildProgressBar(ThemeData selectedTheme, BuildContext context) {
     return FutureBuilder(
       future: FirebaseFirestore.instance
           .collection('User')

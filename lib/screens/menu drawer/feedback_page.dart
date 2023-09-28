@@ -31,10 +31,10 @@ class _FeedBackState extends State<FeedBack> {
           style: GoogleFonts.quicksand(
             fontWeight: FontWeight.bold,
             fontSize: 21,
-            color: selectedTheme.colorScheme.primary,
+            color: selectedTheme.colorScheme.secondary,
           ),
         ),
-        backgroundColor: selectedTheme.colorScheme.secondary,
+        backgroundColor: selectedTheme.colorScheme.tertiary,
       ),
       backgroundColor: selectedTheme.colorScheme.background,
       // SingleChildScrollView was used to get rid of pixel overflow
@@ -111,14 +111,15 @@ class _FeedBackState extends State<FeedBack> {
                   // User typing font colour CHANGE HERE
                 ),
               ),
+
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-                child: ElevatedButton(
-                  onPressed: isRatingSelected
+                child: GestureDetector(
+                  onTap: isRatingSelected
                       ? () async {
-                          // Store rating and feedback in firebase
+                          // Store rating and feedback in Firebase
                           await FirebaseFirestore.instance
-                              .collection('Feedback') // Collection Name
+                              .collection('Feedback')
                               .add({
                             'rating': userRating,
                             'feedback': userFeedback,
@@ -135,8 +136,7 @@ class _FeedBackState extends State<FeedBack> {
 
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
-                              builder: (context) =>
-                                  MainScreen(), // Redirects user to 'main screen' after submitting
+                              builder: (context) => MainScreen(),
                             ),
                           );
 
@@ -144,18 +144,29 @@ class _FeedBackState extends State<FeedBack> {
                           print("Storing rating in Firebase: $userRating");
                           print("Storing feedback in Firebase: $userFeedback");
                         }
-                      : null, // Disable button if the star rating is not selected
-                  child: Container(
+                      : null,
+                  child: SizedBox(
                     width: double.infinity,
-                    child: Center(
-                      // Submit Feedback Button Implementation
-                      child: Text("Submit Feedback",
-                          style: TextStyle(fontSize: 16)), // Submit Button
+                    height: 40, // Set the desired height here
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: isRatingSelected
+                            ? selectedTheme.colorScheme.onBackground
+                            : selectedTheme.colorScheme.onSurface,
+                        // Change the color when disabled
+                      ),
+                      child: Center(
+                        child: Text(
+                          "Submit Feedback",
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: isRatingSelected
+                                  ? selectedTheme.colorScheme.secondary
+                                  : selectedTheme.colorScheme.onPrimary),
+                        ),
+                      ),
                     ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    backgroundColor: selectedTheme.colorScheme.secondary,
                   ),
                 ),
               ),

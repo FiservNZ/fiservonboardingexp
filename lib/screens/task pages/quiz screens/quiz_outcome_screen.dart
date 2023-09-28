@@ -3,7 +3,6 @@ import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:fiservonboardingexp/controllers/quiz%20controllers/extension_question_controller.dart';
 import 'package:fiservonboardingexp/controllers/quiz%20controllers/question_controller.dart';
 import 'package:fiservonboardingexp/util/mc_testing/module/module_screen.dart';
-import 'package:fiservonboardingexp/util/progress_points.dart';
 import 'package:fiservonboardingexp/widgets/quiz%20widgets/background_decoration.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -15,11 +14,6 @@ class QuizOutcomeScreen extends GetView<QuestionController> {
 
   @override
   Widget build(BuildContext context) {
-    // Add points to progress bar when it's the users first time completing the task
-    if (controller.quizModel.isDone == false) {
-      addPointsToProgress(currentCategory);
-    }
-
     // Updates isDone to show the task has been completed.
     Future<void> fetchData() async {
       final querySnapshot = await userColRef
@@ -45,18 +39,17 @@ class QuizOutcomeScreen extends GetView<QuestionController> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       body: BackgroundDecoration(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // QuizAppBar(
-            //     leadingWidget: const SizedBox(height: 80),
-            //     title: controller.correctAnsweredQuestions),
-            Expanded(
-              child: Padding(
+        child: Expanded(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // QuizAppBar(
+              //     leadingWidget: const SizedBox(height: 80),
+              //     title: controller.correctAnsweredQuestions),
+              Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Column(
                   children: [
-                    const SizedBox(height: 170),
                     SizedBox(
                         height: 100,
                         width: 100,
@@ -84,9 +77,11 @@ class QuizOutcomeScreen extends GetView<QuestionController> {
                     const SizedBox(height: 20),
                     Text(
                       "Thank you for completing the ${controller.quizModel.title} quiz!",
-                      style:
-                          TextStyle(color: selectedTheme.colorScheme.primary),
+                      style: GoogleFonts.quicksand(
+                          color: selectedTheme.colorScheme.primary,
+                          fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,
+                      overflow: TextOverflow.visible,
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -97,43 +92,24 @@ class QuizOutcomeScreen extends GetView<QuestionController> {
                             fontWeight: FontWeight.bold,
                             color: selectedTheme.colorScheme.primary),
                         textAlign: TextAlign.center,
+                        overflow: TextOverflow.visible,
                       ),
                     ),
                   ],
                 ),
               ),
-            ),
-            ColoredBox(
-              color: selectedTheme.colorScheme.onBackground ?? Colors.white,
-              child: Padding(
-                padding: const EdgeInsets.only(
-                    bottom: 200, right: 30, left: 20, top: 10),
+
+              const SizedBox(height: 70),
+              ColoredBox(
+                color: selectedTheme.colorScheme.onBackground ?? Colors.white,
+
                 //padding: EdgeInsets.all(10),
                 child: Row(
                   children: [
-                    // Padding(
-                    //   padding: const EdgeInsets.only(right: 10.0),
-                    //   child: Visibility(
-                    //     visible: controller.isFirstQuestion,
-                    //     child: ElevatedButton(
-                    //       style: style,
-                    //       onPressed: () {
-                    //         controller.tryAgain();
-                    //       },
-                    //       child: const Padding(
-                    //         padding: EdgeInsets.all(10.0),
-                    //         child: Text(
-                    //           "Try again",
-                    //           selectionColor: Colors.black,
-                    //           style: TextStyle(color: fiservColor),
-                    //         ),
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
                     Expanded(
                       child: Padding(
-                          padding: const EdgeInsets.only(left: 10.0),
+                          padding:
+                              const EdgeInsets.only(left: 50.0, right: 50.0),
                           child: ElevatedButton(
                             style: style,
                             onPressed: () {
@@ -155,9 +131,9 @@ class QuizOutcomeScreen extends GetView<QuestionController> {
                     ),
                   ],
                 ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );

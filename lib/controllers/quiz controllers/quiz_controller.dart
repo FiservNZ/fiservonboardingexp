@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fiservonboardingexp/controllers/quiz%20controllers/auth_controller.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:fiservonboardingexp/util/mc_testing/module/module_screen.dart';
 import 'package:fiservonboardingexp/widgets/quiz%20widgets/quiz_info_square.dart';
@@ -55,7 +56,7 @@ class QuizController extends GetxController {
       // }
       allQuizzes.assignAll(quizList);
     } catch (e) {
-      debugPrint(e as String?);
+      debugPrint(e.toString());
     }
   }
 
@@ -72,11 +73,10 @@ class QuizController extends GetxController {
   // }
 
   void navigateToQuestions({required QuizModel quiz}) {
-    // AuthController authController = Get.find();
+    AuthController authController = Get.find();
 
     showPopupAlertDialog(
         quizModel: quiz, categoryName: categoryName, theme: selectedTheme);
-    //Get.toNamed(QuizQuestionScreen.routeName, arguments: quiz);
   }
 }
 
@@ -122,43 +122,46 @@ Widget showPopup({
       child: Column(
         //mainAxisSize: MainAxisSize.values,
         children: [
-          const SizedBox(height: 10),
+          //const SizedBox(height: 10),
           Text(
             quizModel.title,
             style: GoogleFonts.quicksand(
-                fontSize: 21,
+                fontSize: 24,
                 fontWeight: FontWeight.bold,
                 color: selectedTheme.colorScheme.primary),
           ),
-          const SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: QuizInfoSquare(
-                      icon: Icons.question_mark_rounded,
-                      text: quizModel.questionCount == 1
-                          ? '${quizModel.questionCount} Question'
-                          : '${quizModel.questionCount} Questions')),
-              Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: QuizInfoSquare(
-                      icon: Icons.book_rounded, text: '${quizModel.exp} exp')),
-              Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: QuizInfoSquare(
-                    icon: Icons.timer, text: quizModel.timeConverter()),
-              )
-            ],
+          const SizedBox(height: 15),
+          Expanded(
+            flex: 1,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                QuizInfoSquare(
+                    icon: Icons.question_mark_rounded,
+                    text: quizModel.questionCount == 1
+                        ? '${quizModel.questionCount} Question'
+                        : '${quizModel.questionCount} Questions'),
+                QuizInfoSquare(
+                    icon: Icons.book_rounded, text: '${quizModel.exp} exp'),
+                QuizInfoSquare(
+                    icon: Icons.timer, text: quizModel.timeConverterTxt()),
+              ],
+            ),
           ),
           const SizedBox(height: 15),
-          Text(
-            quizModel.description,
-            style: GoogleFonts.quicksand(
-              color: selectedTheme.colorScheme.primary,
-              fontSize: 18, // Set your desired font size here
-              fontWeight: FontWeight.w600, // Set your desired font weight here
+          Flexible(
+            flex: 1,
+            child: Text(
+              quizModel.description,
+              textAlign: TextAlign.center,
+              style: GoogleFonts.quicksand(
+                color: selectedTheme.colorScheme.primary,
+                fontSize: 14, // Set your desired font size here
+                fontWeight:
+                    FontWeight.w600, // Set your desired font weight here
+              ),
+              overflow: TextOverflow.visible,
+              maxLines: 2,
             ),
           )
         ],
