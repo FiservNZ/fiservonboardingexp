@@ -39,18 +39,17 @@ class QuizOutcomeScreen extends GetView<QuestionController> {
     return Scaffold(
       extendBodyBehindAppBar: true,
       body: BackgroundDecoration(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            // QuizAppBar(
-            //     leadingWidget: const SizedBox(height: 80),
-            //     title: controller.correctAnsweredQuestions),
-            Expanded(
-              child: Padding(
+        child: Expanded(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              // QuizAppBar(
+              //     leadingWidget: const SizedBox(height: 80),
+              //     title: controller.correctAnsweredQuestions),
+              Padding(
                 padding: const EdgeInsets.all(20.0),
                 child: Column(
                   children: [
-                    const SizedBox(height: 170),
                     SizedBox(
                         height: 100,
                         width: 100,
@@ -82,6 +81,7 @@ class QuizOutcomeScreen extends GetView<QuestionController> {
                           color: selectedTheme.colorScheme.primary,
                           fontWeight: FontWeight.bold),
                       textAlign: TextAlign.center,
+                      overflow: TextOverflow.visible,
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -92,43 +92,24 @@ class QuizOutcomeScreen extends GetView<QuestionController> {
                             fontWeight: FontWeight.bold,
                             color: selectedTheme.colorScheme.primary),
                         textAlign: TextAlign.center,
+                        overflow: TextOverflow.visible,
                       ),
                     ),
                   ],
                 ),
               ),
-            ),
-            ColoredBox(
-              color: selectedTheme.colorScheme.onBackground ?? Colors.white,
-              child: Padding(
-                padding: const EdgeInsets.only(
-                    bottom: 200, right: 30, left: 20, top: 10),
+
+              const SizedBox(height: 70),
+              ColoredBox(
+                color: selectedTheme.colorScheme.onBackground ?? Colors.white,
+
                 //padding: EdgeInsets.all(10),
                 child: Row(
                   children: [
-                    // Padding(
-                    //   padding: const EdgeInsets.only(right: 10.0),
-                    //   child: Visibility(
-                    //     visible: controller.isFirstQuestion,
-                    //     child: ElevatedButton(
-                    //       style: style,
-                    //       onPressed: () {
-                    //         controller.tryAgain();
-                    //       },
-                    //       child: const Padding(
-                    //         padding: EdgeInsets.all(10.0),
-                    //         child: Text(
-                    //           "Try again",
-                    //           selectionColor: Colors.black,
-                    //           style: TextStyle(color: fiservColor),
-                    //         ),
-                    //       ),
-                    //     ),
-                    //   ),
-                    // ),
                     Expanded(
                       child: Padding(
-                          padding: const EdgeInsets.only(left: 10.0),
+                          padding:
+                              const EdgeInsets.only(left: 50.0, right: 50.0),
                           child: ElevatedButton(
                             style: style,
                             onPressed: () {
@@ -150,9 +131,9 @@ class QuizOutcomeScreen extends GetView<QuestionController> {
                     ),
                   ],
                 ),
-              ),
-            )
-          ],
+              )
+            ],
+          ),
         ),
       ),
     );
