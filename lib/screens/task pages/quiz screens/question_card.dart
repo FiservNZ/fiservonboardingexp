@@ -107,7 +107,7 @@ class QuestionCard extends GetView<QuizController> {
                                       .withOpacity(0.3),
                             ),
                             text: Text(
-                              model.timeConverter(),
+                              model.timeConverterTxt(),
                               style: TextStyle(
                                   color: Get.isDarkMode
                                       ? Colors.white

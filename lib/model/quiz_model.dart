@@ -58,7 +58,18 @@ class QuizModel {
         expGained = snapshot['exp_gained'] as bool,
         isDone = snapshot['isDone'] as bool;
 
-  String timeConverter() => "${(quizDuration / 60).ceil()} mins";
+  String timeConverterTxt() {
+    String time = "";
+    if (quizDuration == 60) {
+      time = "${(quizDuration / 60).ceil()} min";
+    } else if (quizDuration <= 59) {
+      time = "$quizDuration secs";
+    } else {
+      time = "${(quizDuration / 60).ceil()} mins";
+    }
+    return time;
+  }
+
   // Converts the properties of the QuizModel object into JSON
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> quizModelData = <String, dynamic>{};
