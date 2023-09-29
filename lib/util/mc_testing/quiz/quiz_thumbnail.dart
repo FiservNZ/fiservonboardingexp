@@ -86,6 +86,7 @@ class QuizThumbnail extends StatelessWidget {
             ),
             const SizedBox(width: 5),
             Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   quizTitle,
@@ -95,14 +96,20 @@ class QuizThumbnail extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ).merge(GoogleFonts.quicksand()),
                 ),
-                const SizedBox(height: 10),
-                Text(
-                  'Description: $quizDescription',
-                  style: TextStyle(
-                    color: selectedTheme.colorScheme.primary,
-                    fontSize: 12,
-                    fontWeight: FontWeight.bold,
-                  ).merge(GoogleFonts.quicksand()),
+                const SizedBox(height: 5),
+                //Wraped in SizedBox to set a preferred width to clip text overflow
+                SizedBox(
+                  width: 270,
+                  child: Text(
+                    "Description: $quizDescription",
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                    style: TextStyle(
+                      color: selectedTheme.colorScheme.primary,
+                      fontSize: 12,
+                      fontWeight: FontWeight.bold,
+                    ).merge(GoogleFonts.quicksand()),
+                  ),
                 ),
               ],
             ),

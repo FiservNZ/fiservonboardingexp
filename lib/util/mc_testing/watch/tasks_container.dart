@@ -5,9 +5,9 @@ import 'package:fiservonboardingexp/util/mc_testing/watch/watch_tasks.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-class WatchTasksContainer extends StatelessWidget {
+class TasksContainer extends StatelessWidget {
   final String watchCategory;
-  const WatchTasksContainer({super.key, required this.watchCategory});
+  const TasksContainer({super.key, required this.watchCategory});
 
   @override
   Widget build(BuildContext context) {
@@ -18,16 +18,21 @@ class WatchTasksContainer extends StatelessWidget {
       bottomNavigationBar: navBar,
       backgroundColor: selectedTheme.colorScheme.background,
       body: Padding(
-        padding: const EdgeInsets.all(8.0),
+        padding: const EdgeInsets.only(
+          left: 8.0,
+          right: 8.0,
+          top: 15.0,
+        ),
         child: Column(
           children: [
             Align(
-              alignment: Alignment.centerLeft,
+              alignment: Alignment.center,
               child: Text(
                 'Watch Tasks:',
                 style: TextStyle(
                         color: selectedTheme.colorScheme.secondary,
                         fontWeight: FontWeight.bold,
+                        fontSize: 18,
                         decoration: TextDecoration.underline)
                     .merge(GoogleFonts.quicksand()),
               ),
@@ -65,12 +70,13 @@ class WatchTasksContainer extends StatelessWidget {
               ),
             ),
             Align(
-              alignment: Alignment.centerLeft,
+              alignment: Alignment.center,
               child: Text(
                 'Read Tasks:',
                 style: TextStyle(
                         color: selectedTheme.colorScheme.secondary,
                         fontWeight: FontWeight.bold,
+                        fontSize: 18,
                         decoration: TextDecoration.underline)
                     .merge(GoogleFonts.quicksand()),
               ),
@@ -108,12 +114,13 @@ class WatchTasksContainer extends StatelessWidget {
               ),
             ),
             Align(
-              alignment: Alignment.centerLeft,
+              alignment: Alignment.center,
               child: Text(
                 'Quiz Tasks:',
                 style: TextStyle(
                         color: selectedTheme.colorScheme.secondary,
                         fontWeight: FontWeight.bold,
+                        fontSize: 18,
                         decoration: TextDecoration.underline)
                     .merge(GoogleFonts.quicksand()),
               ),

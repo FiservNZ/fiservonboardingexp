@@ -70,6 +70,7 @@ class VideoThumbnail extends StatelessWidget {
             ),
             const SizedBox(width: 5),
             Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
                   videoTitle,
@@ -79,14 +80,20 @@ class VideoThumbnail extends StatelessWidget {
                     fontWeight: FontWeight.bold,
                   ).merge(GoogleFonts.quicksand()),
                 ),
-                const SizedBox(height: 10),
-                Text(
-                  'Category: $taskCategory',
-                  style: TextStyle(
-                    color: selectedTheme.colorScheme.primary,
-                    fontSize: 14,
-                    fontWeight: FontWeight.bold,
-                  ).merge(GoogleFonts.quicksand()),
+                const SizedBox(height: 5),
+                //Wraped in SizedBox to set a preferred width to clip text overflow
+                SizedBox(
+                  width: 270,
+                  child: Text(
+                    'Category: $taskCategory',
+                    overflow: TextOverflow.ellipsis,
+                    maxLines: 1,
+                    style: TextStyle(
+                      color: selectedTheme.colorScheme.primary,
+                      fontSize: 14,
+                      fontWeight: FontWeight.bold,
+                    ).merge(GoogleFonts.quicksand()),
+                  ),
                 ),
               ],
             ),

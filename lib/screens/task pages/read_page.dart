@@ -1,7 +1,7 @@
 import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:fiservonboardingexp/util/mc_testing/module/module_screen.dart';
-import 'package:fiservonboardingexp/util/mc_testing/watch/watch_tasks_container.dart';
+import 'package:fiservonboardingexp/util/mc_testing/watch/tasks_container.dart';
 import 'package:fiservonboardingexp/util/progress_points.dart';
 import 'package:fiservonboardingexp/widgets/exp_bar.dart';
 import 'package:flutter/material.dart';
@@ -207,8 +207,7 @@ class ReadPage extends StatelessWidget {
                       }
                       Get.back();
                       Get.back();
-                      Get.to(
-                          WatchTasksContainer(watchCategory: currentCategory));
+                      Get.to(TasksContainer(watchCategory: currentCategory));
                     }
                   },
                   style: ElevatedButton.styleFrom(
