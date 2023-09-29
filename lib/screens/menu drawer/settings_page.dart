@@ -23,7 +23,7 @@ class SettingsPage extends StatefulWidget {
 
 class SettingsPageState extends State<SettingsPage> {
   final ThemeDatabase _firebaseTheme = ThemeDatabase();
-  late bool isOSmode;
+  bool isOSmode = false;
 
   @override
   void initState() {

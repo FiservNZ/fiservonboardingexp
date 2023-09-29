@@ -9,12 +9,15 @@ class ThemeProvider extends ChangeNotifier {
   final BuildContext context;
   ThemeData _currentTheme = lightTheme;
   Brightness _currentOsBrightness = Brightness.light;
+  bool? isOSmode;
 
   // Initialize a timer so it will dynamically update if the os theme is changed.
   late Timer _themeUpdateTimer;
 
   // Initializes the theme when the app starts up.
-  ThemeProvider(this.context) {
+  ThemeProvider(this.context, {bool? isOSmode}) {
+    // Initialize isOSmode with the provided value or set a default value.
+    this.isOSmode = isOSmode ?? false;
     initializeTheme();
     startOsThemeChangeTimer(); // Start the timer
   }
@@ -65,7 +68,7 @@ class ThemeProvider extends ChangeNotifier {
 
 // Start the timer to periodically check for OS theme changes
   void startOsThemeChangeTimer() {
-    _themeUpdateTimer = Timer.periodic(const Duration(seconds: 3), (timer) {
+    _themeUpdateTimer = Timer.periodic(const Duration(seconds: 2), (timer) {
       final newBrightness = MediaQuery.of(context).platformBrightness;
 
       if (newBrightness != _currentOsBrightness) {
