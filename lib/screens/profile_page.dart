@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fiservonboardingexp/api/pdf_api.dart';
+import 'package:fiservonboardingexp/screens/achievements_page.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:fiservonboardingexp/widgets/custom_text_box.dart';
 import 'package:fiservonboardingexp/widgets/user_icons.dart';
@@ -27,7 +28,8 @@ class _ProfilePageState extends State<ProfilePage> {
   Icon userIcon = const Icon(Icons.person);
   // uses references from file
   final currentUser = fireAuth.currentUser!;
-
+  // for calling the update achievement method
+  Achievementpage achievementpage = Achievementpage();
   //final userCollection = FirebaseFirestore.instance.collection('User'); // dont need this anymore
   /*This will show an alert dialogue which will enable us to edit
   information about ourselves which will be saved into
@@ -139,7 +141,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 FontAwesomeIcons.ghost,
                 color: Color(int.parse(iconColor.replaceFirst('#', '0xFF'))),
               );
-            } else if (userData['selectedIcon'] == 'seedling' && level >= 2) {
+            } else if (userData['selectedIcon'] == 'seedling' && level >= 1) {
               userIcon = Icon(
                 FontAwesomeIcons.seedling,
                 color: Color(int.parse(iconColor.replaceFirst('#', '0xFF'))),
@@ -179,6 +181,8 @@ class _ProfilePageState extends State<ProfilePage> {
                 FontAwesomeIcons.robot,
                 color: Color(int.parse(iconColor.replaceFirst('#', '0xFF'))),
               );
+              //update when all icon are unlocked
+              achievementpage.updateAchievement(context, "Unlocked all icons!");
             } else {
               userIcon = Icon(
                 Icons.person,
@@ -200,6 +204,7 @@ class _ProfilePageState extends State<ProfilePage> {
                     setState(() {
                       userIcon = newIcon;
                     });
+                    achievementpage.updateAchievement(context, "Changed Icon!");
                   },
                   userCollection: userColRef,
                   userId: currentUser.uid,
