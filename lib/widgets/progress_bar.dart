@@ -6,6 +6,8 @@ import 'package:fiservonboardingexp/util/progress_max_points.dart';
 import 'package:fiservonboardingexp/util/progress_curr_points.dart';
 import 'package:flutter/material.dart';
 
+import '../screens/achievements_page.dart';
+
 class ProgressBar extends StatelessWidget {
   final String taskCategory;
 
@@ -36,6 +38,35 @@ class ProgressBar extends StatelessWidget {
     // Call getNumberOfTasks here before proceeding with other operations
     await getNumberOfTasks(taskCategory);
     await getCurrentPoints(taskCategory);
+    // You can add additional operations here if needed
+  }
+
+//Update the achievement
+  void _UpdateAchievement(BuildContext context, String categoryName,
+      int currentPoint, int maxPoint) {
+    Achievementpage achievementpage = Achievementpage();
+    if (categoryName == "Compliance") {
+      if (currentPoint == maxPoint) {
+        achievementpage.updateAchievement(context, "Completed Compliance!");
+      }
+    }
+    if (categoryName == "Health & Safety") {
+      if (currentPoint == maxPoint) {
+        achievementpage.updateAchievement(
+            context, "Completed Health & Safety!");
+      }
+    }
+    if (categoryName == "Customs & Culture") {
+      if (currentPoint == maxPoint) {
+        achievementpage.updateAchievement(
+            context, "Completed Customs & Culture!");
+      }
+    }
+    if (categoryName == "Orientation") {
+      if (currentPoint == maxPoint) {
+        achievementpage.updateAchievement(context, "Completed orientation!");
+      }
+    }
     // You can add additional operations here if needed
   }
 
@@ -71,6 +102,8 @@ class ProgressBar extends StatelessWidget {
           curPoints: data['curPoints'],
           maxPoints: data['maxPoints'],
         );
+        _UpdateAchievement(
+            context, taskCategory, category.curPoints, category.maxPoints);
 
         final double progressPercentage =
             (category.curPoints / category.maxPoints);

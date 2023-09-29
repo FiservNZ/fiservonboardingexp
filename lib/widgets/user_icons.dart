@@ -2,6 +2,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+import '../screens/achievements_page.dart';
+
 class UserIcon extends StatefulWidget {
   final Icon initialUserIcon;
   final void Function(Icon) onIconChanged;
@@ -28,6 +30,7 @@ class UserIcon extends StatefulWidget {
 class UserIconState extends State<UserIcon> {
   late Icon userIcon;
   late Color iconColor;
+  Achievementpage achievementpage = Achievementpage();
 
   // Initial values for userIcon and iconColor are set based on what the user has selected / or default.
   @override

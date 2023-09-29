@@ -172,8 +172,8 @@ class Achievementpage extends State<AchievementsPage> {
   void show(BuildContext context, String targetName) {
     // The widget implement pop out
     AchievementView(
-            // title: "Yeaaah!",
-            subTitle: "$targetName completed successfully!",
+            title: "Yeaaah!",
+            subTitle: targetName,
             icon: const Icon(
               Icons.check_circle_outline_outlined,
               color: Colors.white,

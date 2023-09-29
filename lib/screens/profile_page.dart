@@ -124,7 +124,10 @@ class _ProfilePageState extends State<ProfilePage> {
           if (snapshot.hasData) {
             final userData = snapshot.data!.data() as Map<String, dynamic>;
             final level = userData['Level'] ?? 1;
-
+            //update when all icon are unlocked
+            if (level >= 9) {
+              achievementpage.updateAchievement(context, "Unlocked all icons!");
+            }
             void asyncMethod(void Function(int) callback) {
               expBar.level.then((int level) {
                 callback(level);
@@ -141,7 +144,7 @@ class _ProfilePageState extends State<ProfilePage> {
                 FontAwesomeIcons.ghost,
                 color: Color(int.parse(iconColor.replaceFirst('#', '0xFF'))),
               );
-            } else if (userData['selectedIcon'] == 'seedling' && level >= 1) {
+            } else if (userData['selectedIcon'] == 'seedling' && level >= 2) {
               userIcon = Icon(
                 FontAwesomeIcons.seedling,
                 color: Color(int.parse(iconColor.replaceFirst('#', '0xFF'))),
@@ -181,8 +184,6 @@ class _ProfilePageState extends State<ProfilePage> {
                 FontAwesomeIcons.robot,
                 color: Color(int.parse(iconColor.replaceFirst('#', '0xFF'))),
               );
-              //update when all icon are unlocked
-              achievementpage.updateAchievement(context, "Unlocked all icons!");
             } else {
               userIcon = Icon(
                 Icons.person,
@@ -201,10 +202,18 @@ class _ProfilePageState extends State<ProfilePage> {
                   initialUserIcon: userIcon,
                   level: level,
                   onIconChanged: (newIcon) {
-                    setState(() {
-                      userIcon = newIcon;
-                    });
-                    achievementpage.updateAchievement(context, "Changed Icon!");
+                    //update the icon
+                    if (userIcon != newIcon) {
+                      print("different");
+                      setState(() {
+                        userIcon = newIcon;
+                      });
+                      // update when Icon has changed
+                      achievementpage.updateAchievement(
+                          context, "Changed Icon!");
+                    } else {
+                      print("same");
+                    }
                   },
                   userCollection: userColRef,
                   userId: currentUser.uid,

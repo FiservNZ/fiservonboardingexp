@@ -1,3 +1,4 @@
+import 'package:fiservonboardingexp/screens/achievements_page.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
 import '../../widgets/star_rating.dart';
@@ -18,7 +19,7 @@ class _FeedBackState extends State<FeedBack> {
   bool isRatingSelected = false;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final TextEditingController _feedbackController = TextEditingController();
-
+  final Achievementpage _achievementpage = Achievementpage();
   @override
   Widget build(BuildContext context) {
     ThemeData selectedTheme = getSelectedTheme(context);
@@ -125,7 +126,9 @@ class _FeedBackState extends State<FeedBack> {
                             'feedback': userFeedback,
                             'timestamp': FieldValue.serverTimestamp(),
                           });
-
+                          // Update the achievement
+                          _achievementpage.updateAchievement(
+                              context, "Submitted feedback!");
                           // Little output on the bottom after the user submits the feedback
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(
