@@ -10,6 +10,7 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:open_file/open_file.dart';
@@ -161,7 +162,6 @@ class PdfApi {
 
     //Sending email to test recipient
     final mailer = sgm.Mailer(
-
         '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');
 
     //Change toAddress to your own email for testing.
@@ -189,15 +189,26 @@ class PdfApi {
           showDialog(
             context: context,
             builder: (BuildContext context) {
+              ThemeData selectedTheme = getSelectedTheme(context);
               return AlertDialog(
-                title: const Text('Notice:'),
-                content: const Text(
+                backgroundColor: selectedTheme.colorScheme.onBackground,
+                title: Text(
+                  'Notice:',
+                  style: TextStyle(
+                    color: selectedTheme.colorScheme.primary,
+                  ),
+                ),
+                content: Text(
                   'An introduction has been sent out to your colleagues!',
-                  style: TextStyle(fontStyle: FontStyle.italic),
+                  style: TextStyle(
+                      fontStyle: FontStyle.italic,
+                      color: selectedTheme.colorScheme.primary),
                 ),
                 actions: <Widget>[
                   TextButton(
-                    child: const Text('Close'),
+                    child: Text('Close',
+                        style: TextStyle(
+                            color: selectedTheme.colorScheme.secondary)),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
@@ -210,15 +221,29 @@ class PdfApi {
           showDialog(
             context: context,
             builder: (BuildContext context) {
+              ThemeData selectedTheme = getSelectedTheme(context);
               return AlertDialog(
-                title: const Text('Notice:'),
-                content: const Text(
+                backgroundColor: selectedTheme.colorScheme.onBackground,
+                title: Text(
+                  'Notice:',
+                  style: TextStyle(
+                    color: selectedTheme.colorScheme.primary,
+                  ),
+                ),
+                content: Text(
                   'Something went wrong. Please try again.',
-                  style: TextStyle(fontStyle: FontStyle.italic),
+                  style: TextStyle(
+                    fontStyle: FontStyle.italic,
+                    color: selectedTheme.colorScheme.primary,
+                  ),
                 ),
                 actions: <Widget>[
                   TextButton(
-                    child: const Text('Close'),
+                    child: Text(
+                      'Close',
+                      style:
+                          TextStyle(color: selectedTheme.colorScheme.secondary),
+                    ),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
