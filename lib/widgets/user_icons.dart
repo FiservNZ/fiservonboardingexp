@@ -43,6 +43,7 @@ class UserIconState extends State<UserIcon> {
   Widget build(BuildContext context) {
     print('Firebase User Level: ${widget.level}');
     ThemeData selectedTheme = getSelectedTheme(context);
+    bool isDarkTheme = selectedTheme == darkTheme;
     // Triggers the popup when the user icon is pressed
     return IconButton(
       icon: widget.initialUserIcon,
@@ -64,9 +65,7 @@ class UserIconState extends State<UserIcon> {
                       IconButton(
                         icon: const FaIcon(FontAwesomeIcons.ghost),
                         iconSize: 55,
-                        color: selectedTheme == darkTheme
-                            ? Colors.white
-                            : Colors.black87,
+                        color: isDarkTheme ? Colors.white : Colors.black87,
                         onPressed: () async {
                           setState(() {
                             userIcon = const Icon(FontAwesomeIcons.ghost);
@@ -76,7 +75,7 @@ class UserIconState extends State<UserIcon> {
                               .doc(widget.userId)
                               .update({
                             'selectedIcon': 'ghost',
-                            'iconColor': '#1f1f1f',
+                            'iconColor': isDarkTheme ? '#FFFFFF' : '#000000',
                           });
                           widget.onIconChanged(userIcon);
                         },
@@ -146,9 +145,7 @@ class UserIconState extends State<UserIcon> {
                       IconButton(
                         icon: const Icon(FontAwesomeIcons.userNinja),
                         iconSize: 55,
-                        color: selectedTheme == darkTheme
-                            ? Colors.white
-                            : Colors.black87,
+                        color: isDarkTheme ? Colors.white : Colors.black87,
                         onPressed: () async {
                           setState(() {
                             userIcon = const Icon(FontAwesomeIcons.userNinja);
@@ -158,7 +155,7 @@ class UserIconState extends State<UserIcon> {
                               .doc(widget.userId)
                               .update({
                             'selectedIcon': 'userNinja',
-                            'iconColor': '#000000',
+                            'iconColor': isDarkTheme ? '#FFFFFF' : '#000000',
                           });
                           widget.onIconChanged(userIcon);
                         },
@@ -228,7 +225,7 @@ class UserIconState extends State<UserIcon> {
                       IconButton(
                         icon: const Icon(FontAwesomeIcons.robot),
                         iconSize: 55,
-                        color: Colors.grey[800],
+                        color: const Color.fromARGB(255, 78, 79, 82),
                         onPressed: () async {
                           setState(() {
                             userIcon = const Icon(FontAwesomeIcons.robot);
@@ -238,7 +235,7 @@ class UserIconState extends State<UserIcon> {
                               .doc(widget.userId)
                               .update({
                             'selectedIcon': 'robot',
-                            'iconColor': '#333333',
+                            'iconColor': '#4E4F52',
                           });
                           widget.onIconChanged(userIcon);
                         },
@@ -254,7 +251,7 @@ class UserIconState extends State<UserIcon> {
                 width: 400,
                 height: 550,
                 child: AlertDialog(
-                  backgroundColor: selectedTheme.colorScheme.background,
+                  backgroundColor: selectedTheme.colorScheme.onBackground,
                   title: Text('My Icons',
                       style:
                           TextStyle(color: selectedTheme.colorScheme.secondary),
@@ -268,7 +265,7 @@ class UserIconState extends State<UserIcon> {
                         Align(
                           alignment: Alignment.bottomLeft,
                           child: Padding(
-                            padding: EdgeInsets.only(left: 16, bottom: 8),
+                            padding: const EdgeInsets.only(left: 16, bottom: 8),
                             child: Text(
                               'Unlock more Icons by gaining EXP!\n      Total of 9 obtainable Icons',
                               style: TextStyle(
