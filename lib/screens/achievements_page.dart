@@ -142,6 +142,7 @@ class Achievementpage extends State<AchievementsPage> {
                           title: contentInAchv[index]['name'],
                           iconName: contentInAchv[index]['iconData'] ?? "",
                           isCompleted: contentInAchv[index]['IsComplete'],
+                          exp: contentInAchv[index]['exp'],
                         );
                       },
                       childCount: contentInAchv.length,
@@ -225,6 +226,7 @@ class Achievementpage extends State<AchievementsPage> {
     }
   }
 
+  // Import the data to the list
   List<Map<String, dynamic>> fetchAndStoreAchievement(
       List<QueryDocumentSnapshot<Map<String, dynamic>>> docs) {
     List<Map<String, dynamic>> newAchievementContent = [];
@@ -234,6 +236,7 @@ class Achievementpage extends State<AchievementsPage> {
       String name = data['name'] ?? "";
       bool isComplete = data['IsComplete'] ?? false;
       String hour = data['hour'] ?? "";
+      int exp = data['exp'] ?? 0;
 
       // Find the corresponding icon data based on the name
       String subiconData = subIconList.firstWhere(
@@ -247,8 +250,10 @@ class Achievementpage extends State<AchievementsPage> {
             iconList.isNotEmpty ? iconList[newAchievementContent.length] : '',
         'subiconData': subiconData,
         'hour': hour,
+        'exp': exp,
       });
     }
+
     //Sort the achievement based on the Iscomplete
     //If it has been complete, It will goes to the bottom
     // newAchievementContent.sort((a, b) {
