@@ -115,8 +115,9 @@ class AppBarOverlay extends StatelessWidget implements PreferredSizeWidget {
               showModalBottomSheet(
                 context: context,
                 builder: (BuildContext context) {
-                  return NavDraw(); // Use the new component here
+                  return const MenuDrawer(); // Use the new component here
                 },
+                isScrollControlled: true,
               );
             },
           ),

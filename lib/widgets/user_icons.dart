@@ -1,4 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fiservonboardingexp/themes/dark_theme.dart';
+import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -43,7 +45,7 @@ class UserIconState extends State<UserIcon> {
   @override
   Widget build(BuildContext context) {
     print('Firebase User Level: ${widget.level}');
-
+    ThemeData selectedTheme = getSelectedTheme(context);
     // Triggers the popup when the user icon is pressed
     return IconButton(
       icon: widget.initialUserIcon,
@@ -65,7 +67,9 @@ class UserIconState extends State<UserIcon> {
                       IconButton(
                         icon: const FaIcon(FontAwesomeIcons.ghost),
                         iconSize: 55,
-                        color: Colors.black87,
+                        color: selectedTheme == darkTheme
+                            ? Colors.white
+                            : Colors.black87,
                         onPressed: () async {
                           setState(() {
                             userIcon = const Icon(FontAwesomeIcons.ghost);
@@ -105,7 +109,7 @@ class UserIconState extends State<UserIcon> {
                       IconButton(
                         icon: const Icon(FontAwesomeIcons.poo),
                         iconSize: 55,
-                        color: const Color.fromARGB(255, 58, 33, 23),
+                        color: const Color.fromARGB(255, 112, 64, 45),
                         onPressed: () async {
                           setState(() {
                             userIcon = const Icon(FontAwesomeIcons.poo);
@@ -145,7 +149,9 @@ class UserIconState extends State<UserIcon> {
                       IconButton(
                         icon: const Icon(FontAwesomeIcons.userNinja),
                         iconSize: 55,
-                        color: Colors.black,
+                        color: selectedTheme == darkTheme
+                            ? Colors.white
+                            : Colors.black87,
                         onPressed: () async {
                           setState(() {
                             userIcon = const Icon(FontAwesomeIcons.userNinja);
@@ -251,21 +257,25 @@ class UserIconState extends State<UserIcon> {
                 width: 400,
                 height: 550,
                 child: AlertDialog(
-                  title: const Text('My Icons', textAlign: TextAlign.center),
+                  backgroundColor: selectedTheme.colorScheme.background,
+                  title: Text('My Icons',
+                      style:
+                          TextStyle(color: selectedTheme.colorScheme.secondary),
+                      textAlign: TextAlign.center),
                   content: SingleChildScrollView(
                     child: Column(
                       mainAxisSize: MainAxisSize.min,
                       children: [
                         customContent,
                         const SizedBox(height: 20),
-                        const Align(
+                        Align(
                           alignment: Alignment.bottomLeft,
                           child: Padding(
                             padding: EdgeInsets.only(left: 16, bottom: 8),
                             child: Text(
                               'Unlock more Icons by gaining EXP!\n      Total of 9 obtainable Icons',
                               style: TextStyle(
-                                color: Colors.grey,
+                                color: selectedTheme.colorScheme.primary,
                                 fontStyle: FontStyle.italic,
                               ),
                             ),
@@ -278,12 +288,16 @@ class UserIconState extends State<UserIcon> {
                     // Close button implementation here
                     ElevatedButton(
                       style: ElevatedButton.styleFrom(
-                        backgroundColor: const Color(0xFFFF6600),
+                        backgroundColor: selectedTheme.colorScheme.secondary,
                       ),
                       onPressed: () {
                         Navigator.of(context).pop();
                       },
-                      child: const Text('Close'),
+                      child: Text(
+                        'Close',
+                        style: TextStyle(
+                            color: selectedTheme.colorScheme.onBackground),
+                      ),
                     ),
                   ],
                 ),
