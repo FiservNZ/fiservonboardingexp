@@ -164,6 +164,7 @@ class WatchTasksContainer extends StatelessWidget {
     );
   }
 
+// If the task has been completed, it will call the updateAchievement function
   Future<void> detectCompletition(BuildContext context, String category) async {
     List<Widget> watchTasks = await getWatchTaskWidgets(category);
     List<Widget> readTasks = await getReadTaskWidgets(category);
@@ -178,6 +179,7 @@ class WatchTasksContainer extends StatelessWidget {
     }
   }
 
+// update the achievement
   void updateAchievement(
     BuildContext context,
     String categoryName,
