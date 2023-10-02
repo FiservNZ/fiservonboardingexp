@@ -2,6 +2,7 @@ import 'package:achievement_view/achievement_view.dart';
 import 'package:achievement_view/achievement_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fiservonboardingexp/widgets/exp_bar.dart';
 import 'package:flutter/material.dart';
 import '../firebase references/firebase_refs.dart';
 import '../util/achievement_components/achievement_tile.dart';
@@ -192,6 +193,7 @@ class Achievementpage extends State<AchievementsPage> {
   // When certain achievement has been completed then call this function to update the data.
   Future<void> updateAchievement(
       BuildContext context, String targetName) async {
+    ExpBar expBar = ExpBar(barwidth: 15);
     try {
       final currentUser = FirebaseAuth.instance.currentUser;
       // Extract the data from achievement collection
@@ -211,7 +213,13 @@ class Achievementpage extends State<AchievementsPage> {
               (docSnapshot.data() as Map<String, dynamic>)['IsComplete'] ??
                   false;
           if (!isComplete) {
+            // set the achievement to true
             await docRef.update({'IsComplete': true});
+            // detect how many exp should gain
+            int exp = (docSnapshot.data() as Map<String, dynamic>)['exp'] ?? 0;
+            // call the add exp function
+            expBar.addExperience(exp);
+            // show the achievement complete pop out
             show(context, targetName);
           }
         }
@@ -221,8 +229,7 @@ class Achievementpage extends State<AchievementsPage> {
       }
     } catch (e) {
       // Handle other exceptions
-      // ignore: avoid_print
-      print("An error occurred: $e");
+      debugPrint("An error occurred: $e");
     }
   }
 
@@ -243,6 +250,7 @@ class Achievementpage extends State<AchievementsPage> {
         (subiconPath) => subiconPath.contains(name),
         orElse: () => '',
       );
+      // add data to the list
       newAchievementContent.add({
         'name': name,
         'IsComplete': isComplete,
