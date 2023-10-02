@@ -127,8 +127,10 @@ class _FeedBackState extends State<FeedBack> {
                             'timestamp': FieldValue.serverTimestamp(),
                           });
                           // Update the achievement
+                          // ignore: use_build_context_synchronously
                           _achievementpage.updateAchievement(
                               context, "Submitted feedback!");
+
                           // Little output on the bottom after the user submits the feedback
                           ScaffoldMessenger.of(context).showSnackBar(
                             SnackBar(

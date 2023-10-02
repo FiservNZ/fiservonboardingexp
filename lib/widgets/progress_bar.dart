@@ -42,33 +42,32 @@ class ProgressBar extends StatelessWidget {
   }
 
 //Update the achievement
-  void _UpdateAchievement(BuildContext context, String categoryName,
-      int currentPoint, int maxPoint) {
-    Achievementpage achievementpage = Achievementpage();
-    if (categoryName == "Compliance") {
-      if (currentPoint == maxPoint) {
-        achievementpage.updateAchievement(context, "Completed Compliance!");
-      }
-    }
-    if (categoryName == "Health & Safety") {
-      if (currentPoint == maxPoint) {
-        achievementpage.updateAchievement(
-            context, "Completed Health & Safety!");
-      }
-    }
-    if (categoryName == "Customs & Culture") {
-      if (currentPoint == maxPoint) {
-        achievementpage.updateAchievement(
-            context, "Completed Customs & Culture!");
-      }
-    }
-    if (categoryName == "Orientation") {
-      if (currentPoint == maxPoint) {
-        achievementpage.updateAchievement(context, "Completed orientation!");
-      }
-    }
-    // You can add additional operations here if needed
-  }
+  // void _updateAchievement(BuildContext context, String categoryName,
+  //     int currentPoint, int maxPoint) {
+  //   Achievementpage achievementpage = Achievementpage();
+  //   if (categoryName == "Compliance") {
+  //     if (currentPoint == maxPoint) {
+  //       achievementpage.updateAchievement(context, "Completed Compliance!");
+  //     }
+  //   }
+  //   if (categoryName == "Health & Safety") {
+  //     if (currentPoint == maxPoint) {
+  //       achievementpage.updateAchievement(
+  //           context, "Completed Health & Safety!");
+  //     }
+  //   }
+  //   if (categoryName == "Customs & Culture") {
+  //     if (currentPoint == maxPoint) {
+  //       achievementpage.updateAchievement(
+  //           context, "Completed Customs & Culture!");
+  //     }
+  //   }
+  //   if (categoryName == "Orientation") {
+  //     if (currentPoint == maxPoint) {
+  //       achievementpage.updateAchievement(context, "Completed orientation!");
+  //     }
+  //   }
+  // }
 
   Widget _buildProgressBar(ThemeData selectedTheme, BuildContext context) {
     return FutureBuilder(
@@ -102,8 +101,10 @@ class ProgressBar extends StatelessWidget {
           curPoints: data['curPoints'],
           maxPoints: data['maxPoints'],
         );
-        _UpdateAchievement(
-            context, taskCategory, category.curPoints, category.maxPoints);
+
+        // update achievement when the category complete
+        // _updateAchievement(
+        //     context, taskCategory, category.curPoints, category.maxPoints);
 
         final double progressPercentage =
             (category.curPoints / category.maxPoints);
