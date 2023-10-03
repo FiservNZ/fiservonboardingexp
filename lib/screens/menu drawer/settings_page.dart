@@ -23,15 +23,20 @@ class SettingsPage extends StatefulWidget {
 
 class SettingsPageState extends State<SettingsPage> {
   final ThemeDatabase _firebaseTheme = ThemeDatabase();
+  bool isOSmode = false;
 
-  bool isEnabledOS = false;
+  @override
+  void initState() {
+    super.initState();
+    _loadOSMode();
+  }
 
-  // Updates to the new theme
-  void _handleThemeChange(ThemeData theme, ThemeProvider themeProvider) {
-    themeProvider.setTheme(theme);
-
-    // Save the selected theme mode to Firebase Firestore
-    _firebaseTheme.saveThemePreference(currentUser.uid, theme);
+  // Retrieves the disabled or enabled variable for the OS mode
+  Future<void> _loadOSMode() async {
+    final osMode = await _firebaseTheme.getOSPreference(currentUser.uid);
+    // Provide a default value (e.g., false) if osMode is null
+    isOSmode = osMode ?? false;
+    setState(() {});
   }
 
   double edgePadding = 30;
@@ -45,9 +50,11 @@ class SettingsPageState extends State<SettingsPage> {
   Widget build(BuildContext context) {
     final themeProvider = Provider.of<ThemeProvider>(context);
     ThemeData selectedTheme = themeProvider.currentTheme;
+    //Obtains the current light/dark mode of the OS setting.
+    var brightness = MediaQuery.of(context).platformBrightness;
 
+    // Text to indicate the theme
     String currentThemeName = 'None';
-
     if (selectedTheme == rainforestTheme) {
       currentThemeName = 'Rainforest';
     } else if (selectedTheme == pastelTheme) {
@@ -56,12 +63,16 @@ class SettingsPageState extends State<SettingsPage> {
       currentThemeName = 'Beach';
     }
 
+    // Text to indicate the mode
     String currentMode = 'Off';
-
-    if (selectedTheme == lightTheme) {
-      currentMode = 'Light';
-    } else if (selectedTheme == darkTheme) {
-      currentMode = 'Dark';
+    if (isOSmode == true) {
+      currentMode = 'Off';
+    } else {
+      if (selectedTheme == lightTheme) {
+        currentMode = 'Light';
+      } else if (selectedTheme == darkTheme) {
+        currentMode = 'Dark';
+      }
     }
 
     return Scaffold(
@@ -90,7 +101,7 @@ class SettingsPageState extends State<SettingsPage> {
                 SizedBox(width: edgePadding),
                 Icon(
                   Icons.lightbulb,
-                  color: isEnabledOS
+                  color: isOSmode
                       ? selectedTheme.colorScheme.primary
                       : Colors.grey,
                 ),
@@ -99,7 +110,7 @@ class SettingsPageState extends State<SettingsPage> {
                 Text(
                   'OS enabled light/\ndark mode',
                   style: GoogleFonts.quicksand(
-                    color: isEnabledOS
+                    color: isOSmode
                         ? selectedTheme.colorScheme.primary
                         : Colors.grey,
                     fontSize: 18,
@@ -110,24 +121,26 @@ class SettingsPageState extends State<SettingsPage> {
                   children: [
                     const SizedBox(width: 60),
                     Switch(
-                      value: isEnabledOS,
-                      onChanged: (value) {
+                      value: isOSmode,
+                      onChanged: (value) async {
                         setState(() {
-                          isEnabledOS =
-                              value; // Update isEnabled when the Switch is toggled
+                          isOSmode = value;
+                          if (brightness == Brightness.light) {
+                            themeProvider.setTheme(lightTheme);
+                          } else {
+                            themeProvider.setTheme(darkTheme);
+                          }
                         });
-                        if (isEnabledOS) {
-                          // Switch is turned on
-                        } else {
-                          // Switch is turned off
-                        }
+                        // Saves the OS mode preference
+                        _firebaseTheme.saveOSPreference(
+                            currentUser.uid, isOSmode);
                       },
                       activeColor: selectedTheme.colorScheme.primary,
                     ),
                     Text(
-                      isEnabledOS ? 'On' : 'Off',
+                      isOSmode ? 'On' : 'Off',
                       style: GoogleFonts.quicksand(
-                        color: isEnabledOS
+                        color: isOSmode
                             ? selectedTheme.colorScheme.primary
                             : Colors.grey,
                         fontSize: 14,
@@ -151,7 +164,7 @@ class SettingsPageState extends State<SettingsPage> {
                   "(Enabling this feature allows the app mode to\n be controlled by your phone's dark/light\n mode settings..)",
                   style: GoogleFonts.quicksand(
                       fontSize: 13,
-                      color: isEnabledOS
+                      color: isOSmode
                           ? selectedTheme.colorScheme.primary
                           : Colors.grey,
                       fontStyle: FontStyle.italic,
@@ -168,7 +181,7 @@ class SettingsPageState extends State<SettingsPage> {
                 SizedBox(width: edgePadding),
                 Icon(
                   Icons.lightbulb,
-                  color: isEnabledOS
+                  color: isOSmode
                       ? Colors.grey // Grey out the icon
                       : selectedTheme.colorScheme.primary,
                 ),
@@ -178,7 +191,7 @@ class SettingsPageState extends State<SettingsPage> {
                 Text(
                   'Light/dark mode', // Display "Light/Dark Mode On"
                   style: GoogleFonts.quicksand(
-                    color: isEnabledOS
+                    color: isOSmode
                         ? Colors.grey // Grey out the text
                         : selectedTheme.colorScheme.primary,
                     fontSize: 18,
@@ -188,13 +201,19 @@ class SettingsPageState extends State<SettingsPage> {
                 const SizedBox(width: 63),
                 Switch(
                   value: selectedTheme == lightTheme,
-                  onChanged: (isEnabledOS)
+                  onChanged: (isOSmode)
                       ? null
                       : (value) {
                           if (value) {
-                            _handleThemeChange(lightTheme, themeProvider);
+                            themeProvider.setTheme(lightTheme);
+                            // Save the selected theme mode to Firebase Firestore
+                            _firebaseTheme.saveThemePreference(
+                                currentUser.uid, lightTheme);
                           } else {
-                            _handleThemeChange(darkTheme, themeProvider);
+                            themeProvider.setTheme(darkTheme);
+                            // Save the selected theme mode to Firebase Firestore
+                            _firebaseTheme.saveThemePreference(
+                                currentUser.uid, darkTheme);
                           }
                         },
                   activeColor: selectedTheme.colorScheme.primary,
@@ -204,7 +223,7 @@ class SettingsPageState extends State<SettingsPage> {
                   //  "Current Mode: $currentMode",
                   style: TextStyle(
                     fontSize: 14,
-                    color: isEnabledOS
+                    color: isOSmode
                         ? Colors.grey
                         : selectedTheme.colorScheme.primary,
                     fontWeight: FontWeight.bold,
@@ -221,7 +240,7 @@ class SettingsPageState extends State<SettingsPage> {
                   "(Turn off OS enabled light/dark mode to set\n the mode.)",
                   style: GoogleFonts.quicksand(
                     fontSize: 13,
-                    color: isEnabledOS
+                    color: isOSmode
                         ? Colors.grey // Grey out the text
                         : selectedTheme.colorScheme.primary,
                     fontStyle: FontStyle.italic,
@@ -236,7 +255,7 @@ class SettingsPageState extends State<SettingsPage> {
             //Themes
             InkWell(
               onTap: () {
-                if (!isEnabledOS) {
+                if (!isOSmode) {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return const ThemesPage();
                   }));
@@ -252,7 +271,7 @@ class SettingsPageState extends State<SettingsPage> {
                       children: <Widget>[
                         Icon(
                           Icons.color_lens,
-                          color: isEnabledOS
+                          color: isOSmode
                               ? Colors.grey // Grey out the icon
                               : selectedTheme.colorScheme.primary,
                         ),
@@ -262,7 +281,7 @@ class SettingsPageState extends State<SettingsPage> {
                         Text(
                           'Themes',
                           style: GoogleFonts.quicksand(
-                            color: isEnabledOS
+                            color: isOSmode
                                 ? Colors.grey // Grey out the text
                                 : selectedTheme.colorScheme.primary,
                             fontSize: 18,
@@ -277,7 +296,7 @@ class SettingsPageState extends State<SettingsPage> {
                           //  "Current Theme: $currentThemeName",
                           style: TextStyle(
                             fontSize: 14,
-                            color: isEnabledOS
+                            color: isOSmode
                                 ? Colors.grey
                                 : selectedTheme.colorScheme.primary,
                             fontWeight: FontWeight.bold,
@@ -293,7 +312,7 @@ class SettingsPageState extends State<SettingsPage> {
             // Themes explanation
             InkWell(
               onTap: () {
-                if (!isEnabledOS) {
+                if (!isOSmode) {
                   Navigator.push(context, MaterialPageRoute(builder: (context) {
                     return const ThemesPage();
                   }));
@@ -310,7 +329,7 @@ class SettingsPageState extends State<SettingsPage> {
                       "(Turn off OS enabled light/dark mode to set a\n theme.)",
                       style: GoogleFonts.quicksand(
                         fontSize: 13,
-                        color: isEnabledOS
+                        color: isOSmode
                             ? Colors.grey
                             : selectedTheme.colorScheme.primary,
                         fontStyle: FontStyle.italic,
