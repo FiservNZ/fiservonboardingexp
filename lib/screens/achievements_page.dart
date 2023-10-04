@@ -2,6 +2,7 @@ import 'package:achievement_view/achievement_view.dart';
 import 'package:achievement_view/achievement_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fiservonboardingexp/widgets/exp_bar.dart';
 import 'package:flutter/material.dart';
 import '../firebase references/firebase_refs.dart';
 import '../util/achievement_components/achievement_tile.dart';
@@ -142,6 +143,7 @@ class Achievementpage extends State<AchievementsPage> {
                           title: contentInAchv[index]['name'],
                           iconName: contentInAchv[index]['iconData'] ?? "",
                           isCompleted: contentInAchv[index]['IsComplete'],
+                          exp: contentInAchv[index]['exp'],
                         );
                       },
                       childCount: contentInAchv.length,
@@ -172,8 +174,8 @@ class Achievementpage extends State<AchievementsPage> {
   void show(BuildContext context, String targetName) {
     // The widget implement pop out
     AchievementView(
-            // title: "Yeaaah!",
-            subTitle: "$targetName completed successfully!",
+            title: "Yeaaah!",
+            subTitle: targetName,
             icon: const Icon(
               Icons.check_circle_outline_outlined,
               color: Colors.white,
@@ -191,6 +193,7 @@ class Achievementpage extends State<AchievementsPage> {
   // When certain achievement has been completed then call this function to update the data.
   Future<void> updateAchievement(
       BuildContext context, String targetName) async {
+    ExpBar expBar = ExpBar(barwidth: 15);
     try {
       final currentUser = FirebaseAuth.instance.currentUser;
       // Extract the data from achievement collection
@@ -210,7 +213,13 @@ class Achievementpage extends State<AchievementsPage> {
               (docSnapshot.data() as Map<String, dynamic>)['IsComplete'] ??
                   false;
           if (!isComplete) {
+            // set the achievement to true
             await docRef.update({'IsComplete': true});
+            // detect how many exp should gain
+            int exp = (docSnapshot.data() as Map<String, dynamic>)['exp'] ?? 0;
+            // call the add exp function
+            expBar.addExperience(exp);
+            // show the achievement complete pop out
             show(context, targetName);
           }
         }
@@ -220,11 +229,11 @@ class Achievementpage extends State<AchievementsPage> {
       }
     } catch (e) {
       // Handle other exceptions
-      // ignore: avoid_print
-      print("An error occurred: $e");
+      debugPrint("An error occurred: $e");
     }
   }
 
+  // Import the data to the list
   List<Map<String, dynamic>> fetchAndStoreAchievement(
       List<QueryDocumentSnapshot<Map<String, dynamic>>> docs) {
     List<Map<String, dynamic>> newAchievementContent = [];
@@ -234,12 +243,14 @@ class Achievementpage extends State<AchievementsPage> {
       String name = data['name'] ?? "";
       bool isComplete = data['IsComplete'] ?? false;
       String hour = data['hour'] ?? "";
+      int exp = data['exp'] ?? 0;
 
       // Find the corresponding icon data based on the name
       String subiconData = subIconList.firstWhere(
         (subiconPath) => subiconPath.contains(name),
         orElse: () => '',
       );
+      // add data to the list
       newAchievementContent.add({
         'name': name,
         'IsComplete': isComplete,
@@ -247,8 +258,10 @@ class Achievementpage extends State<AchievementsPage> {
             iconList.isNotEmpty ? iconList[newAchievementContent.length] : '',
         'subiconData': subiconData,
         'hour': hour,
+        'exp': exp,
       });
     }
+
     //Sort the achievement based on the Iscomplete
     //If it has been complete, It will goes to the bottom
     // newAchievementContent.sort((a, b) {

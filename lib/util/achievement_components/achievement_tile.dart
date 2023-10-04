@@ -6,13 +6,14 @@ class Achievement extends StatefulWidget {
   final String title;
   final String iconName;
   final bool isCompleted;
+  final int exp;
 
-  const Achievement({
-    super.key,
-    required this.title,
-    required this.iconName,
-    required this.isCompleted,
-  });
+  const Achievement(
+      {super.key,
+      required this.title,
+      required this.iconName,
+      required this.isCompleted,
+      required this.exp});
 
   @override
   AchievenmentState createState() => AchievenmentState();
@@ -33,7 +34,18 @@ class AchievenmentState extends State<Achievement> {
         ),
         child: Column(
           children: [
-            const SizedBox(height: 20),
+            Align(
+              alignment: Alignment.centerRight,
+              child: Text(
+                "exp: ${widget.exp}",
+                style: TextStyle(
+                  fontSize: 15,
+                  color: selectedTheme.colorScheme.primary,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            const SizedBox(height: 7),
             Text(
               widget.title,
               style: TextStyle(
