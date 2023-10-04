@@ -12,6 +12,7 @@ import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 import '../../firebase references/firebase_refs.dart';
+import '../../util/mc_testing/watch/watch_tasks_container.dart';
 import '../../widgets/exp_bar.dart';
 
 class QuestionController extends GetxController {
@@ -152,9 +153,9 @@ class QuestionController extends GetxController {
       // add link to adding exp here
       ExpBar expBar = ExpBar(barwidth: 12);
       expBar.addExperience(151);
-      Get.offNamedUntil(ModuleScreen.routeName, (route) => false);
+      Get.to(() => WatchTasksContainer(watchCategory: currentCategory));
     } else {
-      Get.offNamedUntil(ModuleScreen.routeName, (route) => false);
+      Get.to(() => WatchTasksContainer(watchCategory: currentCategory));
     }
   }
 }

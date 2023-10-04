@@ -1,5 +1,5 @@
 import 'package:fiservonboardingexp/util/constants.dart';
-import 'package:fiservonboardingexp/util/mc_testing/watch/watch_tasks_container.dart';
+import 'package:fiservonboardingexp/util/mc_testing/watch/tasks_container.dart';
 import 'package:fiservonboardingexp/widgets/progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -57,10 +57,10 @@ class ModuleScreen extends StatelessWidget {
         currentCategory = title;
         debugPrint('Route: $currentCategory');
         // Get.toNamed(WatchHomeScreen.routeName, arguments: currentCategory);
-        Get.toNamed("/home", arguments: currentCategory);
+        // Get.toNamed("/home", arguments: currentCategory);
 
         //Modify this to take into consideration other task types
-        Get.to(WatchTasksContainer(watchCategory: currentCategory));
+        Get.to(TasksContainer(watchCategory: currentCategory));
       },
       child: Container(
         padding: const EdgeInsets.all(16),
@@ -93,7 +93,7 @@ class ModuleScreen extends StatelessWidget {
                   width: 30,
                   height: 60,
                 ),
-                //const SizedBox(width: 5),
+                const SizedBox(width: 20),
                 Text(
                   title,
                   style: GoogleFonts.quicksand(

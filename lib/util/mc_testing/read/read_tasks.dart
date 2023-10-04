@@ -28,7 +28,9 @@ Future<List<Widget>> getReadTaskWidgets(String category) async {
         .collection('Tasks')
         .doc(category)
         .collection('Read')
-        .where('isDone', isEqualTo: false)
+        //Commented out part where it would not show tasks that are already done
+        //To address client feedback
+        // .where('isDone', isEqualTo: false)
         .get();
 
     for (final doc in querySnapshot.docs) {

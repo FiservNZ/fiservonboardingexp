@@ -36,25 +36,17 @@ class Achievementpage extends State<AchievementsPage> {
     'assets/icon/technical.png',
     'assets/icon/technical.png',
     'assets/icon/technical.png',
-    'assets/icon/technical.png',
-    'assets/icon/technical.png',
-    'assets/icon/technical.png',
-    'assets/icon/technical.png',
   ];
   // List of the image showing in the home page
   final List subIconList = [
-    'assets/icon/achievement/Unlocked all themes!.png',
     'assets/icon/achievement/First time login!.png',
     'assets/icon/achievement/Submitted feedback!.png',
     'assets/icon/achievement/Changed Icon!.png',
-    'assets/icon/achievement/Completing checklist!.png',
     'assets/icon/achievement/Completed orientation!.png',
     'assets/icon/achievement/Completed Compliance!.png',
     'assets/icon/achievement/Completed Health & Safety!.png',
-    'assets/icon/achievement/Completed Technical Training!.png',
     'assets/icon/achievement/Completed Customs & Culture!.png',
     'assets/icon/achievement/Completed all the modules!.png',
-    'assets/icon/achievement/Unlocked all icons!.png',
   ];
 
   @override
