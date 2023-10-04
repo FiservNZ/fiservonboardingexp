@@ -175,7 +175,7 @@ class _VideoPlayerState extends State<VideoPlayer> {
                     );
                     if (confirm == true) {
                       ExpBar expBar = const ExpBar(barwidth: 1);
-                      expBar.addExperience(25);
+
                       // int currentEXP = await userColRef
                       //     .doc(currentUser.uid)
                       //     .get()
@@ -205,6 +205,7 @@ class _VideoPlayerState extends State<VideoPlayer> {
                         final isDone = doc['isDone'];
                         if (!isDone) {
                           addPointsToProgress(currentCategory);
+                          expBar.addExperience(25);
                         }
 
                         await doc.reference.update({'isDone': true});

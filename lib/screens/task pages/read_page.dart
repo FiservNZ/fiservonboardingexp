@@ -183,11 +183,11 @@ class ReadPage extends StatelessWidget {
                     );
                     if (confirm == true) {
                       ExpBar expBar = const ExpBar(barwidth: 1);
-                      expBar.addExperience(25);
 
                       // Add points to progress bar when it's the users first time completing the task
                       if (readModel.isDone == false) {
                         addPointsToProgress(currentCategory);
+                        expBar.addExperience(25);
                       }
 
                       final querySnapshot = await userColRef
