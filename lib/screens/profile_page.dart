@@ -124,10 +124,10 @@ class _ProfilePageState extends State<ProfilePage> {
           if (snapshot.hasData) {
             final userData = snapshot.data!.data() as Map<String, dynamic>;
             final level = userData['Level'] ?? 1;
-            //update when all icon are unlocked
-            if (level >= 9) {
-              achievementpage.updateAchievement(context, "Unlocked all icons!");
-            }
+            // //update when all icon are unlocked
+            // if (level >= 9) {
+            //   achievementpage.updateAchievement(context, "Unlocked all icons!");
+            // }
             void asyncMethod(void Function(int) callback) {
               expBar.level.then((int level) {
                 callback(level);
