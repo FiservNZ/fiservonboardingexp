@@ -11,7 +11,7 @@ class TeaserPage1 extends StatelessWidget {
         child: Padding(
           padding: const EdgeInsets.only(
               top:
-                  20.0), // Adjustment of the Text title and subtext (vertically)
+                  20.0), // Adjustment of the Text title and subtext (vertically!)
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
