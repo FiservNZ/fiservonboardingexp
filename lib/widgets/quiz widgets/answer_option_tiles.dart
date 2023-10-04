@@ -1,5 +1,4 @@
 import 'package:fiservonboardingexp/themes/theme_provider.dart';
-import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:fiservonboardingexp/themes/quiz%20themes/ui_parameters.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -58,7 +57,6 @@ class AnswerOptionTiles extends StatelessWidget {
                   color: isSelected
                       ? selectedTheme.colorScheme.onBackground
                       : selectedTheme.colorScheme.primary,
-                  //  fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
                   fontWeight: FontWeight.bold,
                 ),
               ),

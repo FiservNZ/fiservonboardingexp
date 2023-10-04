@@ -1,12 +1,11 @@
 // import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fiservonboardingexp/idk/training_page.dart';
-import 'package:flutter/material.dart';
-import '../screens/achievements_page.dart';
-import '../screens/colleagues_page.dart';
-import '../screens/home_page.dart';
-import '../widgets/app_bar_overlay.dart';
-import '../screens/checklist_page.dart';
-import '../main.dart'; // Import main.dart
+// import 'package:fiservonboardingexp/idk/training_page.dart';
+// import 'package:flutter/material.dart';
+// import '../screens/nav bar pages/colleagues_page.dart';
+// import '../screens/home_page.dart';
+// import '../widgets/app_bar_overlay.dart';
+// import '../screens/nav bar pages/checklist_page.dart';
+// import '../main.dart'; // Import main.dart
 
 // class MyHomePage extends StatefulWidget {
 //   const MyHomePage({Key? key}) : super(key: key);

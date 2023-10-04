@@ -1,10 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fiservonboardingexp/widgets/nav_bar.dart';
-import 'achievements_page.dart';
-import 'colleagues_page.dart';
+import 'nav bar pages/achievements_page.dart';
+import 'nav bar pages/colleagues_page.dart';
 import 'home_page.dart';
-import 'checklist_page.dart';
+import 'nav bar pages/checklist_page.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({Key? key}) : super(key: key);
