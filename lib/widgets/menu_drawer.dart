@@ -197,14 +197,15 @@ class MenuDrawer extends StatelessWidget {
                 child: ElevatedButton(
                   onPressed: () async {
                     await FirebaseAuth.instance.signOut();
-                    Navigator.of(context).pushAndRemoveUntil(
-                      MaterialPageRoute(
-                        builder: (BuildContext context) {
-                          return LoginPage();
-                        },
-                      ),
-                      (_) => false,
-                    );
+
+                    // Navigator.of(context).pushAndRemoveUntil(
+                    //   MaterialPageRoute(
+                    //     builder: (BuildContext context) {
+                    //       return LoginPage();
+                    //     },
+                    //   ),
+                    //   (_) => false,
+                    // );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: selectedTheme

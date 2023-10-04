@@ -4,6 +4,7 @@ import 'package:fiservonboardingexp/screens/manager/manager_view.dart';
 import 'package:flutter/material.dart';
 import 'package:fiservonboardingexp/screens/login_page.dart';
 import 'package:fiservonboardingexp/screens/main_screen.dart';
+import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 import '../firebase references/firebase_refs.dart';
 
@@ -32,16 +33,18 @@ class CheckUserState extends State<CheckUser> {
     fireAuth.authStateChanges().listen((User? user) {
       if (user == null) {
         // User is not logged in, navigate to the LoginPage.
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => LoginPage()));
+        // Navigator.pushReplacement<void, void>(context,
+        //     MaterialPageRoute<void>(builder: (context) => LoginPage()));
+        Get.offAndToNamed("/login");
       } else {
         // User is logged in, navigate to the appropriate screen.
-        Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-                builder: (context) => position == 'manager'
-                    ? ManagerView()
-                    : const MainScreen()));
+        Get.offAndToNamed(position == 'manager' ? "/manager" : "/home");
+        // Navigator.pushReplacement<void, void>(
+        //     context,
+        //     MaterialPageRoute<void>(
+        //         builder: (context) => position == 'manager'
+        //             ? ManagerView()
+        //             : const MainScreen()));
       }
     });
   }
