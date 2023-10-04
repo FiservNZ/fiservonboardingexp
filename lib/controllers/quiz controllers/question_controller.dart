@@ -152,9 +152,9 @@ class QuestionController extends GetxController {
       // add link to adding exp here
       ExpBar expBar = ExpBar(barwidth: 12);
       expBar.addExperience(151);
-      Get.offNamedUntil(HomeScreen.routeName, (route) => false);
+      Get.offNamedUntil(ModuleScreen.routeName, (route) => false);
     } else {
-      Get.offNamedUntil(HomeScreen.routeName, (route) => false);
+      Get.offNamedUntil(ModuleScreen.routeName, (route) => false);
     }
   }
 }
