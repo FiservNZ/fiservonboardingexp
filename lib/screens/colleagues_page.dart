@@ -85,7 +85,7 @@ class ColleaguesPageState extends State<ColleaguesPage> {
                     // Colleagues icon set to the person icon by default
                     leading: CircleAvatar(
                       radius: 22,
-                      backgroundColor: selectedTheme.colorScheme.secondary,
+                      backgroundColor: selectedTheme.colorScheme.onBackground,
                       child: Icon(
                         Icons.person,
                         color: selectedTheme.colorScheme.primary,
@@ -134,6 +134,9 @@ class ColleaguesPageState extends State<ColleaguesPage> {
         final themeProvider = Provider.of<ThemeProvider>(context);
         ThemeData selectedTheme = themeProvider.currentTheme;
         return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(10.0),
+          ),
           backgroundColor: selectedTheme.colorScheme.background,
           // Colleague details title
           title: Text(
@@ -184,7 +187,8 @@ class ColleaguesPageState extends State<ColleaguesPage> {
                           TextSpan(
                             text: colleague.phoneNumber,
                             style: TextStyle(
-                                color: selectedTheme.colorScheme.secondary),
+                                color: selectedTheme.colorScheme.secondary,
+                                decoration: TextDecoration.underline),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
                                 _launchPhoneNumber(colleague
@@ -209,7 +213,8 @@ class ColleaguesPageState extends State<ColleaguesPage> {
                           TextSpan(
                             text: colleague.email,
                             style: TextStyle(
-                                color: selectedTheme.colorScheme.secondary),
+                                color: selectedTheme.colorScheme.secondary,
+                                decoration: TextDecoration.underline),
                             recognizer: TapGestureRecognizer()
                               ..onTap = () {
                                 _launchEmail(colleague
@@ -233,7 +238,7 @@ class ColleaguesPageState extends State<ColleaguesPage> {
           actions: [
             ElevatedButton(
               style: ElevatedButton.styleFrom(
-                backgroundColor: selectedTheme.colorScheme.secondary,
+                backgroundColor: selectedTheme.colorScheme.onBackground,
               ),
               onPressed: () {
                 Navigator.of(context).pop();

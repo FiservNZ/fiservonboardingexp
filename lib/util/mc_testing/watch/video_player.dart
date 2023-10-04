@@ -4,7 +4,7 @@ import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:fiservonboardingexp/util/mc_testing/module/module_screen.dart';
 import 'package:fiservonboardingexp/util/mc_testing/watch/video_player_widget.dart';
 import 'package:fiservonboardingexp/util/mc_testing/watch/tasks_container.dart';
-import 'package:fiservonboardingexp/util/progress_points.dart';
+
 import 'package:fiservonboardingexp/widgets/exp_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';

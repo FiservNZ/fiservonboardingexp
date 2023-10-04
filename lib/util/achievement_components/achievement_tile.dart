@@ -1,18 +1,19 @@
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
 
-// This class is used to create the
+// This class is used to create an unit of the achievement
 class Achievement extends StatefulWidget {
   final String title;
   final String iconName;
   final bool isCompleted;
+  final int exp;
 
-  const Achievement({
-    super.key,
-    required this.title,
-    required this.iconName,
-    required this.isCompleted,
-  });
+  const Achievement(
+      {super.key,
+      required this.title,
+      required this.iconName,
+      required this.isCompleted,
+      required this.exp});
 
   @override
   AchievenmentState createState() => AchievenmentState();
@@ -33,7 +34,18 @@ class AchievenmentState extends State<Achievement> {
         ),
         child: Column(
           children: [
-            const SizedBox(height: 20),
+            Align(
+              alignment: Alignment.centerRight,
+              child: Text(
+                "exp: ${widget.exp}",
+                style: TextStyle(
+                  fontSize: 15,
+                  color: selectedTheme.colorScheme.primary,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            ),
+            const SizedBox(height: 7),
             Text(
               widget.title,
               style: TextStyle(
@@ -41,6 +53,7 @@ class AchievenmentState extends State<Achievement> {
                 color: selectedTheme.colorScheme.primary,
                 fontWeight: FontWeight.bold,
               ),
+              textAlign: TextAlign.center,
             ),
             const SizedBox(height: 5),
             Padding(
@@ -50,6 +63,7 @@ class AchievenmentState extends State<Achievement> {
                 widget.iconName,
               ),
             ),
+            //reconize the achivement is complete or not
             const SizedBox(height: 10),
             Text(
               widget.isCompleted ? "Complete" : "Incomplete",

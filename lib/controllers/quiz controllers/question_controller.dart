@@ -1,6 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fiservonboardingexp/controllers/quiz%20controllers/auth_controller.dart';
+import 'package:fiservonboardingexp/idk/auth_controller.dart';
 import 'package:fiservonboardingexp/controllers/quiz%20controllers/extension_question_controller.dart';
 import 'package:fiservonboardingexp/controllers/quiz%20controllers/quiz_controller.dart';
 import 'package:fiservonboardingexp/util/mc_testing/module/module_screen.dart';
@@ -152,9 +152,9 @@ class QuestionController extends GetxController {
       // add link to adding exp here
       ExpBar expBar = ExpBar(barwidth: 12);
       expBar.addExperience(151);
-      Get.offNamedUntil(HomeScreen.routeName, (route) => false);
+      Get.offNamedUntil(ModuleScreen.routeName, (route) => false);
     } else {
-      Get.offNamedUntil(HomeScreen.routeName, (route) => false);
+      Get.offNamedUntil(ModuleScreen.routeName, (route) => false);
     }
   }
 }

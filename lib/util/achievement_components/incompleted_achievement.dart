@@ -29,7 +29,6 @@ class IncompletedAchievement extends StatelessWidget {
           //fetch the achievement list
           final List<Map<String, dynamic>> contentInAchv =
               _achievementpage.fetchAndStoreAchievement(snapshot.data!.docs);
-          // List<Map<String, dynamic>> contentInAchv = snapshot.data!;
 
           // Filter out achievements with the 'IsComplete' value set to false.
           List<Map<String, dynamic>> incompletedAchievements = contentInAchv
