@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fiservonboardingexp/idk/auth_controller.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
-import 'package:fiservonboardingexp/util/mc_testing/module/module_screen.dart';
+import 'package:fiservonboardingexp/screens/module/module_screen.dart';
 import 'package:fiservonboardingexp/widgets/quiz%20widgets/quiz_info_square.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,7 +9,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../firebase references/firebase_refs.dart';
 import '../../model/quiz_model.dart';
 import '../../model/task_category_model.dart';
-import '../../screens/task pages/quiz screens/question_screen.dart';
+import '../../screens/module/task pages/quiz screens/question_screen.dart';
 import 'package:flutter/material.dart';
 
 class QuizController extends GetxController {

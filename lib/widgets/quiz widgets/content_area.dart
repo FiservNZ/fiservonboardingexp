@@ -1,6 +1,5 @@
 import 'package:fiservonboardingexp/themes/quiz%20themes/ui_parameters.dart';
 import 'package:flutter/material.dart';
-
 import '../../util/constants.dart';
 
 class ContentArea extends StatelessWidget {
