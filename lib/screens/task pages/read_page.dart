@@ -184,7 +184,6 @@ class ReadPage extends StatelessWidget {
 
                       // Add points to progress bar when it's the users first time completing the task
                       if (readModel.isDone == false) {
-                        addPointsToProgress(currentCategory);
                         expBar.addExperience(25);
                       }
 

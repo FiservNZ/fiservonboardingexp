@@ -4,7 +4,6 @@ import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:fiservonboardingexp/util/mc_testing/module/module_screen.dart';
 import 'package:fiservonboardingexp/util/mc_testing/watch/video_player_widget.dart';
 import 'package:fiservonboardingexp/util/mc_testing/watch/tasks_container.dart';
-
 import 'package:fiservonboardingexp/widgets/exp_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -204,7 +203,6 @@ class _VideoPlayerState extends State<VideoPlayer> {
                         // Checks if task has been completed if not add a point to the progress bar
                         final isDone = doc['isDone'];
                         if (!isDone) {
-                          addPointsToProgress(currentCategory);
                           expBar.addExperience(25);
                         }
 
