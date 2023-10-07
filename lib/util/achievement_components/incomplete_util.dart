@@ -70,16 +70,16 @@ class IncompleteAchvState extends State<IncompleteAchv> {
               child: Row(
                 children: [
                   const SizedBox(width: 30),
-                  const Icon(
+                  Icon(
                     Icons.access_time,
-                    color: Colors.white,
+                    color: selectedTheme.colorScheme.primary,
                   ),
                   const SizedBox(width: 30),
                   Text(
                     widget.hour,
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 16,
-                      color: Colors.white,
+                      color: selectedTheme.colorScheme.primary,
                       fontWeight: FontWeight.bold,
                     ),
                   ),

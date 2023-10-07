@@ -110,38 +110,14 @@ class ProgressBar extends StatelessWidget {
             (category.curPoints / category.maxPoints);
 
         // Displays the progress indicator
-        return Container(
-          // child: Column(
-          //   children: [
-          //     Text(
-          //       '${category.curPoints} / ${category.maxPoints}',
-          //       style: TextStyle(
-          //         color: selectedTheme.colorScheme.primary,
-          //         fontSize: 15,
-          //         fontWeight: FontWeight.bold,
-          //       ),
-          //     ),
-          //     const SizedBox(height: 3),
-          //     SizedBox(
-          //       width: 80,
-          //       height: 10,
-          //       child: ClipRRect(
-          //         borderRadius: BorderRadius.circular(5),
-          //         child: LinearProgressIndicator(
-          //           value: progressPercentage,
-          //           valueColor: AlwaysStoppedAnimation<Color>(
-          //             selectedTheme.colorScheme.primary,
-          //           ),
-          //           backgroundColor: selectedTheme.colorScheme.surface,
-          //         ),
-          //       ),
-          //     ),
-
-          child: Stack(
-            alignment: Alignment.center,
-            children: [
-              Transform.scale(
-                scale: 1.15,
+        return Stack(
+          alignment: Alignment.center,
+          children: [
+            Transform.scale(
+              scale: 1.15,
+              child: SizedBox(
+                width: 50, // Adjust the width as needed
+                height: 30, // Adjust the height as needed
                 child: CircularProgressIndicator(
                   value: progressPercentage,
                   strokeWidth: 4.0,
@@ -149,18 +125,47 @@ class ProgressBar extends StatelessWidget {
                   backgroundColor: selectedTheme.colorScheme.surface,
                 ),
               ),
-              Text(
-                '${category.curPoints} / ${category.maxPoints}',
-                style: TextStyle(
-                  color: selectedTheme.colorScheme.primary,
-                  fontSize: 12,
-                  fontWeight: FontWeight.bold,
-                ),
+            ),
+            Text(
+              '${category.curPoints} / ${category.maxPoints}',
+              style: TextStyle(
+                color: selectedTheme.colorScheme.primary,
+                fontSize: 12,
+                fontWeight: FontWeight.bold,
               ),
-            ],
-          ),
+            ),
+          ],
         );
       },
     );
   }
 }
+
+
+// child: Stack(
+//   alignment: Alignment.center,
+//   children: [
+//     Transform.scale(
+//       scale: 1.15,
+//       child: SizedBox(
+//         width: 100, // Adjust the width as needed
+//         height: 10, // Adjust the height as needed
+//         child: LinearProgressIndicator(
+//           value: progressPercentage,
+//           valueColor: AlwaysStoppedAnimation<Color>(
+//             selectedTheme.colorScheme.primary,
+//           ),
+//           backgroundColor: selectedTheme.colorScheme.surface,
+//         ),
+//       ),
+//     ),
+//     Text(
+//       '${category.curPoints} / ${category.maxPoints}',
+//       style: TextStyle(
+//         color: selectedTheme.colorScheme.primary,
+//         fontSize: 12,
+//         fontWeight: FontWeight.bold,
+//       ),
+//     ),
+//   ],
+// ),
