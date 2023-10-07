@@ -4,6 +4,9 @@
     "image_url": "",
     "description": "This is a quick quiz on the company",
     "quiz_duration": 60,
+    "question_count": 4,
+    "exp": 15,
+    "exp_gained": false,
     "questions":[
         {
             "id": "1",

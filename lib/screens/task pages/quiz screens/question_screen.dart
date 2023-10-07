@@ -31,7 +31,7 @@ class QuestionScreen extends GetView<QuestionController> {
         textStyle: GoogleFonts.quicksand(
           fontSize: 20,
         ),
-        backgroundColor: selectedTheme.colorScheme.secondary);
+        backgroundColor: selectedTheme.colorScheme.background);
     const double buttonHeight = 40;
     const double buttonWidth = 150;
     return Scaffold(
@@ -59,7 +59,7 @@ class QuestionScreen extends GetView<QuestionController> {
                                   style: GoogleFonts.quicksand(
                                       color:
                                           selectedTheme.colorScheme.secondary,
-                                      fontWeight: FontWeight.w400,
+                                      fontWeight: FontWeight.bold,
                                       fontSize: 16),
                                   textAlign: TextAlign.start,
                                 ),
@@ -75,7 +75,7 @@ class QuestionScreen extends GetView<QuestionController> {
                                     //maxLines: 2,
                                     style: GoogleFonts.quicksand(
                                         color:
-                                            selectedTheme.colorScheme.secondary,
+                                            selectedTheme.colorScheme.primary,
                                         fontWeight: FontWeight.bold,
                                         fontSize: 17),
                                     softWrap: true,
@@ -200,7 +200,7 @@ class QuestionScreen extends GetView<QuestionController> {
                 //     ),
                 //   ),
                 ColoredBox(
-                  color: darkBackgroundColor,
+                  color: selectedTheme.colorScheme.onBackground,
                   child: Padding(
                     padding: UIParameters.mobileScreenPadding,
                     //padding: EdgeInsets.all(10),
@@ -223,10 +223,11 @@ class QuestionScreen extends GetView<QuestionController> {
                                   padding: const EdgeInsets.all(8.0),
                                   child: Text(
                                     "Previous",
-                                    selectionColor: Colors.black,
+                                    selectionColor:
+                                        selectedTheme.colorScheme.background,
                                     style: GoogleFonts.quicksand(
-                                        color:
-                                            selectedTheme.colorScheme.tertiary),
+                                        color: selectedTheme
+                                            .colorScheme.secondary),
                                   ),
                                 ),
                               ),
@@ -258,10 +259,11 @@ class QuestionScreen extends GetView<QuestionController> {
                                                   const EdgeInsets.all(8.0),
                                               child: Text(
                                                 'Submit Answers',
-                                                selectionColor: Colors.black,
+                                                selectionColor: selectedTheme
+                                                    .colorScheme.background,
                                                 style: GoogleFonts.quicksand(
                                                     color: selectedTheme
-                                                        .colorScheme.tertiary,
+                                                        .colorScheme.secondary,
                                                     fontWeight:
                                                         FontWeight.bold),
                                               ),
@@ -271,11 +273,12 @@ class QuestionScreen extends GetView<QuestionController> {
                                                   const EdgeInsets.all(8.0),
                                               child: Text('Next',
                                                   //Selection Color is not working for some reason, the text does not change to black?
-                                                  selectionColor: Colors.black,
+                                                  selectionColor: selectedTheme
+                                                      .colorScheme.background,
                                                   style: GoogleFonts.quicksand(
                                                       color: selectedTheme
                                                           .colorScheme
-                                                          .tertiary)),
+                                                          .secondary)),
                                             ) //const Icon(Icons.arrow_forward_ios),
                                       ),
                                 )),

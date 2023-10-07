@@ -1,12 +1,12 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fiservonboardingexp/api/pdf_api.dart';
-import 'package:fiservonboardingexp/themes/theme_provider.dart';
+import 'package:fiservonboardingexp/screens/achievements_page.dart';
+import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:fiservonboardingexp/widgets/custom_text_box.dart';
 import 'package:fiservonboardingexp/widgets/user_icons.dart';
 import 'package:fiservonboardingexp/widgets/exp_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:provider/provider.dart';
 import '../firebase references/firebase_refs.dart';
 
 class ProfilePage extends StatefulWidget {
@@ -28,7 +28,8 @@ class _ProfilePageState extends State<ProfilePage> {
   Icon userIcon = const Icon(Icons.person);
   // uses references from file
   final currentUser = fireAuth.currentUser!;
-
+  // for calling the update achievement method
+  Achievementpage achievementpage = Achievementpage();
   //final userCollection = FirebaseFirestore.instance.collection('User'); // dont need this anymore
   /*This will show an alert dialogue which will enable us to edit
   information about ourselves which will be saved into
@@ -97,8 +98,7 @@ class _ProfilePageState extends State<ProfilePage> {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-    ThemeData selectedTheme = themeProvider.currentTheme;
+    ThemeData selectedTheme = getSelectedTheme(context);
 
     // userIcon variable to change user icon.
     Icon userIcon = const Icon(Icons.person);
@@ -124,7 +124,10 @@ class _ProfilePageState extends State<ProfilePage> {
           if (snapshot.hasData) {
             final userData = snapshot.data!.data() as Map<String, dynamic>;
             final level = userData['Level'] ?? 1;
-
+            //update when all icon are unlocked
+            if (level >= 9) {
+              achievementpage.updateAchievement(context, "Unlocked all icons!");
+            }
             void asyncMethod(void Function(int) callback) {
               expBar.level.then((int level) {
                 callback(level);
@@ -199,9 +202,18 @@ class _ProfilePageState extends State<ProfilePage> {
                   initialUserIcon: userIcon,
                   level: level,
                   onIconChanged: (newIcon) {
-                    setState(() {
-                      userIcon = newIcon;
-                    });
+                    //update the icon
+                    if (userIcon != newIcon) {
+                      print("different");
+                      setState(() {
+                        userIcon = newIcon;
+                      });
+                      // update when Icon has changed
+                      achievementpage.updateAchievement(
+                          context, "Changed Icon!");
+                    } else {
+                      print("same");
+                    }
                   },
                   userCollection: userColRef,
                   userId: currentUser.uid,

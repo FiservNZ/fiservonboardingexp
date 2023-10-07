@@ -64,7 +64,6 @@ class FiservAppRoutes {
             Get.put<QuestionController>(QuestionController());
           }),
         ),
-
         GetPage(
           name: QuizOutcomeScreen.routeName,
           page: () => const QuizOutcomeScreen(),

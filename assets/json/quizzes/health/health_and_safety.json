@@ -5,6 +5,8 @@
     "description": "This is a quiz on Health & Safety",
     "quiz_duration": 60,
     "question_count": 5,
+    "exp": 25,
+    "exp_gained": false,
     "questions":[
         {
             "id": "1",

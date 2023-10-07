@@ -14,7 +14,7 @@ class ReadController extends GetxController {
   late ReadModel? model;
   final allReadTasks =
       <ReadModel>[]; // Initializes a collection of read tasks as an array.
-  RxInt selectedIndex = RxInt(0); // Initialize with a default index of 0.
+  ThemeData get selectedTheme => Get.theme;
 
   @override
   void onReady() {
@@ -60,7 +60,7 @@ class ReadController extends GetxController {
     if (model != null) {
       debugPrint('Model Initialised!');
       model = readModel;
-      showPopupAlertDialog(readModel: readModel, categoryName: categoryName);
+      showPopupAlertDialog(readModel: readModel, categoryName: categoryName, theme: selectedTheme);
     } else {
       debugPrint('Model not initialised!');
     }
@@ -68,24 +68,26 @@ class ReadController extends GetxController {
 }
 
 void showPopupAlertDialog(
-    {required ReadModel readModel, required String categoryName}) {
+    {required ReadModel readModel, required String categoryName, required ThemeData theme,}) {
   Get.dialog(
       showPopup(
           onTapStart: () {
-            debugPrint('${readModel.description}');
+            debugPrint(readModel.description);
             Get.toNamed(ReadPage.routeName, arguments: readModel);
           },
           onTapCancel: () {
             Get.back();
           },
-          readModel: readModel),
+          readModel: readModel, 
+          selectedTheme: theme),
       barrierDismissible: false);
 }
 
 Widget showPopup(
     {required VoidCallback onTapStart,
     required VoidCallback onTapCancel,
-    required ReadModel readModel}) {
+    required ReadModel readModel,
+    required ThemeData selectedTheme}) {
   double buttonHeight = 35;
   double buttonWidth = 80;
   return AlertDialog(
@@ -93,7 +95,7 @@ Widget showPopup(
     shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16.0),
         side: const BorderSide(color: Color.fromARGB(221, 36, 36, 36))),
-    backgroundColor: darkBackgroundColor,
+    backgroundColor: selectedTheme.colorScheme.onBackground,
     //shadowColor: fiservColor,
     elevation: 20,
     content: SizedBox(
@@ -108,7 +110,7 @@ Widget showPopup(
           Text(
             readModel.title,
             style: GoogleFonts.quicksand(
-                fontSize: 25, fontWeight: FontWeight.bold, color: fiservColor),
+                fontSize: 25, fontWeight: FontWeight.bold, color: selectedTheme.colorScheme.primary),
           ),
           const SizedBox(height: 10),
           Row(
@@ -120,7 +122,7 @@ Widget showPopup(
                   child: QuizInfoSquare(
                       icon: Icons.book_rounded,
                       //'${readModel.exp} exp'
-                      text: 'read model exp count for the specific task')),
+                      text: 'exp count')),
               Padding(
                   padding: const EdgeInsets.all(5.0),
                   // Time for how long the specific task would take
@@ -135,7 +137,7 @@ Widget showPopup(
           // Short description about the read task
           Text(
             readModel.description,
-            style: GoogleFonts.quicksand(color: darkTextColor),
+            style: GoogleFonts.quicksand(color: selectedTheme.colorScheme.primary),
           )
         ],
       ),
@@ -152,16 +154,17 @@ Widget showPopup(
               width: buttonWidth,
               child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    side: const BorderSide(color: fiservColor),
+                    side: BorderSide(color: selectedTheme.colorScheme.secondary),
                     backgroundColor:
-                        darkBackgroundColor, /*shadowColor: fiservColor*/
+                        selectedTheme
+                        .colorScheme.onBackground, /*shadowColor: fiservColor*/
                   ),
                   onPressed: onTapCancel,
                   child: Text(
                     "Cancel",
                     style: GoogleFonts.quicksand(
                         fontWeight: FontWeight.bold,
-                        color: fiservColor,
+                        color: selectedTheme.colorScheme.primary,
                         fontSize: 14),
                   )),
             ),
@@ -172,12 +175,12 @@ Widget showPopup(
               width: buttonWidth,
               child: ElevatedButton(
                   style: TextButton.styleFrom(
-                      side: const BorderSide(color: fiservColor),
-                      backgroundColor: fiservColor),
+                      side: BorderSide(color: selectedTheme.colorScheme.secondary),
+                      backgroundColor: selectedTheme.colorScheme.secondary),
                   onPressed: onTapStart,
                   child: Text("Start",
                       style: TextStyle(
-                          color: darkTextColor,
+                          color: selectedTheme.colorScheme.background,
                           fontWeight: FontWeight.bold,
                           fontSize: 15))),
             ),

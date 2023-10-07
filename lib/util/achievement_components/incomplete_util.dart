@@ -1,13 +1,14 @@
+import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
 
-// This class is used to create the
+// This class is used to create the utill which shows the incomplete achievement
 class IncompleteAchv extends StatefulWidget {
   final String title;
   final String iconName;
   final bool isCompleted;
   final String hour;
 
-  IncompleteAchv({
+  const IncompleteAchv({
     super.key,
     required this.hour,
     required this.title,
@@ -22,30 +23,20 @@ class IncompleteAchv extends StatefulWidget {
 class IncompleteAchvState extends State<IncompleteAchv> {
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
+    ThemeData selectedTheme = getSelectedTheme(context);
+
     return Padding(
       padding: const EdgeInsets.all(5.0),
       child: Container(
         width: 300,
         height: 150,
         decoration: BoxDecoration(
-          color: const Color.fromARGB(255, 30, 32, 67),
+          color: selectedTheme.colorScheme.onBackground,
           borderRadius: BorderRadius.circular(10.0),
         ),
         child: Column(
           children: [
-            // Expanded(
-            //   child: Padding(
-            //     padding:
-            //         const EdgeInsets.symmetric(horizontal: 0.0, vertical: 0.0),
-            //     child: Image.asset(
-            //       widget.iconName,
-            //       width: double.infinity,
-            //       height: 100,
-            //       fit: BoxFit.cover,
-            //     ),
-            //   ),
-            // ),
+            // Create the box the store the image
             ConstrainedBox(
               constraints: const BoxConstraints(
                 maxHeight: 160,
@@ -66,9 +57,9 @@ class IncompleteAchvState extends State<IncompleteAchv> {
             const SizedBox(height: 20),
             Text(
               widget.title,
-              style: const TextStyle(
+              style: TextStyle(
                 fontSize: 23,
-                color: Colors.white,
+                color: selectedTheme.colorScheme.primary,
                 fontWeight: FontWeight.bold,
               ),
               textAlign: TextAlign.center,
@@ -78,15 +69,15 @@ class IncompleteAchvState extends State<IncompleteAchv> {
               visible: widget.hour.isNotEmpty,
               child: Row(
                 children: [
-                  SizedBox(width: 30),
-                  Icon(
+                  const SizedBox(width: 30),
+                  const Icon(
                     Icons.access_time,
                     color: Colors.white,
                   ),
-                  SizedBox(width: 30),
+                  const SizedBox(width: 30),
                   Text(
                     widget.hour,
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                       color: Colors.white,
                       fontWeight: FontWeight.bold,
@@ -96,19 +87,20 @@ class IncompleteAchvState extends State<IncompleteAchv> {
                     " hours",
                     style: TextStyle(
                       fontSize: 16,
-                      color: Colors.white,
+                      color: selectedTheme.colorScheme.primary,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 ],
               ),
             ),
+            //reconize the achivement is complete or not
             const SizedBox(height: 30),
             Text(
-              widget.isCompleted ? "Completed" : "InCompleted",
-              style: const TextStyle(
+              widget.isCompleted ? "Complete" : "Incomplete",
+              style: TextStyle(
                 fontSize: 17,
-                color: Colors.white,
+                color: selectedTheme.colorScheme.primary,
                 fontWeight: FontWeight.bold,
               ),
             ),

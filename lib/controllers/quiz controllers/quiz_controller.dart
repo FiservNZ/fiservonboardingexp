@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:fiservonboardingexp/idk/auth_controller.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:fiservonboardingexp/util/mc_testing/module/module_screen.dart';
 import 'package:fiservonboardingexp/widgets/quiz%20widgets/quiz_info_square.dart';
@@ -9,6 +10,7 @@ import '../../firebase references/firebase_refs.dart';
 import '../../model/quiz_model.dart';
 import '../../model/task_category_model.dart';
 import '../../screens/task pages/quiz screens/question_screen.dart';
+import 'package:flutter/material.dart';
 
 class QuizController extends GetxController {
   late final String categoryName;
@@ -16,6 +18,8 @@ class QuizController extends GetxController {
   late final TaskCategoryModel cat;
   final allQuizImages = <String>[].obs;
   final allQuizzes = <QuizModel>[].obs;
+
+  ThemeData get selectedTheme => Get.theme;
 
   @override
   void onReady() {
@@ -52,7 +56,7 @@ class QuizController extends GetxController {
       // }
       allQuizzes.assignAll(quizList);
     } catch (e) {
-      debugPrint(e as String?);
+      debugPrint(e.toString());
     }
   }
 
@@ -69,16 +73,17 @@ class QuizController extends GetxController {
   // }
 
   void navigateToQuestions({required QuizModel quiz}) {
-    // AuthController authController = Get.find();
+    //AuthController authController = Get.find();
 
-    showPopupAlertDialog(quizModel: quiz, categoryName: categoryName);
-    //Get.toNamed(QuizQuestionScreen.routeName, arguments: quiz);
+    showPopupAlertDialog(
+        quizModel: quiz, categoryName: categoryName, theme: selectedTheme);
   }
 }
 
 void showPopupAlertDialog({
   required QuizModel quizModel,
   required String categoryName,
+  required ThemeData theme,
 }) {
   Get.dialog(
       showPopup(
@@ -90,14 +95,17 @@ void showPopupAlertDialog({
           onTapCancel: () {
             Get.back();
           },
-          quizModel: quizModel),
+          quizModel: quizModel,
+          selectedTheme: theme),
       barrierDismissible: false);
 }
 
-Widget showPopup(
-    {required VoidCallback onTapStart,
-    required VoidCallback onTapCancel,
-    required QuizModel quizModel}) {
+Widget showPopup({
+  required VoidCallback onTapStart,
+  required VoidCallback onTapCancel,
+  required QuizModel quizModel,
+  required ThemeData selectedTheme,
+}) {
   double buttonHeight = 35;
   double buttonWidth = 80;
   return AlertDialog(
@@ -105,8 +113,8 @@ Widget showPopup(
     shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16.0),
         side: const BorderSide(color: Color.fromARGB(221, 36, 36, 36))),
-    backgroundColor: darkBackgroundColor,
-    //shadowColor: fiservColor,
+    backgroundColor: selectedTheme.colorScheme.onBackground,
+    //shadowColor: selectedTheme.colorScheme.secondary,
     elevation: 20,
     content: SizedBox(
       width: 400,
@@ -114,38 +122,47 @@ Widget showPopup(
       child: Column(
         //mainAxisSize: MainAxisSize.values,
         children: [
-          const SizedBox(height: 10),
+          //const SizedBox(height: 10),
           Text(
             quizModel.title,
             style: GoogleFonts.quicksand(
-                fontSize: 21, fontWeight: FontWeight.bold, color: fiservColor),
-          ),
-          const SizedBox(height: 10),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: QuizInfoSquare(
-                      icon: Icons.question_mark_rounded,
-                      text: quizModel.questionCount == 1
-                          ? '${quizModel.questionCount} Question'
-                          : '${quizModel.questionCount} Questions')),
-              Padding(
-                  padding: const EdgeInsets.all(5.0),
-                  child: QuizInfoSquare(
-                      icon: Icons.book_rounded, text: '${quizModel.exp} exp')),
-              Padding(
-                padding: const EdgeInsets.all(5.0),
-                child: QuizInfoSquare(
-                    icon: Icons.timer, text: quizModel.timeConverter()),
-              )
-            ],
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
+                color: selectedTheme.colorScheme.primary),
           ),
           const SizedBox(height: 15),
-          Text(
-            quizModel.description,
-            style: GoogleFonts.quicksand(color: darkTextColor),
+          Expanded(
+            flex: 1,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                QuizInfoSquare(
+                    icon: Icons.question_mark_rounded,
+                    text: quizModel.questionCount == 1
+                        ? '${quizModel.questionCount} Question'
+                        : '${quizModel.questionCount} Questions'),
+                QuizInfoSquare(
+                    icon: Icons.book_rounded, text: '${quizModel.exp} exp'),
+                QuizInfoSquare(
+                    icon: Icons.timer, text: quizModel.timeConverterTxt()),
+              ],
+            ),
+          ),
+          const SizedBox(height: 15),
+          Flexible(
+            flex: 1,
+            child: Text(
+              quizModel.description,
+              textAlign: TextAlign.center,
+              style: GoogleFonts.quicksand(
+                color: selectedTheme.colorScheme.primary,
+                fontSize: 14, // Set your desired font size here
+                fontWeight:
+                    FontWeight.w600, // Set your desired font weight here
+              ),
+              overflow: TextOverflow.visible,
+              maxLines: 2,
+            ),
           )
         ],
       ),
@@ -161,16 +178,17 @@ Widget showPopup(
               width: buttonWidth,
               child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    side: const BorderSide(color: fiservColor),
-                    backgroundColor:
-                        darkBackgroundColor, /*shadowColor: fiservColor*/
+                    side:
+                        BorderSide(color: selectedTheme.colorScheme.secondary),
+                    backgroundColor: selectedTheme
+                        .colorScheme.onBackground, /*shadowColor: fiservColor*/
                   ),
                   onPressed: onTapCancel,
                   child: Text(
                     "Cancel",
                     style: GoogleFonts.quicksand(
                         fontWeight: FontWeight.bold,
-                        color: fiservColor,
+                        color: selectedTheme.colorScheme.primary,
                         fontSize: 14),
                   )),
             ),
@@ -179,12 +197,13 @@ Widget showPopup(
               width: buttonWidth,
               child: ElevatedButton(
                   style: TextButton.styleFrom(
-                      side: const BorderSide(color: fiservColor),
-                      backgroundColor: fiservColor),
+                      side: BorderSide(
+                          color: selectedTheme.colorScheme.secondary),
+                      backgroundColor: selectedTheme.colorScheme.secondary),
                   onPressed: onTapStart,
                   child: Text("Start",
                       style: TextStyle(
-                          color: darkTextColor,
+                          color: selectedTheme.colorScheme.background,
                           fontWeight: FontWeight.bold,
                           fontSize: 15))),
             ),

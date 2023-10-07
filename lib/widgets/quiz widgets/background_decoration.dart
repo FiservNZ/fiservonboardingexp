@@ -13,12 +13,14 @@ class BackgroundDecoration extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThemeData selectedTheme = getSelectedTheme(context);
     return Stack(
       children: [
         Positioned.fill(
             child: Container(
           decoration: BoxDecoration(
-              color: showGradient ? null : darkBackgroundColor,
+              color:
+                  showGradient ? null : selectedTheme.colorScheme.onBackground,
               //color: showGradient ? null : Theme.of(context).primaryColor,
               gradient: showGradient ? mainGradient() : null),
         )),

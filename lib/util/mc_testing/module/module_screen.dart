@@ -1,14 +1,9 @@
-import 'package:fiservonboardingexp/screens/task%20pages/quiz%20screens/home_screen.dart';
-import 'package:fiservonboardingexp/screens/task%20pages/read_card_screen.dart';
-import 'package:fiservonboardingexp/screens/task%20pages/watch_card_screen.dart';
-import 'package:fiservonboardingexp/screens/task%20pages/watch_card.dart';
-import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:fiservonboardingexp/util/mc_testing/watch/watch_tasks_container.dart';
+import 'package:fiservonboardingexp/widgets/progress_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
 
 late String currentCategory;
 
@@ -18,8 +13,7 @@ class ModuleScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-    ThemeData selectedTheme = themeProvider.currentTheme;
+    ThemeData selectedTheme = getSelectedTheme(context);
 
     return Scaffold(
       appBar: myAppBar,
@@ -97,9 +91,9 @@ class ModuleScreen extends StatelessWidget {
                                   ? 'assets/icon/compliance.png'
                                   : 'assets/icon/technical.png',
                   width: 30,
-                  height: 30,
+                  height: 60,
                 ),
-                const SizedBox(width: 5),
+                //const SizedBox(width: 5),
                 Text(
                   title,
                   style: GoogleFonts.quicksand(
@@ -110,6 +104,8 @@ class ModuleScreen extends StatelessWidget {
                     ),
                   ),
                 ),
+                const Spacer(),
+                ProgressBar(taskCategory: title),
               ],
             ),
           ],

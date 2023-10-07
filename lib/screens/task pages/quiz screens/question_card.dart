@@ -14,6 +14,7 @@ class QuestionCard extends GetView<QuizController> {
 
   @override
   Widget build(BuildContext context) {
+    ThemeData selectedTheme = getSelectedTheme(context);
     const double padding = 10.0;
     return Container(
       decoration: BoxDecoration(
@@ -58,7 +59,7 @@ class QuestionCard extends GetView<QuizController> {
                       children: [
                         Text(model.title,
                             style: TextStyle(
-                                color: darkTextColor,
+                                color: selectedTheme.colorScheme.primary,
                                 // color: UIParameters.isDarkMode()
                                 //     ? Theme.of(context)
                                 //         .textTheme
@@ -72,7 +73,8 @@ class QuestionCard extends GetView<QuizController> {
                           child: Text(
                             //model.description,
                             model.id,
-                            style: TextStyle(color: darkTextColor),
+                            style: TextStyle(
+                                color: selectedTheme.colorScheme.primary),
                           ),
                         ),
                         Row(children: [
@@ -105,7 +107,7 @@ class QuestionCard extends GetView<QuizController> {
                                       .withOpacity(0.3),
                             ),
                             text: Text(
-                              model.timeConverter(),
+                              model.timeConverterTxt(),
                               style: TextStyle(
                                   color: Get.isDarkMode
                                       ? Colors.white

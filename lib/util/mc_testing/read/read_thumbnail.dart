@@ -1,12 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fiservonboardingexp/screens/task%20pages/read_page.dart';
-import 'package:fiservonboardingexp/themes/theme_provider.dart';
-import 'package:fiservonboardingexp/util/mc_testing/module/module_screen.dart';
+import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'package:provider/provider.dart';
-import 'package:fiservonboardingexp/controllers/read_controller.dart';
+import '../../../controllers/read_controller.dart';
 import '../../../firebase references/firebase_refs.dart';
 import '../../../model/read_model.dart';
 
@@ -24,8 +22,7 @@ class ReadThumbnail extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-    ThemeData selectedTheme = themeProvider.currentTheme;
+    ThemeData selectedTheme = getSelectedTheme(context);
     return GestureDetector(
       onTap: () {
         debugPrint('Read Tapped!\nTitle: $readTitle');
@@ -57,7 +54,12 @@ class ReadThumbnail extends StatelessWidget {
             );
             debugPrint("Document ID: $documentId");
             Get.to(ReadPage(readModel: readModel));
+            // showPopupAlertDialog(
+            //     readModel: readModel,
+            //     categoryName: taskCategory, 
+            //     theme: selectedTheme);
           }
+
         }).catchError((error) {
           debugPrint('ERROR: $error');
         });

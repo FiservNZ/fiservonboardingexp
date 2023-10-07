@@ -1,7 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import '../../firebase references/firebase_refs.dart';
 import '../../screens/achievements_page.dart';
 import 'incomplete_util.dart';
@@ -30,7 +29,6 @@ class IncompletedAchievement extends StatelessWidget {
           //fetch the achievement list
           final List<Map<String, dynamic>> contentInAchv =
               _achievementpage.fetchAndStoreAchievement(snapshot.data!.docs);
-          // List<Map<String, dynamic>> contentInAchv = snapshot.data!;
 
           // Filter out achievements with the 'IsComplete' value set to false.
           List<Map<String, dynamic>> incompletedAchievements = contentInAchv

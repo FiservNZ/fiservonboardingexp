@@ -1,9 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fiservonboardingexp/themes/theme_provider.dart';
+import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../firebase references/firebase_refs.dart';
-import 'package:provider/provider.dart';
 
 // yellow squig Class Name
 class ChecklistTile extends StatelessWidget {
@@ -20,8 +19,7 @@ class ChecklistTile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-    ThemeData selectedTheme = themeProvider.currentTheme;
+    ThemeData selectedTheme = getSelectedTheme(context);
     bool taskCompleted = task['taskCompleted'];
 
     // UI of the Checklist Tiles

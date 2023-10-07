@@ -95,31 +95,31 @@ class DataUploader extends GetxController {
 
     var batch = firestore.batch();
 
-    for (var quiz in quizzes) {
-      batch.set(complianceQuiz.doc(quiz.id), {
-        "title": quiz.title,
-        "image_url": quiz.imageUrl,
-        "description": quiz.description,
-        "quiz_duration": quiz.quizDuration,
-        "question_count": quiz.questions == null ? 0 : quiz.questions!.length,
-        "exp": quiz.exp,
-        "exp_gained": quiz.expGained
-      });
-      for (var questions in quiz.questions!) {
-        final questionCollection =
-            questionRef(quizId: quiz.id, questionId: questions.id);
-        batch.set(questionCollection, {
-          "question": questions.question,
-          "correct_answer": questions.correctAnswer
-        });
+    // for (var quiz in quizzes) {
+    //   batch.set(complianceQuiz.doc(quiz.id), {
+    //     "title": quiz.title,
+    //     "image_url": quiz.imageUrl,
+    //     "description": quiz.description,
+    //     "quiz_duration": quiz.quizDuration,
+    //     "question_count": quiz.questions == null ? 0 : quiz.questions!.length,
+    //     "exp": quiz.exp,
+    //     "exp_gained": quiz.expGained
+    //   });
+    //   for (var questions in quiz.questions!) {
+    //     final questionCollection =
+    //         questionRef(quizId: quiz.id, questionId: questions.id);
+    //     batch.set(questionCollection, {
+    //       "question": questions.question,
+    //       "correct_answer": questions.correctAnswer
+    //     });
 
-        for (var options in questions.options!) {
-          batch.set(
-              questionCollection.collection("options").doc(options.identifier),
-              {"identifier": options.identifier, "answer": options.answer});
-        }
-      }
-    }
+    //     for (var options in questions.options!) {
+    //       batch.set(
+    //           questionCollection.collection("options").doc(options.identifier),
+    //           {"identifier": options.identifier, "answer": options.answer});
+    //     }
+    //   }
+    // }
 
      for (var quiz in quizzes) {
       batch.set(complianceQuiz.doc(quiz.id), {
@@ -132,16 +132,16 @@ class DataUploader extends GetxController {
         "exp_gained": quiz.expGained
       });
       for (var questions in quiz.questions!) {
-        final questionCollection =
-            questionRef(quizId: quiz.id, questionId: questions.id);
-        batch.set(questionCollection, {
+        final complianceQuestions =
+            complianceQRef(quizId: quiz.id, questionId: questions.id);
+        batch.set(complianceQuestions, {
           "question": questions.question,
           "correct_answer": questions.correctAnswer
         });
 
         for (var options in questions.options!) {
           batch.set(
-              questionCollection.collection("options").doc(options.identifier),
+              complianceQuestions.collection("options").doc(options.identifier),
               {"identifier": options.identifier, "answer": options.answer});
         }
       }
@@ -158,16 +158,16 @@ class DataUploader extends GetxController {
         "exp_gained": quiz.expGained
       });
       for (var questions in quiz.questions!) {
-        final questionCollection =
-            questionRef(quizId: quiz.id, questionId: questions.id);
-        batch.set(questionCollection, {
+        final orientationQuestion =
+            orientationQRef(quizId: quiz.id, questionId: questions.id);
+        batch.set(orientationQuestion, {
           "question": questions.question,
           "correct_answer": questions.correctAnswer
         });
 
         for (var options in questions.options!) {
           batch.set(
-              questionCollection.collection("options").doc(options.identifier),
+              orientationQuestion.collection("options").doc(options.identifier),
               {"identifier": options.identifier, "answer": options.answer});
         }
       }
@@ -184,16 +184,16 @@ class DataUploader extends GetxController {
         "exp_gained": quiz.expGained
       });
       for (var questions in quiz.questions!) {
-        final questionCollection =
-            questionRef(quizId: quiz.id, questionId: questions.id);
-        batch.set(questionCollection, {
+        final healthSafetyQuestions =
+            healthSafetyQRef(quizId: quiz.id, questionId: questions.id);
+        batch.set(healthSafetyQuestions, {
           "question": questions.question,
           "correct_answer": questions.correctAnswer
         });
 
         for (var options in questions.options!) {
           batch.set(
-              questionCollection.collection("options").doc(options.identifier),
+              healthSafetyQuestions.collection("options").doc(options.identifier),
               {"identifier": options.identifier, "answer": options.answer});
         }
       }
@@ -210,16 +210,16 @@ class DataUploader extends GetxController {
         "exp_gained": quiz.expGained
       });
       for (var questions in quiz.questions!) {
-        final questionCollection =
-            questionRef(quizId: quiz.id, questionId: questions.id);
-        batch.set(questionCollection, {
+        final customsQuestions =
+            customsCultureQRef(quizId: quiz.id, questionId: questions.id);
+        batch.set(customsQuestions, {
           "question": questions.question,
           "correct_answer": questions.correctAnswer
         });
 
         for (var options in questions.options!) {
           batch.set(
-              questionCollection.collection("options").doc(options.identifier),
+              customsQuestions.collection("options").doc(options.identifier),
               {"identifier": options.identifier, "answer": options.answer});
         }
       }
