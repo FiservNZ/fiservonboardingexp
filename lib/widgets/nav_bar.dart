@@ -1,11 +1,11 @@
-import 'package:fiservonboardingexp/screens/achievements_page.dart';
-import 'package:fiservonboardingexp/screens/colleagues_page.dart';
+import 'package:fiservonboardingexp/screens/nav%20bar%20pages/colleagues_page.dart';
 import 'package:fiservonboardingexp/screens/home_page.dart';
-import 'package:fiservonboardingexp/screens/checklist_page.dart';
+import 'package:fiservonboardingexp/screens/nav%20bar%20pages/checklist_page.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
-import 'package:fiservonboardingexp/util/mc_testing/module/module_screen.dart';
+import 'package:fiservonboardingexp/screens/module/module_screen.dart';
 import 'package:flutter/material.dart';
 import '../firebase references/firebase_refs.dart';
+import '../screens/nav bar pages/achievements_page.dart';
 
 class CustomNavBar extends StatelessWidget {
   const CustomNavBar({
@@ -23,7 +23,7 @@ class CustomNavBar extends StatelessWidget {
         switch (newIndex) {
           // Directs user to Home Page
           case 0:
-            Navigator.of(context).push(_instantPageRoute(HomePage()));
+            Navigator.of(context).push(_instantPageRoute(const HomePage()));
             break;
           // Directs user to Training Page
           case 1:
@@ -39,7 +39,8 @@ class CustomNavBar extends StatelessWidget {
             break;
           // Directs user to the Achievements Page
           case 3:
-            Navigator.push(context, _instantPageRoute(AchievementsPage()));
+            Navigator.push(
+                context, _instantPageRoute(const AchievementsPage()));
             break;
           // Directs user to the Colleagues Page
           case 4:

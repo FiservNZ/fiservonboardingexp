@@ -1,13 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fiservonboardingexp/api/pdf_api.dart';
-import 'package:fiservonboardingexp/screens/achievements_page.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
-import 'package:fiservonboardingexp/widgets/custom_text_box.dart';
-import 'package:fiservonboardingexp/widgets/user_icons.dart';
+import 'package:fiservonboardingexp/widgets/profile%20widgets/custom_text_box.dart';
+import 'package:fiservonboardingexp/widgets/profile%20widgets/user_icons.dart';
 import 'package:fiservonboardingexp/widgets/exp_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../firebase references/firebase_refs.dart';
+import 'nav bar pages/achievements_page.dart';
 
 class ProfilePage extends StatefulWidget {
   static const String routeName = '/Profile';
@@ -124,10 +124,10 @@ class _ProfilePageState extends State<ProfilePage> {
           if (snapshot.hasData) {
             final userData = snapshot.data!.data() as Map<String, dynamic>;
             final level = userData['Level'] ?? 1;
-            //update when all icon are unlocked
-            if (level >= 9) {
-              achievementpage.updateAchievement(context, "Unlocked all icons!");
-            }
+            // //update when all icon are unlocked
+            // if (level >= 9) {
+            //   achievementpage.updateAchievement(context, "Unlocked all icons!");
+            // }
             void asyncMethod(void Function(int) callback) {
               expBar.level.then((int level) {
                 callback(level);
