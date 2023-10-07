@@ -2,11 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fiservonboardingexp/firebase%20references/firebase_refs.dart';
 import 'package:fiservonboardingexp/model/task_category_model.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
-import 'package:fiservonboardingexp/util/progress_max_points.dart';
 import 'package:fiservonboardingexp/util/progress_curr_points.dart';
+import 'package:fiservonboardingexp/util/progress_max_points.dart';
 import 'package:flutter/material.dart';
-
-import '../screens/achievements_page.dart';
 
 class ProgressBar extends StatelessWidget {
   final String taskCategory;
@@ -21,7 +19,7 @@ class ProgressBar extends StatelessWidget {
       future: _loadData(), // Call the _loadData method first
       builder: (context, AsyncSnapshot<void> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const LinearProgressIndicator();
+          return const CircularProgressIndicator();
         }
 
         if (snapshot.hasError) {
@@ -79,7 +77,7 @@ class ProgressBar extends StatelessWidget {
           .get(),
       builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const LinearProgressIndicator();
+          return const CircularProgressIndicator();
         }
 
         if (snapshot.hasError) {
@@ -110,14 +108,38 @@ class ProgressBar extends StatelessWidget {
             (category.curPoints / category.maxPoints);
 
         // Displays the progress indicator
-        return Stack(
-          alignment: Alignment.center,
-          children: [
-            Transform.scale(
-              scale: 1.15,
-              child: SizedBox(
-                width: 50, // Adjust the width as needed
-                height: 30, // Adjust the height as needed
+        return Container(
+          // child: Column(
+          //   children: [
+          //     Text(
+          //       '${category.curPoints} / ${category.maxPoints}',
+          //       style: TextStyle(
+          //         color: selectedTheme.colorScheme.primary,
+          //         fontSize: 15,
+          //         fontWeight: FontWeight.bold,
+          //       ),
+          //     ),
+          //     const SizedBox(height: 3),
+          //     SizedBox(
+          //       width: 80,
+          //       height: 10,
+          //       child: ClipRRect(
+          //         borderRadius: BorderRadius.circular(5),
+          //         child: LinearProgressIndicator(
+          //           value: progressPercentage,
+          //           valueColor: AlwaysStoppedAnimation<Color>(
+          //             selectedTheme.colorScheme.primary,
+          //           ),
+          //           backgroundColor: selectedTheme.colorScheme.surface,
+          //         ),
+          //       ),
+          //     ),
+
+          child: Stack(
+            alignment: Alignment.center,
+            children: [
+              Transform.scale(
+                scale: 1.15,
                 child: CircularProgressIndicator(
                   value: progressPercentage,
                   strokeWidth: 4.0,
@@ -125,47 +147,18 @@ class ProgressBar extends StatelessWidget {
                   backgroundColor: selectedTheme.colorScheme.surface,
                 ),
               ),
-            ),
-            Text(
-              '${category.curPoints} / ${category.maxPoints}',
-              style: TextStyle(
-                color: selectedTheme.colorScheme.primary,
-                fontSize: 12,
-                fontWeight: FontWeight.bold,
+              Text(
+                '${category.curPoints} / ${category.maxPoints}',
+                style: TextStyle(
+                  color: selectedTheme.colorScheme.primary,
+                  fontSize: 12,
+                  fontWeight: FontWeight.bold,
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         );
       },
     );
   }
 }
-
-
-// child: Stack(
-//   alignment: Alignment.center,
-//   children: [
-//     Transform.scale(
-//       scale: 1.15,
-//       child: SizedBox(
-//         width: 100, // Adjust the width as needed
-//         height: 10, // Adjust the height as needed
-//         child: LinearProgressIndicator(
-//           value: progressPercentage,
-//           valueColor: AlwaysStoppedAnimation<Color>(
-//             selectedTheme.colorScheme.primary,
-//           ),
-//           backgroundColor: selectedTheme.colorScheme.surface,
-//         ),
-//       ),
-//     ),
-//     Text(
-//       '${category.curPoints} / ${category.maxPoints}',
-//       style: TextStyle(
-//         color: selectedTheme.colorScheme.primary,
-//         fontSize: 12,
-//         fontWeight: FontWeight.bold,
-//       ),
-//     ),
-//   ],
-// ),
