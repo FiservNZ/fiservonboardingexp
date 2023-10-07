@@ -4,6 +4,7 @@ import 'package:fiservonboardingexp/themes/Theme_database.dart';
 import 'package:fiservonboardingexp/themes/beach_theme.dart';
 import 'package:fiservonboardingexp/themes/pastel_theme.dart';
 import 'package:fiservonboardingexp/themes/rainforest_theme.dart';
+import 'package:fiservonboardingexp/themes/theme_achievements.dart';
 import 'package:fiservonboardingexp/themes/theme_provider.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
@@ -27,6 +28,25 @@ class ThemesPageState extends State<ThemesPage> {
 
     // Save the selected theme mode to Firebase Firestore
     _firebaseTheme.saveThemePreference(uid, theme);
+  }
+
+  int level = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadLevel();
+  }
+
+  // Obtains the users exp level
+  Future<void> _loadLevel() async {
+    try {
+      level = await getExpLevel();
+      setState(() {}); // Trigger a rebuild of the widget to update the UI
+    } catch (e) {
+      // Handle any errors that occur while loading the level
+      print("Error loading level: $e");
+    }
   }
 
   @override
@@ -70,22 +90,31 @@ class ThemesPageState extends State<ThemesPage> {
                 ),
                 child: RadioListTile<ThemeData>(
                   title: Text(
-                    'Rainforest Theme',
+                    'Rainforest Theme (Unlocked at level 3)',
                     style: GoogleFonts.quicksand(
-                      color: selectedTheme.colorScheme.primary,
+                      color: isRainforestThemeLocked(
+                              level) // Check if the theme is locked
+                          ? selectedTheme.colorScheme
+                              .onPrimary // Disable the theme selection if locked
+                          : selectedTheme.colorScheme.primary,
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   value: rainforestTheme,
                   groupValue: selectedTheme,
-                  onChanged: (value) {
-                    _handleThemeChange(rainforestTheme, themeProvider);
-                  },
+                  onChanged: isRainforestThemeLocked(
+                          level) // Check if the theme is locked
+                      ? null // Disable the theme selection if locked
+                      : (value) {
+                          _handleThemeChange(rainforestTheme, themeProvider);
+                        },
                   activeColor: selectedTheme.colorScheme.primary,
                 ),
               ),
             ),
+
+            const SizedBox(height: 20),
 
             // Pastel theme
             Container(
@@ -97,9 +126,13 @@ class ThemesPageState extends State<ThemesPage> {
                 ),
                 child: RadioListTile<ThemeData>(
                   title: Text(
-                    'Pastel Theme',
+                    'Pastel Theme (Unlocked at level 6)',
                     style: GoogleFonts.quicksand(
-                      color: selectedTheme.colorScheme.primary,
+                      color: isPastelThemeLocked(
+                              level) // Check if the theme is locked
+                          ? selectedTheme.colorScheme
+                              .onBackground // Disable the theme selection if locked
+                          : selectedTheme.colorScheme.primary,
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
@@ -107,14 +140,19 @@ class ThemesPageState extends State<ThemesPage> {
                   // Radio widget for selecting the "Pastel" theme.
                   value: pastelTheme,
                   groupValue: selectedTheme,
-                  onChanged: (value) {
-                    _handleThemeChange(pastelTheme, themeProvider);
-                  },
+                  onChanged:
+                      isPastelThemeLocked(level) // Check if the theme is locked
+                          ? null // Disable the theme selection if locked
+                          : (value) {
+                              _handleThemeChange(pastelTheme, themeProvider);
+                            },
                   // The color to use when the radio button is selected.
                   activeColor: selectedTheme.colorScheme.primary,
                 ),
               ),
             ),
+
+            const SizedBox(height: 20),
 
             // Beach theme
             Container(
@@ -126,18 +164,25 @@ class ThemesPageState extends State<ThemesPage> {
                 ),
                 child: RadioListTile<ThemeData>(
                   title: Text(
-                    'Beach Theme',
+                    'Beach Theme (Unlocked at level 9)',
                     style: GoogleFonts.quicksand(
-                      color: selectedTheme.colorScheme.primary,
+                      color: isBeachThemeLocked(
+                              level) // Check if the theme is locked
+                          ? selectedTheme.colorScheme
+                              .onPrimary // Disable the theme selection if locked
+                          : selectedTheme.colorScheme.primary,
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   value: beachTheme,
                   groupValue: selectedTheme,
-                  onChanged: (value) {
-                    _handleThemeChange(beachTheme, themeProvider);
-                  },
+                  onChanged:
+                      isBeachThemeLocked(level) // Check if the theme is locked
+                          ? null
+                          : (value) {
+                              _handleThemeChange(beachTheme, themeProvider);
+                            },
                   activeColor: selectedTheme.colorScheme.primary,
                 ),
               ),
