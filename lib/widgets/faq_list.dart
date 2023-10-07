@@ -35,6 +35,11 @@ class FaqList extends StatelessWidget {
             return Padding(
               padding: const EdgeInsets.fromLTRB(0, 7, 0, 7),
               child: ExpansionTile(
+                backgroundColor: selectedTheme.colorScheme.onBackground,
+                collapsedBackgroundColor:
+                    selectedTheme.colorScheme.onBackground,
+                iconColor: selectedTheme.colorScheme.primary,
+                collapsedIconColor: selectedTheme.colorScheme.primary,
                 title: Text(
                   question,
                   style: GoogleFonts.quicksand(

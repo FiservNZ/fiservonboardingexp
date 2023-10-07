@@ -1,7 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fiservonboardingexp/model/read_model.dart';
-import 'package:fiservonboardingexp/screens/task%20pages/read_page.dart';
-import 'package:fiservonboardingexp/util/mc_testing/module/module_screen.dart';
+import 'package:fiservonboardingexp/screens/module/task%20pages/read_page.dart';
+import 'package:fiservonboardingexp/screens/module/module_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -60,15 +60,21 @@ class ReadController extends GetxController {
     if (model != null) {
       debugPrint('Model Initialised!');
       model = readModel;
-      showPopupAlertDialog(readModel: readModel, categoryName: categoryName, theme: selectedTheme);
+      showPopupAlertDialog(
+          readModel: readModel,
+          categoryName: categoryName,
+          theme: selectedTheme);
     } else {
       debugPrint('Model not initialised!');
     }
   }
 }
 
-void showPopupAlertDialog(
-    {required ReadModel readModel, required String categoryName, required ThemeData theme,}) {
+void showPopupAlertDialog({
+  required ReadModel readModel,
+  required String categoryName,
+  required ThemeData theme,
+}) {
   Get.dialog(
       showPopup(
           onTapStart: () {
@@ -78,7 +84,7 @@ void showPopupAlertDialog(
           onTapCancel: () {
             Get.back();
           },
-          readModel: readModel, 
+          readModel: readModel,
           selectedTheme: theme),
       barrierDismissible: false);
 }
@@ -110,7 +116,9 @@ Widget showPopup(
           Text(
             readModel.title,
             style: GoogleFonts.quicksand(
-                fontSize: 25, fontWeight: FontWeight.bold, color: selectedTheme.colorScheme.primary),
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+                color: selectedTheme.colorScheme.primary),
           ),
           const SizedBox(height: 10),
           Row(
@@ -137,7 +145,8 @@ Widget showPopup(
           // Short description about the read task
           Text(
             readModel.description,
-            style: GoogleFonts.quicksand(color: selectedTheme.colorScheme.primary),
+            style:
+                GoogleFonts.quicksand(color: selectedTheme.colorScheme.primary),
           )
         ],
       ),
@@ -154,9 +163,9 @@ Widget showPopup(
               width: buttonWidth,
               child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    side: BorderSide(color: selectedTheme.colorScheme.secondary),
-                    backgroundColor:
-                        selectedTheme
+                    side:
+                        BorderSide(color: selectedTheme.colorScheme.secondary),
+                    backgroundColor: selectedTheme
                         .colorScheme.onBackground, /*shadowColor: fiservColor*/
                   ),
                   onPressed: onTapCancel,
@@ -175,7 +184,8 @@ Widget showPopup(
               width: buttonWidth,
               child: ElevatedButton(
                   style: TextButton.styleFrom(
-                      side: BorderSide(color: selectedTheme.colorScheme.secondary),
+                      side: BorderSide(
+                          color: selectedTheme.colorScheme.secondary),
                       backgroundColor: selectedTheme.colorScheme.secondary),
                   onPressed: onTapStart,
                   child: Text("Start",

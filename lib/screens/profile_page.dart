@@ -1,13 +1,13 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fiservonboardingexp/api/pdf_api.dart';
-import 'package:fiservonboardingexp/screens/achievements_page.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
-import 'package:fiservonboardingexp/widgets/custom_text_box.dart';
-import 'package:fiservonboardingexp/widgets/user_icons.dart';
+import 'package:fiservonboardingexp/widgets/profile%20widgets/custom_text_box.dart';
+import 'package:fiservonboardingexp/widgets/profile%20widgets/user_icons.dart';
 import 'package:fiservonboardingexp/widgets/exp_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import '../firebase references/firebase_refs.dart';
+import 'nav bar pages/achievements_page.dart';
 
 class ProfilePage extends StatefulWidget {
   static const String routeName = '/Profile';
