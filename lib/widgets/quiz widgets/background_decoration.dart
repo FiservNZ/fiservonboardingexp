@@ -1,7 +1,5 @@
 import 'package:fiservonboardingexp/util/constants.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
-
 import '../../themes/quiz themes/app_colors.dart';
 
 class BackgroundDecoration extends StatelessWidget {
@@ -21,7 +19,6 @@ class BackgroundDecoration extends StatelessWidget {
           decoration: BoxDecoration(
               color:
                   showGradient ? null : selectedTheme.colorScheme.onBackground,
-              //color: showGradient ? null : Theme.of(context).primaryColor,
               gradient: showGradient ? mainGradient() : null),
         )),
         Positioned(child: SafeArea(child: child))

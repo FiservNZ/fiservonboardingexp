@@ -2,9 +2,9 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fiservonboardingexp/firebase%20references/firebase_refs.dart';
 import 'package:fiservonboardingexp/model/task_category_model.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
-import 'package:fiservonboardingexp/util/progress_curr_points.dart';
-import 'package:fiservonboardingexp/util/progress_max_points.dart';
 import 'package:flutter/material.dart';
+import '../controllers/progress bar/progress_curr_points.dart';
+import '../controllers/progress bar/progress_max_points.dart';
 
 class ProgressBar extends StatelessWidget {
   final String taskCategory;
