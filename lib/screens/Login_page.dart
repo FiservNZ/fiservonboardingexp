@@ -1,4 +1,3 @@
-import 'package:fiservonboardingexp/screens/achievements_page.dart';
 import 'package:fiservonboardingexp/screens/main_screen.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
@@ -7,7 +6,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import '../firebase references/firebase_refs.dart';
 import 'menu drawer/help_page.dart';
-import 'teaser pages/teaser.dart';
+import 'menu drawer/teaser pages/teaser.dart';
+import 'nav bar pages/achievements_page.dart';
 
 // This class is used to create a login page for user to login.
 // And it will lead the user to different page based on their position and

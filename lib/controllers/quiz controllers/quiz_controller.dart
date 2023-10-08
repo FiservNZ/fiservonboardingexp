@@ -1,7 +1,4 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:fiservonboardingexp/idk/auth_controller.dart';
-import 'package:fiservonboardingexp/util/constants.dart';
-import 'package:fiservonboardingexp/util/mc_testing/module/module_screen.dart';
 import 'package:fiservonboardingexp/widgets/quiz%20widgets/quiz_info_square.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -9,8 +6,7 @@ import 'package:google_fonts/google_fonts.dart';
 import '../../firebase references/firebase_refs.dart';
 import '../../model/quiz_model.dart';
 import '../../model/task_category_model.dart';
-import '../../screens/task pages/quiz screens/question_screen.dart';
-import 'package:flutter/material.dart';
+import '../../screens/module/task pages/quiz screens/question_screen.dart';
 
 class QuizController extends GetxController {
   late final String categoryName;
@@ -29,10 +25,7 @@ class QuizController extends GetxController {
   }
 
   Future<void> getAllQuizzes() async {
-    //List<String> imgName = ["Harry Potter", "Programming"];
     try {
-      //QuerySnapshot<Map<String, dynamic>> data = await quizref.get();
-
       QuerySnapshot<Map<String, dynamic>> data = await FirebaseFirestore
           .instance
           .collection('User')
@@ -45,36 +38,12 @@ class QuizController extends GetxController {
       final quizList =
           data.docs.map((quiz) => QuizModel.fromSnapshot(quiz)).toList();
       allQuizzes.assignAll(quizList);
-
-      // for (var quiz in quizList) {
-      //   if (imgName.contains(quiz.title)) {
-      //     final imgUrl = await Get.find<FirebaseStorageService>()
-      //         .getStorageRef(quiz.title);
-      //     quiz.imageUrl = imgUrl;
-      //     debugPrint(imgUrl);
-      //   }
-      // }
-      allQuizzes.assignAll(quizList);
     } catch (e) {
       debugPrint(e.toString());
     }
   }
 
-  // void navigateToQuestions({required QuizModel quiz, bool tryAgain = false}) {
-  //   // AuthController authController = Get.find();
-  //   if (tryAgain) {
-  //     Get.back();
-  //     Get.toNamed(QuestionScreen.routeName,
-  //         arguments: quiz, preventDuplicates: false);
-  //   } else {
-  //     showPopupAlertDialog(quizModel: quiz);
-  //     //Get.toNamed(QuizQuestionScreen.routeName, arguments: quiz);
-  //   }
-  // }
-
   void navigateToQuestions({required QuizModel quiz}) {
-    //AuthController authController = Get.find();
-
     showPopupAlertDialog(
         quizModel: quiz, categoryName: categoryName, theme: selectedTheme);
   }
@@ -114,15 +83,12 @@ Widget showPopup({
         borderRadius: BorderRadius.circular(16.0),
         side: const BorderSide(color: Color.fromARGB(221, 36, 36, 36))),
     backgroundColor: selectedTheme.colorScheme.onBackground,
-    //shadowColor: selectedTheme.colorScheme.secondary,
     elevation: 20,
     content: SizedBox(
       width: 400,
       height: 200,
       child: Column(
-        //mainAxisSize: MainAxisSize.values,
         children: [
-          //const SizedBox(height: 10),
           Text(
             quizModel.title,
             style: GoogleFonts.quicksand(
@@ -180,8 +146,7 @@ Widget showPopup({
                   style: ElevatedButton.styleFrom(
                     side:
                         BorderSide(color: selectedTheme.colorScheme.secondary),
-                    backgroundColor: selectedTheme
-                        .colorScheme.onBackground, /*shadowColor: fiservColor*/
+                    backgroundColor: selectedTheme.colorScheme.onBackground,
                   ),
                   onPressed: onTapCancel,
                   child: Text(

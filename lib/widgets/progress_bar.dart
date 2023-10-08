@@ -2,11 +2,10 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fiservonboardingexp/firebase%20references/firebase_refs.dart';
 import 'package:fiservonboardingexp/model/task_category_model.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
-import 'package:fiservonboardingexp/util/progress_max_points.dart';
-import 'package:fiservonboardingexp/util/progress_curr_points.dart';
 import 'package:flutter/material.dart';
-
-import '../screens/achievements_page.dart';
+import '../controllers/progress bar/progress_curr_points.dart';
+import '../controllers/progress bar/progress_max_points.dart';
+import '../screens/nav bar pages/achievements_page.dart';
 
 class ProgressBar extends StatelessWidget {
   final String taskCategory;
@@ -21,7 +20,7 @@ class ProgressBar extends StatelessWidget {
       future: _loadData(), // Call the _loadData method first
       builder: (context, AsyncSnapshot<void> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const LinearProgressIndicator();
+          return const CircularProgressIndicator();
         }
 
         if (snapshot.hasError) {
@@ -42,32 +41,44 @@ class ProgressBar extends StatelessWidget {
   }
 
 //Update the achievement
-  // void _updateAchievement(BuildContext context, String categoryName,
-  //     int currentPoint, int maxPoint) {
-  //   Achievementpage achievementpage = Achievementpage();
-  //   if (categoryName == "Compliance") {
-  //     if (currentPoint == maxPoint) {
-  //       achievementpage.updateAchievement(context, "Completed Compliance!");
-  //     }
-  //   }
-  //   if (categoryName == "Health & Safety") {
-  //     if (currentPoint == maxPoint) {
-  //       achievementpage.updateAchievement(
-  //           context, "Completed Health & Safety!");
-  //     }
-  //   }
-  //   if (categoryName == "Customs & Culture") {
-  //     if (currentPoint == maxPoint) {
-  //       achievementpage.updateAchievement(
-  //           context, "Completed Customs & Culture!");
-  //     }
-  //   }
-  //   if (categoryName == "Orientation") {
-  //     if (currentPoint == maxPoint) {
-  //       achievementpage.updateAchievement(context, "Completed orientation!");
-  //     }
-  //   }
-  // }
+  Future<void> _allModuleComplete(
+    BuildContext context,
+  ) async {
+    try {
+      // Get task collection
+      var tasksCollection = FirebaseFirestore.instance
+          .collection('User')
+          .doc(currentUser.uid)
+          .collection('Tasks');
+
+      QuerySnapshot querySnapshot = await tasksCollection.get();
+      bool allTasksCompleted = true;
+      // Iterate through each document
+      for (var doc in querySnapshot.docs) {
+        int currentPoint = doc.get('curPoints');
+        int maxPoint = doc.get('maxPoints');
+        // when in one of the doc , if the current = max, then it will set "Alltaskcomplete" to false
+        if (currentPoint != maxPoint) {
+          allTasksCompleted = false;
+          break;
+        }
+      }
+      ;
+      if (allTasksCompleted) {
+        // update the achievement when all currentpoint = max point
+        Achievementpage achievementpage = Achievementpage();
+        // ignore: use_build_context_synchronously
+        achievementpage.updateAchievement(
+            context, "Completed all the modules!");
+        print('All tasks completed! Updating achievement...');
+      } else {
+        print('Not all tasks are completed yet.');
+      }
+    } catch (e) {
+      // ignore: avoid_print
+      print('Error: $e');
+    }
+  }
 
   Widget _buildProgressBar(ThemeData selectedTheme, BuildContext context) {
     return FutureBuilder(
@@ -79,7 +90,7 @@ class ProgressBar extends StatelessWidget {
           .get(),
       builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const LinearProgressIndicator();
+          return const CircularProgressIndicator();
         }
 
         if (snapshot.hasError) {
@@ -103,8 +114,7 @@ class ProgressBar extends StatelessWidget {
         );
 
         // update achievement when the category complete
-        // _updateAchievement(
-        //     context, taskCategory, category.curPoints, category.maxPoints);
+        _allModuleComplete(context);
 
         final double progressPercentage =
             (category.curPoints / category.maxPoints);

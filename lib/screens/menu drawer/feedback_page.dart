@@ -1,10 +1,10 @@
-import 'package:fiservonboardingexp/screens/achievements_page.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
 import '../../widgets/star_rating.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../main_screen.dart';
+import '../nav bar pages/achievements_page.dart';
 
 class FeedBack extends StatefulWidget {
   const FeedBack({super.key});
