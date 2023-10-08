@@ -5,6 +5,7 @@ import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
 import '../controllers/progress bar/progress_curr_points.dart';
 import '../controllers/progress bar/progress_max_points.dart';
+import '../screens/nav bar pages/achievements_page.dart';
 
 class ProgressBar extends StatelessWidget {
   final String taskCategory;
@@ -40,32 +41,38 @@ class ProgressBar extends StatelessWidget {
   }
 
 //Update the achievement
-  // void _updateAchievement(BuildContext context, String categoryName,
-  //     int currentPoint, int maxPoint) {
-  //   Achievementpage achievementpage = Achievementpage();
-  //   if (categoryName == "Compliance") {
-  //     if (currentPoint == maxPoint) {
-  //       achievementpage.updateAchievement(context, "Completed Compliance!");
-  //     }
-  //   }
-  //   if (categoryName == "Health & Safety") {
-  //     if (currentPoint == maxPoint) {
-  //       achievementpage.updateAchievement(
-  //           context, "Completed Health & Safety!");
-  //     }
-  //   }
-  //   if (categoryName == "Customs & Culture") {
-  //     if (currentPoint == maxPoint) {
-  //       achievementpage.updateAchievement(
-  //           context, "Completed Customs & Culture!");
-  //     }
-  //   }
-  //   if (categoryName == "Orientation") {
-  //     if (currentPoint == maxPoint) {
-  //       achievementpage.updateAchievement(context, "Completed orientation!");
-  //     }
-  //   }
-  // }
+  void _updateAchievement(BuildContext context, String categoryName,
+      int currentPoint, int maxPoint) {
+    bool allCategoriesCompleted = true;
+
+    if (categoryName == "Compliance") {
+      if (currentPoint != maxPoint) {
+        debugPrint("is 1");
+        allCategoriesCompleted = false;
+      }
+    } else if (categoryName == "Health & Safety") {
+      if (currentPoint != maxPoint) {
+        debugPrint("is 2");
+        allCategoriesCompleted = false;
+      }
+    } else if (categoryName == "Customs & Culture") {
+      if (currentPoint != maxPoint) {
+        debugPrint("is 3");
+        allCategoriesCompleted = false;
+      }
+    } else if (categoryName == "Orientation") {
+      if (currentPoint != maxPoint) {
+        debugPrint("is 5");
+        allCategoriesCompleted = false;
+      }
+    }
+
+    if (allCategoriesCompleted) {
+      Achievementpage achievementpage = Achievementpage();
+      debugPrint("Completed All Modules!");
+      achievementpage.updateAchievement(context, "Completed all the modules!");
+    }
+  }
 
   Widget _buildProgressBar(ThemeData selectedTheme, BuildContext context) {
     return FutureBuilder(
@@ -101,8 +108,8 @@ class ProgressBar extends StatelessWidget {
         );
 
         // update achievement when the category complete
-        // _updateAchievement(
-        //     context, taskCategory, category.curPoints, category.maxPoints);
+        _updateAchievement(
+            context, taskCategory, category.curPoints, category.maxPoints);
 
         final double progressPercentage =
             (category.curPoints / category.maxPoints);
