@@ -41,36 +41,42 @@ class ProgressBar extends StatelessWidget {
   }
 
 //Update the achievement
-  void _updateAchievement(BuildContext context, String categoryName,
-      int currentPoint, int maxPoint) {
-    bool allCategoriesCompleted = true;
+  Future<void> _allModuleComplete(
+    BuildContext context,
+  ) async {
+    try {
+      // Get task collection
+      var tasksCollection = FirebaseFirestore.instance
+          .collection('User')
+          .doc(currentUser.uid)
+          .collection('Tasks');
 
-    if (categoryName == "Compliance") {
-      if (currentPoint != maxPoint) {
-        debugPrint("is 1");
-        allCategoriesCompleted = false;
+      QuerySnapshot querySnapshot = await tasksCollection.get();
+      bool allTasksCompleted = true;
+      // Iterate through each document
+      for (var doc in querySnapshot.docs) {
+        int currentPoint = doc.get('curPoints');
+        int maxPoint = doc.get('maxPoints');
+        // when in one of the doc , if the current = max, then it will set "Alltaskcomplete" to false
+        if (currentPoint != maxPoint) {
+          allTasksCompleted = false;
+          break;
+        }
       }
-    } else if (categoryName == "Health & Safety") {
-      if (currentPoint != maxPoint) {
-        debugPrint("is 2");
-        allCategoriesCompleted = false;
+      ;
+      if (allTasksCompleted) {
+        // update the achievement when all currentpoint = max point
+        Achievementpage achievementpage = Achievementpage();
+        // ignore: use_build_context_synchronously
+        achievementpage.updateAchievement(
+            context, "Completed all the modules!");
+        print('All tasks completed! Updating achievement...');
+      } else {
+        print('Not all tasks are completed yet.');
       }
-    } else if (categoryName == "Customs & Culture") {
-      if (currentPoint != maxPoint) {
-        debugPrint("is 3");
-        allCategoriesCompleted = false;
-      }
-    } else if (categoryName == "Orientation") {
-      if (currentPoint != maxPoint) {
-        debugPrint("is 5");
-        allCategoriesCompleted = false;
-      }
-    }
-
-    if (allCategoriesCompleted) {
-      Achievementpage achievementpage = Achievementpage();
-      debugPrint("Completed All Modules!");
-      achievementpage.updateAchievement(context, "Completed all the modules!");
+    } catch (e) {
+      // ignore: avoid_print
+      print('Error: $e');
     }
   }
 
@@ -108,8 +114,7 @@ class ProgressBar extends StatelessWidget {
         );
 
         // update achievement when the category complete
-        _updateAchievement(
-            context, taskCategory, category.curPoints, category.maxPoints);
+        _allModuleComplete(context);
 
         final double progressPercentage =
             (category.curPoints / category.maxPoints);
