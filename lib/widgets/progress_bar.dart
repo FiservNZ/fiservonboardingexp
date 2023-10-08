@@ -20,7 +20,7 @@ class ProgressBar extends StatelessWidget {
       future: _loadData(), // Call the _loadData method first
       builder: (context, AsyncSnapshot<void> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const LinearProgressIndicator();
+          return const CircularProgressIndicator();
         }
 
         if (snapshot.hasError) {
@@ -84,7 +84,7 @@ class ProgressBar extends StatelessWidget {
           .get(),
       builder: (context, AsyncSnapshot<DocumentSnapshot> snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
-          return const LinearProgressIndicator();
+          return const CircularProgressIndicator();
         }
 
         if (snapshot.hasError) {
