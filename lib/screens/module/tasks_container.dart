@@ -192,16 +192,16 @@ class TasksContainer extends StatelessWidget {
           break;
         }
       }
-      ;
+
       if (allTasksCompleted) {
         // update the achievement when all currentpoint = max point
         Achievementpage achievementpage = Achievementpage();
         // ignore: use_build_context_synchronously
         achievementpage.updateAchievement(
             context, "Completed all the modules!");
-        print('All tasks completed! Updating achievement...');
+        debugPrint('All tasks completed! Updating achievement...');
       } else {
-        print('Not all tasks are completed yet.');
+        debugPrint('Not all tasks are completed yet.');
       }
     } catch (e) {
       // ignore: avoid_print
@@ -224,11 +224,12 @@ class TasksContainer extends StatelessWidget {
       int maxPoint = querySnapshot.data()?['maxPoints'];
       int currentPoint = querySnapshot.data()?['curPoints'];
       if (maxPoint == currentPoint) {
+        // ignore: use_build_context_synchronously
         updateSingleAchievement(context, category);
-        print('$category complete');
+        debugPrint('$category complete');
       }
     } else {
-      print('Document does not exist.');
+      debugPrint('Document does not exist.');
     }
   }
 
