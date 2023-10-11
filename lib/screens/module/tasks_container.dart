@@ -1,9 +1,13 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:fiservonboardingexp/controllers/load_quiz_tasks.dart';
 import 'package:fiservonboardingexp/controllers/load_read_tasks.dart';
 import 'package:fiservonboardingexp/controllers/load_watch_tasks.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+
+import '../../firebase references/firebase_refs.dart';
+import '../nav bar pages/achievements_page.dart';
 
 class TasksContainer extends StatelessWidget {
   final String watchCategory;
@@ -43,6 +47,8 @@ class TasksContainer extends StatelessWidget {
                 child: FutureBuilder<List<Widget>>(
                   future: getWatchTaskWidgets(watchCategory),
                   builder: ((context, snapshot) {
+                    detectCompletition(context, watchCategory);
+                    _allModuleComplete(context);
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       return const Center(child: CircularProgressIndicator());
                     } else if (snapshot.hasError) {
@@ -161,5 +167,98 @@ class TasksContainer extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  //Update the achievement
+  Future<void> _allModuleComplete(
+    BuildContext context,
+  ) async {
+    try {
+      // Get task collection
+      var tasksCollection = FirebaseFirestore.instance
+          .collection('User')
+          .doc(currentUser.uid)
+          .collection('Tasks');
+
+      QuerySnapshot querySnapshot = await tasksCollection.get();
+      bool allTasksCompleted = true;
+      // Iterate through each document
+      for (var doc in querySnapshot.docs) {
+        int currentPoint = doc.get('curPoints');
+        int maxPoint = doc.get('maxPoints');
+        // when in one of the doc , if the current = max, then it will set "Alltaskcomplete" to false
+        if (currentPoint != maxPoint) {
+          allTasksCompleted = false;
+          break;
+        }
+      }
+      ;
+      if (allTasksCompleted) {
+        // update the achievement when all currentpoint = max point
+        Achievementpage achievementpage = Achievementpage();
+        // ignore: use_build_context_synchronously
+        achievementpage.updateAchievement(
+            context, "Completed all the modules!");
+        print('All tasks completed! Updating achievement...');
+      } else {
+        print('Not all tasks are completed yet.');
+      }
+    } catch (e) {
+      // ignore: avoid_print
+      print('Error: $e');
+    }
+  }
+
+  Future<void> detectCompletition(BuildContext context, String category) async {
+    // List<Widget> watchTasks = await getWatchTaskWidgets(category);
+    // List<Widget> readTasks = await getReadTaskWidgets(category);
+    // List<Widget> quizTasks = await getQuizTaskWidgets(category);
+    final querySnapshot = await FirebaseFirestore.instance
+        .collection('User')
+        .doc(currentUser.uid)
+        .collection('Tasks')
+        .doc(category)
+        .get();
+
+    if (querySnapshot.exists) {
+      int maxPoint = querySnapshot.data()?['maxPoints'];
+      int currentPoint = querySnapshot.data()?['curPoints'];
+      if (maxPoint == currentPoint) {
+        updateSingleAchievement(context, category);
+        print('$category complete');
+      }
+    } else {
+      print('Document does not exist.');
+    }
+  }
+
+  void updateSingleAchievement(
+    BuildContext context,
+    String categoryName,
+  ) {
+    Achievementpage achievementpage = Achievementpage();
+
+    if (categoryName == "Compliance") {
+      {
+        achievementpage.updateAchievement(context, "Completed Compliance!");
+      }
+    }
+    if (categoryName == "Health & Safety") {
+      {
+        achievementpage.updateAchievement(
+            context, "Completed Health & Safety!");
+      }
+    }
+    if (categoryName == "Customs & Culture") {
+      {
+        achievementpage.updateAchievement(
+            context, "Completed Customs & Culture!");
+      }
+    }
+    if (categoryName == "Orientation") {
+      {
+        achievementpage.updateAchievement(context, "Completed orientation!");
+      }
+    }
   }
 }

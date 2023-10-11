@@ -40,46 +40,6 @@ class ProgressBar extends StatelessWidget {
     // You can add additional operations here if needed
   }
 
-//Update the achievement
-  Future<void> _allModuleComplete(
-    BuildContext context,
-  ) async {
-    try {
-      // Get task collection
-      var tasksCollection = FirebaseFirestore.instance
-          .collection('User')
-          .doc(currentUser.uid)
-          .collection('Tasks');
-
-      QuerySnapshot querySnapshot = await tasksCollection.get();
-      bool allTasksCompleted = true;
-      // Iterate through each document
-      for (var doc in querySnapshot.docs) {
-        int currentPoint = doc.get('curPoints');
-        int maxPoint = doc.get('maxPoints');
-        // when in one of the doc , if the current = max, then it will set "Alltaskcomplete" to false
-        if (currentPoint != maxPoint) {
-          allTasksCompleted = false;
-          break;
-        }
-      }
-      ;
-      if (allTasksCompleted) {
-        // update the achievement when all currentpoint = max point
-        Achievementpage achievementpage = Achievementpage();
-        // ignore: use_build_context_synchronously
-        achievementpage.updateAchievement(
-            context, "Completed all the modules!");
-        print('All tasks completed! Updating achievement...');
-      } else {
-        print('Not all tasks are completed yet.');
-      }
-    } catch (e) {
-      // ignore: avoid_print
-      print('Error: $e');
-    }
-  }
-
   Widget _buildProgressBar(ThemeData selectedTheme, BuildContext context) {
     return FutureBuilder(
       future: FirebaseFirestore.instance
@@ -114,7 +74,6 @@ class ProgressBar extends StatelessWidget {
         );
 
         // update achievement when the category complete
-        _allModuleComplete(context);
 
         final double progressPercentage =
             (category.curPoints / category.maxPoints);
