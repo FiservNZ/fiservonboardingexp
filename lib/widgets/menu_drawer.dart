@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:fiservonboardingexp/screens/menu drawer/feedback_page.dart';
 import '../util/constants.dart';
-import 'package:fiservonboardingexp/screens/login_page.dart';
 
 class MenuDrawer extends StatelessWidget {
   const MenuDrawer({super.key});
@@ -221,7 +220,7 @@ class MenuDrawer extends StatelessWidget {
                           actions: <Widget>[
                             TextButton(
                               onPressed: () {
-                                // User clicked No, close the dialog and don't add EXP
+                                // User clicked No, close the dialog and don't log them out.
                                 Navigator.of(context).pop(false);
                               },
                               child: Text(
@@ -234,7 +233,7 @@ class MenuDrawer extends StatelessWidget {
                             ),
                             TextButton(
                               onPressed: () {
-                                // User clicked Yes, add EXP
+                                // User clicked Yes, close the dialogue and log them out.
                                 Navigator.of(context).pop(true);
                               },
                               child: Text(
