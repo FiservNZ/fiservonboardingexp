@@ -130,7 +130,7 @@ class ThemesPageState extends State<ThemesPage> {
                       color: isPastelThemeLocked(
                               level) // Check if the theme is locked
                           ? selectedTheme.colorScheme
-                              .onBackground // Disable the theme selection if locked
+                              .onPrimary // Disable the theme selection if locked
                           : selectedTheme.colorScheme.primary,
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
