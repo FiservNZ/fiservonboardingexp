@@ -165,7 +165,7 @@ class PdfApi {
         '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');
 
     //Change toAddress to your own email for testing.
-    const toAddress = sgm.Address('michaelcalbay.uni@gmail.com');
+    const toAddress = sgm.Address('rndproject96@gmail.com');
     const fromAddress = sgm.Address('rndproject96@gmail.com');
     const subject = 'Here comes a new challenger!';
     const personalization = sgm.Personalization([toAddress]);
