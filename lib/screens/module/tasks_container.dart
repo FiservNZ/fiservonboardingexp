@@ -195,7 +195,9 @@ class TasksContainer extends StatelessWidget {
 
       if (allTasksCompleted) {
         // update the achievement when all currentpoint = max point
-        Achievementpage achievementpage = Achievementpage();
+        final Achievementpage achievementpage = Achievementpage();
+        // Delay this achievement popout
+        await Future.delayed(const Duration(seconds: 5));
         // ignore: use_build_context_synchronously
         achievementpage.updateAchievement(
             context, "Completed all the modules!");
@@ -210,9 +212,8 @@ class TasksContainer extends StatelessWidget {
   }
 
   Future<void> detectCompletition(BuildContext context, String category) async {
-    // List<Widget> watchTasks = await getWatchTaskWidgets(category);
-    // List<Widget> readTasks = await getReadTaskWidgets(category);
-    // List<Widget> quizTasks = await getQuizTaskWidgets(category);
+    // Delay this pop out when
+
     final querySnapshot = await FirebaseFirestore.instance
         .collection('User')
         .doc(currentUser.uid)
