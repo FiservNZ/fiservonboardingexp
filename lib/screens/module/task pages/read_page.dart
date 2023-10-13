@@ -1,3 +1,4 @@
+import 'package:fiservonboardingexp/controllers/progress%20bar/progress_curr_points.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:fiservonboardingexp/screens/module/module_screen.dart';
 import 'package:fiservonboardingexp/screens/module/tasks_container.dart';
@@ -199,6 +200,8 @@ class ReadPage extends StatelessWidget {
                         final doc = querySnapshot.docs[0];
 
                         await doc.reference.update({'isDone': true});
+                        // Updates the current points after isDone is set to true
+                        await PointsUpdater.getCurrentPoints(currentCategory);
                       } else {
                         debugPrint('No Matching Document Found!');
                       }

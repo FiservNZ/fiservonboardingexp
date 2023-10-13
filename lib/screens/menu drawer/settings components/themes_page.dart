@@ -82,7 +82,7 @@ class ThemesPageState extends State<ThemesPage> {
             // Rainforest theme
             Container(
               margin: const EdgeInsets.symmetric(
-                  horizontal: 50), // Adjust the vertical margin
+                  horizontal: 40), // Adjust the vertical margin
               child: Theme(
                 data: Theme.of(context).copyWith(
                   unselectedWidgetColor: selectedTheme.colorScheme.primary,
@@ -118,7 +118,7 @@ class ThemesPageState extends State<ThemesPage> {
             // Pastel theme
             Container(
               margin: const EdgeInsets.symmetric(
-                  horizontal: 50), // Adjust the vertical margin
+                  horizontal: 40), // Adjust the vertical margin
               child: Theme(
                 data: Theme.of(context).copyWith(
                   unselectedWidgetColor: selectedTheme.colorScheme.primary,
@@ -156,7 +156,7 @@ class ThemesPageState extends State<ThemesPage> {
             // Beach theme
             Container(
               margin: const EdgeInsets.symmetric(
-                  horizontal: 50), // Adjust the vertical margin
+                  horizontal: 40), // Adjust the vertical margin
               child: Theme(
                 data: Theme.of(context).copyWith(
                   unselectedWidgetColor: selectedTheme.colorScheme.primary,
