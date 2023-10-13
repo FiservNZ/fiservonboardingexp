@@ -1,3 +1,4 @@
+import 'package:fiservonboardingexp/controllers/progress%20bar/progress_curr_points.dart';
 import 'package:fiservonboardingexp/firebase%20references/firebase_refs.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:fiservonboardingexp/controllers/quiz%20controllers/extension_question_controller.dart';
@@ -28,6 +29,9 @@ class QuizOutcomeScreen extends GetView<QuestionController> {
         final doc = querySnapshot.docs[0];
         await doc.reference.update({'isDone': true});
       }
+
+      // Updates the current points after isDone is set to true
+      await PointsUpdater.getCurrentPoints(currentCategory);
     }
 
     fetchData();
