@@ -36,7 +36,7 @@ class ProgressBar extends StatelessWidget {
   Future<void> _loadData() async {
     // Call getNumberOfTasks here before proceeding with other operations
     await getNumberOfTasks(taskCategory);
-    await getCurrentPoints(taskCategory);
+    await PointsUpdater.getCurrentPoints(taskCategory);
     // You can add additional operations here if needed
   }
 
