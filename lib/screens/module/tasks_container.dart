@@ -234,6 +234,7 @@ class TasksContainer extends StatelessWidget {
     }
   }
 
+  // Update the achievement regard which category get completed
   void updateSingleAchievement(
     BuildContext context,
     String categoryName,
