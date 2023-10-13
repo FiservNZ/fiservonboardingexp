@@ -145,13 +145,13 @@ class QuestionController extends GetxController {
   }
 
   void navigateToHome() {
-    if (quizModel.expGained = false) {
+    if (quizModel.isDone == false) {
       // add link to adding exp here
       ExpBar expBar = ExpBar(barwidth: 12);
-      expBar.addExperience(151);
-      Get.to(() => TasksContainer(watchCategory: currentCategory));
+      expBar.addExperience(quizModel.exp);
+      Get.offAll(TasksContainer(watchCategory: currentCategory));
     } else {
-      Get.to(() => TasksContainer(watchCategory: currentCategory));
+      Get.offAll(TasksContainer(watchCategory: currentCategory));
     }
   }
 }
