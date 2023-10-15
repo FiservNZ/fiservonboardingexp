@@ -4,7 +4,6 @@ import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:fiservonboardingexp/screens/menu drawer/feedback_page.dart';
 import '../util/constants.dart';
-import 'package:fiservonboardingexp/screens/login_page.dart';
 
 class MenuDrawer extends StatelessWidget {
   const MenuDrawer({super.key});
@@ -196,16 +195,62 @@ class MenuDrawer extends StatelessWidget {
                 width: 150, // Set the desired width for the button
                 child: ElevatedButton(
                   onPressed: () async {
-                    await FirebaseAuth.instance.signOut();
-
-                    // Navigator.of(context).pushAndRemoveUntil(
-                    //   MaterialPageRoute(
-                    //     builder: (BuildContext context) {
-                    //       return LoginPage();
-                    //     },
-                    //   ),
-                    //   (_) => false,
-                    // );
+                    bool confirm = await showDialog(
+                      context: context,
+                      builder: (context) {
+                        return AlertDialog(
+                          backgroundColor:
+                              selectedTheme.colorScheme.onBackground,
+                          title: Text(
+                            'Confirmation',
+                            style: TextStyle(
+                              color: selectedTheme.colorScheme.secondary,
+                              fontSize: 20,
+                              fontWeight: FontWeight.bold,
+                            ).merge(GoogleFonts.quicksand()),
+                          ),
+                          content: Text(
+                            "Are you sure you want to Logout?",
+                            style: TextStyle(
+                              color: selectedTheme.colorScheme.primary,
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                            ).merge(GoogleFonts.quicksand()),
+                          ),
+                          actions: <Widget>[
+                            TextButton(
+                              onPressed: () {
+                                // User clicked No, close the dialog and don't log them out.
+                                Navigator.of(context).pop(false);
+                              },
+                              child: Text(
+                                'No',
+                                style: TextStyle(
+                                  color: selectedTheme.colorScheme.primary,
+                                  fontWeight: FontWeight.bold,
+                                ).merge(GoogleFonts.quicksand()),
+                              ),
+                            ),
+                            TextButton(
+                              onPressed: () {
+                                // User clicked Yes, close the dialogue and log them out.
+                                Navigator.of(context).pop(true);
+                              },
+                              child: Text(
+                                'Yes',
+                                style: TextStyle(
+                                  color: selectedTheme.colorScheme.primary,
+                                  fontWeight: FontWeight.bold,
+                                ).merge(GoogleFonts.quicksand()),
+                              ),
+                            ),
+                          ],
+                        );
+                      },
+                    );
+                    if (confirm == true) {
+                      await FirebaseAuth.instance.signOut();
+                    }
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: selectedTheme

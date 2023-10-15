@@ -86,17 +86,20 @@ class LoginPage extends StatelessWidget {
                 MaterialPageRoute(builder: (context) => const MainScreen()));
             if (isFirstLogin) {
               debugPrint("go to the teaser page");
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const TeaserScreen())).then(
-                (value) => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const HelpPage(),
-                  ),
-                ),
-              );
+              // Navigator.push(
+              //     context,
+              //     MaterialPageRoute(
+              //         builder: (context) => const TeaserScreen())).then(
+              //   (value) => Navigator.push(
+              //     context,
+              //     MaterialPageRoute(
+              //       builder: (context) => const HelpPage(),
+              //     ),
+              //   ),
+              // );
+              Get.offAndToNamed('/teaser')
+                  ?.then((value) => Get.offAndToNamed('/help'));
+
               //update the status of firstlog in firestone
               await FirebaseFirestore.instance
                   .collection('User')
