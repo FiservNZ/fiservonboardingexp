@@ -129,7 +129,6 @@ class _FeedBackState extends State<FeedBack> {
                             'timestamp': FieldValue.serverTimestamp(),
                           });
                           // Update the achievement
-                          // ignore: use_build_context_synchronously
                           _achievementpage.updateAchievement(
                               context, "Submitted feedback!");
 
