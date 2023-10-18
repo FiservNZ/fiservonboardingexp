@@ -172,20 +172,6 @@ class _VideoPlayerState extends State<VideoPlayer> {
                     if (confirm == true) {
                       ExpBar expBar = const ExpBar(barwidth: 1);
 
-                      // int currentEXP = await userColRef
-                      //     .doc(currentUser.uid)
-                      //     .get()
-                      //     .then((doc) {
-                      //   if (doc.exists) {
-                      //     return doc.data()!['EXP'] ?? 0;
-                      //   } else {
-                      //     return 0;
-                      //   }
-                      // });
-                      // await userColRef
-                      //     .doc(currentUser.uid)
-                      //     .update({'EXP': currentEXP + 25});
-
                       final querySnapshot = await userColRef
                           .doc(currentUser.uid)
                           .collection('Tasks')

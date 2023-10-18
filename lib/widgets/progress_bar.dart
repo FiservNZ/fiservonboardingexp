@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_unnecessary_containers
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fiservonboardingexp/firebase%20references/firebase_refs.dart';
 import 'package:fiservonboardingexp/model/task_category_model.dart';
@@ -5,7 +7,6 @@ import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
 import '../controllers/progress bar/progress_curr_points.dart';
 import '../controllers/progress bar/progress_max_points.dart';
-import '../screens/nav bar pages/achievements_page.dart';
 
 class ProgressBar extends StatelessWidget {
   final String taskCategory;
@@ -80,32 +81,6 @@ class ProgressBar extends StatelessWidget {
 
         // Displays the progress indicator
         return Container(
-          // child: Column(
-          //   children: [
-          //     Text(
-          //       '${category.curPoints} / ${category.maxPoints}',
-          //       style: TextStyle(
-          //         color: selectedTheme.colorScheme.primary,
-          //         fontSize: 15,
-          //         fontWeight: FontWeight.bold,
-          //       ),
-          //     ),
-          //     const SizedBox(height: 3),
-          //     SizedBox(
-          //       width: 80,
-          //       height: 10,
-          //       child: ClipRRect(
-          //         borderRadius: BorderRadius.circular(5),
-          //         child: LinearProgressIndicator(
-          //           value: progressPercentage,
-          //           valueColor: AlwaysStoppedAnimation<Color>(
-          //             selectedTheme.colorScheme.primary,
-          //           ),
-          //           backgroundColor: selectedTheme.colorScheme.surface,
-          //         ),
-          //       ),
-          //     ),
-
           child: Stack(
             alignment: Alignment.center,
             children: [

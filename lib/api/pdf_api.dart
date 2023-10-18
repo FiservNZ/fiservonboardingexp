@@ -1,8 +1,4 @@
 /*
-API KEY:
-
-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
-
 To test pdf generation & email: Please go to firestore, set introduced
 filed to false (if you are unable to see the button.)
  */
@@ -109,7 +105,7 @@ class PdfApi {
           error.code == 'object-not-found') {
         imageData = null;
       } else {
-        print('There was an error fetching image data.\nError: $error');
+        debugPrint('There was an error fetching image data.\nError: $error');
       }
     }
   }
@@ -184,7 +180,7 @@ class PdfApi {
           content: [content]);
 
       mailer.send(email).then((result) {
-        print('Email Sent: ${result.isValue}');
+        debugPrint('Email Sent: ${result.isValue}');
         if (result.isValue) {
           showDialog(
             context: context,

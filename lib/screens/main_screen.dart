@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:fiservonboardingexp/widgets/nav_bar.dart';
@@ -17,10 +19,10 @@ class _MainScreenState extends State<MainScreen> {
   int currentIndex = 0;
 
   final List<Widget> pages = [
-    HomePage(),
+    const HomePage(),
     //const SecurityTasks(),
     ChecklistPage(firestore: FirebaseFirestore.instance),
-    AchievementsPage(),
+    const AchievementsPage(),
     const ColleaguesPage(),
   ];
 

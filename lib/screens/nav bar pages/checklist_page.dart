@@ -44,7 +44,7 @@ class _ChecklistPageState extends State<ChecklistPage> {
         });
       }
     } catch (error) {
-      print("Error loading checklist data: $error");
+      debugPrint("Error loading checklist data: $error");
     }
   }
 

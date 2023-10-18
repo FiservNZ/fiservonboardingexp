@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:fiservonboardingexp/screens/main_screen.dart';
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
@@ -5,8 +7,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import '../firebase references/firebase_refs.dart';
-import 'menu drawer/help_page.dart';
-import 'menu drawer/teaser pages/teaser.dart';
 import 'nav bar pages/achievements_page.dart';
 
 // This class is used to create a login page for user to login.
@@ -86,17 +86,6 @@ class LoginPage extends StatelessWidget {
                 MaterialPageRoute(builder: (context) => const MainScreen()));
             if (isFirstLogin) {
               debugPrint("go to the teaser page");
-              // Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //         builder: (context) => const TeaserScreen())).then(
-              //   (value) => Navigator.push(
-              //     context,
-              //     MaterialPageRoute(
-              //       builder: (context) => const HelpPage(),
-              //     ),
-              //   ),
-              // );
               Get.toNamed('/teaser')?.then((value) => Get.toNamed('/help'));
 
               //update the status of firstlog in firestone

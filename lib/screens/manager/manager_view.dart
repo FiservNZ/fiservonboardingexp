@@ -1,3 +1,5 @@
+// ignore_for_file: library_private_types_in_public_api, use_build_context_synchronously
+
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
 
@@ -6,6 +8,8 @@ import '../login_page.dart';
 import '../../controllers/manager_functions.dart';
 
 class ManagerView extends StatefulWidget {
+  const ManagerView({super.key});
+
   @override
   _ManagerViewState createState() => _ManagerViewState();
 }
@@ -16,7 +20,7 @@ class _ManagerViewState extends State<ManagerView> {
   final TextEditingController _firstNameController = TextEditingController();
   final TextEditingController _lastNameController = TextEditingController();
   String? _selectedPosition;
-  GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   final List<String> _positions = ['manager', 'developer'];
 
@@ -159,5 +163,5 @@ class _ManagerViewState extends State<ManagerView> {
 }
 
 void main() {
-  runApp(MaterialApp(home: ManagerView()));
+  runApp(const MaterialApp(home: ManagerView()));
 }

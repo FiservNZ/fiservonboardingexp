@@ -51,7 +51,7 @@ Future<List<Widget>> getReadTaskWidgets(String category) async {
       readTaskWidgets.add(readThumbnail);
     }
   } catch (e) {
-    print('Error fetching watch tasks: $e');
+    debugPrint('Error fetching watch tasks: $e');
   }
 
   return readTaskWidgets;

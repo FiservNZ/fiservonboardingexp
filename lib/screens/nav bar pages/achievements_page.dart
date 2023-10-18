@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:achievement_view/achievement_view.dart';
 import 'package:achievement_view/achievement_widget.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -18,13 +20,6 @@ class AchievementsPage extends StatefulWidget {
 
 class Achievementpage extends State<AchievementsPage> {
   AchievementTracker achievementTracker = const AchievementTracker();
-
-  // fetch the achievement list in initialization
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   // fetchAndStoreAchievement();
-  // }
 
   // List for the achievements' icon
   final List iconList = [
@@ -75,7 +70,6 @@ class Achievementpage extends State<AchievementsPage> {
             // Store all the achievement information in list
             final List<Map<String, dynamic>> contentInAchv =
                 fetchAndStoreAchievement(snapshot.data!.docs);
-            // print(contentInAchv);
             return CustomScrollView(
               slivers: <Widget>[
                 SliverToBoxAdapter(
@@ -90,7 +84,6 @@ class Achievementpage extends State<AchievementsPage> {
                         Positioned(
                           top: 10.0,
                           right: 30.0,
-                          // bottom: 30,
                           child: Image.asset(
                             'assets/icon/achievement/achievement.png',
                             width: 120,
@@ -145,13 +138,6 @@ class Achievementpage extends State<AchievementsPage> {
                 const SliverToBoxAdapter(
                   child: SizedBox(height: 100),
                 ),
-                // SliverToBoxAdapter(
-                //   child: ElevatedButton(
-                //     child: const Text("Show"),
-                //     onPressed: () =>
-                //         updateAchievement(context, "First time login!"),
-                //   ),
-                // ),
               ],
             );
           } else {
@@ -185,7 +171,7 @@ class Achievementpage extends State<AchievementsPage> {
   // When certain achievement has been completed then call this function to update the data.
   Future<void> updateAchievement(
       BuildContext context, String targetName) async {
-    ExpBar expBar = ExpBar(barwidth: 15);
+    ExpBar expBar = const ExpBar(barwidth: 15);
     try {
       final currentUser = FirebaseAuth.instance.currentUser;
       // Extract the data from achievement collection
@@ -254,22 +240,6 @@ class Achievementpage extends State<AchievementsPage> {
       });
     }
 
-    //Sort the achievement based on the Iscomplete
-    //If it has been complete, It will goes to the bottom
-    // newAchievementContent.sort((a, b) {
-    //   bool isCompleteA = a['IsComplete'] ?? false;
-    //   bool isCompleteB = b['IsComplete'] ?? false;
-    //   return isCompleteA
-    //       ? 1
-    //       : isCompleteB
-    //           ? -1
-    //           : 0;
-    // });
-
-    // newAchievementContent
-    //     .sort((a, b) => b['IsComplete'].compareTo(a['IsComplete']));
-
-    // print(newAchievementContent);
     return newAchievementContent;
   }
 }

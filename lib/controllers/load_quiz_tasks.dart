@@ -51,7 +51,7 @@ Future<List<Widget>> getQuizTaskWidgets(String category) async {
       quizTaskWidgets.add(quizThumbnail);
     }
   } catch (e) {
-    print('Error fetching watch tasks: $e');
+    debugPrint('Error fetching watch tasks: $e');
   }
 
   return quizTaskWidgets;

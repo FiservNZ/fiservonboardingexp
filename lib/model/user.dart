@@ -17,8 +17,6 @@ class UserModel {
   int exp;
   int level;
   int maxEXP;
-  //List<TaskModel>? tasks;
-  //List<Checklist>? checklist;
 
   bool hasIntroduced;
   bool isFirstLog;
@@ -38,8 +36,6 @@ class UserModel {
     required this.exp,
     required this.level,
     required this.maxEXP,
-    //this.tasks,
-    //this.checklist,
     required this.hasIntroduced,
     required this.isFirstLog,
   });
@@ -61,7 +57,4 @@ class UserModel {
         maxEXP = snapshot['MaxEXP'] as int,
         hasIntroduced = snapshot['introduced'] as bool,
         isFirstLog = snapshot['firstlog'] as bool;
-
-  //tasks = [];
-  //checklist = [];
 }

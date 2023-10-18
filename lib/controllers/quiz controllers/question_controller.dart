@@ -147,7 +147,7 @@ class QuestionController extends GetxController {
   void navigateToHome() {
     if (quizModel.isDone == false) {
       // add link to adding exp here
-      ExpBar expBar = ExpBar(barwidth: 12);
+      ExpBar expBar = const ExpBar(barwidth: 12);
       expBar.addExperience(quizModel.exp);
       Get.offAll(TasksContainer(watchCategory: currentCategory));
     } else {

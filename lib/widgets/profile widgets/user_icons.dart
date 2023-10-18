@@ -16,6 +16,7 @@ class UserIcon extends StatefulWidget {
   final int level;
 
   const UserIcon({
+    super.key,
     required this.initialUserIcon,
     required this.onIconChanged,
     required this.userCollection,
@@ -44,7 +45,7 @@ class UserIconState extends State<UserIcon> {
 
   @override
   Widget build(BuildContext context) {
-    print('Firebase User Level: ${widget.level}');
+    debugPrint('Firebase User Level: ${widget.level}');
     ThemeData selectedTheme = getSelectedTheme(context);
     bool isDarkTheme = selectedTheme == darkTheme;
     // Triggers the popup when the user icon is pressed

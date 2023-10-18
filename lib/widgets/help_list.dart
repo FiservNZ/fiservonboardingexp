@@ -31,7 +31,7 @@ class HelpList extends StatelessWidget {
         return topicsWithDescriptions;
       }
     } catch (error) {
-      print('Error fetching data: $error');
+      debugPrint('Error fetching data: $error');
     }
 
     return [];

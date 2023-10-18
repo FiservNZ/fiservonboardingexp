@@ -45,11 +45,11 @@ class FiservAppRoutes {
         ),
         GetPage(
           name: "/faq",
-          page: () => FaqPage(),
+          page: () => const FaqPage(),
         ),
         GetPage(
           name: "/settings",
-          page: () => SettingsPage(),
+          page: () => const SettingsPage(),
         ),
         GetPage(
           name: "/profile",
@@ -66,11 +66,5 @@ class FiservAppRoutes {
           name: QuizOutcomeScreen.routeName,
           page: () => const QuizOutcomeScreen(),
         ),
-        // GetPage(
-        //     name: QuizQuestionScreen.routeName,
-        //     page: () => const QuizQuestionScreen(),
-        //     binding: BindingsBuilder(() {
-        //       Get.put(QuestionController());
-        //     })),
       ];
 }
