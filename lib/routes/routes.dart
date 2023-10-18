@@ -37,7 +37,7 @@ class FiservAppRoutes {
         ),
         GetPage(
           name: "/manager",
-          page: () => ManagerView(),
+          page: () => const ManagerView(),
         ),
         GetPage(
           name: "/mainScreen",
