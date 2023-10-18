@@ -1,7 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fiservonboardingexp/controllers/check_user.dart';
-import 'package:fiservonboardingexp/model/task_category_model.dart';
 //import 'package:firebase_core/firebase_core.dart';
 
 // create firebase instance
@@ -21,13 +19,35 @@ final userDocRef = userColRef.doc(uid);
 final tasksCollectionRef = userDocRef.collection('Tasks');
 final complianceRef = tasksCollectionRef.doc('Compliance');
 final complianceQuiz = complianceRef.collection('Quiz');
+DocumentReference complianceQRef({
+  required String quizId,
+  required String questionId,
+}) =>
+    complianceQuiz.doc(quizId).collection("questions").doc(questionId);
+
 final orientationRef = tasksCollectionRef.doc('Orientation');
 final orientationQuiz = orientationRef.collection('Quiz');
+DocumentReference orientationQRef({
+  required String quizId,
+  required String questionId,
+}) =>
+    orientationQuiz.doc(quizId).collection("questions").doc(questionId);
+
 final healthSafetyRef = tasksCollectionRef.doc('Health & Safety');
 final healthSafetyQuiz = healthSafetyRef.collection('Quiz');
+DocumentReference healthSafetyQRef({
+  required String quizId,
+  required String questionId,
+}) =>
+    healthSafetyQuiz.doc(quizId).collection("questions").doc(questionId);
+
 final customsCultureRef = tasksCollectionRef.doc('Customs & Culture');
 final customsCultureQuiz = customsCultureRef.collection('Quiz');
-
+DocumentReference customsCultureQRef({
+  required String quizId,
+  required String questionId,
+}) =>
+    customsCultureQuiz.doc(quizId).collection("questions").doc(questionId);
 
 final achievementsCollectionRef = userDocRef.collection('Achievements');
 final checklistCollectionRef = userDocRef.collection('General Checklist');

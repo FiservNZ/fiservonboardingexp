@@ -1,7 +1,6 @@
-import 'package:fiservonboardingexp/themes/theme_provider.dart';
+import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 // Interacts with Firebase
@@ -10,8 +9,7 @@ class FaqList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-    ThemeData selectedTheme = themeProvider.currentTheme;
+    ThemeData selectedTheme = getSelectedTheme(context);
 
     // Changes in the FAQ collection in firestore
     return StreamBuilder<QuerySnapshot>(
@@ -37,6 +35,11 @@ class FaqList extends StatelessWidget {
             return Padding(
               padding: const EdgeInsets.fromLTRB(0, 7, 0, 7),
               child: ExpansionTile(
+                backgroundColor: selectedTheme.colorScheme.onBackground,
+                collapsedBackgroundColor:
+                    selectedTheme.colorScheme.onBackground,
+                iconColor: selectedTheme.colorScheme.primary,
+                collapsedIconColor: selectedTheme.colorScheme.primary,
                 title: Text(
                   question,
                   style: GoogleFonts.quicksand(

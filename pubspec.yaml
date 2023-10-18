@@ -34,6 +34,7 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.2
   font_awesome_flutter: ^9.0.0
+  # used to create a pop out once achievement is complete
   achievement_view: ^1.0.1
   url_launcher: ^6.1.12
   firebase_core: ^2.14.0
@@ -119,7 +120,7 @@ flutter:
       - assets/icon/video_thumbnail_icon.png
       - assets/video/video.mp4
 
-      #Achievement
+      # Achievement
       - assets/icon/achievement/
       # Teaser
       - assets/images/teaser1.png

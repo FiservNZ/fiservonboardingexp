@@ -1,6 +1,5 @@
 import 'package:fiservonboardingexp/themes/quiz%20themes/ui_parameters.dart';
 import 'package:flutter/material.dart';
-
 import '../../util/constants.dart';
 
 class ContentArea extends StatelessWidget {
@@ -11,12 +10,14 @@ class ContentArea extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    ThemeData selectedTheme = getSelectedTheme(context);
     return Material(
       borderRadius: const BorderRadius.vertical(top: Radius.circular(20.0)),
       clipBehavior: Clip.hardEdge,
       type: MaterialType.transparency,
       child: Ink(
-        decoration: BoxDecoration(color: darkBackgroundColor),
+        decoration:
+            BoxDecoration(color: selectedTheme.colorScheme.onBackground),
         padding: addPadding
             ? EdgeInsets.only(
                 top: mobileScreenPadding,

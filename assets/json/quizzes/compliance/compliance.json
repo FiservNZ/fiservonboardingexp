@@ -4,91 +4,94 @@
     "image_url": "",
     "description": "This is a quiz on general compliance",
     "quiz_duration": 60,
+    "question_count": 4,
+    "exp": 10,
+    "exp_gained": false,
     "questions":[
         {
             "id": "1",
-            "question": "",
+            "question": "test",
             "options": [
                 {
                     "identifier": "1",
-                    "answer": ""
+                    "answer": "1"
                 },
                 {
                     "identifier": "2",
-                    "answer": ""
+                    "answer": "2"
                 },
                 {
                     "identifier": "3",
-                    "answer": ""
+                    "answer": "3"
                 },
                 {
                     "identifier": "4",
-                    "answer": ""
+                    "answer": "4"
                 }
             ],
-            "correct_answer": ""
+            "correct_answer": "2"
         },
         {
             "id": "2",
             "question": "TRUE or FALSE: ",
             "options": [
                 {
-                    "identifier": "TRUE",
-                    "answer": ""
+                    "identifier": "1",
+                    "answer": "t"
                 },
                 {
-                    "identifier": "FALSE",
-                    "answer": ""
+                    "identifier": "2",
+                    "answer": "f"
                 }
                 
             ],
-            "correct_answer": ""
+            "correct_answer": "2"
         },
         {
             "id": "3",
-            "question": "",
+            "question": "test2",
             "options": [
                 {
                     "identifier": "1",
-                    "answer": ""
+                    "answer": "1"
                 },
                 {
                     "identifier": "2",
-                    "answer": ""
+                    "answer": "2"
                 },
                 {
                     "identifier": "3",
-                    "answer": ""
+                    "answer": "3"
                 },
                 {
                     "identifier": "4",
-                    "answer": ""
+                    "answer": "4"
                 }    
             ],
-            "correct_answer": ""
+            "correct_answer": "3"
         },
         {
             "id": "4",
-            "question": "",
+            "question": "test3",
             "options": [
                 {
                     "identifier": "1",
-                    "answer": ""
+                    "answer": "1"
                 },
                 {
                     "identifier": "2",
-                    "answer": ""
+                    "answer": "2"
                 },
                 {
                     "identifier": "3",
-                    "answer": ""
+                    "answer": "3"
                 },
                 {
                     "identifier": "4",
-                    "answer": ""
+                    "answer": "4"
                 }    
             ],
-            "correct_answer": ""
+            "correct_answer": "1"
         }
         
     ]

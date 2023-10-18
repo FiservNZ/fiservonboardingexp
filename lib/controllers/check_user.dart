@@ -1,9 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fiservonboardingexp/screens/manager/manager_view.dart';
 import 'package:flutter/material.dart';
-import 'package:fiservonboardingexp/screens/login_page.dart';
-import 'package:fiservonboardingexp/screens/main_screen.dart';
+import 'package:get/get.dart';
 import 'package:logger/logger.dart';
 import '../firebase references/firebase_refs.dart';
 
@@ -32,16 +30,10 @@ class CheckUserState extends State<CheckUser> {
     fireAuth.authStateChanges().listen((User? user) {
       if (user == null) {
         // User is not logged in, navigate to the LoginPage.
-        Navigator.pushReplacement(
-            context, MaterialPageRoute(builder: (context) => LoginPage()));
+        Get.offAndToNamed("/login");
       } else {
         // User is logged in, navigate to the appropriate screen.
-        Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-                builder: (context) => position == 'manager'
-                    ? ManagerView()
-                    : const MainScreen()));
+        Get.toNamed(position == 'manager' ? "/manager" : "/home");
       }
     });
   }
@@ -58,7 +50,6 @@ class CheckUserState extends State<CheckUser> {
   Future<void> fetchUser() async {
     try {
       String uid = fireAuth.currentUser!.uid;
-      //final userCollection = FirebaseFirestore.instance.collection('User');
 
       DocumentSnapshot snapshot = await userColRef.doc(uid).get();
 

@@ -1,65 +1,90 @@
-import 'package:fiservonboardingexp/themes/theme_provider.dart';
+import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:provider/provider.dart';
 import 'package:google_fonts/google_fonts.dart';
 
-// Interacts with Firebase
 class HelpList extends StatelessWidget {
-  const HelpList({super.key});
+  const HelpList({Key? key}) : super(key: key);
+
+  Future<List<Map<String, dynamic>>> fetchData() async {
+    try {
+      final snapshot =
+          await FirebaseFirestore.instance.collection('Help').get();
+
+      if (snapshot.docs.isNotEmpty) {
+        final List<Map<String, dynamic>> topicsWithDescriptions = [];
+
+        for (final doc in snapshot.docs) {
+          if (doc.exists &&
+              doc.data().containsKey('topic') &&
+              doc.data().containsKey('description') &&
+              doc.data().containsKey('imagePath')) {
+            topicsWithDescriptions.add({
+              'topic': doc.data()['topic'] as String,
+              'description': doc.data()['description'] as String,
+              'imagePath':
+                  doc.data()['imagePath'] as String, // Image path in Firestore
+            });
+          }
+        }
+
+        return topicsWithDescriptions;
+      }
+    } catch (error) {
+      debugPrint('Error fetching data: $error');
+    }
+
+    return [];
+  }
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-    ThemeData selectedTheme = themeProvider.currentTheme;
-
-    // Changes in the FAQ collection in firestore
-    return StreamBuilder<QuerySnapshot>(
-      stream: FirebaseFirestore.instance.collection('Help').snapshots(),
+    ThemeData selectedTheme = getSelectedTheme(context);
+    return FutureBuilder<List<Map<String, dynamic>>>(
+      future: fetchData(),
       builder: (context, snapshot) {
-        if (!snapshot.hasData) {
-          // Loading animation while getting the FAQ questions and answers
-          return const CircularProgressIndicator();
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const CircularProgressIndicator(); // Loading indicator
         }
 
-        final helpList = snapshot.data!.docs;
+        if (snapshot.hasError || !snapshot.hasData) {
+          return const Text('Error fetching data'); // Error message
+        }
+
+        final topicsWithDescriptions = snapshot.data!;
 
         return ListView.builder(
-          itemCount: helpList.length,
+          itemCount: topicsWithDescriptions.length,
           itemBuilder: (context, index) {
-            final data = helpList[index].data() as Map<String, dynamic>;
-
-            // Gets the question and answers from firestore data
-            final topic = data['topic'] as String? ?? 'No questions';
-            final description = data['description'] as String? ?? 'No answers';
-
-            // The UI part of the FAQ List (Font, text size, text colour, alignment)
-            return Padding(
-              padding: const EdgeInsets.fromLTRB(0, 7, 0, 7),
+            final topicData = topicsWithDescriptions[index];
+            return Container(
+              color: selectedTheme.colorScheme.onBackground, // Background color
               child: ExpansionTile(
                 title: Text(
-                  topic,
+                  topicData['topic']!,
                   style: GoogleFonts.quicksand(
-                    textStyle: TextStyle(
-                      color:
-                          selectedTheme.colorScheme.primary, // Question Colour
-                      fontWeight: FontWeight.bold,
-                      fontSize: 17,
-                    ),
+                    fontSize: 18,
+                    fontWeight: FontWeight.bold,
+                    color: selectedTheme.colorScheme.primary,
                   ),
                 ),
                 children: [
-                  Padding(
-                    padding: const EdgeInsets.all(14.0),
-                    child: Text(
-                      description,
+                  Image.network(
+                    topicData['imagePath'], // Display the image from Firestore
+                    height: 200, // Adjust the height as needed
+                    width: 100, // Expand to full width
+                    fit: BoxFit
+                        .cover, // Maintain aspect ratio and cover the entire width
+                  ),
+                  const SizedBox(
+                      height: 8), // Add spacing between image and description
+                  ListTile(
+                    title: Text(
+                      topicData['description']!,
                       style: GoogleFonts.quicksand(
-                        textStyle: TextStyle(
-                          color: selectedTheme
-                              .colorScheme.secondary, // Answer Colour
-                          fontWeight: FontWeight.bold,
-                          fontSize: 15,
-                        ),
+                        fontSize: 18,
+                        fontWeight: FontWeight.bold,
+                        color: selectedTheme.colorScheme.secondary,
                       ),
                     ),
                   ),

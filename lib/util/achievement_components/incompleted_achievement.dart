@@ -1,9 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
 import '../../firebase references/firebase_refs.dart';
-import '../../screens/achievements_page.dart';
+import '../../screens/nav bar pages/achievements_page.dart';
+import '../constants.dart';
 import 'incomplete_util.dart';
 
 class IncompletedAchievement extends StatelessWidget {
@@ -15,6 +15,7 @@ class IncompletedAchievement extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Update the current user account
+    ThemeData selectedTheme = getSelectedTheme(context);
     final currentUser = FirebaseAuth.instance.currentUser;
     final achievementColRef =
         userColRef.doc(currentUser?.uid).collection("Achievement");
@@ -30,7 +31,6 @@ class IncompletedAchievement extends StatelessWidget {
           //fetch the achievement list
           final List<Map<String, dynamic>> contentInAchv =
               _achievementpage.fetchAndStoreAchievement(snapshot.data!.docs);
-          // List<Map<String, dynamic>> contentInAchv = snapshot.data!;
 
           // Filter out achievements with the 'IsComplete' value set to false.
           List<Map<String, dynamic>> incompletedAchievements = contentInAchv
@@ -42,18 +42,34 @@ class IncompletedAchievement extends StatelessWidget {
               SizedBox(
                 width: 400,
                 height: 350,
-                // color: Colors.red,
-                child: ListView.builder(
-                  scrollDirection: Axis.horizontal,
-                  itemCount: incompletedAchievements.length,
-                  itemBuilder: (context, index) {
-                    return IncompleteAchv(
-                      title: incompletedAchievements[index]['name'],
-                      iconName: incompletedAchievements[index]['subiconData'],
-                      hour: incompletedAchievements[index]['hour'],
-                      isCompleted: incompletedAchievements[index]['IsComplete'],
-                    );
-                  },
+                child: Stack(
+                  children: [
+                    ListView.builder(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: incompletedAchievements.length,
+                      itemBuilder: (context, index) {
+                        return IncompleteAchv(
+                          title: incompletedAchievements[index]['name'],
+                          iconName: incompletedAchievements[index]
+                              ['subiconData'],
+                          hour: incompletedAchievements[index]['hour'],
+                          isCompleted: incompletedAchievements[index]
+                              ['IsComplete'],
+                        );
+                      },
+                    ),
+                    if (incompletedAchievements.isEmpty)
+                      Padding(
+                        padding: const EdgeInsets.all(16.0),
+                        child: Text(
+                          "All Achievement Have Been Completed!",
+                          style: TextStyle(
+                            color: selectedTheme.colorScheme.secondary,
+                            fontSize: 15,
+                          ),
+                        ),
+                      ),
+                  ],
                 ),
               ),
               const SizedBox(height: 3),

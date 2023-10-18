@@ -1,12 +1,12 @@
-import 'dart:convert';
+// ignore_for_file: sized_box_for_whitespace
 
+import 'dart:convert';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:fiservonboardingexp/widgets/exp_bar.dart';
 import 'package:fiservonboardingexp/widgets/nav_bar.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-import '../themes/theme_provider.dart';
 import '../util/achievement_components/incompleted_achievement.dart';
 import '../widgets/app_bar_overlay.dart';
 import 'package:http/http.dart' as http;
@@ -30,10 +30,8 @@ class HomePage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-    ThemeData selectedTheme = themeProvider.currentTheme;
+    ThemeData selectedTheme = getSelectedTheme(context);
     final currentUser = FirebaseAuth.instance.currentUser;
-
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -241,109 +239,3 @@ Widget getUserIcon(Map<String, dynamic> userData, ThemeData selectedTheme) {
       );
   }
 }
-
-// PREVIOUS HOMEPAGE IMPLEMENTATION HERE LEFT IT JUST INCASE SOME1 NEEDS IT NO PROBLEM
-
-// class HomePage extends StatelessWidget {
-//   final ExpBar _expBar = const ExpBar(barwidth: 300);
-//   final ProgressBar _progressBar = const ProgressBar();
-
-//   const HomePage({Key? key}) : super(key: key);
-
-//   @override
-//   Widget build(BuildContext context) {
-//     final themeProvider = Provider.of<ThemeProvider>(context);
-//     ThemeData selectedTheme = themeProvider.currentTheme;
-//     ReadController readController = Get.find();
-
-//     return MaterialApp(
-//       debugShowCheckedModeBanner: false,
-//       home: Scaffold(
-//         backgroundColor: selectedTheme.colorScheme.background,
-//         appBar: const AppBarOverlay(),
-//         bottomNavigationBar: const CustomNavBar(),
-
-//         //Floating action button
-//         floatingActionButton: FloatingActionButton(
-//           backgroundColor: Colors.green,
-//           foregroundColor: Colors.white,
-//           onPressed: () {
-//             int expToAdd = 200;
-//             _expBar.addExperience(expToAdd);
-//           },
-//           child: const Icon(Icons.navigation),
-//         ),
-
-//         //Home Page
-//         body: SafeArea(
-//           child: ListView(
-//             children: [
-//               const SizedBox(height: 15),
-
-//               //expBar
-//               Padding(
-//                 padding: const EdgeInsets.only(left: 12),
-//                 child:
-//                     Container(alignment: Alignment.centerLeft, child: _expBar),
-//               ),
-//               const SizedBox(
-//                 height: 30,
-//               ),
-
-//               const SizedBox(height: 30),
-
-//               //Progress bar
-//               Padding(
-//                 padding: const EdgeInsets.only(left: 10),
-//                 child: Container(
-//                     alignment: Alignment.centerLeft, child: _progressBar),
-//               ),
-//               const SizedBox(
-//                 height: 30,
-//               ),
-//               // IncompletedAchievement
-//               Padding(
-//                 padding: const EdgeInsets.only(left: 10),
-//                 child: Container(
-//                   alignment: Alignment.centerLeft,
-//                   child: IncompletedAchievement(),
-//                 ),
-//               ),
-//               const SizedBox(height: 200),
-
-//               //Read task for platypus article
-//               Padding(
-//                 padding: const EdgeInsets.symmetric(horizontal: 120),
-//                 child: ElevatedButton(
-//                   onPressed: () {
-//                    readController
-//                        .setSelectedIndex(0); // Set the desired index here
-//                    Navigator.push(
-//                      context,
-//                      MaterialPageRoute(
-//                       builder: (context) => ReadPage(),
-//                      ),
-//s                    );
-//                  },
-//                   style: ElevatedButton.styleFrom(
-//                     backgroundColor: selectedTheme.colorScheme.onBackground,
-//                     fixedSize: Size(120, 35),
-//                   ),
-//                   child: Text(
-//                     'Read Task',
-//                     style: TextStyle(
-//                       color: selectedTheme.colorScheme.secondary,
-//                       fontSize: 18,
-//                       fontWeight: FontWeight.bold,
-//                     ).merge(GoogleFonts
-//                         .quicksand()), // Merge styles with GoogleFonts
-//                   ),
-//                 ),
-//               ),
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }

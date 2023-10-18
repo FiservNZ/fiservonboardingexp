@@ -1,20 +1,21 @@
-import 'package:fiservonboardingexp/screens/main_screen.dart';
+// ignore_for_file: use_build_context_synchronously
 
+import 'package:fiservonboardingexp/screens/main_screen.dart';
+import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
-
 import '../firebase references/firebase_refs.dart';
-import 'menu drawer/help_page.dart';
-import 'teaser pages/teaser.dart';
+import 'nav bar pages/achievements_page.dart';
 
-// class Global {'menu drawer/help_page.dart'rCredential? userCredential;
-// }
-
+// This class is used to create a login page for user to login.
+// And it will lead the user to different page based on their position and
+// the status of the first time login.
 class LoginPage extends StatelessWidget {
   final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
+  final Achievementpage achievementpage = Achievementpage();
 
   LoginPage({super.key});
 
@@ -24,13 +25,11 @@ class LoginPage extends StatelessWidget {
     String password = passwordController.text;
 
     try {
-      //instance is pulled from references now
+      //Implement the login function
       await fireAuth.signInWithEmailAndPassword(
         email: username,
         password: password,
       );
-      // //save userCredential in global varible
-      // Global.userCredential = userCredential;
 
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(
@@ -87,21 +86,15 @@ class LoginPage extends StatelessWidget {
                 MaterialPageRoute(builder: (context) => const MainScreen()));
             if (isFirstLogin) {
               debugPrint("go to the teaser page");
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => const TeaserScreen())).then(
-                (value) => Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const HelpPage(),
-                  ),
-                ),
-              );
+              Get.toNamed('/teaser')?.then((value) => Get.toNamed('/help'));
+
+              //update the status of firstlog in firestone
               await FirebaseFirestore.instance
                   .collection('User')
                   .doc(uid)
                   .update({'firstlog': false});
+
+              achievementpage.updateAchievement(context, "First time login!");
             } else {
               Get.off("/mainScreen");
             }
@@ -159,7 +152,6 @@ class LoginPage extends StatelessWidget {
               ),
             ),
             Expanded(
-              // Wrap the Column with Expanded
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -183,7 +175,7 @@ class LoginPage extends StatelessWidget {
                   const SizedBox(height: 24),
                   ElevatedButton(
                     onPressed: () {
-                      // Navigate the user to the Home page
+                      // Handle the login event
                       handleLogin(context);
                     },
                     style: ElevatedButton.styleFrom(
@@ -202,6 +194,4 @@ class LoginPage extends StatelessWidget {
       ),
     );
   }
-
-  static const fiservColor = Color(0xFFFF6600);
 }

@@ -8,13 +8,18 @@ import '../widgets/app_bar_overlay.dart';
 const myAppBar = AppBarOverlay();
 const navBar = CustomNavBar();
 
+ThemeData getSelectedTheme(BuildContext context) {
+  final themeProvider = Provider.of<ThemeProvider>(context);
+  return themeProvider.currentTheme;
+}
+
 // Text font design style
 const fontWeight = FontWeight.bold;
 const headerFontSize = 24.0;
 const bodyFontSize = 18.0;
 var fontStyle = GoogleFonts.quicksand();
-var headerFontStyle = GoogleFonts.quicksand(
-    fontWeight: fontWeight, fontSize: headerFontSize, color: fiservColor);
+var headerFontStyle =
+    GoogleFonts.quicksand(fontWeight: fontWeight, fontSize: headerFontSize);
 var bodyFontStyle =
     GoogleFonts.quicksand(fontWeight: fontWeight, fontSize: bodyFontSize);
 
@@ -23,7 +28,7 @@ const fiservColor = Color.fromARGB(255, 255, 102, 0);
 
 // Light Mode Colors
 var lightBackgroundColor = const Color(0xFFe9e9e9);
-var lightBars = Color.fromARGB(255, 217, 217, 219);
+var lightBars = const Color.fromARGB(255, 217, 217, 219);
 var lightTileColor = const Color(0xFFfefefe);
 var lightTextColor = Colors.black;
 

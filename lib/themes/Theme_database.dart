@@ -54,4 +54,18 @@ class ThemeDatabase {
     final userData = await userColRef.doc(userId).get();
     return userData['theme'] as String;
   }
+
+  // Saves the OS mode as enable or disabled.
+  Future<void> saveOSPreference(String userId, bool isOSmode) async {
+    await firestore
+        .collection('User')
+        .doc(userId)
+        .update({'isOSmode': isOSmode});
+  }
+
+  // Retrieves the variable for the os mode
+  Future<bool?> getOSPreference(String userId) async {
+    final userData = await userColRef.doc(userId).get();
+    return userData['isOSmode'] as bool?;
+  }
 }

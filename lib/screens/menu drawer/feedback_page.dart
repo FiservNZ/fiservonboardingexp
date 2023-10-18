@@ -1,10 +1,12 @@
-import 'package:fiservonboardingexp/themes/theme_provider.dart';
+// ignore_for_file: use_build_context_synchronously
+
+import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import '../../widgets/star_rating.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../main_screen.dart';
+import '../nav bar pages/achievements_page.dart';
 
 class FeedBack extends StatefulWidget {
   const FeedBack({super.key});
@@ -19,11 +21,10 @@ class _FeedBackState extends State<FeedBack> {
   bool isRatingSelected = false;
   final GlobalKey<ScaffoldState> _scaffoldKey = GlobalKey<ScaffoldState>();
   final TextEditingController _feedbackController = TextEditingController();
-
+  final Achievementpage _achievementpage = Achievementpage();
   @override
   Widget build(BuildContext context) {
-    final themeProvider = Provider.of<ThemeProvider>(context);
-    ThemeData selectedTheme = themeProvider.currentTheme;
+    ThemeData selectedTheme = getSelectedTheme(context);
     return Scaffold(
       key: _scaffoldKey,
       appBar: AppBar(
@@ -33,10 +34,10 @@ class _FeedBackState extends State<FeedBack> {
           style: GoogleFonts.quicksand(
             fontWeight: FontWeight.bold,
             fontSize: 21,
-            color: selectedTheme.colorScheme.primary,
+            color: selectedTheme.colorScheme.secondary,
           ),
         ),
-        backgroundColor: selectedTheme.colorScheme.secondary,
+        backgroundColor: selectedTheme.colorScheme.tertiary,
       ),
       backgroundColor: selectedTheme.colorScheme.background,
       // SingleChildScrollView was used to get rid of pixel overflow
@@ -113,23 +114,28 @@ class _FeedBackState extends State<FeedBack> {
                   // User typing font colour CHANGE HERE
                 ),
               ),
+
               Padding(
                 padding: const EdgeInsets.fromLTRB(0, 10, 0, 10),
-                child: ElevatedButton(
-                  onPressed: isRatingSelected
+                child: GestureDetector(
+                  onTap: isRatingSelected
                       ? () async {
-                          // Store rating and feedback in firebase
+                          // Store rating and feedback in Firebase
                           await FirebaseFirestore.instance
-                              .collection('Feedback') // Collection Name
+                              .collection('Feedback')
                               .add({
                             'rating': userRating,
                             'feedback': userFeedback,
                             'timestamp': FieldValue.serverTimestamp(),
                           });
+                          // Update the achievement
+                          // ignore: use_build_context_synchronously
+                          _achievementpage.updateAchievement(
+                              context, "Submitted feedback!");
 
                           // Little output on the bottom after the user submits the feedback
                           ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
+                            const SnackBar(
                               content: Text('Thank you for your feedback!'),
                               duration: Duration(seconds: 2),
                             ),
@@ -137,27 +143,38 @@ class _FeedBackState extends State<FeedBack> {
 
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
-                              builder: (context) =>
-                                  MainScreen(), // Redirects user to 'main screen' after submitting
+                              builder: (context) => const MainScreen(),
                             ),
                           );
 
                           // Debugging to check if it's being stored
-                          print("Storing rating in Firebase: $userRating");
-                          print("Storing feedback in Firebase: $userFeedback");
+                          debugPrint("Storing rating in Firebase: $userRating");
+                          debugPrint(
+                              "Storing feedback in Firebase: $userFeedback");
                         }
-                      : null, // Disable button if the star rating is not selected
-                  child: Container(
+                      : null,
+                  child: SizedBox(
                     width: double.infinity,
-                    child: Center(
-                      // Submit Feedback Button Implementation
-                      child: Text("Submit Feedback",
-                          style: TextStyle(fontSize: 16)), // Submit Button
+                    height: 40, // Set the desired height here
+                    child: Container(
+                      decoration: BoxDecoration(
+                        color: isRatingSelected
+                            ? selectedTheme.colorScheme.onBackground
+                            : selectedTheme.colorScheme.onSurface,
+                        // Change the color when disabled
+                      ),
+                      child: Center(
+                        child: Text(
+                          "Submit Feedback",
+                          style: TextStyle(
+                              fontSize: 16,
+                              fontWeight: FontWeight.bold,
+                              color: isRatingSelected
+                                  ? selectedTheme.colorScheme.secondary
+                                  : selectedTheme.colorScheme.onPrimary),
+                        ),
+                      ),
                     ),
-                  ),
-                  style: ElevatedButton.styleFrom(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
-                    backgroundColor: selectedTheme.colorScheme.secondary,
                   ),
                 ),
               ),

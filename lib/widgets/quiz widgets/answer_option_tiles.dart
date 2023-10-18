@@ -1,5 +1,4 @@
 import 'package:fiservonboardingexp/themes/theme_provider.dart';
-import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:fiservonboardingexp/themes/quiz%20themes/ui_parameters.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -30,11 +29,11 @@ class AnswerOptionTiles extends StatelessWidget {
         decoration: BoxDecoration(
             borderRadius: UIParameters.cardBorderRadius,
             color: isSelected
-                ? selectedTheme.colorScheme.onBackground
+                ? selectedTheme.colorScheme.primary
                 : selectedTheme.colorScheme.background,
             border: Border.all(
                 color: isSelected
-                    ? selectedTheme.colorScheme.secondary
+                    ? selectedTheme.colorScheme.primary
                     : selectedTheme.colorScheme.onBackground)),
         child: Row(
           children: [
@@ -43,10 +42,10 @@ class AnswerOptionTiles extends StatelessWidget {
               child: Text(
                 answerIdentifier,
                 style: GoogleFonts.quicksand(
-                  color: isSelected
-                      ? selectedTheme.colorScheme.primary
-                      : selectedTheme.colorScheme.tertiary,
                   fontWeight: FontWeight.bold,
+                  color: isSelected
+                      ? selectedTheme.colorScheme.onBackground
+                      : selectedTheme.colorScheme.primary,
                 ),
               ),
             ),
@@ -56,9 +55,9 @@ class AnswerOptionTiles extends StatelessWidget {
                 answerOption,
                 style: GoogleFonts.quicksand(
                   color: isSelected
-                      ? selectedTheme.colorScheme.primary
-                      : selectedTheme.colorScheme.tertiary,
-                  fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
+                      ? selectedTheme.colorScheme.onBackground
+                      : selectedTheme.colorScheme.primary,
+                  fontWeight: FontWeight.bold,
                 ),
               ),
             ),

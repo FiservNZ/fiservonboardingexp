@@ -1,12 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fiservonboardingexp/model/read_model.dart';
-import 'package:fiservonboardingexp/screens/task%20pages/read_page.dart';
-import 'package:fiservonboardingexp/util/mc_testing/module/module_screen.dart';
+import 'package:fiservonboardingexp/screens/module/task%20pages/read_page.dart';
+import 'package:fiservonboardingexp/screens/module/module_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../firebase references/firebase_refs.dart';
-import '../util/constants.dart';
 import '../widgets/quiz widgets/quiz_info_square.dart';
 
 class ReadController extends GetxController {
@@ -14,7 +13,7 @@ class ReadController extends GetxController {
   late ReadModel? model;
   final allReadTasks =
       <ReadModel>[]; // Initializes a collection of read tasks as an array.
-  RxInt selectedIndex = RxInt(0); // Initialize with a default index of 0.
+  ThemeData get selectedTheme => Get.theme;
 
   @override
   void onReady() {
@@ -35,8 +34,6 @@ class ReadController extends GetxController {
           .collection('Read')
           .get();
 
-      //print("Number of documents fetched: ${data.docs.length}");
-
       final readList = data.docs.map((model) {
         // Convert each document to a ReadModel
         return ReadModel(
@@ -52,7 +49,7 @@ class ReadController extends GetxController {
         model = readList[0];
       }
     } catch (e) {
-      print("Error fetching data: $e");
+      debugPrint("Error fetching data: $e");
     }
   }
 
@@ -60,32 +57,40 @@ class ReadController extends GetxController {
     if (model != null) {
       debugPrint('Model Initialised!');
       model = readModel;
-      showPopupAlertDialog(readModel: readModel, categoryName: categoryName);
+      showPopupAlertDialog(
+          readModel: readModel,
+          categoryName: categoryName,
+          theme: selectedTheme);
     } else {
       debugPrint('Model not initialised!');
     }
   }
 }
 
-void showPopupAlertDialog(
-    {required ReadModel readModel, required String categoryName}) {
+void showPopupAlertDialog({
+  required ReadModel readModel,
+  required String categoryName,
+  required ThemeData theme,
+}) {
   Get.dialog(
       showPopup(
           onTapStart: () {
-            debugPrint('${readModel.description}');
+            debugPrint(readModel.description);
             Get.toNamed(ReadPage.routeName, arguments: readModel);
           },
           onTapCancel: () {
             Get.back();
           },
-          readModel: readModel),
+          readModel: readModel,
+          selectedTheme: theme),
       barrierDismissible: false);
 }
 
 Widget showPopup(
     {required VoidCallback onTapStart,
     required VoidCallback onTapCancel,
-    required ReadModel readModel}) {
+    required ReadModel readModel,
+    required ThemeData selectedTheme}) {
   double buttonHeight = 35;
   double buttonWidth = 80;
   return AlertDialog(
@@ -93,14 +98,12 @@ Widget showPopup(
     shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(16.0),
         side: const BorderSide(color: Color.fromARGB(221, 36, 36, 36))),
-    backgroundColor: darkBackgroundColor,
-    //shadowColor: fiservColor,
+    backgroundColor: selectedTheme.colorScheme.onBackground,
     elevation: 20,
     content: SizedBox(
       width: 400,
       height: 200,
       child: Column(
-        //mainAxisSize: MainAxisSize.values,
         children: [
           const SizedBox(height: 10),
 
@@ -108,7 +111,9 @@ Widget showPopup(
           Text(
             readModel.title,
             style: GoogleFonts.quicksand(
-                fontSize: 25, fontWeight: FontWeight.bold, color: fiservColor),
+                fontSize: 25,
+                fontWeight: FontWeight.bold,
+                color: selectedTheme.colorScheme.primary),
           ),
           const SizedBox(height: 10),
           Row(
@@ -118,9 +123,7 @@ Widget showPopup(
               const Padding(
                   padding: EdgeInsets.all(5.0),
                   child: QuizInfoSquare(
-                      icon: Icons.book_rounded,
-                      //'${readModel.exp} exp'
-                      text: 'read model exp count for the specific task')),
+                      icon: Icons.book_rounded, text: 'exp count')),
               Padding(
                   padding: const EdgeInsets.all(5.0),
                   // Time for how long the specific task would take
@@ -135,7 +138,8 @@ Widget showPopup(
           // Short description about the read task
           Text(
             readModel.description,
-            style: GoogleFonts.quicksand(color: darkTextColor),
+            style:
+                GoogleFonts.quicksand(color: selectedTheme.colorScheme.primary),
           )
         ],
       ),
@@ -152,16 +156,16 @@ Widget showPopup(
               width: buttonWidth,
               child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
-                    side: const BorderSide(color: fiservColor),
-                    backgroundColor:
-                        darkBackgroundColor, /*shadowColor: fiservColor*/
+                    side:
+                        BorderSide(color: selectedTheme.colorScheme.secondary),
+                    backgroundColor: selectedTheme.colorScheme.onBackground,
                   ),
                   onPressed: onTapCancel,
                   child: Text(
                     "Cancel",
                     style: GoogleFonts.quicksand(
                         fontWeight: FontWeight.bold,
-                        color: fiservColor,
+                        color: selectedTheme.colorScheme.primary,
                         fontSize: 14),
                   )),
             ),
@@ -172,12 +176,13 @@ Widget showPopup(
               width: buttonWidth,
               child: ElevatedButton(
                   style: TextButton.styleFrom(
-                      side: const BorderSide(color: fiservColor),
-                      backgroundColor: fiservColor),
+                      side: BorderSide(
+                          color: selectedTheme.colorScheme.secondary),
+                      backgroundColor: selectedTheme.colorScheme.secondary),
                   onPressed: onTapStart,
                   child: Text("Start",
                       style: TextStyle(
-                          color: darkTextColor,
+                          color: selectedTheme.colorScheme.background,
                           fontWeight: FontWeight.bold,
                           fontSize: 15))),
             ),

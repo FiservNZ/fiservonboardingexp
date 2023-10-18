@@ -1,8 +1,4 @@
 /*
-API KEY:
-
-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
-
 To test pdf generation & email: Please go to firestore, set introduced
 filed to false (if you are unable to see the button.)
  */
@@ -10,6 +6,7 @@ import 'dart:io';
 import 'dart:typed_data';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:open_file/open_file.dart';
@@ -108,7 +105,7 @@ class PdfApi {
           error.code == 'object-not-found') {
         imageData = null;
       } else {
-        print('There was an error fetching image data.\nError: $error');
+        debugPrint('There was an error fetching image data.\nError: $error');
       }
     }
   }
@@ -161,11 +158,10 @@ class PdfApi {
 
     //Sending email to test recipient
     final mailer = sgm.Mailer(
-
         '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');
 
     //Change toAddress to your own email for testing.
-    const toAddress = sgm.Address('michaelcalbay.uni@gmail.com');
+    const toAddress = sgm.Address('rndproject96@gmail.com');
     const fromAddress = sgm.Address('rndproject96@gmail.com');
     const subject = 'Here comes a new challenger!';
     const personalization = sgm.Personalization([toAddress]);
@@ -184,20 +180,31 @@ class PdfApi {
           content: [content]);
 
       mailer.send(email).then((result) {
-        print('Email Sent: ${result.isValue}');
+        debugPrint('Email Sent: ${result.isValue}');
         if (result.isValue) {
           showDialog(
             context: context,
             builder: (BuildContext context) {
+              ThemeData selectedTheme = getSelectedTheme(context);
               return AlertDialog(
-                title: const Text('Notice:'),
-                content: const Text(
+                backgroundColor: selectedTheme.colorScheme.onBackground,
+                title: Text(
+                  'Notice:',
+                  style: TextStyle(
+                    color: selectedTheme.colorScheme.primary,
+                  ),
+                ),
+                content: Text(
                   'An introduction has been sent out to your colleagues!',
-                  style: TextStyle(fontStyle: FontStyle.italic),
+                  style: TextStyle(
+                      fontStyle: FontStyle.italic,
+                      color: selectedTheme.colorScheme.primary),
                 ),
                 actions: <Widget>[
                   TextButton(
-                    child: const Text('Close'),
+                    child: Text('Close',
+                        style: TextStyle(
+                            color: selectedTheme.colorScheme.secondary)),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },
@@ -210,15 +217,29 @@ class PdfApi {
           showDialog(
             context: context,
             builder: (BuildContext context) {
+              ThemeData selectedTheme = getSelectedTheme(context);
               return AlertDialog(
-                title: const Text('Notice:'),
-                content: const Text(
+                backgroundColor: selectedTheme.colorScheme.onBackground,
+                title: Text(
+                  'Notice:',
+                  style: TextStyle(
+                    color: selectedTheme.colorScheme.primary,
+                  ),
+                ),
+                content: Text(
                   'Something went wrong. Please try again.',
-                  style: TextStyle(fontStyle: FontStyle.italic),
+                  style: TextStyle(
+                    fontStyle: FontStyle.italic,
+                    color: selectedTheme.colorScheme.primary,
+                  ),
                 ),
                 actions: <Widget>[
                   TextButton(
-                    child: const Text('Close'),
+                    child: Text(
+                      'Close',
+                      style:
+                          TextStyle(color: selectedTheme.colorScheme.secondary),
+                    ),
                     onPressed: () {
                       Navigator.of(context).pop();
                     },

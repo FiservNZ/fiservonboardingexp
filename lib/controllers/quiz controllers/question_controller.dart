@@ -1,17 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fiservonboardingexp/controllers/quiz%20controllers/auth_controller.dart';
-import 'package:fiservonboardingexp/controllers/quiz%20controllers/extension_question_controller.dart';
 import 'package:fiservonboardingexp/controllers/quiz%20controllers/quiz_controller.dart';
-import 'package:fiservonboardingexp/util/mc_testing/module/module_screen.dart';
+import 'package:fiservonboardingexp/screens/module/module_screen.dart';
 import 'package:fiservonboardingexp/widgets/quiz%20widgets/loading_status.dart';
 import 'package:fiservonboardingexp/model/quiz_model.dart';
-import 'package:fiservonboardingexp/screens/task%20pages/quiz%20screens/home_screen.dart';
-import 'package:fiservonboardingexp/screens/task%20pages/quiz%20screens/quiz_outcome_screen.dart';
+import 'package:fiservonboardingexp/screens/module/task%20pages/quiz%20screens/quiz_outcome_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:get/get.dart';
 
 import '../../firebase references/firebase_refs.dart';
+import '../../screens/module/tasks_container.dart';
 import '../../widgets/exp_bar.dart';
 
 class QuestionController extends GetxController {
@@ -148,13 +145,13 @@ class QuestionController extends GetxController {
   }
 
   void navigateToHome() {
-    if (quizModel.expGained = false) {
+    if (quizModel.isDone == false) {
       // add link to adding exp here
-      ExpBar expBar = ExpBar(barwidth: 12);
-      expBar.addExperience(151);
-      Get.offNamedUntil(HomeScreen.routeName, (route) => false);
+      ExpBar expBar = const ExpBar(barwidth: 12);
+      expBar.addExperience(quizModel.exp);
+      Get.offAll(TasksContainer(watchCategory: currentCategory));
     } else {
-      Get.offNamedUntil(HomeScreen.routeName, (route) => false);
+      Get.offAll(TasksContainer(watchCategory: currentCategory));
     }
   }
 }
