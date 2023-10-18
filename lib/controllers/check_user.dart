@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:fiservonboardingexp/screens/home_page.dart';
 import 'package:fiservonboardingexp/screens/manager/manager_view.dart';
 import 'package:flutter/material.dart';
 import 'package:fiservonboardingexp/screens/login_page.dart';
@@ -38,13 +39,12 @@ class CheckUserState extends State<CheckUser> {
         Get.offAndToNamed("/login");
       } else {
         // User is logged in, navigate to the appropriate screen.
-        Get.offAndToNamed(position == 'manager' ? "/manager" : "/home");
+        Get.toNamed(position == 'manager' ? "/manager" : "/home");
         // Navigator.pushReplacement<void, void>(
         //     context,
         //     MaterialPageRoute<void>(
-        //         builder: (context) => position == 'manager'
-        //             ? ManagerView()
-        //             : const MainScreen()));
+        //         builder: (context) =>
+        //             position == 'manager' ? ManagerView() : const HomePage()));
       }
     });
   }

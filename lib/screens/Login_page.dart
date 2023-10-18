@@ -97,8 +97,7 @@ class LoginPage extends StatelessWidget {
               //     ),
               //   ),
               // );
-              Get.offAndToNamed('/teaser')
-                  ?.then((value) => Get.offAndToNamed('/help'));
+              Get.toNamed('/teaser')?.then((value) => Get.toNamed('/help'));
 
               //update the status of firstlog in firestone
               await FirebaseFirestore.instance
