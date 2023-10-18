@@ -24,7 +24,6 @@ class ReadPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: selectedTheme.colorScheme.background,
       appBar: myAppBar,
-      //bottomNavigationBar: navBar,
       body: SafeArea(
           child: ListView(
         children: [
@@ -49,8 +48,7 @@ class ReadPage extends StatelessWidget {
 
           // Image (from local assets folder not firebase). Needs to be changed as its hard coded.
           Padding(
-            padding: EdgeInsets.all(40.0),
-            // child: Image(image: AssetImage('assets/images/Read.jpg')),
+            padding: const EdgeInsets.all(40.0),
             child: readModel.imageUrl != ""
                 ? Image.network(readModel.imageUrl!)
                 : const Image(image: AssetImage('assets/images/Read.jpg')),

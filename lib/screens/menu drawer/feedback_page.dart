@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:fiservonboardingexp/util/constants.dart';
 import 'package:flutter/material.dart';
 import '../../widgets/star_rating.dart';
@@ -133,7 +135,7 @@ class _FeedBackState extends State<FeedBack> {
 
                           // Little output on the bottom after the user submits the feedback
                           ScaffoldMessenger.of(context).showSnackBar(
-                            SnackBar(
+                            const SnackBar(
                               content: Text('Thank you for your feedback!'),
                               duration: Duration(seconds: 2),
                             ),
@@ -141,13 +143,14 @@ class _FeedBackState extends State<FeedBack> {
 
                           Navigator.of(context).pushReplacement(
                             MaterialPageRoute(
-                              builder: (context) => MainScreen(),
+                              builder: (context) => const MainScreen(),
                             ),
                           );
 
                           // Debugging to check if it's being stored
-                          print("Storing rating in Firebase: $userRating");
-                          print("Storing feedback in Firebase: $userFeedback");
+                          debugPrint("Storing rating in Firebase: $userRating");
+                          debugPrint(
+                              "Storing feedback in Firebase: $userFeedback");
                         }
                       : null,
                   child: SizedBox(

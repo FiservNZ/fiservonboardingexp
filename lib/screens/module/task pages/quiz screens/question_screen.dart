@@ -43,7 +43,6 @@ class QuestionScreen extends GetView<QuestionController> {
                             padding: const EdgeInsets.only(top: 25),
                             child: Column(
                               children: [
-                                //need to figure out how to get it to move to start and not be center
                                 Text(
                                   ' Q: ${(controller.questionIndex.value + 1).toString()} out of ${controller.allQuizQuestions.length}',
                                   style: GoogleFonts.quicksand(
@@ -59,10 +58,8 @@ class QuestionScreen extends GetView<QuestionController> {
                                 ),
                                 const SizedBox(height: 10),
                                 SizedBox(
-                                  //height: 70,
                                   child: Text(
                                     controller.currentQuestion.value!.question,
-                                    //maxLines: 2,
                                     style: GoogleFonts.quicksand(
                                         color:
                                             selectedTheme.colorScheme.primary,

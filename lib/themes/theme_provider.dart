@@ -1,3 +1,5 @@
+// ignore_for_file: use_build_context_synchronously
+
 import 'package:fiservonboardingexp/themes/theme_database.dart';
 import 'package:fiservonboardingexp/themes/dark_theme.dart';
 import 'package:fiservonboardingexp/themes/light_theme.dart';

@@ -1,3 +1,5 @@
+// ignore_for_file: sized_box_for_whitespace
+
 import 'package:fiservonboardingexp/firebase%20references/firebase_refs.dart';
 import 'package:fiservonboardingexp/screens/menu%20drawer/settings%20components/change_password_page.dart';
 import 'package:fiservonboardingexp/themes/theme_database.dart';
@@ -293,7 +295,6 @@ class SettingsPageState extends State<SettingsPage> {
 
                         Text(
                           currentThemeName,
-                          //  "Current Theme: $currentThemeName",
                           style: TextStyle(
                             fontSize: 14,
                             color: isOSmode

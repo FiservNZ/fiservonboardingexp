@@ -13,8 +13,9 @@ final ThemeData lightTheme = ThemeData(
     onTertiary: Colors.black,
     surface: const Color.fromARGB(
         255, 230, 226, 226), // Progress indicator background
-    onSurface:
-        Color.fromARGB(255, 223, 223, 223), //disabled button background color
-    onPrimary: Color.fromARGB(255, 189, 188, 188), //disabled button text color
+    onSurface: const Color.fromARGB(
+        255, 223, 223, 223), //disabled button background color
+    onPrimary:
+        const Color.fromARGB(255, 189, 188, 188), //disabled button text color
   ),
 );

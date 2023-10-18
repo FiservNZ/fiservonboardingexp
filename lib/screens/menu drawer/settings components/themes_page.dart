@@ -44,7 +44,7 @@ class ThemesPageState extends State<ThemesPage> {
       setState(() {}); // Trigger a rebuild of the widget to update the UI
     } catch (e) {
       // Handle any errors that occur while loading the level
-      print("Error loading level: $e");
+      debugPrint("Error loading level: $e");
     }
   }
 

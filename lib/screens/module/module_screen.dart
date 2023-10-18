@@ -53,11 +53,8 @@ class ModuleScreen extends StatelessWidget {
   Widget _customMissionTile(String title, ThemeData selectedTheme) {
     return GestureDetector(
       onTap: () {
-        // String route = title.replaceAll(" ", "");
         currentCategory = title;
         debugPrint('Route: $currentCategory');
-        // Get.toNamed(WatchHomeScreen.routeName, arguments: currentCategory);
-        // Get.toNamed("/home", arguments: currentCategory);
 
         //Modify this to take into consideration other task types
         Get.to(TasksContainer(watchCategory: currentCategory));

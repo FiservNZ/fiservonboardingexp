@@ -206,8 +206,7 @@ class TasksContainer extends StatelessWidget {
         debugPrint('Not all tasks are completed yet.');
       }
     } catch (e) {
-      // ignore: avoid_print
-      print('Error: $e');
+      debugPrint('Error: $e');
     }
   }
 

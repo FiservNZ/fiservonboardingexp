@@ -10,7 +10,6 @@ class TaskCategoryModel {
   int maxPoints;
   List<QuizModel>? quiz;
   List<ReadModel>? read;
-  //List<WatchModel> watch;
 
   TaskCategoryModel(
       {required this.id,
@@ -28,5 +27,4 @@ class TaskCategoryModel {
         maxPoints = snapshot['maxPoints'] as int,
         quiz = [],
         read = [];
-  //watch = []
 }

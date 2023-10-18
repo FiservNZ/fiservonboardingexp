@@ -42,7 +42,7 @@ class TeaserPage2State extends State<TeaserPage2> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Color.fromARGB(255, 194, 200, 255),
+      color: const Color.fromARGB(255, 194, 200, 255),
       child: Center(
         child: Padding(
           padding: const EdgeInsets.only(
@@ -54,7 +54,7 @@ class TeaserPage2State extends State<TeaserPage2> {
               Padding(
                 padding: const EdgeInsets.all(16.0),
                 child: AnimatedSwitcher(
-                  duration: Duration(seconds: 1),
+                  duration: const Duration(seconds: 1),
                   child: Image.asset(
                     imagePaths[_currentPage],
                     key: ValueKey<int>(_currentPage),
@@ -76,7 +76,7 @@ class TeaserPage2State extends State<TeaserPage2> {
                 height: 10,
               ),
               const Padding(
-                padding: const EdgeInsets.fromLTRB(40, 10, 20, 10),
+                padding: EdgeInsets.fromLTRB(40, 10, 20, 10),
                 child: Text(
                   'Complete modules to gain more experience! Unlock more icons and themes by gaining experience and leveling!',
                   style: TextStyle(

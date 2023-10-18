@@ -196,23 +196,18 @@ class _ProfilePageState extends State<ProfilePage> {
               children: [
                 //This is just used for spacing between elements.
                 const SizedBox(height: 30),
-                //User profile picture, will be pulled from firebase.
-                //For now, we will use a placeholder.
                 UserIcon(
                   initialUserIcon: userIcon,
                   level: level,
                   onIconChanged: (newIcon) {
                     //update the icon
                     if (userIcon != newIcon) {
-                      print("different");
                       setState(() {
                         userIcon = newIcon;
                       });
                       // update when Icon has changed
                       achievementpage.updateAchievement(
                           context, "Changed Icon!");
-                    } else {
-                      print("same");
                     }
                   },
                   userCollection: userColRef,
@@ -223,7 +218,6 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
 
                 //User fullname.
-                //Using a place holder for now.
                 const SizedBox(height: 10),
 
                 Text(
@@ -287,14 +281,6 @@ class _ProfilePageState extends State<ProfilePage> {
                 ),
 
                 const SizedBox(height: 50),
-
-                /*Submit button will generate a pdf
-          Then send that PDF to colleagues*/
-                /*I will set send introduction button to work only once.
-          After it had been pressed at least 1 time, the button will either disappear
-          or will become a logout button instead
-          I will still allow users to edit their "about me".*/
-                //To be implemented later.
                 userData['introduced'] == false
                     ? Padding(
                         padding: const EdgeInsets.only(

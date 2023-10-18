@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fiservonboardingexp/firebase%20references/firebase_refs.dart';
+import 'package:flutter/material.dart';
 
 Future<void> getNumberOfTasks(String categoryName) async {
   int numberOfTasks = 0;
@@ -30,6 +31,6 @@ Future<void> getNumberOfTasks(String categoryName) async {
       await categoryDocRef.update({'maxPoints': numberOfTasks});
     }
   } catch (e) {
-    print('Error fetching watch tasks: $e');
+    debugPrint('Error fetching watch tasks: $e');
   }
 }

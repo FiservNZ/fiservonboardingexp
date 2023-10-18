@@ -37,15 +37,6 @@ class QuestionCard extends GetView<QuizController> {
                       child: SizedBox(
                         height: Get.width * 0.15,
                         width: Get.width * 0.15,
-                        // child: CachedNetworkImage(
-                        //   imageUrl: model.imageUrl!,
-                        //   placeholder: (context, url) => Container(
-                        //     alignment: Alignment.center,
-                        //     child: const CircularProgressIndicator(),
-                        //   ),
-                        //   errorWidget: (context, url, error) =>
-                        //       Image.asset("assets/images/Fiserv_logo.png"),
-                        // ),
                       ),
                     ),
                   ),
@@ -57,18 +48,11 @@ class QuestionCard extends GetView<QuizController> {
                         Text(model.title,
                             style: TextStyle(
                                 color: selectedTheme.colorScheme.primary,
-                                // color: UIParameters.isDarkMode()
-                                //     ? Theme.of(context)
-                                //         .textTheme
-                                //         .bodySmall!
-                                //         .color
-                                //     : Theme.of(context).primaryColor,
                                 fontSize: 18,
                                 fontWeight: FontWeight.bold)),
                         Padding(
                           padding: const EdgeInsets.only(top: 10.0, bottom: 15),
                           child: Text(
-                            //model.description,
                             model.id,
                             style: TextStyle(
                                 color: selectedTheme.colorScheme.primary),

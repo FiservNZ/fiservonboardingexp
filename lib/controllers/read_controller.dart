@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:google_fonts/google_fonts.dart';
 import '../firebase references/firebase_refs.dart';
-import '../util/constants.dart';
 import '../widgets/quiz widgets/quiz_info_square.dart';
 
 class ReadController extends GetxController {
@@ -35,8 +34,6 @@ class ReadController extends GetxController {
           .collection('Read')
           .get();
 
-      //print("Number of documents fetched: ${data.docs.length}");
-
       final readList = data.docs.map((model) {
         // Convert each document to a ReadModel
         return ReadModel(
@@ -52,7 +49,7 @@ class ReadController extends GetxController {
         model = readList[0];
       }
     } catch (e) {
-      print("Error fetching data: $e");
+      debugPrint("Error fetching data: $e");
     }
   }
 
@@ -102,13 +99,11 @@ Widget showPopup(
         borderRadius: BorderRadius.circular(16.0),
         side: const BorderSide(color: Color.fromARGB(221, 36, 36, 36))),
     backgroundColor: selectedTheme.colorScheme.onBackground,
-    //shadowColor: fiservColor,
     elevation: 20,
     content: SizedBox(
       width: 400,
       height: 200,
       child: Column(
-        //mainAxisSize: MainAxisSize.values,
         children: [
           const SizedBox(height: 10),
 
@@ -128,9 +123,7 @@ Widget showPopup(
               const Padding(
                   padding: EdgeInsets.all(5.0),
                   child: QuizInfoSquare(
-                      icon: Icons.book_rounded,
-                      //'${readModel.exp} exp'
-                      text: 'exp count')),
+                      icon: Icons.book_rounded, text: 'exp count')),
               Padding(
                   padding: const EdgeInsets.all(5.0),
                   // Time for how long the specific task would take
@@ -165,8 +158,7 @@ Widget showPopup(
                   style: ElevatedButton.styleFrom(
                     side:
                         BorderSide(color: selectedTheme.colorScheme.secondary),
-                    backgroundColor: selectedTheme
-                        .colorScheme.onBackground, /*shadowColor: fiservColor*/
+                    backgroundColor: selectedTheme.colorScheme.onBackground,
                   ),
                   onPressed: onTapCancel,
                   child: Text(

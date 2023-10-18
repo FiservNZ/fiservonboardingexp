@@ -1,7 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:fiservonboardingexp/controllers/check_user.dart';
-import 'package:fiservonboardingexp/model/task_category_model.dart';
 //import 'package:firebase_core/firebase_core.dart';
 
 // create firebase instance
@@ -50,7 +48,6 @@ DocumentReference customsCultureQRef({
   required String questionId,
 }) =>
     customsCultureQuiz.doc(quizId).collection("questions").doc(questionId);
-
 
 final achievementsCollectionRef = userDocRef.collection('Achievements');
 final checklistCollectionRef = userDocRef.collection('General Checklist');

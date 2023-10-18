@@ -14,7 +14,6 @@ class QuizModel {
   int questionCount;
   int exp;
   bool expGained;
-  //For the progress bar
   bool isDone;
 
   QuizModel({

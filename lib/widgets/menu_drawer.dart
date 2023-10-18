@@ -186,11 +186,7 @@ class MenuDrawer extends StatelessWidget {
 
               const SizedBox(height: 10),
 
-              //Logout Button
-              //Padding(
-              // padding:
-              //     EdgeInsets.only(left: 0), // Adjust the left padding as needed
-              // child:
+              // Logout Button
               SizedBox(
                 width: 150, // Set the desired width for the button
                 child: ElevatedButton(

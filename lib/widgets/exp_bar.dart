@@ -61,7 +61,7 @@ class ExpBar extends StatelessWidget {
       child: StreamBuilder<DocumentSnapshot>(
         stream: FirebaseFirestore.instance
             .collection("User")
-            .doc(currentUser?.uid)
+            .doc(currentUser.uid)
             .snapshots(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {

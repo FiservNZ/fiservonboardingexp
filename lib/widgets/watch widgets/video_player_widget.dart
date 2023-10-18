@@ -1,3 +1,5 @@
+// ignore_for_file: sized_box_for_whitespace
+
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import '../../screens/module/task pages/watch screens/basic_overlay.dart';

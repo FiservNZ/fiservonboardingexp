@@ -1,13 +1,14 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:fiservonboardingexp/firebase%20references/firebase_refs.dart';
 import 'package:fiservonboardingexp/model/task_category_model.dart';
+import 'package:flutter/material.dart';
 import 'package:logger/logger.dart';
 
 final Logger logger = Logger();
 
 class PointsUpdater {
   static Future<void> getCurrentPoints(String categoryName) async {
-    print(categoryName);
+    debugPrint(categoryName);
     int noOfcompletedTasks = 0;
 
     try {
