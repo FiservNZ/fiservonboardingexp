@@ -1,6 +1,6 @@
-# Welcome to Fiserv Onboarding Experience
+# Welcome to Fiserv Onboarding Experience Application
 
-A new Flutter project.
+This is a mobile application that aims to address & resolve concerns with the current onboarding experience at Fiserv. 
 
 ## Getting Started
 
