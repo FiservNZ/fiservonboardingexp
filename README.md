@@ -16,9 +16,9 @@ Currently, this app is only set up for Android mobile devices. Flutter supports 
 | Type | Name | Version |
 | :---- | :----: | :-------: |
 | `IDE` | VS Code | insert |
-| `SDK` | Android Studio | insert |
+| `SDK` | Android Studio | 12.0 |
 | `SDK` | Flutter | >=2.19.4 <3.0.0 |
-| `Language` | Dart | insert |
+| `Language` | Dart | v3.68.1 |
 | `Database` | Firebase | -- |
 
 For information on the decisions behind why these tools were used, please view the [Software Decisions & Considerations](https://github.com/MichaelCalbay/fiservonboardingexp/wiki/Software-Decisions-&-Considerations) page. 
