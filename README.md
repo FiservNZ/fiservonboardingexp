@@ -4,12 +4,20 @@ This is a mobile application that aims to address & resolve concerns with the cu
 
 ## Getting Started
 
-Mobile Operating System Compatibility
+### Mobile Operating System Compatibility
 | O/S | Status |
 | --- | ------ |
 | `Android` | icon |
 | `iOS` | icon |
 
+### Software & Versioning
+| Type | Name | Version |
+| ---- | :----: | :-------: |
+| `IDE` | VS Code | insert |
+| `SDK` | Android Studio | insert |
+| `SDK` | Flutter | insert |
+| `Language` | Dart | insert |
+| `Database` | Firebase | -- |
 
 
 
@@ -25,11 +33,11 @@ Mobile Operating System Compatibility
 
 
 
-A few resources to get you started if this is your first Flutter project:
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+
+
+
+
+
+
