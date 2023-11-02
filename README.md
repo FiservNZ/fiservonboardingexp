@@ -8,7 +8,7 @@ Mobile Operating System Compatibility
 | O/S | Status |
 | --- | ------ |
 | `Android` | icon |
-| `IOS` | icon |
+| `iOS` | icon |
 
 
 
