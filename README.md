@@ -10,7 +10,7 @@
 | `Android` | :white_check_mark: |
 | `iOS` | :x: |
 
-A little blurb here about how it is currently only set up for android mobile devices.
+Currently this app is only set up for android mobile devices. Flutter supports cross-platform, for more information regarding this [click here](https://docs.flutter.dev/get-started/install).
 
 ## Software & Versioning
 | Type | Name | Version |
