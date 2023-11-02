@@ -23,7 +23,9 @@ Currently, this app is only set up for Android mobile devices. Flutter supports 
 
 For information on the decisions behind why these tools were used, please view the [Software Decisions & Considerations](https://github.com/MichaelCalbay/fiservonboardingexp/wiki/Software-Decisions-&-Considerations) page. 
 
-## Dependencies & Extensions
+## Plugins & Dependencies
+
+Flutter and Dart require VS Code plugins to work. Install instructions & futher information can be found [here.](https://docs.flutter.dev/get-started/editor?tab=vscode)
 
 fiservonboardingexp comes with a lot of dependencies. You can take a look from _line 30_ in [pubspec.yaml](https://github.com/MichaelCalbay/fiservonboardingexp/blob/master/pubspec.yaml) file and/or view the [Software Version & Dependencies](https://github.com/MichaelCalbay/fiservonboardingexp/wiki/Software-Version-&-Dependencies) page for more details.
 
