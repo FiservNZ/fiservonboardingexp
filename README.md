@@ -10,7 +10,7 @@
 | `Android` | :white_check_mark: |
 | `iOS` | :x: |
 
-Currently this app is only set up for android mobile devices. Flutter supports cross-platform, for more information regarding this [click here](https://docs.flutter.dev/get-started/install).
+Currently, this app is only set up for Android mobile devices. Flutter supports cross-platform, for more information regarding this [click here](https://docs.flutter.dev/get-started/install).
 
 ## Software & Versioning
 | Type | Name | Version |
@@ -21,7 +21,7 @@ Currently this app is only set up for android mobile devices. Flutter supports c
 | `Language` | Dart | insert |
 | `Database` | Firebase | -- |
 
-For information on the decisions behind why these tools were used please view the [Software Decisions & Considerations](https://github.com/MichaelCalbay/fiservonboardingexp/wiki/Software-Decisions-&-Considerations) page. 
+For information on the decisions behind why these tools were used, please view the [Software Decisions & Considerations](https://github.com/MichaelCalbay/fiservonboardingexp/wiki/Software-Decisions-&-Considerations) page. 
 
 ## Dependencies & Extensions
 
@@ -29,16 +29,16 @@ fiservonboardingexp comes with a lot of dependencies. You can take a look from _
 
 ### Installing Dependencies
 
-There are two methods of adding dependencies to your projects in flutter using VS Code: 
-1. The first method to add dependencies in flutter, requires the pubspec.yaml file to be edited manually.
-    First add the code under the `dependencies` section (edit the **placeholder** with the package name, and add the version after the colon 
+There are two methods of adding dependencies to your projects in Flutter using VS Code: 
+1. The first method to add dependencies in Flutter requires the pubspec.yaml file to be edited manually.
+    First, add the code under the `dependencies` section (edit **placeholder** with the package name, and add the version after the colon 
     if required).
    
     ```
     dependencies:
     placeholder:
     ```
-    then in the file add the following line to the top of the file that will use it (edit the info **between the inverted commas** to match 
+    then in the file, add the following line to the top of the file that will use it (edit the info **between the inverted commas** to match 
     the package info).
    
     ```
@@ -58,7 +58,7 @@ There are two methods of adding dependencies to your projects in flutter using V
    
    ![Screenshot of VS Code search result](https://github.com/MichaelCalbay/fiservonboardingexp/blob/master/assets/images/Adding_dependency2.PNG)
    
-   then in the file add the following line to the top of the file that will use it (edit the info **between the inverted commas** to match 
+   Then in the file, add the following line to the top of the file that will use it (edit the info **between the inverted commas** to match 
    the package info).
    
    ![Screenshot of file import](https://github.com/MichaelCalbay/fiservonboardingexp/blob/master/assets/images/import.png)
