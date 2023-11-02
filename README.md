@@ -4,7 +4,25 @@ This is a mobile application that aims to address & resolve concerns with the cu
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+Mobile Operating System Compatibility
+| O/S | Status |
+| Android | icon |
+| IOS | icon |
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 A few resources to get you started if this is your first Flutter project:
 
