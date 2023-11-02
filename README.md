@@ -50,11 +50,18 @@ There are two methods of adding dependencies to your projects in flutter using V
 
     For Windows: `CTRL` + `SHIFT` + `P`.
 
-    Then, select `Dart: Add Dependency` and type in the dependency you want to install.
-
-    ![Screenshot of VS Code hotkey result](https://github.com/MichaelCalbay/fiservonboardingexp/blob/master/assets/images/Adding_dependency2.PNG) ![Screenshot of VS Code search result](https://github.com/MichaelCalbay/fiservonboardingexp/blob/master/assets/images/Adding_dependency.PNG)
+    Then, select `Dart: Add Dependency`
    
-
+    ![Screenshot of VS Code hotkey result](https://github.com/MichaelCalbay/fiservonboardingexp/blob/master/assets/images/Adding_dependency1.png)
+   
+    Type in the dependency you want to install
+   
+   ![Screenshot of VS Code search result](https://github.com/MichaelCalbay/fiservonboardingexp/blob/master/assets/images/Adding_dependency2.PNG)
+   
+   then in the file add the following line to the top of the file that will use it (edit the info **between the inverted commas** to match 
+   the package info).
+   
+   ![Screenshot of file import](https://github.com/MichaelCalbay/fiservonboardingexp/blob/master/assets/images/import.png)
   
 
 
