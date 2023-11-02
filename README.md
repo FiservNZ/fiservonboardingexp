@@ -6,9 +6,9 @@
 
 ### Mobile Operating System Compatibility
 | O/S | Status |
-| :--- | ------ |
-| `Android` | icon |
-| `iOS` | icon |
+| :--- | :------: |
+| `Android` | :white_check_mark: |
+| `iOS` | :x: |
 
 A little blurb here about how it is currently only set up for android mobile devices.
 
