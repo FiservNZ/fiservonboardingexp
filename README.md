@@ -6,6 +6,7 @@ This is a mobile application that aims to address & resolve concerns with the cu
 
 Mobile Operating System Compatibility
 | O/S | Status |
+| --- | ------ |
 | Android | icon |
 | IOS | icon |
 
